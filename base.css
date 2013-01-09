@@ -36,6 +36,7 @@ body { background-image: url('bg.png'); font-family: 'Domine', cursive; }
 
 #wrapper #contact div { font-size: 15px; padding: 0px 7px; margin-bottom: 5px; }
 #wrapper #contact img { width: 50px; height: 50px; margin: 10px 10px 0px 10px; padding: 3px; background-color: #fff; border: 2px solid #8ABCFF; border-radius: 10px; }
+#wrapper #contact #bottomlabel { padding-top: 10px; font-size: 10px; }
 
 #wrapper .initialHide { display: none; }
 
