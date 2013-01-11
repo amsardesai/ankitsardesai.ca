@@ -19,7 +19,7 @@ body { background-image: url('bg.png'); font-family: 'Domine', cursive; }
 
 /* HEADER */
 #wrapper #header { height: 160px; background: url('innerbg.png'); border-bottom: 10px solid #fff;  }
-#wrapper #header #mainLogo { width: 600px; height: 120px; background-image: url('mainlogo.png'); }
+#wrapper #header #mainLogo { width: 600px; height: 120px; background-image: url('mainlogo.png'); background-size: 600px 120px;  }
 #wrapper #header #menuItems li { margin: 0px 12px 0px 8px; width: 130px; height: 20px; text-align:center; font-size: 17px; font-weight:bold; color: #000; float:left; color: #4B5868; }
 #wrapper #header #menuItems li:hover { transform: scale(1.1); -ms-transform: scale(1.1); -webkit-transform: scale(1.1); -moz-transform: scale(1.1); -o-transform: scale(1.1); }
 #wrapper #header #menuItems li img { width: 20px; height: 20px; padding-right: 5px; }
