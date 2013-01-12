@@ -19,7 +19,7 @@ body { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQA
 
 /* HEADER */
 #wrapper #header { height: 160px; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAABlBMVEW32v/H4v9qQgUtAAAAXklEQVQY022QOQ4AIQwDZ/7/6S3AIYmWBsk2PgBAeUdAghzKUIJXbXDDF/JwYxKH4TczLQebQrdUunBU9u8FvcMp4LYTKaYvRNW2JX/jW1kJ9tY1dYS5FuNaObaf6wNVggBqHXyFEgAAAABJRU5ErkJggg=='); border-bottom: 10px solid #fff;  }
-#wrapper #header #mainLogo { width: 600px; height: 120px; background: url('mainlogo.png') no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale'); -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')"; }
+#wrapper #header #mainLogo { width: 600px; height: 120px; background-image: url('mainlogo.png'); background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale'); -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')"; }
 #wrapper #header #menuItems li { margin: 0px 12px 0px 8px; width: 130px; height: 20px; text-align:center; font-size: 17px; font-weight:bold; color: #000; float:left; color: #4B5868; }
 #wrapper #header #menuItems li:hover { transform: scale(1.1); -ms-transform: scale(1.1); -webkit-transform: scale(1.1); -moz-transform: scale(1.1); -o-transform: scale(1.1); }
 #wrapper #header #menuItems li img { width: 20px; height: 20px; padding-right: 5px; }
@@ -47,7 +47,9 @@ body { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQA
 /* FOOTER */
 #wrapper #footer { height: 15px; border-top: 10px solid #fff; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAABlBMVEW32v/H4v9qQgUtAAAAXklEQVQY022QOQ4AIQwDZ/7/6S3AIYmWBsk2PgBAeUdAghzKUIJXbXDDF/JwYxKH4TczLQebQrdUunBU9u8FvcMp4LYTKaYvRNW2JX/jW1kJ9tY1dYS5FuNaObaf6wNVggBqHXyFEgAAAABJRU5ErkJggg=='); padding: 20px; text-align: center; font-size: 15px; color: #4B5868; }
 
-
+@media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
+	#wrapper #header #mainLogo { background-image: url('mainlogo@2x.png'); }
+}
 
 
 
