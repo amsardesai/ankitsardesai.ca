@@ -21,12 +21,13 @@ $(document).ready(function() {
 
 function refreshPages() {
 	var hash = window.location.hash;
-	if (hash=="#projects")
-		showProjects();
-	else if (hash=="#contact")
+	if (hash=="#projects") {
+		showProjects();		
+	} else if (hash=="#contact") {
 		showContact();
-	else
+	} else {
 		showAbout();
+	}
 }
 
 function showAbout() {
