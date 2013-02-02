@@ -1,0 +1,14 @@
+
+/* IE STYLES */
+
+body { background-image: url('bg.png'); }
+
+/* HEADER */
+#wrapper #header { background-image: url('innerbg.png'); }
+#wrapper #header #mainLogo { background-image: url('mainlogo.png'); filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale'); -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')"; }
+
+/* BODY */
+#wrapper .body { background-image: url('bodybg.png'); }
+
+/* FOOTER */
+#wrapper #footer { background-image: url('innerbg.png'); }
