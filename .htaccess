@@ -1,4 +1,4 @@
-ErrorDocument 404 http://www.ankitsardesai.com/404.html
+ErrorDocument 404 /index.html
 
 RewriteEngine On
 RewriteCond %{HTTP_HOST} !^my-domain\.com$ [NC]
