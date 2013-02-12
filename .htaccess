@@ -1,5 +1,5 @@
 ErrorDocument 404 http://ankitsardesai.ca/
 
 RewriteEngine On
-RewriteCond %{HTTP_HOST} !^ankitsardesai\.com$ [NC]
-RewriteRule ^(.*)$ http://ankitsardesai.com/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} !^ankitsardesai\.ca$ [NC]
+RewriteRule ^(.*)$ http://ankitsardesai.ca/$1 [R=301,L]
