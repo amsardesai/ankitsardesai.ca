@@ -1,1 +1,5 @@
 ErrorDocument 404 http://www.ankitsardesai.com/404.html
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^my-domain\.com$ [NC]
+RewriteRule ^(.*)$ http://my-domain.com/$1 [R=301,L]
