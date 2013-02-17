@@ -1,3 +1,5 @@
+/* Written by Ankit Sardesai */
+
 // Google Analytics
 
 var _gaq = _gaq || [];
