@@ -55,8 +55,9 @@ body { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQA
 	#wrapper #header #mainLogo { background-image: url('mainlogo@2x.png'); }
 }
 
-@media only screen and (max-device-width : 420px) {
+@media only screen and (max-device-width : 480px) {
 	#wrapper #header #mainLogo { background-image: url('mainlogo.png'); }
+	#wrapper #header #menuItems li:hover { transform: none; -ms-transform: none; -webkit-transform: none; -moz-transform: none; -o-transform: none; }
 }
 
 @media only screen and (max-width : 640px) {
