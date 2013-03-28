@@ -1,3 +1,6 @@
+ErrorDocument 400 http://ankitsardesai.ca/
+ErrorDocument 401 http://ankitsardesai.ca/
+ErrorDocument 403 http://ankitsardesai.ca/
 ErrorDocument 404 http://ankitsardesai.ca/
 
 RewriteEngine On
