@@ -3,10 +3,6 @@ ErrorDocument 401 http://ankitsardesai.ca/
 ErrorDocument 403 http://ankitsardesai.ca/
 ErrorDocument 404 http://ankitsardesai.ca/
 
-RewriteEngine On
-RewriteCond %{HTTP_HOST} !^ankitsardesai\.ca$ [NC]
-RewriteRule ^(.*)$ http://ankitsardesai.ca/$1 [R=301,L]
-
 <FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak)$">
 Order Allow,Deny
 Deny from all
