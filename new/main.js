@@ -16,7 +16,7 @@ _gaq.push(['_trackPageview']);
 // Main Javascript
 
 $(document).ready(function() {
-	$("#wrapper .body").addClass("initialHide");
+	$("#wrapper #content li").addClass("initialHide");
 	var items = $("#wrapper #header #menuItems li");
     items.addClass("animationReset");
     items.each(function(index) {
