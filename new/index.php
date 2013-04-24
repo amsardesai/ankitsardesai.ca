@@ -19,9 +19,6 @@
 	
 	<div id="header">
 		<div id="mainLogo"></div>
-
-<!--
-
 		<ul id="menuItems">
 			<li>
 				<a href="#about">
@@ -48,16 +45,12 @@
 				</a>
 			</li>
 		</ul>
-
--->
-
 	</div>
 	
-	<ul id="content">
 	
 	<!-- BODY: About -->
 	
-	<li id="about">
+	<div id="about" class="body">
 		<h3>About Me</h3>
 		
 		<p>
@@ -71,11 +64,11 @@
 			Click on the links above to view my resume and side projects, and find ways to get in touch with me.
 		</p>
 
-	</li>
+	</div>
 	
 	<!-- BODY: Projects -->
 	
-	<li id="projects">
+	<div id="projects" class="body">
 		<h3>My Projects</h3>
 		<p>Some cool projects I have worked on in my spare time:</p>
 		<ul>
@@ -84,11 +77,11 @@
 		</ul>
 		<p>The source code for these projects are available on <a href="https://www.github.com/amsardesai/">Github</a>.</p>
 		<p>If you would like to work with me on a project, click <a href="#contact">here</a> to go to my contact information.</p>
-	</li>
+	</div>
 	
 	<!-- BODY: Contact -->
 	
-	<li id="contact">
+	<div id="contact" class="body">
 		<h3>Get in Touch!</h3>
 
 		<p>Here are some ways to get in touch with me: </p>
@@ -105,10 +98,8 @@
 			<img src="iconLinkedin.svg" alt="LinkedIn" />
 		</a>
 		<div id="bottomlabel">Icons are from <a href="http://fairheadcreative.com/">fairheadcreative.com</a></div>
-	</li>
+	</div>
 	
-	</ul>
-
 	<!-- FOOTER -->
 	
 	<div id="footer">
