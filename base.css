@@ -32,7 +32,7 @@ background: linear-gradient(to bottom, #ffc354 0%,#ffdfa3 100%); }
 #wrapper, #header, #footer, #wrapper .body h3, #contact img { border-color: #F5F9FF; }
 
 /* FUNDAMENTALS */
-body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust: none; background-attachment:fixed;  }
+body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust: none; background-attachment:fixed; background-position: center; background-size: cover; }
 #wrapper { width: 600px; margin: 20px auto; border-width: 10px; border-style: solid; }
 
 /* HEADER */
