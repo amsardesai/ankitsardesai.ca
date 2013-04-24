@@ -33,12 +33,6 @@
 				</a>
 			</li>
 			<li>
-				<a href="resume.pdf">
-					<span class="icon" id="imgResume"></span>
-					<span class="label">Resume</span>
-				</a>
-			</li>
-			<li>
 				<a href="#contact">
 					<span class="icon" id="imgContact"></span>
 					<span class="label">Contact</span>
