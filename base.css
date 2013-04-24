@@ -21,13 +21,18 @@ a { color:#000; text-decoration: none; }
 /* lighthbg: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAABlBMVEXj8P/c7P/43Bl2AAAAYklEQVQY012QURIAIQhCH/e/9H6IYGs5NqIYIkmgGhIIvwfC+QFpXQBfOyUyiXko3z9CItKZ0cqwuXCxDHX6VRMhRcvJHFYqMJ6ZY10Sp+lI8H+2CEUqdzFVvAO3N2mVZcIH5yABFpTfsmEAAAAASUVORK5CYII=') */
 
 /* COLORSCHEME */
-body { background: #FFDFA3; }
+body { background: #FFDFA3; 
+background: -moz-linear-gradient(top, #ffc354 0%, #ffdfa3 100%); 
+background: -webkit-linear-gradient(top, #ffc354 0%,#ffdfa3 100%);
+background: -o-linear-gradient(top, #ffc354 0%,#ffdfa3 100%);
+background: -ms-linear-gradient(top, #ffc354 0%,#ffdfa3 100%);
+background: linear-gradient(to bottom, #ffc354 0%,#ffdfa3 100%); }
 #header, #footer { background: #C8DCFF; }
 #wrapper .body { background: #E4EDFF; }
 #wrapper, #header, #footer, #wrapper .body h3, #contact img { border-color: #F5F9FF; }
 
 /* FUNDAMENTALS */
-body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust: none; }
+body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust: none; background-attachment:fixed;  }
 #wrapper { width: 600px; margin: 20px auto; border-width: 10px; border-style: solid; }
 
 /* HEADER */
