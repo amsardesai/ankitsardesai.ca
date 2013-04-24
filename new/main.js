@@ -44,6 +44,7 @@ $(document).ready(function() {
 			});
 	    });
 	});
+	$("#arrow").append($("<div>").attr("id","box"));
 	$(window).hashchange(refreshPages);
 	$(window).hashchange();
 });
