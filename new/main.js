@@ -15,23 +15,12 @@ _gaq.push(['_trackPageview']);
 
 // Main Javascript
 
-$.easing.def = "easeOutBounce";
-$.easing.easeOutBounce = function (x, t, b, c, d) {
-        if ((t/=d) < (1/2.75)) {
-            return c*(7.5625*t*t) + b;
-        } else if (t < (2/2.75)) {
-            return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
-        } else if (t < (2.5/2.75)) {
-            return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
-        } else {
-            return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
-        }
-}
+var curSlide;
 
 $(document).ready(function() {
-	$("#wrapper, #wrapper .body").addClass("initialHide");
+	$("#wrapper").addClass("initialHide");
+	$("#arrow").append($("<div>").attr("id","box"));
 	var items = $("#wrapper #header #menuItems li");
-	items.addClass("animationReset");
 	$("#wrapper").delay(250).fadeIn(250, function() {
 	    items.each(function(index) {
 			var delay = 150 * index;
@@ -44,11 +33,46 @@ $(document).ready(function() {
 			});
 	    });
 	});
-	$("#arrow").append($("<div>").attr("id","box"));
+	var totalwidth = $("#wrapper .body").length * $("#wrapper .body").outerWidth();
+	var slider = $("<div>").attr("id","slider");
+	var w = $("#wrapper .body").outerWidth();
+	$("#wrapper #container").wrapInner(slider.css({width:totalwidth}));
+	$("#wrapper .body").css({"float":"left"}).attr("id","");
 	$(window).hashchange(refreshPages);
 	$(window).hashchange();
 });
 
+function changeSlide() {
+	var delay = 250;
+	var items = $("#wrapper .body");
+	var w = items.outerWidth();
+	var h = items.eq(curSlide).outerHeight();
+
+	$("#wrapper #container #slider").animate({"left": -w*curSlide},delay);
+	$("#wrapper #container").animate({"height":h},delay);
+
+}
+
+function refreshPages() {
+// find proper left value for each
+	var hash = window.location.hash;
+	if (hash=="#projects") curSlide = 1;
+	else if (hash=="#contact") curSlide = 2;
+	else curSlide = 0;
+	changeSlide();
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
 function refreshPages() {
 	var hash = window.location.hash;
 	if (hash=="#projects") {
@@ -90,3 +114,4 @@ function doTheSlide() {
 	$(".notshown").slideUp(slideDelay).fadeOut(slideDelay);
 	$(".shown").delay(slideDelay + timeBetweenUpDown).slideDown(slideDelay).fadeIn(slideDelay);
 }
+*/

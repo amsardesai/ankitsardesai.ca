@@ -19,6 +19,7 @@
 	
 	<div id="header">
 		<div id="mainLogo"></div>
+		<div id="arrow"></div>
 		<ul id="menuItems">
 			<li>
 				<a href="#about">
@@ -39,9 +40,9 @@
 				</a>
 			</li>
 		</ul>
-		<div id="arrow"></div>
 	</div>
 	
+	<div id="container">
 	
 	<!-- BODY: About -->
 	
@@ -80,21 +81,25 @@
 		<h3>Get in Touch!</h3>
 
 		<p>Here are some ways to get in touch with me: </p>
-		<a href="mailto:me@ankitsardesai.ca" title="Email" class="imgref">
-			<img src="iconEmail.svg" alt="Email" />
-		</a>
-		<!--<a href="https://www.facebook.com/amsardesai" alt="Facebook" title="Facebook">
-			<img src="iconFacebook.svg" />
-		</a>-->
-		<a href="https://www.github.com/amsardesai" title="Github" class="imgref">
-			<img src="iconGithub.svg" alt="Github" />
-		</a>
-		<a href="https://www.linkedin.com/in/amsardesai" title="LinkedIn" class="imgref">
-			<img src="iconLinkedin.svg" alt="LinkedIn" />
-		</a>
+		<div id="contactimages">
+			<a href="mailto:me@ankitsardesai.ca" title="Email" class="imgref">
+				<img src="iconEmail.svg" alt="Email" />
+			</a>
+			<!--<a href="https://www.facebook.com/amsardesai" alt="Facebook" title="Facebook">
+				<img src="iconFacebook.svg" />
+			</a>-->
+			<a href="https://www.github.com/amsardesai" title="Github" class="imgref">
+				<img src="iconGithub.svg" alt="Github" />
+			</a>
+			<a href="https://www.linkedin.com/in/amsardesai" title="LinkedIn" class="imgref">
+				<img src="iconLinkedin.svg" alt="LinkedIn" />
+			</a>
+		</div>
 		<div id="bottomlabel">Icons are from <a href="http://fairheadcreative.com/">fairheadcreative.com</a></div>
 	</div>
 	
+	</div>
+
 	<!-- FOOTER -->
 	
 	<div id="footer">
