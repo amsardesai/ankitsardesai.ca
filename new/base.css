@@ -28,14 +28,15 @@ background: -o-linear-gradient(top, #ffc354 0%,#ffdfa3 100%);
 background: -ms-linear-gradient(top, #ffc354 0%,#ffdfa3 100%);
 background: linear-gradient(to bottom, #ffc354 0%,#ffdfa3 100%); }
 #wrapper { background: #C8DCFF;
-background: -moz-linear-gradient(top, #c8dcff 0%, #bfd6ff 100%);
-background: -webkit-linear-gradient(top, #c8dcff 0%, #bfd6ff 100%);
-background: -o-linear-gradient(top, #c8dcff 0%, #bfd6ff 100%);
-background: -ms-linear-gradient(top, #c8dcff 0%, #bfd6ff 100%);
-background: linear-gradient(to bottom, #c8dcff 0%, #bfd6ff 100%);
+background: -moz-linear-gradient(top, #c8dcff 0%, #a5c6ff 100%);
+background: -webkit-linear-gradient(top, #c8dcff 0%, #a5c6ff 100%);
+background: -o-linear-gradient(top, #c8dcff 0%, #a5c6ff 100%);
+background: -ms-linear-gradient(top, #c8dcff 0%, #a5c6ff 100%);
+background: linear-gradient(to bottom, #c8dcff 0%, #a5c6ff 100%);
 }
 #wrapper #container { background: #E4EDFF; }
-#header, #footer, #wrapper .body h3, #contactimages img { border-color: #FFF; }
+#arrow #box { background: #a5c6ff; }
+#header, #footer, #wrapper .body h3, #contactimages img, #arrow #box { border-color: #FFF; }
 
 /* FUNDAMENTALS */
 body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust: none; background-attachment:fixed; background-position: center; background-size: cover; }
@@ -57,7 +58,7 @@ body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust
 #wrapper #header #menuItems #imgResume { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABr0lEQVQ4y63UzYtOYRjH8c8jaTQpZjCaYiGKlFh4DUkMJWHhZTerKa/zB0xNzWwkFizNwkpeStTUI2qmDFkgCyHC0kKEslLIY/ObmjnNOfMop+66fvf5Xd9z39d9n0uj0fA/x2RBB06iDydwGv24iNu4gRWmeMqAfWhMM67/C/Bckl5hCBfQg7MFaG+zwMEkDMTXik7sz/woPiYeagY4EHN/fGOFlfVgH35H19FWBTwV46UAz+A13mT+Jz7g14SP1KuAR2K6WyhRLXUcxpXs5Gq8L1ErAx4qADuxFYui52Jh4u3xjlWtcBx4M0mj0fejX0SvxKrEj6qAh2O6E8CSlGFT9Hp0J14T73u0TAesJ2ktjmJW6tiFdXm3PN4vaCsDHoxpOEn3orvQnvgHZqaeDXzD/DLgzpieBLgAu9ESvQfbEi9tBrhj4snhMv5gc/QDfMdizIn3K9rLgHtjuhXA8XSZjuhBXEs8DvyMeWXAYzE9xwFsxGpswa5clWVpYd3xfqo6lPNNtK/ieIvWMuAGjOBh7uJI6vYYT3NYz7KDd/mve6sudjNPDTMwO2NS+/oLK5HfEW0x+lAAAAAASUVORK5CYII='); }
 #wrapper #header #menuItems #imgContact { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABgklEQVQ4y82UvS9DYRTGf7fVSml9DE0MYhKRSHRgNJFgYTKK0SCNhMEgBqOPrRGTMJglEv4BzGZhEqEJFhGCtLevoc+Vk5vbJqSDk5yc956P53zck+M552gkxWgwNRywCcDzPIAckAF8oFl2BySBLiALVIBn4EXvFmAQSAC7wD2a4ZyCHfBl3r/h1Z8KgX5TdRK4Aa6AdlX7BBQ1ok510QcMmbj3ak/VCqdD2R6AsTqjGlZS29GsBRyX8gw4MMBbEWBLxr4HHOo9bwEnpDxV0LIJOjZg60a/Kd22vhct4KSpMKBR4EP6ArBmwBaMX0G6lSjA81B7UxF/Mx/yCaresIvt11j0E2AGKOk7D+yEfN4kU3ZtfLvoIToCehVwHWEPjkElCvCzxprc1VmhomTGAmYkO4ARtREkiQOe8Y2LY1rmAel7LGC3ZA64+ONdyAKJAPASuFWCR6AVSMtW1nwC6YtLYh9oA/aBkuecC65NWm28qqWUWi1r8BUj/Vplev/+Yn8DBueQGVgYbLoAAAAASUVORK5CYII='); }
 #wrapper #header #arrow { position: relative; }
-#wrapper #header #arrow #box { margin-left: 33px; padding:0; width: 130px; height: 30px; border: 5px solid #FFF; border-radius: 10px; position: absolute; display: none; }
+#wrapper #header #arrow #box { margin-left: 33px; padding:0; width: 130px; height: 30px; border-width: 5px; border-style: solid; border-radius: 10px; position: absolute; display: none; }
 
 /* BODY */
 #wrapper #container { position: relative; overflow: hidden; }
@@ -84,9 +85,22 @@ body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust
 }
 
 @media only screen and (max-device-width : 480px) {
+	#wrapper #header #mainLogo { background-image: url('mainlogo.png'); }
 }
 
 @media only screen and (max-width : 640px) {
+	body { font-size: 14px; }
+	#wrapper { width: 540px; margin: 10px auto; border-radius: 15px;  }
+	#wrapper #header { width: 100%; max-width: 100%; border-bottom-width: 5px; border-bottom-style: solid; height: 150px; }
+	#wrapper #header #mainLogo { width: 540px; padding: 50px 0px; height:0; margin: auto; }
+	#wrapper #header #menuItems { width: 100%; height: 35px; margin: auto; }
+	#wrapper #header #menuItems li { width: 120px; margin: 10px 30px; }
+	#wrapper #header #menuItems li a .label { bottom: 4px; }
+	#wrapper #header #menuItems .icon { width: 20px; height: 20px; margin:0; }
+	#wrapper #header #arrow #box { margin-left: 30px; border-width: 5px; width: 120px; }
+	#wrapper .body { width: 520px; }
+	#wrapper .body p { padding: 5px; }
+	#wrapper #footer { border-top-width: 5px; border-bottom-style: solid; padding: 15px; }
 }
 
 @media only screen and (max-width : 520px) {
