@@ -37,7 +37,9 @@ $(document).ready(function() {
 	var slider = $("<div>").attr("id","slider");
 	$("#wrapper #container").wrapInner(slider);
 	$("#wrapper .body").css({"float":"left"}).attr("id","");
+
 	$(window).on("resize",function(){reHeight(100)});
+
 	$(window).hashchange(refreshPages);
 	$(window).hashchange();
 });
