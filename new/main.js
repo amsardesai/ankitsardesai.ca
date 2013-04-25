@@ -15,7 +15,7 @@ _gaq.push(['_trackPageview']);
 
 // Main Javascript
 
-var curSlide;
+var curSlide, hp=0;
 
 $(document).ready(function() {
 	$("#wrapper").addClass("initialHide");
@@ -35,21 +35,24 @@ $(document).ready(function() {
 	    $("#arrow #box").delay(items.length*d2).fadeIn(250);
 	});
 	var slider = $("<div>").attr("id","slider");
-	$("#wrapper #container").wrapInner(slider.css({width:"300%"}));
+	$("#wrapper #container").wrapInner(slider);
 	$("#wrapper .body").css({"float":"left"}).attr("id","");
+	$(window).on("resize",function(){reHeight(100)});
 	$(window).hashchange(refreshPages);
 	$(window).hashchange();
 });
 
+function reHeight(d) {
+	var hn = $("#wrapper .body").eq(curSlide).outerHeight();
+	if (hn!=hp) $("#wrapper #container").animate({height:hn},d);
+	hp = hn;
+}
+
 function changeSlide() {
-	var delay = 250;
-	var items = $("#wrapper .body");
-	var w = -100*curSlide + "%";
-	var h = items.eq(curSlide).outerHeight();
-	var m = (100/3)*curSlide + "%";
-	$("#wrapper #container #slider").animate({left:w},delay);
-	$("#wrapper #container").animate({height:h},delay);
-	$("#arrow #box").animate({left:m},delay);
+	var slidedelay = 300;
+	$("#wrapper #container #slider").animate({left:-100*curSlide+"%"},slidedelay);
+	$("#arrow #box").animate({left:(100/3)*curSlide+"%"},slidedelay);
+	reHeight(slidedelay);
 }
 
 function refreshPages() {
