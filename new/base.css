@@ -47,6 +47,7 @@ body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust
 /* HEADER */
 #wrapper #header { height: 160px; width: 100%; max-width: 100%;  border-bottom-width: 10px; border-bottom-style: solid; }
 #wrapper #header #mainLogo { width: 600px; height: 110px; background-image: url('mainlogo.png'); background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')"; }
+#wrapper #header #menuItems { height: 40px; }
 #wrapper #header #menuItems li { margin: 10px 0; width: 33.33333333333333%; height: 20px; text-align:center; font-size: 110%; font-weight:bold; color: #000; float:left; color: #4B5868; }
 #wrapper #header #menuItems li a .label { position: relative; bottom: 3px; }
 #wrapper #header #menuItems .icon { width: 20px; height: 20px; margin-right: 5px; background-repeat: no-repeat; display: inline-block; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')"; }
@@ -89,7 +90,7 @@ body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust
 	#wrapper { width: 540px; margin: 10px auto; border-radius: 15px;  }
 	#wrapper #header { border-bottom-width: 5px; border-bottom-style: solid; height: 150px; }
 	#wrapper #header #mainLogo { width: 100%; padding: 50px 0; height:0; margin: 0; }
-	#wrapper #header #menuItems { width: 100%; height: 35px; margin: auto; padding-bottom: 15px; }
+	#wrapper #header #menuItems { width: 100%; margin: auto; padding-bottom: 15px; }
 	#wrapper #header #menuItems li a .label { bottom: 4px; }
 	#wrapper #header #menuItems .icon { width: 20px; height: 20px; margin:0; }
 	#wrapper .body p { padding: 5px; }
@@ -97,11 +98,12 @@ body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust
 }
 
 @media only screen and (max-width : 540px) {
-	#wrapper { border-radius:0; width: 100%; }
-	#wrapper #header { height: 20%; }
+	#wrapper { border-radius:0; width: 100%; min-width: 240px; }
+	#wrapper #header { height: 19%; }
+	#wrapper #header #menuItems { padding-bottom: 10px; }
 	#wrapper #header #mainLogo { max-width: 100%; padding: 9% 0; }
-	#wrapper #header #arrow #box { margin-left: 2%; width: 28%; }
-	#wrapper .body { font-size: 110%; }
+	#wrapper #header #arrow #box { margin-left: 1.66666%; width: 28%; }
+	#wrapper .body { padding-top: 5px; padding-bottom: 5px; font-size: 110%; }
 	#wrapper .body h3 { padding: 5px 10px 0 10px; margin-bottom: 5px; font-size: 120%; }
 	#wrapper .body p { padding: 2px 5px 5px 5px; }
 	#wrapper .body #contactimages img { width: 35px; height: 35px; margin: 5px; }
@@ -109,5 +111,7 @@ body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust
 
 @media only screen and (max-width : 420px) {
 	body { font-size: 13px; }
+	#wrapper #header #menuItems { padding-bottom: 5px; }
+	#wrapper #header #arrow #box { margin-left: 0; width: 30%; }
 }
 
