@@ -80,6 +80,7 @@
 	<div id="contact" class="body">
 		<h3>Get in Touch!</h3>
 
+		<p>Click <a href="resume.pdf">here</a> to view my resume.</p>
 		<p>Here are some ways to get in touch with me: </p>
 		<div id="contactimages">
 			<a href="mailto:me@ankitsardesai.ca" title="Email" class="imgref">
