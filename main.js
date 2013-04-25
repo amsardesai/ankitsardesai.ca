@@ -19,24 +19,21 @@ var curSlide, hp=0;
 
 $(document).ready(function() {
 	$("#wrapper").addClass("initialHide");
-	$("#arrow").append($("<div>").attr("id","box"));
-	var items = $("#wrapper #header #menuItems li").addClass("animationReset");
-
+	$("#wrapper #header #menuItems li").addClass("animationReset");
+	$("#wrapper #container").wrapInner($("<div>").attr("id","slider"));
+	$("#wrapper .body").attr("id","");
+	$("#wrapper #arrow").append($("<div>").attr("id","box"));
 	$("#wrapper").fadeIn(500, function() {
-		var d1 = 300, d2 = 100;
-	    items.each(function(index) {
-			var delay = d2 * index;
+	    $("#wrapper #arrow #box").delay(300).fadeIn(250);
+	    $("#wrapper #header #menuItems li").each(function(index) {
+			var delay = 100 * index;
 			var opacity = 0.7; 
 	        $(this).delay(delay).animate({
 	            opacity: opacity,
 	            top: '0'
-	        }, d1, 'linear');
+	        }, 300, 'linear');
 	    });
-	    $("#arrow #box").delay(items.length*d2).fadeIn(250);
 	});
-	var slider = $("<div>").attr("id","slider");
-	$("#wrapper #container").wrapInner(slider);
-	$("#wrapper .body").css("float","left").attr("id","");
 
 	$(window).on("resize",function(){reHeight(100)});
 	$(window).hashchange(refreshPages);
@@ -58,12 +55,8 @@ function changeSlide() {
 
 function refreshPages() {
 	var hash = window.location.hash;
-	if (hash=="#projects") {
-		curSlide = 1;
-	} else if (hash=="#contact") {
-		curSlide = 2;
-	} else {
-		curSlide = 0;
-	}
+	if (hash=="#projects") curSlide = 1;
+	else if (hash=="#contact") curSlide = 2;
+	else curSlide = 0;
 	changeSlide();
 }

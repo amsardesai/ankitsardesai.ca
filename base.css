@@ -60,7 +60,7 @@ body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust
 /* BODY */
 #wrapper #container { position: relative; overflow: hidden; width: 100%; }
 #wrapper #container #slider { position: absolute; width: 300%; }
-#wrapper #container #slider .body { padding: 10px 0.5%; width: 32.3333333333%; }
+#wrapper #container #slider .body { padding: 10px 0.5%; width: 32.3333333333%; float: left; }
 #wrapper .body { padding: 10px; color: #3D454E; font-family: 'Monda', sans-serif; }
 #wrapper .body strong { font-weight: 700; }
 #wrapper .body h3 { font-size: 120%; height: 25px; padding: 5px 20px; margin-bottom: 10px; border-bottom-width: 5px; border-bottom-style: solid; }
