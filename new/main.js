@@ -36,17 +36,16 @@ $(document).ready(function() {
 	});
 	var slider = $("<div>").attr("id","slider");
 	$("#wrapper #container").wrapInner(slider);
-	$("#wrapper .body").css({"float":"left"}).attr("id","");
+	$("#wrapper .body").css("float","left").attr("id","");
 
 	$(window).on("resize",function(){reHeight(100)});
-
 	$(window).hashchange(refreshPages);
 	$(window).hashchange();
 });
 
 function reHeight(d) {
 	var hn = $("#wrapper .body").eq(curSlide).outerHeight();
-	if (hn!=hp) $("#wrapper #container").animate({height:hn},d);
+	if (hn!=hp) $("#wrapper #container").stop().animate({height:hn},d);
 	hp = hn;
 }
 
