@@ -51,6 +51,8 @@ function changeSlide() {
 	$("#wrapper #container #slider").animate({left:-100*curSlide+"%"},slidedelay);
 	$("#arrow #box").animate({left:(100/3)*curSlide+"%"},slidedelay);
 	reHeight(slidedelay);
+	var t = curSlide==2? "Contact Me!" : curSlide==1? "Projects" : "About";
+	document.title = t + " - Ankit Sardesai";
 }
 
 function refreshPages() {
