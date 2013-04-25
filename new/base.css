@@ -107,11 +107,14 @@ body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust
 	#wrapper .body h3 { padding: 5px 10px 0 10px; margin-bottom: 5px; font-size: 120%; }
 	#wrapper .body p { padding: 2px 5px 5px 5px; }
 	#wrapper .body #contactimages img { width: 35px; height: 35px; margin: 5px; }
+	#wrapper #footer { padding: 12px; }
 }
 
 @media only screen and (max-width : 420px) {
 	body { font-size: 13px; }
-	#wrapper #header #menuItems { padding-bottom: 5px; }
-	#wrapper #header #arrow #box { margin-left: 0; width: 30%; }
+	#wrapper #header #menuItems { padding-bottom: 0; }
+	#wrapper #header #menuItems li a .label { bottom: 2px; }
+	#wrapper #header #menuItems .icon { width: 15px; height: 15px; }
+	#wrapper #header #arrow #box { margin-left: 0; width: 30%; height: 25px; }
 }
 
