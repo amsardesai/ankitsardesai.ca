@@ -1,21 +1,7 @@
-
 /* IE STYLES */
 
-/*body { background-image: url('bg.png'); }*/
-
-/* HEADER */
-/*#wrapper #header { background-image: url('innerbg.png'); }*/
 #wrapper #header #mainLogo { background: none; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='mainlogo.png', sizingMethod='scale'); }
-#wrapper #header #menuItems li { width: 120px; }
 #wrapper #header #menuItems li a .label { position: relative; bottom: 0; left: 2px; }
 #wrapper #header #menuItems #imgAbout { background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='iconAbout.png',sizingMethod='crop'); }
 #wrapper #header #menuItems #imgProjects { background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='iconProjects.png',sizingMethod='crop'); }
-#wrapper #header #menuItems #imgResume { background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='iconResume.png',sizingMethod='crop'); }
 #wrapper #header #menuItems #imgContact { background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='iconContact.png',sizingMethod='crop'); }
-
-/* BODY */
-/*#wrapper .body { background-image: url('bodybg.png'); }*/
-
-
-/* FOOTER */
-/*#wrapper #footer { background-image: url('innerbg.png'); }*/

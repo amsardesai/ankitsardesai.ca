@@ -15,62 +15,55 @@ _gaq.push(['_trackPageview']);
 
 // Main Javascript
 
+var curSlide, hp=0;
+
 $(document).ready(function() {
-	$("#wrapper .body").addClass("initialHide");
-	var items = $("#wrapper #header #menuItems li");
-    items.addClass("animationReset");
-    items.each(function(index) {
-		var delay = 150 * index;
-		var opacity = 0.7; 
-        $(this).delay(delay).animate({
-            opacity: opacity,
-            top: '0'
-        }, 500, 'linear', function() {
-			$(this).addClass("transitioning");
-		});
-    });
+	$("#wrapper").addClass("initialHide");
+	$("#arrow").append($("<div>").attr("id","box"));
+	var items = $("#wrapper #header #menuItems li").addClass("animationReset");
+
+	$("#wrapper").fadeIn(500, function() {
+		var d1 = 300, d2 = 100;
+	    items.each(function(index) {
+			var delay = d2 * index;
+			var opacity = 0.7; 
+	        $(this).delay(delay).animate({
+	            opacity: opacity,
+	            top: '0'
+	        }, d1, 'linear');
+	    });
+	    $("#arrow #box").delay(items.length*d2).fadeIn(250);
+	});
+	var slider = $("<div>").attr("id","slider");
+	$("#wrapper #container").wrapInner(slider);
+	$("#wrapper .body").css("float","left").attr("id","");
+
+	$(window).on("resize",function(){reHeight(100)});
 	$(window).hashchange(refreshPages);
 	$(window).hashchange();
 });
 
+function reHeight(d) {
+	var hn = $("#wrapper .body").eq(curSlide).outerHeight();
+	if (hn!=hp) $("#wrapper #container").stop().animate({height:hn},d);
+	hp = hn;
+}
+
+function changeSlide() {
+	var slidedelay = 300;
+	$("#wrapper #container #slider").animate({left:-100*curSlide+"%"},slidedelay);
+	$("#arrow #box").animate({left:(100/3)*curSlide+"%"},slidedelay);
+	reHeight(slidedelay);
+}
+
 function refreshPages() {
 	var hash = window.location.hash;
 	if (hash=="#projects") {
-		showProjects();		
+		curSlide = 1;
 	} else if (hash=="#contact") {
-		showContact();
+		curSlide = 2;
 	} else {
-		showAbout();
+		curSlide = 0;
 	}
-}
-
-function showAbout() {
-	$("#projects").removeClass("shown").addClass("notshown");
-	$("#contact").removeClass("shown").addClass("notshown");
-	$("#about").removeClass("notshown").addClass("shown");
-	doTheSlide();
-	document.title = "About - Ankit Sardesai";
-}
-
-function showProjects() {
-	$("#about").removeClass("shown").addClass("notshown");
-	$("#contact").removeClass("shown").addClass("notshown");
-	$("#projects").removeClass("notshown").addClass("shown");
-	doTheSlide();
-	document.title = "Projects - Ankit Sardesai";
-}
-
-function showContact() {
-	$("#about").removeClass("shown").addClass("notshown");
-	$("#projects").removeClass("shown").addClass("notshown");
-	$("#contact").removeClass("notshown").addClass("shown");
-	doTheSlide();
-	document.title = "Contact Me - Ankit Sardesai";
-}
-
-function doTheSlide() {
-	var slideDelay = 400;
-	var timeBetweenUpDown = 100;
-	$(".notshown").slideUp(slideDelay).fadeOut(slideDelay);
-	$(".shown").delay(slideDelay + timeBetweenUpDown).slideDown(slideDelay).fadeIn(slideDelay);
+	changeSlide();
 }
