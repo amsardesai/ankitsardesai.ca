@@ -1,7 +1,0 @@
-/* IE STYLES */
-
-#wrapper #header #mainLogo { background: none; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='mainlogo.png', sizingMethod='scale'); }
-#wrapper #header #menuItems li a .label { position: relative; bottom: 0; left: 2px; }
-#wrapper #header #menuItems #imgAbout { background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='iconAbout.png',sizingMethod='crop'); }
-#wrapper #header #menuItems #imgProjects { background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='iconProjects.png',sizingMethod='crop'); }
-#wrapper #header #menuItems #imgContact { background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='iconContact.png',sizingMethod='crop'); }
