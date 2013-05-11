@@ -17,6 +17,7 @@ _gaq.push(['_trackPageview']);
 
 var curSlide, hp=0;
 
+// Startup function
 $(document).ready(function() {
 	$("#wrapper").addClass("initialHide");
 	$("#wrapper #header #menuItems li").addClass("animationReset");
@@ -24,28 +25,30 @@ $(document).ready(function() {
 	$("#wrapper .body").attr("id","");
 	$("#wrapper #arrow").append($("<div>").attr("id","box"));
 	$("#wrapper").fadeIn(500, function() {
-	    $("#wrapper #arrow #box").delay(300).fadeIn(250);
-	    $("#wrapper #header #menuItems li").each(function(index) {
+		$("#wrapper #arrow #box").delay(300).fadeIn(250);
+		$("#wrapper #header #menuItems li").each(function(index) {
 			var delay = 100 * index;
-			var opacity = 0.7; 
-	        $(this).delay(delay).animate({
-	            opacity: opacity,
-	            top: '0'
-	        }, 300, 'linear');
-	    });
+			var opacity = 0.7;
+			$(this).delay(delay).animate({
+				opacity: opacity,
+				top: '0'
+			}, 300, 'linear');
+		});
 	});
 
-	$(window).on("resize",function(){reHeight(100)});
+	$(window).on("resize",function(){reHeight(100);});
 	$(window).hashchange(refreshPages);
 	$(window).hashchange();
 });
 
+// Animate height of wrapper to correct height
 function reHeight(d) {
 	var hn = $("#wrapper .body").eq(curSlide).outerHeight();
 	if (hn!=hp) $("#wrapper #container").stop().animate({height:hn},d);
 	hp = hn;
 }
 
+// Change the slide of the page to correct slide
 function changeSlide() {
 	var slidedelay = 300;
 	$("#wrapper #container #slider").animate({left:-100*curSlide+"%"},slidedelay);
@@ -55,6 +58,7 @@ function changeSlide() {
 	document.title = t + " - Ankit Sardesai";
 }
 
+// Determine which slide the page should be changed to depending on the location hash
 function refreshPages() {
 	var hash = window.location.hash;
 	if (hash=="#projects") curSlide = 1;
