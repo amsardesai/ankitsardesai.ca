@@ -103,7 +103,7 @@ fslider = {
 		var newLeft = fslider.startLeft + fslider.movement;
 		var rightbound = -item.width() * 2/3;
 		if (newLeft > 0) newLeft /= 2;
-		else if (newLeft < rightbound) newLeft = (newLeft - rightbound)/2 + rightbound; 
+		else if (newLeft < rightbound) newLeft = (newLeft - rightbound)/2 + rightbound;
 		console.log(fslider.movement + " " + fslider.startLeft + " ===== " + newLeft);
 		item.css("left",newLeft);
 		var menu = $("#wrapper #arrow #box");
@@ -118,12 +118,12 @@ fslider = {
 		else if (!goingLeft && curSlide < 2 && fslider.movement < -20) curSlide++;
 
 		changeSlide();
-		
+
 	}
 
 
 
-}
+};
 
 
 
