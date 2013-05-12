@@ -123,15 +123,12 @@ fslider = {
 			} else return true;
 		});
 	},
-
 	startT: function(item,e) {
 		item.add(fslider.menu).addClass("sliding").stop();
 		fslider.startX = e.originalEvent.touches.item(0).clientX;
 		fslider.startY = e.originalEvent.touches.item(0).clientY;
-		fslider.startLeft = parseInt(item.css("left"), 10);
+		fslider.startLeft = parseInt(item.css("left"),10);
 	},
-
-
 	moveT: function(item,e) {
 		fslider.movement = e.originalEvent.touches.item(0).clientX - fslider.startX;
 		var newLeft = fslider.startLeft + fslider.movement;
@@ -143,18 +140,14 @@ fslider = {
 		item.css("left",newItemLeft + "%");
 		fslider.menu.css("left",newMenuLeft + "%");
 	},
-
-
 	endT: function(item,e) {
 		item.add(fslider.menu).removeClass("sliding");
 		var goingLeft = (fslider.movement > 0);
-		if (goingLeft && curSlide > 0 && fslider.movement > 20) curSlide--;
-		else if (!goingLeft && curSlide < 2 && fslider.movement < -20) curSlide++;
+		var threshold = 50;
+		if (goingLeft && curSlide > 0 && fslider.movement > threshold) curSlide--;
+		else if (!goingLeft && curSlide < 2 && fslider.movement < -threshold) curSlide++;
 		changeSlide();
 	}
-
-
-
 };
 
 
