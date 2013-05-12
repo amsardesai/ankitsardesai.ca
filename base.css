@@ -36,16 +36,16 @@ background: linear-gradient(to bottom, #c8dcff 0%, #a5c6ff 100%);
 #header, #footer, #wrapper .body h3, #contactimages img, #arrow #box { border-color: #FFF; }
 
 /* FUNDAMENTALS */
-body { font-family: 'Domine', cursive; font-size: 15px; -webkit-text-size-adjust: none; background-attachment:fixed; background-position: center; background-size: cover; }
+body { font-family: 'Domine', 'Garamond', serif; font-size: 15px; -webkit-text-size-adjust: none; -ms-text-size-adjust: none; background-attachment:fixed; background-position: center; background-size: cover; }
 #wrapper { width: 600px; margin: 20px auto; border-radius: 20px; position: relative; }
 .initialHide { display:none; }
 .animationReset { position:relative; top: -50px; opacity:0; }
 
 /* HEADER */
-#wrapper #header { height: 160px; width: 100%; max-width: 100%;  border-bottom-width: 10px; border-bottom-style: solid; }
+#wrapper #header { height: 160px; width: 100%; max-width: 100%;  border-bottom-width: 10px; border-bottom-style: solid; overflow:hidden; }
 #wrapper #header #mainLogo { width: 600px; height: 110px; background-image: url('mainlogo.png'); background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')"; }
 #wrapper #header #menuItems { height: 40px; }
-#wrapper #header #menuItems li { margin: 10px 0; width: 33.33333333333333%; height: 20px; text-align:center; font-size: 110%; font-weight:bold; color: #000; float:left; color: #4B5868; }
+#wrapper #header #menuItems li { margin: 10px 0; width: 33.33333333333333%; height: 20px; text-align:center; font-size: 110%; font-weight:bold; float:left; color: #4B5868; }
 #wrapper #header #menuItems li a .label { position: relative; bottom: 3px; }
 #wrapper #header #menuItems .icon { width: 20px; height: 20px; margin-right: 5px; background-repeat: no-repeat; display: inline-block; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')"; }
 #wrapper #header #menuItems #imgAbout { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABAUlEQVQ4y2P4//8/AzUxpgACsANxFBBPB+JVQLweiNcAcRcQayMrJMZAcyC+D1KLB+cTa6AXmsbfQPwYiG8A8VM0uSBiDJyMpGEmEKsCMR8QcwIxExCnIsnvAmJGQgaqAHEPEPsw4AYboAaCXKxObKTgAw1QA38BsR01DFyD5G03SgwMB+JrSIbdBWIFcgx0hWpGTzq+xKZDZOCOZsgfIF4IxEqkJGxksBHJsKVALIOugFQDT0MNu4orPEg1cB/UwEvUMjAAiL8DcQG1DOQHYmMgFqGGgTlA/BOI7wDxFyCeT6mBl9CSzFcglqLEwKlIhoFcWkmpCxmhpbMZEIsRE4YAlykWCbdvl2UAAAAASUVORK5CYII='); }
