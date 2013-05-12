@@ -15,7 +15,8 @@ _gaq.push(['_trackPageview']);
 
 // Main Javascript
 
-var touchSupport = ("ontouchstart" in document.documentElement);
+var touchSupport = Modernizr.touch;
+var transitionSupport = Modernizr.csstransitions;
 var curSlide, hp=0;
 
 // Startup function
@@ -51,15 +52,26 @@ $(document).ready(function() {
 // Animate height of wrapper to correct height
 function reHeight(d) {
 	var hn = $("#wrapper .body").eq(curSlide).outerHeight();
-	if (hn!=hp) $("#wrapper #container").stop().animate({height:hn},d);
+	if (hn!=hp) {
+		if (transitionSupport) {
+			$("#wrapper #container").css("height",hn);
+		} else {
+			$("#wrapper #container").stop().animate({height:hn},d);
+		}
+	}
 	hp = hn;
 }
 
 // Change the slide of the page to correct slide
 function changeSlide() {
 	var slidedelay = 300;
-	$("#wrapper #container #slider").animate({left:-100*curSlide+"%"},slidedelay);
-	$("#arrow #box").animate({left:(100/3)*curSlide+"%"},slidedelay);
+	if (transitionSupport) {
+		$("#wrapper #container #slider").css("left",-100*curSlide+"%");
+		$("#arrow #box").css("left",(100/3)*curSlide+"%");
+	} else {
+		$("#wrapper #container #slider").animate({left:-100*curSlide+"%"},slidedelay);
+		$("#arrow #box").animate({left:(100/3)*curSlide+"%"},slidedelay);
+	}
 	reHeight(slidedelay);
 	var t = curSlide==2? "Contact Me!" : curSlide==1? "Projects" : "About";
 	document.title = t + " - Ankit Sardesai";
@@ -76,31 +88,46 @@ function refreshPages() {
 
 /**
  * Begin Slider Code
+ * Created by Ankit Sardesai
  */
 
 fslider = {
 	touchSlider: function(frame) {
+		fslider.menu = $("#wrapper #arrow #box");
 		frame.bind("touchstart",function(e) {
-			fslider.touched = true;
 			fslider.startT($(this),e);
+			fslider.firstTouch = true;
+			fslider.canMove = false;
 			return true;
 		}).bind("touchmove",function(e) {
-			fslider.moveT($(this),e);
-			e.preventDefault();
-			e.stopPropagation();
-			return false;
+			if (fslider.firstTouch && !fslider.canMove) {
+				var diffX = Math.abs(e.originalEvent.touches.item(0).clientX - fslider.startX);
+				var diffY = Math.abs(e.originalEvent.touches.item(0).clientY - fslider.startY);
+				fslider.canMove = diffY < diffX;
+				fslider.firstTouch = false;
+				return !fslider.canMove;
+			} else if (fslider.canMove) {
+				fslider.moving = true;
+				fslider.moveT($(this),e);
+				e.preventDefault();
+				e.stopPropagation();
+				return false;
+			} else return true;
 		}).bind("touchend",function(e) {
-			fslider.touched = false;
-			fslider.endT($(this),e);
-			e.preventDefault();
-			e.stopPropagation();
-			return false;
+			if (fslider.moving) {
+				fslider.moving = false;
+				fslider.endT($(this),e);
+				e.preventDefault();
+				e.stopPropagation();
+				return false;
+			} else return true;
 		});
 	},
 
 	startT: function(item,e) {
-		item.stop();
+		item.add(fslider.menu).addClass("sliding").stop();
 		fslider.startX = e.originalEvent.touches.item(0).clientX;
+		fslider.startY = e.originalEvent.touches.item(0).clientY;
 		fslider.startLeft = parseInt(item.css("left"), 10);
 	},
 
@@ -111,21 +138,19 @@ fslider = {
 		var rightbound = -item.width() * 2/3;
 		if (newLeft > 0) newLeft /= 2;
 		else if (newLeft < rightbound) newLeft = (newLeft - rightbound)/2 + rightbound;
-		console.log(fslider.movement + " " + fslider.startLeft + " ===== " + newLeft);
-		item.css("left",newLeft);
-		var menu = $("#wrapper #arrow #box");
-		menu.css("left",-newLeft/3);
+		var newItemLeft = newLeft / item.parent().width() * 100;
+		var newMenuLeft = - newLeft / fslider.menu.parent().width() * (100/3);
+		item.css("left",newItemLeft + "%");
+		fslider.menu.css("left",newMenuLeft + "%");
 	},
 
 
 	endT: function(item,e) {
+		item.add(fslider.menu).removeClass("sliding");
 		var goingLeft = (fslider.movement > 0);
-		console.log(goingLeft);
 		if (goingLeft && curSlide > 0 && fslider.movement > 20) curSlide--;
 		else if (!goingLeft && curSlide < 2 && fslider.movement < -20) curSlide++;
-
 		changeSlide();
-
 	}
 
 
