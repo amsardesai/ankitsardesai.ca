@@ -98,7 +98,7 @@ transition-property: left; transition-duration: 0.25s; transition-timing-functio
 /* FOOTER */
 #wrapper #footer { height: 15px; border-top-width: 10px; border-top-style: solid; padding: 20px; text-align: center; color: #4B5868; }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
 	#wrapper #header #mainLogo { background-image: url('mainlogo@2x.png'); }
 }
 
