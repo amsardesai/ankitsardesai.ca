@@ -119,7 +119,7 @@ transition-property: left; transition-duration: 0.25s; transition-timing-functio
 }
 
 @media only screen and (max-width : 540px) {
-	#wrapper { border-radius:0; width: 100%; min-width: 240px; }
+	#wrapper { border-radius:10px; width: 100%; min-width: 240px; }
 	#wrapper #header { height: 19%; }
 	#wrapper #header #menuItems { padding-bottom: 10px; }
 	#wrapper #header #mainLogo { max-width: 100%; padding: 9% 0; }
