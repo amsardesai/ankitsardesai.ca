@@ -39,17 +39,17 @@ $(document).ready(function() {
 	}
 	$(window).hashchange(refreshPages);
 	$(window).hashchange();
+	if(!Modernizr.svg) $('img[src*="svg"]').attr('src', function() {
+		return $(this).attr('src').replace('.svg', '.png');
+	});
 });
 
 // Animate height of wrapper to correct height
 function reHeight(d) {
 	var hn = $("#wrapper .body").eq(curSlide).outerHeight();
 	if (hn!=hp) {
-		if (transitionSupport) {
-			$("#container").css("height",hn);
-		} else {
-			$("#container").stop().animate({height:hn},d);
-		}
+		if (transitionSupport) $("#container").css("height",hn);
+		else $("#container").stop().animate({height:hn},d);
 	}
 	hp = hn;
 }
