@@ -1,5 +1,7 @@
 /* Written by Ankit Sardesai */
 
+$("html").addClass("js"); // Fixed flashing bug in IE
+
 var touchSupport = Modernizr.touch;
 var transitionSupport = Modernizr.csstransitions;
 var curSlide, hp=0;
@@ -15,11 +17,16 @@ $(document).ready(function() {
 		$("#box").delay(300).fadeIn(250);
 		$("#menuItems li").each(function(index) {
 			var delay = 100 * index;
-			var opacity = 0.7;
+			var opacity = 1;
 			$(this).delay(delay).animate({
 				opacity: opacity,
 				top: '0'
-			}, 300, 'linear');
+			}, 300, 'linear', function() {
+				$(this).css({
+					position: "",
+					filter: ""
+				});
+			});
 		});
 	});
 	$(window).on("resize",function(){reHeight(100);});
@@ -39,9 +46,9 @@ function reHeight(d) {
 	var hn = $("#wrapper .body").eq(curSlide).outerHeight();
 	if (hn!=hp) {
 		if (transitionSupport) {
-			$("#wrapper #container").css("height",hn);
+			$("#container").css("height",hn);
 		} else {
-			$("#wrapper #container").stop().animate({height:hn},d);
+			$("#container").stop().animate({height:hn},d);
 		}
 	}
 	hp = hn;
@@ -51,11 +58,11 @@ function reHeight(d) {
 function changeSlide() {
 	var slidedelay = 300;
 	if (transitionSupport) {
-		$("#wrapper #container #slider").css("left",-100*curSlide+"%");
-		$("#arrow #box").css("left",(100/3)*curSlide+"%");
+		$("#slider").css("left",-100*curSlide+"%");
+		$("#box").css("left",(100/3)*curSlide+"%");
 	} else {
-		$("#wrapper #container #slider").animate({left:-100*curSlide+"%"},slidedelay);
-		$("#arrow #box").animate({left:(100/3)*curSlide+"%"},slidedelay);
+		$("#slider").animate({left:-100*curSlide+"%"},slidedelay);
+		$("#box").animate({left:(100/3)*curSlide+"%"},slidedelay);
 	}
 	reHeight(slidedelay);
 	var t = curSlide==2? "Contact Me!" : curSlide==1? "Projects" : "About";
