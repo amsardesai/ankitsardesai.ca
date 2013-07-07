@@ -50,7 +50,7 @@ transition-duration: 0 !important;
 
 /* HEADER */
 #wrapper #header { height: 160px; width: 100%; max-width: 100%;  border-bottom-width: 10px; border-bottom-style: solid; overflow:hidden; -webkit-tap-highlight-color: rgba(0,0,0,0); }
-#wrapper #header #mainLogo { width: 600px; height: 110px; background-image: url('mainlogo.png'); background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')"; }
+#wrapper #header #mainLogo { width: 600px; height: 110px; background-image: url('../img/mainlogo.png'); background-repeat: no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')"; }
 #wrapper #header #menuItems { height: 40px; }
 #wrapper #header #menuItems li { margin: 10px 0; width: 33.33333333333333%; height: 20px; text-align:center; font-size: 110%; font-weight:bold; float:left; color: #4B5868; }
 #wrapper #header #menuItems li a .label { position: relative; bottom: 3px; }
@@ -98,11 +98,11 @@ transition-property: left; transition-duration: 0.25s; transition-timing-functio
 #wrapper #footer { height: 15px; border-top-width: 10px; border-top-style: solid; padding: 20px; text-align: center; color: #4B5868; }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
-	#wrapper #header #mainLogo { background-image: url('mainlogo@2x.png'); }
+	#wrapper #header #mainLogo { background-image: url('../img/mainlogo@2x.png'); }
 }
 
 @media only screen and (max-device-width : 480px) {
-	#wrapper #header #mainLogo { background-image: url('mainlogo.png'); }
+	#wrapper #header #mainLogo { background-image: url('../img/mainlogo.png'); }
 }
 
 @media only screen and (max-width : 640px) {
