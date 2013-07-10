@@ -31,7 +31,7 @@ $(document).ready(function() {
 	});
 	$(window).on("resize",function(){reHeight(100);});
 	if (touchSupport) {
-		fslider.touchSlider($("#slider"));
+		centerslider.bindTouches($("#slider"));
 		$("#menuItems a").click(function(e) {
 			e.preventDefault();
 			e.stopPropagation();
@@ -83,32 +83,32 @@ function refreshPages() {
  * Created by Ankit Sardesai
  */
 
-fslider = {
-	touchSlider: function(frame) {
-		fslider.menu = $("#wrapper #arrow #box");
+centerslider = {
+	bindTouches: function(frame) {
+		centerslider.menu = $("#wrapper #arrow #box");
 		frame.bind("touchstart",function(e) {
-			fslider.startT($(this),e);
-			fslider.firstTouch = true;
-			fslider.canMove = false;
+			centerslider.startT($(this),e);
+			centerslider.firstTouch = true;
+			centerslider.canMove = false;
 			return true;
 		}).bind("touchmove",function(e) {
-			if (fslider.firstTouch && !fslider.canMove) {
-				var diffX = Math.abs(e.originalEvent.touches.item(0).clientX - fslider.startX);
-				var diffY = Math.abs(e.originalEvent.touches.item(0).clientY - fslider.startY);
-				fslider.canMove = diffY < diffX;
-				fslider.firstTouch = false;
-				return !fslider.canMove;
-			} else if (fslider.canMove) {
-				fslider.moving = true;
-				fslider.moveT($(this),e);
+			if (centerslider.firstTouch && !centerslider.canMove) {
+				var diffX = Math.abs(e.originalEvent.touches.item(0).clientX - centerslider.startX);
+				var diffY = Math.abs(e.originalEvent.touches.item(0).clientY - centerslider.startY);
+				centerslider.canMove = diffY < diffX;
+				centerslider.firstTouch = false;
+				return !centerslider.canMove;
+			} else if (centerslider.canMove) {
+				centerslider.moving = true;
+				centerslider.moveT($(this),e);
 				e.preventDefault();
 				e.stopPropagation();
 				return false;
 			} else return true;
 		}).bind("touchend",function(e) {
-			if (fslider.moving) {
-				fslider.moving = false;
-				fslider.endT($(this),e);
+			if (centerslider.moving) {
+				centerslider.moving = false;
+				centerslider.endT($(this),e);
 				e.preventDefault();
 				e.stopPropagation();
 				return false;
@@ -116,28 +116,28 @@ fslider = {
 		});
 	},
 	startT: function(item,e) {
-		item.add(fslider.menu).addClass("sliding").stop();
-		fslider.startX = e.originalEvent.touches.item(0).clientX;
-		fslider.startY = e.originalEvent.touches.item(0).clientY;
-		fslider.startLeft = parseInt(item.css("left"),10);
+		item.add(centerslider.menu).addClass("sliding").stop();
+		centerslider.startX = e.originalEvent.touches.item(0).clientX;
+		centerslider.startY = e.originalEvent.touches.item(0).clientY;
+		centerslider.startLeft = parseInt(item.css("left"),10);
 	},
 	moveT: function(item,e) {
-		fslider.movement = e.originalEvent.touches.item(0).clientX - fslider.startX;
-		var newLeft = fslider.startLeft + fslider.movement;
+		centerslider.movement = e.originalEvent.touches.item(0).clientX - centerslider.startX;
+		var newLeft = centerslider.startLeft + centerslider.movement;
 		var rightbound = -item.width() * 2/3;
 		if (newLeft > 0) newLeft /= 2;
 		else if (newLeft < rightbound) newLeft = (newLeft - rightbound)/2 + rightbound;
 		var newItemLeft = newLeft / item.parent().width() * 100;
-		var newMenuLeft = - newLeft / fslider.menu.parent().width() * (100/3);
+		var newMenuLeft = - newLeft / centerslider.menu.parent().width() * (100/3);
 		item.css("left",newItemLeft + "%");
-		fslider.menu.css("left",newMenuLeft + "%");
+		centerslider.menu.css("left",newMenuLeft + "%");
 	},
 	endT: function(item,e) {
-		item.add(fslider.menu).removeClass("sliding");
-		var goingLeft = (fslider.movement > 0);
+		item.add(centerslider.menu).removeClass("sliding");
+		var goingLeft = (centerslider.movement > 0);
 		var threshold = 50;
-		if (goingLeft && curSlide > 0 && fslider.movement > threshold) curSlide--;
-		else if (!goingLeft && curSlide < 2 && fslider.movement < -threshold) curSlide++;
+		if (goingLeft && curSlide > 0 && centerslider.movement > threshold) curSlide--;
+		else if (!goingLeft && curSlide < 2 && centerslider.movement < -threshold) curSlide++;
 		changeSlide();
 	}
 };
