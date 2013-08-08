@@ -6,6 +6,6 @@ body { margin-top: 20px; }
 #box { behavior: url('pie/PIE.htc'); }
 #wrapper #header #mainLogo { background: none; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/mainlogo.png', sizingMethod='scale'); }
 #wrapper #header #menuItems li a .label { *bottom: 0; }
-#wrapper #header #menuItems #imgAbout { background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/iconAbout.png',sizingMethod='crop'); }
-#wrapper #header #menuItems #imgProjects { background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/iconProjects.png',sizingMethod='crop'); }
-#wrapper #header #menuItems #imgContact { background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/iconContact.png',sizingMethod='crop'); }
+#wrapper #header #menuItems #imgAbout { background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/about.png',sizingMethod='crop'); }
+#wrapper #header #menuItems #imgProjects { background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/projects.png',sizingMethod='crop'); }
+#wrapper #header #menuItems #imgContact { background: none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/contact.png',sizingMethod='crop'); }
