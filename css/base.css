@@ -86,7 +86,7 @@ transition-property: left; transition-duration: 0.25s; transition-timing-functio
 #wrapper .body { padding: 10px; color: #3D454E; font-family: 'Monda', sans-serif; }
 #wrapper .body strong { font-weight: 700; }
 #wrapper .body h3 { font-size: 120%; font-weight: bold; height: 25px; padding: 5px 20px; margin-bottom: 10px; border-bottom-width: 5px; border-bottom-style: solid; }
-#wrapper .body p { line-height: 1.3; padding: 5px 10px 10px 10px; }
+#wrapper .body p { line-height: 1.3; padding: 5px 10px; }
 #wrapper .body ul { padding: 0px 10px 10px 30px; }
 #wrapper .body li { list-style-type: square; line-height: 1.3; padding-top: 10px; }
 #wrapper .body a { font-weight: 700; color: #3D454E; }
@@ -126,7 +126,7 @@ transition-property: left; transition-duration: 0.25s; transition-timing-functio
 	#wrapper .body { padding-top: 5px; padding-bottom: 5px; font-size: 110%; }
 	#wrapper .body h3 { padding: 5px 10px 0 10px; margin-bottom: 5px; font-size: 120%; }
 	#wrapper .body p { padding: 2px 5px 5px 5px; }
-	#wrapper .body #contactimages img { width: 35px; height: 35px; margin: 5px 0 5px 5px; }
+	#wrapper .body #contactimages img { /*width: 35px; height: 35px;*/ margin: 5px 0 5px 5px; }
 	#wrapper #footer { padding: 12px; }
 }
 
