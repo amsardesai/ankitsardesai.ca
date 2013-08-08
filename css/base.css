@@ -92,7 +92,7 @@ transition-property: left; transition-duration: 0.25s; transition-timing-functio
 #wrapper .body a { font-weight: 700; color: #3D454E; }
 #wrapper .body a:hover { color: #000; }
 #wrapper .body #bottomlabel { font-size: 60%; padding: 0px 7px; margin-bottom: 5px; }
-#wrapper .body #contactimages img { width: 50px; height: 50px; margin: 10px 0 10px 10px; padding: 3px; background: transparent; }
+#wrapper .body #contactimages img { width: 50px; height: 50px; margin: 10px 0 5px 15px; background: transparent; }
 
 /* FOOTER */
 #wrapper #footer { height: 15px; padding: 20px; text-align: center; color: #4B5868; }
@@ -126,7 +126,7 @@ transition-property: left; transition-duration: 0.25s; transition-timing-functio
 	#wrapper .body { padding-top: 5px; padding-bottom: 5px; font-size: 110%; }
 	#wrapper .body h3 { padding: 5px 10px 0 10px; margin-bottom: 5px; font-size: 120%; }
 	#wrapper .body p { padding: 2px 5px 5px 5px; }
-	#wrapper .body #contactimages img { /*width: 35px; height: 35px;*/ margin: 5px 0 5px 5px; }
+	#wrapper .body #contactimages img { /*width: 35px; height: 35px;*/ margin: 5px 0 5px 10px; }
 	#wrapper #footer { padding: 12px; }
 }
 
