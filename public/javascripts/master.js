@@ -1,1 +1,0 @@
-(function(){$(function(){return alert("hihi")})}).call(this)
