@@ -1,8 +1,18 @@
-@import "bootstrap/bootstrap";
+// Font Import
+@import url(http://fonts.googleapis.com/css?family=Black+Ops+One);
 
+// Bootstrap Import
+@import "bootstrap/bootstrap";
+@import "font-awesome/font-awesome";
+
+// Global Variables
 @header-height: 50px;
 @max-width: 720px;
 
+@color-1: #a5c6ff;
+@color-2: #ffc354;
+
+// Box Model Test
 .btest { border: 1px solid #000; }
 
 body {
@@ -10,11 +20,41 @@ body {
 }
 
 header {
-	background-color: #eee;
+	.navbar-fixed-top;
+	background-color: @color-2;
+	//border-bottom: 1px solid darken(@color-2, 30%);
+	height: @header-height;
 	.container {
-
 		max-width: @max-width;
 		height: @header-height;
+		a {
+			font-size: (@header-height / 2);
+			padding: (@header-height / 4) 10px;
+			margin: 0;
+			border: 0;
+			display: inline-block;
+			color: darken(@color-2, 30%);
+			cursor: pointer;
+			&:hover { 
+				text-decoration: none;
+				color: darken(@color-2, 40%);
+			}
+		}
+		.logo {
+			height: @header-height;
+			font-size: 36px;
+			font-weight: bolder;
+			font-family: "Black Ops One", serif;
+			padding: 0 10px;
+			margin:0;
+			color: lighten(@color-2, 20%);
+			text-shadow: 2px 2px 0 darken(@color-2, 25%);
+			float: right;
+			&:hover { 
+				color: lighten(@color-2, 30%);
+				text-shadow: 2px 2px 0 darken(@color-2, 35%);
+			}
+		}
 	}
 }
 
