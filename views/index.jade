@@ -7,11 +7,18 @@ html
 		script(type='text/javascript', src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js')
 		script(type='text/javascript', src='http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js')
 		script(type='text/javascript', src='/javascripts/master.js')
-	
 	body
-		header
+		nav.navbar-fixed-top
 			.container
-				a.icon-envelope
-				a.icon-github
-				a.icon-linkedin
-				a.logo ANKIT SARDESAI
+				a.icon-question-sign(href='javascript:void()')
+				a.icon-rocket(href='javascript:void()')
+				a.icon-briefcase(href='javascript:void()')
+				a.logo(href='javascript:void()') Ankit S
+					span.last-name ardesai
+		section#aboutme
+			.container
+				p My name is <strong>Ankit Sardesai</strong> and I am a software developer from Toronto, Ontario.
+				.buildings
+		section#projects
+			.container
+				h1 Projects

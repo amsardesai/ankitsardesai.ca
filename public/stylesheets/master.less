@@ -1,16 +1,21 @@
 // Font Import
-@import url(http://fonts.googleapis.com/css?family=Black+Ops+One);
+@import url("http://fonts.googleapis.com/css?family=Black+Ops+One|Monda:400,700");
 
 // Bootstrap Import
 @import "bootstrap/bootstrap";
 @import "font-awesome/font-awesome";
+@import "elements";
 
 // Global Variables
 @header-height: 50px;
 @max-width: 720px;
 
-@color-1: #a5c6ff;
-@color-2: #ffc354;
+@color-header: #E5AB41;
+@color-aboutme: #698CCC;
+@color-projects: #806DCE;
+
+@file-city-buildings: "/images/city-buildings.png";
+@file-city-toronto: "/images/city-toronto.png";
 
 // Box Model Test
 .btest { border: 1px solid #000; }
@@ -19,42 +24,93 @@ body {
 	padding-top: @header-height;
 }
 
-header {
-	.navbar-fixed-top;
-	background-color: @color-2;
-	//border-bottom: 1px solid darken(@color-2, 30%);
+nav {
+	background-color: @color-header;
 	height: @header-height;
 	.container {
 		max-width: @max-width;
 		height: @header-height;
 		a {
+			display: inline-block;
 			font-size: (@header-height / 2);
+			height: @header-height;
 			padding: (@header-height / 4) 10px;
 			margin: 0;
 			border: 0;
-			display: inline-block;
-			color: darken(@color-2, 30%);
-			cursor: pointer;
+			color: darken(@color-header, 30%);
+			float: left;
+			.transition(0.1s);
 			&:hover { 
 				text-decoration: none;
-				color: darken(@color-2, 40%);
+				color: darken(@color-header, 35%);
+				background-color: lighten(@color-header, 10%);
 			}
 		}
 		.logo {
-			height: @header-height;
-			font-size: 36px;
+			font-size: 37px;
 			font-weight: bolder;
-			font-family: "Black Ops One", serif;
+			font-family: "Black Ops One", sans-serif;
 			padding: 0 10px;
-			margin:0;
-			color: lighten(@color-2, 20%);
-			text-shadow: 2px 2px 0 darken(@color-2, 25%);
+			color: #fff;
+			text-shadow: 2px 2px 0 darken(@color-header, 25%);
 			float: right;
-			&:hover { 
-				color: lighten(@color-2, 30%);
-				text-shadow: 2px 2px 0 darken(@color-2, 35%);
+			&:hover {
+				color: #fff;
+				text-shadow: 2px 2px 0 darken(@color-header, 40%);
 			}
 		}
+		@media screen and (max-width: 520px) {
+			.last-name {
+				display: none;
+			}
+		}
+	}
+}
+
+section {
+	.container {
+		max-width: @max-width;
+		min-height: 400px;
+		h1 {
+			font-size: 24px;
+			padding: 0 10px 10px 10px;
+			margin: 20px 0;
+			color: #fff;
+		}
+	}
+	&#aboutme {
+		background-color: @color-aboutme;
+		.container {
+			background-color: lighten(@color-aboutme, 10%);
+			background-image: url(@file-city-toronto);
+			background-position: bottom right;
+			background-repeat: no-repeat;
+			position: relative;
+			overflow: hidden;
+			padding-bottom: 120px;
+			p {
+				color: #fff;
+				line-height: 1.5;
+				&:first-child {
+					padding: 40px 200px 30px 30px;
+					font-size: 25px;
+					font-family: "Monda", sans-serif;
+				}
+			}
+			.buildings {
+				position: absolute;
+				bottom: -90px;
+				left:0;
+				right:0;
+				height: 90px;
+				background-image: url(@file-city-buildings);
+				background-position: bottom left;
+				background-repeat: repeat-x;	
+			}
+		}
+	}
+	&#projects {
+		background-color: @color-projects;
 	}
 }
 
