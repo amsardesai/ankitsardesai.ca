@@ -3,22 +3,28 @@ html
 	head
 		title Ankit Sardesai
 		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+		meta(name='viewport', content='width=device-width, minimum-scale=1.0, maximum-scale=1.0')
 		link(rel='stylesheet', href='/stylesheets/master.css')
 		script(type='text/javascript', src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js')
 		script(type='text/javascript', src='http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js')
 		script(type='text/javascript', src='/javascripts/master.js')
 	body
-		nav.navbar-fixed-top
+		header.navbar-fixed-top
 			.container
-				a.icon-question-sign(href='javascript:void()')
-				a.icon-rocket(href='javascript:void()')
-				a.icon-briefcase(href='javascript:void()')
-				a.logo(href='javascript:void()') Ankit S
+				a.icon-envelope(href='mailto:me@ankitsardesai.ca')
+				a.icon-github(href='http://github.com/amsardesai')
+				a.icon-linkedin(href='http://linkedin.com/in/amsardesai')
+				a.logo(href='#top') Ankit S
 					span.last-name ardesai
 		section#aboutme
 			.container
-				p My name is <strong>Ankit Sardesai</strong> and I am a software developer from Toronto, Ontario.
+				h3 My name is Ankit Sardesai and I am a software developer from the Toronto area.
+				ul.hidden-paragraphs
+					li I go to the <strong>University of Waterloo</strong> and I study Software Engineering.
+					li I enjoy carefully creating interfaces that favour intuitivity without sacrificing functionality. My passion is coding and designing, but I also like photography and Indian food.
+					li Click <a href="images/resume.pdf">here</a> to view my r&eacute;sum&eacute;.
+				.city
 				.buildings
 		section#projects
 			.container
-				h1 Projects
+				h1 My Work
