@@ -20,13 +20,11 @@ app.configure ->
 	app.use express.methodOverride()
 	app.use require("less-middleware")(
 		src: __dirname + "/public"
-		yuicompress: app.get("env") is "production"
-		force: app.get("env") is "development"
+		yuicompress: true
 	)
 	app.use require("express-coffee")(
 		path: __dirname + "/public"
 		uglify: app.get("env") is "production"
-		live: app.get("env") is "development"
 	)
 	app.use express.static(__dirname + "/public")
 	app.use app.router

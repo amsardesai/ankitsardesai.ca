@@ -1,12 +1,13 @@
-// Font Import
-@import url("http://fonts.googleapis.com/css?family=Black+Ops+One|Raleway:400,700|Bad+Script|Pompiere|Shadows+Into+Light|Just+Me+Again+Down+Here");
-
-@h3-font: "Bad Script";
-
-// Bootstrap Import
+// Include Libraries
 @import "bootstrap/bootstrap";
 @import "font-awesome/font-awesome";
 @import "elements";
+
+// Font Import
+@import url("http://fonts.googleapis.com/css?family=Black+Ops+One|Raleway:400,700|Bad+Script|Pompiere|Shadows+Into+Light|Just+Me+Again+Down+Here");
+@title-font: "Black Ops One", sans-serif;
+@intro-font: "Bad Script", serif;
+@default-font: "Raleway", sans-serif;
 
 // Global Variables
 @header-height: 50px;
@@ -16,7 +17,6 @@
 @color-header: #E5AB41;
 @color-aboutme: #698CCC;
 @color-projects: #806DCE;
-@color-contactme: #FFF;
 
 @file-city-buildings: "/images/city-buildings.png";
 @file-city-toronto: "/images/city-toronto.png";
@@ -53,9 +53,9 @@ header {
 				background-color: lighten(@color-header, 10%);
 			}
 			&.logo {
-				font-size: 200%;
+				font-size: 38px;
 				font-weight: bolder;
-				font-family: "Black Ops One", sans-serif;
+				font-family: @title-font;
 				padding: 0 10px;
 				color: lighten(@color-header, 40%);
 				text-shadow: 2px 2px 0 darken(@color-header, 25%);
@@ -82,7 +82,8 @@ header {
 }
 
 section {
-	font-family: "Raleway", sans-serif;
+	font-family: @default-font;
+	color: #fff;
 	h1 {
 		font-family: inherit;
 	}
@@ -93,7 +94,6 @@ section {
 			font-size: 150%;
 			padding: 0 10px 10px 10px;
 			margin: 20px 0;
-			color: #fff;
 		}
 	}
 	&#aboutme {
@@ -103,10 +103,10 @@ section {
 			position: relative;
 			overflow: hidden;
 			padding-bottom: 160px;
-			color: #fff;
 			line-height: 1.5;
 			h3 {
-				font-family: @h3-font, sans-serif;
+				font-family: @intro-font;
+	
 				padding: 40px 50px;
 				line-height: inherit;
 				font-size: 150%;
@@ -114,8 +114,8 @@ section {
 			.hidden-paragraphs {
 				font-size: 100%;
 				padding: 0 100px 0 30px;
-				margin:0;
-				li {
+				margin: 0;
+				p {
 					position: relative;
 					padding-bottom: 20px;
 					list-style: none;
@@ -131,7 +131,7 @@ section {
 			}
 			.buildings {
 				position: absolute;
-				bottom: -100%;
+				bottom: -90px;
 				left:0;
 				right:0;
 				height: 90px;
@@ -141,7 +141,7 @@ section {
 			}
 			.city {
 				position: absolute;
-				bottom: -100%;
+				bottom: -280px;
 				left:0;
 				right:0;
 				height: 280px;
@@ -152,10 +152,13 @@ section {
 			@media screen and (max-width: 560px) {
 				padding-bottom: 250px;
 				h3 {
-					padding: 40px 30px;
+					padding: 25px 20px;
 				}
 				.hidden-paragraphs {
-					padding: 0 30px;
+					padding: 0 20px;
+					p {
+						padding-bottom: 15px;
+					}
 				}
 			}
 		}
@@ -165,7 +168,30 @@ section {
 		.container {
 			h1 {
 				font-weight: bold;
-				padding: 20px 30px;
+				padding: 15px 30px;
+			}
+			p {
+				padding: 0 30px;
+			}
+			a {
+				padding: 15px 15px;
+				margin: 15px 2.5%;
+				width: 45%;
+				display: inline-block;
+				color: #fff;
+				background-color: lighten(@color-projects, 10%);
+				&:hover {
+					text-decoration: none;
+					background-color: lighten(@color-projects, 15%);
+				}
+				strong {
+					font-size: 120%;
+				}
+			}
+			@media screen and (max-width: 560px) {
+				a {
+					width: 95%;
+				}
 			}
 		}
 	}
