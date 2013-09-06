@@ -7,7 +7,7 @@ $ ->
 		#delay(delay).
 		animate (opacity: 1), 1000
 	$("#aboutme .hidden-paragraphs p").
-		css(opacity: 0, left: -100).
+		css(opacity: 0, left: -50).
 		delay(delay*2).
 		each (i) -> $(this).delay(i*150).animate (opacity: 1, left: 0), 400
 	$("#aboutme .buildings").
