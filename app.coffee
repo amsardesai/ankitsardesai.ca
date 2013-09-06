@@ -8,10 +8,12 @@ http = require("http")
 path = require("path")
 app = express()
 
+port = process.env.PORT or 3000
+env = app.get("env")
 
 # all environments
 app.configure ->
-	app.set "port", process.env.PORT or 3000
+	app.set "port", port
 	app.set "views", __dirname + "/views"
 	app.set "view engine", "jade"
 	app.use express.favicon()
@@ -24,17 +26,16 @@ app.configure ->
 	)
 	app.use require("express-coffee")(
 		path: __dirname + "/public"
-		uglify: app.get("env") is "production"
+		uglify: env is "production"
 	)
 	app.use express.static(__dirname + "/public")
 	app.use app.router
 
 # development only
-app.configure "development", ->
-	app.use express.errorHandler()
+app.configure "development", -> app.use express.errorHandler()
 
 routes app
 
-app.listen app.get("port"), ->
-	console.log "ankitsardesai.ca running at port " + app.get("port") + " in " + app.get("env") + " mode"
+app.listen port, ->
+	console.log "ankitsardesai.ca running at port " + port + " in " + env + " mode"
 
