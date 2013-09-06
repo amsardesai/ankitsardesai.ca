@@ -4,10 +4,11 @@
 @import "elements";
 
 // Font Import
-@import url("http://fonts.googleapis.com/css?family=Black+Ops+One|Raleway:400,700|Bad+Script|Pompiere|Shadows+Into+Light|Just+Me+Again+Down+Here");
+@import url("http://fonts.googleapis.com/css?family=Black+Ops+One|Raleway:400,700|Bad+Script|Yeseva+One");
 @title-font: "Black Ops One", sans-serif;
 @intro-font: "Bad Script", serif;
 @default-font: "Raleway", sans-serif;
+@projects-font: "Yeseva One";
 
 // Global Variables
 @header-height: 50px;
@@ -18,16 +19,16 @@
 @color-aboutme: #698CCC;
 @color-projects: #806DCE;
 
+@selection-darken-percentage: 25%;
+
 @file-city-buildings: "/images/city-buildings.png";
 @file-city-toronto: "/images/city-toronto.png";
-
-// Box Model Test
-//.btest { border: 1px solid #000; }
 
 body {
 	padding-top: @header-height;
 	min-width: @body-min-width;
 	font-size: 17px;
+	font-family: @default-font;
 }
 
 header {
@@ -35,6 +36,9 @@ header {
 	background-color: @color-header;
 	height: @header-height;
 	.container {
+		::selection {
+			background-color: darken(@color-header, @selection-darken-percentage);
+		}
 		max-width: @container-max-width;
 		height: @header-height;
 		a {
@@ -82,14 +86,23 @@ header {
 }
 
 section {
-	font-family: @default-font;
 	color: #fff;
 	h1 {
 		font-family: inherit;
 	}
+	a {
+		color: lighten(@color-aboutme, 30%);
+		&:hover {
+			color: #fff;
+			text-decoration: none;
+			border-bottom: 1px dotted #fff;
+		}
+	}
 	.container {
+		::selection {
+			background-color: darken(@color-aboutme, @selection-darken-percentage);
+		}
 		max-width: @container-max-width;
-		min-height: 400px;
 		h1 {
 			font-size: 150%;
 			padding: 0 10px 10px 10px;
@@ -106,8 +119,8 @@ section {
 			line-height: 1.5;
 			h3 {
 				font-family: @intro-font;
-	
-				padding: 40px 50px;
+				padding: 40px 30px;
+				text-align: center;
 				line-height: inherit;
 				font-size: 150%;
 			}
@@ -119,14 +132,6 @@ section {
 					position: relative;
 					padding-bottom: 20px;
 					list-style: none;
-					a {
-						color: lighten(@color-aboutme, 30%);
-						&:hover {
-							color: #fff;
-							text-decoration: none;
-							border-bottom: 1px dotted #fff;
-						}
-					}
 				}
 			}
 			.buildings {
@@ -164,53 +169,75 @@ section {
 		}
 	}
 	&#projects {
+		a {
+			color: lighten(@color-projects, 30%);
+		}
 		background-color: @color-projects;
 		.container {
 			h1 {
+				font-family: @projects-font;
 				font-weight: bold;
+				text-align: center;
 				padding: 15px 30px;
 			}
 			p {
-				padding: 0 30px;
+				padding: 0 30px 20px 30px;
 			}
-			a {
-				padding: 15px 15px;
-				margin: 15px 2.5%;
-				width: 45%;
-				display: inline-block;
-				color: #fff;
-				background-color: lighten(@color-projects, 10%);
-				&:hover {
-					text-decoration: none;
-					background-color: lighten(@color-projects, 15%);
-				}
-				strong {
-					font-size: 120%;
+			.projects {
+				padding: 20px 0 0 0;
+				margin: 0;
+				border: 0;
+				border-top: 4px solid lighten(@color-projects, 20%);
+				border-bottom: 4px solid lighten(@color-projects, 20%);
+				a {
+					.box-sizing();
+					display: block;
+					max-width: 400px;
+					background-color: lighten(@color-projects, 10%);
+					margin: 0 auto 20px auto;
+					border: 1px dotted transparent;
+					font-size: 90%;
+					padding: 15px;
+					position: relative;
+					h2 {
+						margin: 0;
+						padding: 0 0 10px 0;
+						font-size: 130%;
+						font-weight: bold;
+						display: block;
+						color: #fff;
+					}
+					span {
+						position: absolute;
+						top: 10px;
+						right: 5px;
+						font-size: 80%;
+						padding: 5px 10px;
+						margin: 0 5px;
+						background-color: lighten(@color-projects, 15%);
+						border-radius: 5px;
+						display: inline-block;
+					}
+					&:hover {
+						border-color: lighten(@color-projects, 30%);
+					}
 				}
 			}
 			@media screen and (max-width: 560px) {
-				a {
-					width: 95%;
+				p {
+					padding: 0 20px 20px 20px;
 				}
 			}
 		}
 	}
-
 }
 
-/*
-			.more-info {
-				display: inline-block;
-				margin: 15px 30px;
-				padding: 15px 30px;
-				border: 1px solid lighten(@color-aboutme, 30%);
-				color: lighten(@color-aboutme, 30%);
-				font-size: 17px;
-				&:hover {
-					text-decoration: none;
-					background-color: @color-aboutme;
-					border-color: lighten(@color-aboutme, 10%);
-				}
-			}
- */
+footer {
+	background-color: @color-projects;
+	text-align: center;
+	padding: 20px 0;
+	margin: 0;
+	font-size: 75%;
+	color: #fff;
+}
 
