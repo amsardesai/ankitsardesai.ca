@@ -14,3 +14,5 @@ Source code for [my website](http://ankitsardesai.ca).
 -	Server-side optimizations done by CloudFlare
 
 &copy; Ankit Sardesai 2013
+
+## This code is not used anymore, but if you still want to access the old site, you can click [here](http://old.ankitsardesai.ca).
