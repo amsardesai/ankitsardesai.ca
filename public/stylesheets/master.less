@@ -90,14 +90,7 @@ section {
 	h1 {
 		font-family: inherit;
 	}
-	a {
-		color: lighten(@color-aboutme, 30%);
-		&:hover {
-			color: #fff;
-			text-decoration: none;
-			border-bottom: 1px dotted #fff;
-		}
-	}
+
 	.container {
 		::selection {
 			background-color: darken(@color-aboutme, @selection-darken-percentage);
@@ -110,6 +103,14 @@ section {
 		}
 	}
 	&#aboutme {
+		a {
+			color: lighten(@color-aboutme, 30%);
+			&:hover {
+				color: lighten(@color-aboutme, 30%);
+				text-decoration: none;
+				border-bottom: 1px dotted #fff;
+			}
+		}
 		background-color: @color-aboutme;
 		.container {
 			background-color: lighten(@color-aboutme, 10%);
@@ -171,6 +172,11 @@ section {
 	&#projects {
 		a {
 			color: lighten(@color-projects, 30%);
+			&:hover {
+				color: lighten(@color-projects, 30%);
+				text-decoration: none;
+				border-bottom: 1px dotted #fff;
+			}
 		}
 		background-color: @color-projects;
 		.container {
@@ -183,43 +189,55 @@ section {
 			p {
 				padding: 0 30px 20px 30px;
 			}
-			.projects {
-				padding: 20px 0 0 0;
+			.list {
+				padding: 0;
 				margin: 0;
 				border: 0;
 				border-top: 4px solid lighten(@color-projects, 20%);
 				border-bottom: 4px solid lighten(@color-projects, 20%);
+				min-height: 400px;
+				position: relative;
 				a {
-					.box-sizing();
 					display: block;
-					max-width: 400px;
-					background-color: lighten(@color-projects, 10%);
-					margin: 0 auto 20px auto;
-					border: 1px dotted transparent;
-					font-size: 90%;
-					padding: 15px;
 					position: relative;
-					h2 {
-						margin: 0;
-						padding: 0 0 10px 0;
-						font-size: 130%;
-						font-weight: bold;
-						display: block;
-						color: #fff;
-					}
-					span {
-						position: absolute;
-						top: 10px;
-						right: 5px;
-						font-size: 80%;
-						padding: 5px 10px;
-						margin: 0 5px;
-						background-color: lighten(@color-projects, 15%);
-						border-radius: 5px;
-						display: inline-block;
+					margin: 0;
+					padding:0;
+					.inside {
+						.box-sizing();
+						padding: 20px;
+						max-width: 300px;
+						background-color: lighten(@color-projects, 10%);
+						margin: 30px auto;
+						border: 1px solid transparent;
+						font-size: 90%;
+						position: relative;
+						h2 {
+							margin: 0;
+							padding: 0 0 15px 0;
+							font-size: 130%;
+							font-weight: bold;
+							display: block;
+							color: #fff;
+						}
+						span {
+							position: absolute;
+							top: -1px;
+							right: -1px;
+							font-size: 80%;
+							padding: 5px 1px 2px 1px;
+							margin: 5px 14px 3px 14px;
+							display: inline-block;
+						}
 					}
 					&:hover {
-						border-color: lighten(@color-projects, 30%);
+						border: 0;
+						.inside {
+							border-color: lighten(@color-projects, 25%);
+							border-style: dotted;
+							span {
+								border-bottom: 1px solid lighten(@color-projects, 25%);
+							}
+						}
 					}
 				}
 			}
