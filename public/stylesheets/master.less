@@ -1,7 +1,6 @@
 // Include Libraries
 @import "bootstrap/bootstrap";
 @import "font-awesome/font-awesome";
-@import "elements";
 
 // Font Import
 @import url("http://fonts.googleapis.com/css?family=Black+Ops+One|Raleway:400,700|Bad+Script|Yeseva+One");
@@ -23,6 +22,13 @@
 
 @file-city-buildings: "/images/city-buildings.png";
 @file-city-toronto: "/images/city-toronto.png";
+
+.transition(@duration:0.2s, @properties:all) {
+  -webkit-transition: @properties @duration;
+  -moz-transition: @properties @duration;
+  -o-transition: @properties @duration;
+  transition: @properties @duration;
+}
 
 body {
 	padding-top: @header-height;
@@ -95,9 +101,6 @@ section {
 	}
 
 	.container {
-		::selection {
-			background-color: darken(@color-aboutme, @selection-darken-percentage);
-		}
 		max-width: @container-max-width;
 		h1 {
 			font-size: 150%;
@@ -106,6 +109,9 @@ section {
 		}
 	}
 	&#aboutme {
+		::selection {
+			background-color: darken(@color-aboutme, @selection-darken-percentage);
+		}
 		a {
 			color: lighten(@color-aboutme, 30%);
 			-webkit-tap-highlight-color: fade(@color-aboutme, 50%);
@@ -174,6 +180,9 @@ section {
 		}
 	}
 	&#projects {
+		::selection {
+			background-color: darken(@color-projects, @selection-darken-percentage);
+		}
 		a {
 			color: lighten(@color-projects, 30%);
 			-webkit-tap-highlight-color: fade(@color-projects, 50%);
@@ -210,9 +219,10 @@ section {
 					max-width: 90%;
 					background-color: lighten(@color-projects, 10%);
 					margin: 30px 5%;
-					border: 1px solid transparent;
+					border: 1px dotted transparent;
 					font-size: 90%;
 					position: relative;
+					.transition(0.3s, border);
 					h2 {
 						margin: 0;
 						padding: 0 0 15px 0;
@@ -229,12 +239,13 @@ section {
 						padding: 5px 1px 2px 1px;
 						margin: 5px 14px 3px 14px;
 						display: inline-block;
+						border-bottom: 1px solid transparent;
+						.transition(0.3s, border);
 					}
 					&:hover {
 						border-color: lighten(@color-projects, 25%);
-						border-style: dotted;
 						span {
-							border-bottom: 1px solid lighten(@color-projects, 25%);
+							border-color: lighten(@color-projects, 25%);
 						}
 					}
 				}
