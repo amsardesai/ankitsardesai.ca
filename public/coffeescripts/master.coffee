@@ -17,13 +17,14 @@ $ ->
 		animate ("bottom": 0), 1000
 
 	# Projects Animations
-	$("#projects h1, #projects p, #projects .list").
-		css(opacity: 0).
-		delay(delay*4).
-		waypoint ((dir) ->
-			$(this).
-				delay(delay).
-				animate (opacity: 1), 500
-		), (offset: "95%")
+	if not Modernizr.touch
+		$("#projects h1, #projects p, #projects .list").
+			css(opacity: 0).
+			delay(delay*4).
+			waypoint ((dir) ->
+				$(this).
+					delay(delay).
+					animate (opacity: 1), 500
+			), (offset: "95%")
 
-	$("header a").tooltip(placement: "bottom")
+		$("header a").tooltip(placement: "bottom")
