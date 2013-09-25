@@ -1,16 +1,22 @@
 {
   "name": "ankitsardesai.ca",
+  "email": "me@ankitsardesai.ca",
+  "url": "http://ankitsardesai.ca",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/amsardesai/ankitsardesai.ca"
+  },
   "private": true,
   "dependencies": {
     "express": "3.3.5",
-    "jade": "*",
-    "less-middleware": "*",
-    "coffee-script": "~1.6.3",
+    "jade": "0.35.0",
+    "less-middleware": "0.1.12",
+    "coffee-script": "1.6.3",
     "express-coffee": "git://github.com/elisee/express-coffee.git"
   },
   "engines": {
-    "node": "0.10.15",
-    "npm": "1.3.5"
+    "node": "0.10.18",
+    "npm": "1.3.11"
   }
 }
