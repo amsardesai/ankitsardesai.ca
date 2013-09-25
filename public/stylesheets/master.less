@@ -59,22 +59,22 @@ header {
 				color: darken(@color-header, 35%);
 				background-color: lighten(@color-header, 10%);
 			}
-			&.logo {
-				font-size: 38px;
-				font-weight: bolder;
-				font-family: @title-font;
-				padding: 0 10px;
-				color: lighten(@color-header, 40%);
-				text-shadow: 2px 2px 0 darken(@color-header, 25%);
-				float: right;
-				&:hover {
-					color: #fff;
-					background-color: transparent;
-					text-shadow: 2px 2px 0 darken(@color-header, 50%);
-				}
+		}
+		.logo {
+			font-size: 38px;
+			font-weight: bolder;
+			font-family: @title-font;
+			padding: 0 10px;
+			color: lighten(@color-header, 40%);
+			text-shadow: 2px 2px 0 darken(@color-header, 25%);
+			float: right;
+			&:hover {
+				color: #fff;
+				background-color: transparent;
+				text-shadow: 2px 2px 0 darken(@color-header, 50%);
 			}
 		}
-		@media screen and (max-width: 520px) {
+		@media screen and (max-width: 500px) {
 			padding-left: 5px;
 			padding-right: 5px;
 			a {
@@ -95,7 +95,6 @@ section {
 	h1 {
 		font-family: inherit;
 	}
-
 	.container {
 		max-width: @container-max-width;
 		h1 {
@@ -104,163 +103,165 @@ section {
 			margin: 20px 0;
 		}
 	}
-	&#aboutme {
-		::selection {
-			background-color: darken(@color-aboutme, @selection-darken-percentage);
-		}
-		a {
+}
+
+#aboutme {
+	::selection {
+		background-color: darken(@color-aboutme, @selection-darken-percentage);
+	}
+	a {
+		color: lighten(@color-aboutme, 30%);
+		-webkit-tap-highlight-color: fade(@color-aboutme, 50%);
+		&:hover {
 			color: lighten(@color-aboutme, 30%);
-			-webkit-tap-highlight-color: fade(@color-aboutme, 50%);
-			&:hover {
-				color: lighten(@color-aboutme, 30%);
-				text-decoration: none;
-				border-bottom: 1px dotted #fff;
+			text-decoration: none;
+			border-bottom: 1px dotted #fff;
+		}
+	}
+	background-color: @color-aboutme;
+	.container {
+		background-color: lighten(@color-aboutme, 10%);
+		position: relative;
+		overflow: hidden;
+		padding-bottom: 160px;
+		line-height: 1.5;
+		h3 {
+			font-family: @intro-font;
+			padding: 40px 30px;
+			text-align: center;
+			line-height: inherit;
+			font-size: 150%;
+			font-weight: 400;
+		}
+		.hidden-paragraphs {
+			font-size: 100%;
+			padding: 0 100px 0 30px;
+			margin: 0;
+			p {
+				position: relative;
+				padding-bottom: 20px;
+				list-style: none;
 			}
 		}
-		background-color: @color-aboutme;
-		.container {
-			background-color: lighten(@color-aboutme, 10%);
-			position: relative;
-			overflow: hidden;
-			padding-bottom: 160px;
-			line-height: 1.5;
+		.buildings {
+			position: absolute;
+			bottom: -90px;
+			left:0;
+			right:0;
+			height: 90px;
+			background-image: url(@file-city-buildings);
+			background-position: bottom center;
+			background-repeat: repeat-x;
+		}
+		.city {
+			position: absolute;
+			bottom: -280px;
+			left:0;
+			right:0;
+			height: 280px;
+			background-image: url(@file-city-toronto);
+			background-position: bottom right;
+			background-repeat: no-repeat;
+		}
+		@media screen and (max-width: 560px) {
+			padding-bottom: 250px;
 			h3 {
-				font-family: @intro-font;
-				padding: 40px 30px;
-				text-align: center;
-				line-height: inherit;
-				font-size: 150%;
-				font-weight: 400;
+				padding: 25px 20px;
 			}
 			.hidden-paragraphs {
-				font-size: 100%;
-				padding: 0 100px 0 30px;
-				margin: 0;
+				padding: 0 20px;
 				p {
-					position: relative;
-					padding-bottom: 20px;
-					list-style: none;
-				}
-			}
-			.buildings {
-				position: absolute;
-				bottom: -90px;
-				left:0;
-				right:0;
-				height: 90px;
-				background-image: url(@file-city-buildings);
-				background-position: bottom center;
-				background-repeat: repeat-x;
-			}
-			.city {
-				position: absolute;
-				bottom: -280px;
-				left:0;
-				right:0;
-				height: 280px;
-				background-image: url(@file-city-toronto);
-				background-position: bottom right;
-				background-repeat: no-repeat;
-			}
-			@media screen and (max-width: 560px) {
-				padding-bottom: 250px;
-				h3 {
-					padding: 25px 20px;
-				}
-				.hidden-paragraphs {
-					padding: 0 20px;
-					p {
-						padding-bottom: 15px;
-					}
+					padding-bottom: 15px;
 				}
 			}
 		}
 	}
-	&#projects {
-		::selection {
-			background-color: darken(@color-projects, @selection-darken-percentage);
-		}
-		a {
+}
+
+#projects {
+	::selection {
+		background-color: darken(@color-projects, @selection-darken-percentage);
+	}
+	a {
+		color: lighten(@color-projects, 30%);
+		-webkit-tap-highlight-color: fade(@color-projects, 50%);
+		&:hover {
 			color: lighten(@color-projects, 30%);
-			-webkit-tap-highlight-color: fade(@color-projects, 50%);
-			&:hover {
-				color: lighten(@color-projects, 30%);
-				text-decoration: none;
-				border-bottom: 1px dotted #fff;
+			text-decoration: none;
+			border-bottom: 1px dotted #fff;
+		}
+	}
+	background-color: @color-projects;
+	.container {
+		h1 {
+			font-family: @projects-font;
+			font-weight: bold;
+			text-align: center;
+			padding: 15px 30px;
+		}
+		p {
+			padding: 0 30px 20px 30px;
+		}
+		.list {
+			padding: 0;
+			margin: 0;
+			border-top: 4px solid lighten(@color-projects, 20%);
+			.left, .right {
+				padding:0;
+				margin:0;
+				width: 50%;
+				float: left;
+			}
+			a {
+				display: block;
+				padding: 20px;
+				max-width: 90%;
+				background-color: lighten(@color-projects, 10%);
+				margin: 30px 5%;
+				border: 1px dotted transparent;
+				font-size: 90%;
+				position: relative;
+				.transition(0.3s, border);
+				h2 {
+					margin: 0;
+					padding: 0 0 15px 0;
+					font-size: 130%;
+					font-weight: bold;
+					display: block;
+					color: #fff;
+				}
+				span {
+					position: absolute;
+					top: -1px;
+					right: -1px;
+					font-size: 80%;
+					padding: 5px 1px 2px 1px;
+					margin: 5px 14px 3px 14px;
+					display: inline-block;
+					border-bottom: 1px solid transparent;
+					.transition(0.3s, border);
+				}
+				&:hover {
+					border-color: lighten(@color-projects, 25%);
+					span {
+						border-color: lighten(@color-projects, 25%);
+					}
+				}
 			}
 		}
-		background-color: @color-projects;
-		.container {
-			h1 {
-				font-family: @projects-font;
-				font-weight: bold;
-				text-align: center;
-				padding: 15px 30px;
-			}
-			p {
-				padding: 0 30px 20px 30px;
-			}
+		@media screen and (max-width: 720px) {
 			.list {
-				padding: 0;
-				margin: 0;
-				border-top: 4px solid lighten(@color-projects, 20%);
 				.left, .right {
-					padding:0;
-					margin:0;
-					width: 50%;
-					float: left;
+					width: 100%;
 				}
-				a {
-					display: block;
-					padding: 20px;
-					max-width: 90%;
-					background-color: lighten(@color-projects, 10%);
-					margin: 30px 5%;
-					border: 1px dotted transparent;
-					font-size: 90%;
-					position: relative;
-					.transition(0.3s, border);
-					h2 {
-						margin: 0;
-						padding: 0 0 15px 0;
-						font-size: 130%;
-						font-weight: bold;
-						display: block;
-						color: #fff;
-					}
-					span {
-						position: absolute;
-						top: -1px;
-						right: -1px;
-						font-size: 80%;
-						padding: 5px 1px 2px 1px;
-						margin: 5px 14px 3px 14px;
-						display: inline-block;
-						border-bottom: 1px solid transparent;
-						.transition(0.3s, border);
-					}
-					&:hover {
-						border-color: lighten(@color-projects, 25%);
-						span {
-							border-color: lighten(@color-projects, 25%);
-						}
-					}
+				.right a:first-child {
+					margin-top: 0;
 				}
 			}
-			@media screen and (max-width: 720px) {
-				.list {
-					.left, .right {
-						width: 100%;
-					}
-					.right a:first-child {
-						margin-top: 0;
-					}
-				}
-			}
-			@media screen and (max-width: 560px) {
-				p {
-					padding: 0 20px 20px 20px;
-				}
+		}
+		@media screen and (max-width: 560px) {
+			p {
+				padding: 0 20px 20px 20px;
 			}
 		}
 	}

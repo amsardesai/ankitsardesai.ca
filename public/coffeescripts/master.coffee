@@ -22,8 +22,7 @@ $ ->
 			css(opacity: 0).
 			delay(delay*4).
 			waypoint ((dir) ->
-				$(this).
-					delay(delay).
+				$(this).delay(delay).
 					animate (opacity: 1), 500
 			), (offset: "95%")
 
