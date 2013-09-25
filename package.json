@@ -16,7 +16,7 @@
     "express-coffee": "git://github.com/elisee/express-coffee.git"
   },
   "engines": {
-    "node": "0.10.18",
-    "npm": "1.3.11"
+    "node": "0.10.17",
+    "npm": "1.3.9"
   }
 }
