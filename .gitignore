@@ -3,3 +3,5 @@ node_modules/*
 public/stylesheets/master.css
 public/javascripts/master.js
 psd/*
+
+*.psd
