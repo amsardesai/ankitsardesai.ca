@@ -1,5 +1,13 @@
-$ ->
+parallaxCityFactor = 0.11
+parallaxSkylineFactor = 2.2
 
+getScrollPos = (element) -> 
+	offset = $(element).position().top - 50
+	scrollpos = $(window).scrollTop() + offset
+	scrollpos = offset if $(window).scrollTop() < 0
+	scrollpos
+
+$ ->
 	# About Me Animations
 	delay = 200
 	$("#aboutme h3").
@@ -10,11 +18,26 @@ $ ->
 		delay(delay).
 		each (i) -> $(this).delay(i*150).animate (opacity: 1, left: 0), 700
 	$("#aboutme .buildings").
-		delay(delay*3).
-		animate ("bottom": 0), 600
+		delay(delay*2).
+		animate (bottom: 0), (
+			duration: 400
+			step: (now,fx) -> if not Modernizr.touch then fx.end = getScrollPos("#aboutme") * -parallaxCityFactor
+		)
 	$("#aboutme .city").
-		delay(delay*3).
-		animate ("bottom": 0), 1000
+		delay(delay*2).
+		animate (bottom: 0), (
+			duration: 600
+			step: (now,fx) -> if not Modernizr.touch then fx.end = getScrollPos("#aboutme") * -parallaxCityFactor * parallaxSkylineFactor
+			complete: -> 
+				if not Modernizr.touch then $(window).bind "scroll", ->
+					scrolled = getScrollPos("#aboutme")
+					scrolled = 0 if scrolled < 0
+					$("#aboutme .buildings").
+						css (bottom: -scrolled * parallaxCityFactor)
+					$("#aboutme .city").
+						css (bottom: -scrolled * parallaxCityFactor * parallaxSkylineFactor)
+		)
+
 
 	# Projects Animations
 	if not Modernizr.touch

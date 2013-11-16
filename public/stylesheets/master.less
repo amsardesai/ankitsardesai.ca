@@ -123,11 +123,11 @@ section {
 		background-color: lighten(@color-aboutme, 10%);
 		position: relative;
 		overflow: hidden;
-		padding-bottom: 160px;
+		padding-bottom: 130px;
 		line-height: 1.5;
 		h3 {
 			font-family: @intro-font;
-			padding: 40px 30px;
+			padding: 30px;
 			text-align: center;
 			line-height: inherit;
 			font-size: 150%;
@@ -139,7 +139,7 @@ section {
 			margin: 0;
 			p {
 				position: relative;
-				padding-bottom: 20px;
+				padding-bottom: 25px;
 				list-style: none;
 			}
 		}
@@ -157,14 +157,14 @@ section {
 			position: absolute;
 			bottom: -280px;
 			left:0;
-			right:0;
+			right:15px;
 			height: 280px;
 			background-image: url(@file-city-toronto);
 			background-position: bottom right;
 			background-repeat: no-repeat;
 		}
 		@media screen and (max-width: 560px) {
-			padding-bottom: 250px;
+			padding-bottom: 240px;
 			h3 {
 				padding: 25px 20px;
 			}
@@ -173,6 +173,9 @@ section {
 				p {
 					padding-bottom: 15px;
 				}
+			}
+			.city {
+				right: 0px;
 			}
 		}
 	}
