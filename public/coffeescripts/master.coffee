@@ -1,41 +1,50 @@
-parallaxCityFactor = 0.11
-parallaxSkylineFactor = 2.2
+parallaxCity = true
+parallaxCityFactor = 0.12
+parallaxCitySkylineFactor = 0.24
+
+delay = 200
 
 getScrollPos = (element) -> 
 	offset = $(element).position().top - 50
 	scrollpos = $(window).scrollTop() + offset
 	scrollpos = offset if $(window).scrollTop() < 0
-	scrollpos
+	return scrollpos
 
 $ ->
+	# Header
+	$("header a").tooltip(placement: "bottom")
+
 	# About Me Animations
-	delay = 200
 	$("#aboutme h3").
 		css(opacity: 0).
-		animate (opacity: 1), 1000
+		animate((opacity: 1), 1000).
+		click -> 
+			parallaxCity = false
+			$("#aboutme .container").fadeOut 500
 	$("#aboutme .hidden-paragraphs p").
 		css(opacity: 0).
 		delay(delay).
 		each (i) -> $(this).delay(i*150).animate (opacity: 1, left: 0), 700
 	$("#aboutme .buildings").
-		delay(delay*2).
+		delay(delay).
 		animate (bottom: 0), (
-			duration: 400
+			duration: 500
 			step: (now,fx) -> if not Modernizr.touch then fx.end = getScrollPos("#aboutme") * -parallaxCityFactor
 		)
 	$("#aboutme .city").
-		delay(delay*2).
+		delay(delay).
 		animate (bottom: 0), (
-			duration: 600
-			step: (now,fx) -> if not Modernizr.touch then fx.end = getScrollPos("#aboutme") * -parallaxCityFactor * parallaxSkylineFactor
+			duration: 800
+			step: (now,fx) -> if not Modernizr.touch then fx.end = getScrollPos("#aboutme") * -parallaxCitySkylineFactor
 			complete: -> 
 				if not Modernizr.touch then $(window).bind "scroll", ->
-					scrolled = getScrollPos("#aboutme")
-					scrolled = 0 if scrolled < 0
-					$("#aboutme .buildings").
-						css (bottom: -scrolled * parallaxCityFactor)
-					$("#aboutme .city").
-						css (bottom: -scrolled * parallaxCityFactor * parallaxSkylineFactor)
+					if parallaxCity
+						scrolled = getScrollPos("#aboutme")
+						scrolled = 0 if scrolled < 0
+						$("#aboutme .buildings").
+							css (bottom: scrolled * -parallaxCityFactor)
+						$("#aboutme .city").
+							css (bottom: scrolled * -parallaxCitySkylineFactor)
 		)
 
 
@@ -49,4 +58,3 @@ $ ->
 					animate (opacity: 1), 500
 			), (offset: "95%")
 
-		$("header a").tooltip(placement: "bottom")
