@@ -1,7 +1,5 @@
-parallaxCity = true
 parallaxCityFactor = 0.12
 parallaxCitySkylineFactor = 0.24
-
 delay = 200
 
 getScrollPos = (element) -> 
@@ -17,8 +15,7 @@ $ ->
 	# About Me Animations
 	$("#aboutme h3").
 		css(opacity: 0).
-		animate((opacity: 1), 1000).
-		click -> parallaxCity = false
+		animate((opacity: 1), 1000)
 	$("#aboutme .hidden-paragraphs p").
 		css(opacity: 0).
 		delay(delay).
@@ -36,13 +33,12 @@ $ ->
 			step: (now,fx) -> if not Modernizr.touch then fx.end = getScrollPos("#aboutme") * -parallaxCitySkylineFactor
 			complete: -> 
 				if not Modernizr.touch then $(window).bind "scroll", ->
-					if parallaxCity
-						scrolled = getScrollPos("#aboutme")
-						scrolled = 0 if scrolled < 0
-						$("#aboutme .buildings").
-							css (bottom: scrolled * -parallaxCityFactor)
-						$("#aboutme .city").
-							css (bottom: scrolled * -parallaxCitySkylineFactor)
+					scrolled = getScrollPos("#aboutme")
+					scrolled = 0 if scrolled < 0
+					$("#aboutme .buildings").
+						css (bottom: scrolled * -parallaxCityFactor)
+					$("#aboutme .city").
+						css (bottom: scrolled * -parallaxCitySkylineFactor)
 		)
 
 
