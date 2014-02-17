@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "http://github.com/amsardesai/ankitsardesai.ca"
+    "url": "http://github.com/amsardesai/ankitsardesai.ca.git"
   },
   "private": true,
   "dependencies": {
