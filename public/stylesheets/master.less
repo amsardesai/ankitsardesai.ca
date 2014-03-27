@@ -54,7 +54,7 @@ header {
 			float: left;
 			-webkit-tap-highlight-color: fade(@color-header, 70%);
 			.transition(0.4s);
-			&:hover { 
+			&:hover, &:focus { 
 				text-decoration: none;
 				color: darken(@color-header, 35%);
 				background-color: lighten(@color-header, 10%);
@@ -68,7 +68,7 @@ header {
 			color: lighten(@color-header, 40%);
 			text-shadow: 2px 2px 0 darken(@color-header, 25%);
 			float: right;
-			&:hover {
+			&:hover, &:focus {
 				color: #fff;
 				background-color: transparent;
 				text-shadow: 2px 2px 0 darken(@color-header, 50%);
@@ -112,7 +112,7 @@ section {
 	a {
 		color: lighten(@color-aboutme, 30%);
 		-webkit-tap-highlight-color: fade(@color-aboutme, 50%);
-		&:hover {
+		&:hover, &:focus {
 			color: lighten(@color-aboutme, 30%);
 			text-decoration: none;
 			border-bottom: 1px dotted #fff;
@@ -150,7 +150,7 @@ section {
 				margin-top: 10px;
 				display: inline-block;
 				color: #fff;
-				&:hover {
+				&:hover, &:focus {
 					border-color: lighten(@color-aboutme, 2%);
 					background-color: lighten(@color-aboutme, 12%);
 				}
@@ -232,7 +232,7 @@ section {
 	a {
 		color: lighten(@color-projects, 30%);
 		-webkit-tap-highlight-color: fade(@color-projects, 50%);
-		&:hover {
+		&:hover, &:focus {
 			color: lighten(@color-projects, 30%);
 			text-decoration: none;
 			border-bottom: 1px dotted #fff;
@@ -288,7 +288,7 @@ section {
 					border-bottom: 1px solid transparent;
 					.transition(0.3s, border);
 				}
-				&:hover {
+				&:hover, &:focus {
 					border-color: lighten(@color-projects, 25%);
 					span {
 						border-color: lighten(@color-projects, 25%);
