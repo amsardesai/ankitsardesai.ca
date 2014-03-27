@@ -142,6 +142,19 @@ section {
 				padding-bottom: 15px;
 				list-style: none;
 			}
+			a.fancy-button {
+				border: 2px solid lighten(@color-aboutme, 5%);
+				background-color: lighten(@color-aboutme, 13%);
+				border-radius: 5px;
+				padding: 5px 15px;
+				margin-top: 10px;
+				display: inline-block;
+				color: #fff;
+				&:hover {
+					border-color: lighten(@color-aboutme, 2%);
+					background-color: lighten(@color-aboutme, 12%);
+				}
+			}
 		}
 		.buildings {
 			position: absolute;
