@@ -13,7 +13,7 @@
     "jade": "0.35.0",
     "less-middleware": "0.1.12",
     "coffee-script": "1.6.3",
-    "express-coffee": "git://github.com/elisee/express-coffee.git"
+    "express-coffee": "0.0.9"
   },
   "engines": {
     "node": "0.10.17",
