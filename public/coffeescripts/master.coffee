@@ -1,10 +1,12 @@
 $ ->
+  $('.icons a').tooltip
+    placement: 'bottom'
+    html: true
 
 
 
 ###
   # Header
-  $("header a").tooltip(placement: "bottom")
 
   # About Me Animations
   $("#aboutme h3").

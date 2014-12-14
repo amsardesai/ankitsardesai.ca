@@ -1,3 +1,5 @@
+@import 'brand-colors';
+
 // Font Import
 @import url("http://fonts.googleapis.com/css?family=Black+Ops+One|Raleway:400,700|Bad+Script|Yeseva+One");
 @bad-script: "Bad Script", serif;
@@ -8,6 +10,7 @@
 @container-max-width: 720px;
 @body-min-width: 320px;
 
+@color-grey: #AAA;
 @color-yellow: #E5AB41;
 @color-blue: #698CCC;
 @color-purple: #806DCE;
@@ -49,7 +52,7 @@ hr {
   margin-top: 0;
   margin-bottom: 0;
   &.animate {
-    animation: full-width 0.5s ease-in-out;
+    animation: full-width 0.4s ease-in-out;
   }
   &.yellow {
     border-color: @color-yellow;
@@ -67,6 +70,7 @@ hr {
   display: table;
   height: 100%;
   width: 100%;
+  min-height: 250px;
   text-align: center;
   .center-container {
     display: table-cell;
@@ -75,28 +79,53 @@ hr {
   .hr-container {
     max-width: 400px;
     margin: auto;
+    margin-bottom: 25px;
   }
   h3 {
     font-size: 42px;
     text-transform: uppercase;
-    padding: 20px 0;
-    margin: 0;
+    margin: 0 0 20px 0;
     animation: full-opacity 1s ease-in-out;
   }
   .icons {
-    font-size: 42px;
+    font-size: 32px;
+    animation: full-opacity 1s ease-in-out;
     a {
+      text-decoration: none;
       display: inline-block;
-      padding: 0 10px;
+      padding: 0 20px 10px 20px;
+      color: #000;
+      transition: color 0.5s;
+      &.github {
+        color: @bc-github;
+      }
+      &.twitter {
+        color: @bc-twitter;
+      }
+      &.linkedin {
+        color: @bc-linkedin;
+      }
     }
   }
   @media screen and (max-width: 500px) {
-    hr {
+    display: block;
+    height: auto;
+    .center-container {
+      display: block;
+    }
+    .hr-container {
       max-width: 300px;
+      margin-bottom: 20px;
     }
     h3 {
       font-size: 32px;
-      padding: 15px 0;
+      margin: 0 0 15px 0;
+    }
+    .icons {
+      font-size: 20px;
+      a {
+        padding: 0 15px 10px 15px;
+      }
     }
   }
 }

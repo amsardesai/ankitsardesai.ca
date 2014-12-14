@@ -27,7 +27,7 @@ app.configure ->
   app.use express.methodOverride()
 
   app.use autoprefixer
-    browsers: 'last 2 versions'
+    browsers: 'last 5 versions'
     cascade: false
   app.use less
     src: "#{__dirname}/public"
