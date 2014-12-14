@@ -1,5 +1,6 @@
 .DS_Store
 node_modules/*
+bower/*
 public/stylesheets/master.css
 public/javascripts/master.js
 psd/*

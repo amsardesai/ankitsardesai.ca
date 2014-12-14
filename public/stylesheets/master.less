@@ -1,325 +1,396 @@
 // Font Import
 @import url("http://fonts.googleapis.com/css?family=Black+Ops+One|Raleway:400,700|Bad+Script|Yeseva+One");
-@title-font: "Black Ops One", sans-serif;
-@intro-font: "Bad Script", serif;
-@default-font: "Raleway", sans-serif;
-@projects-font: "Black Ops One", serif;
+@bad-script: "Bad Script", serif;
+@black-ops-one: "Black Ops One", serif;
+@raleway: "Raleway", sans-serif;
 
 // Global Variables
-@header-height: 50px;
 @container-max-width: 720px;
 @body-min-width: 320px;
 
-@color-header: #E5AB41;
-@color-aboutme: #698CCC;
-@color-projects: #806DCE;
+@color-yellow: #E5AB41;
+@color-blue: #698CCC;
+@color-purple: #806DCE;
 
 @selection-darken-percentage: 25%;
 
-@file-city-buildings: "/images/city-buildings.png";
-@file-city-toronto: "/images/city-toronto.png";
+@keyframes full-width {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
 
-.transition(@duration:0.2s, @properties:all) {
-  -webkit-transition: @properties @duration;
-  -moz-transition: @properties @duration;
-  -o-transition: @properties @duration;
-  transition: @properties @duration;
+@keyframes full-opacity {
+  0% { opacity: 0; }
+  100% { opacity: 100%; }
+}
+
+html {
+  height: 100%;
 }
 
 body {
-	padding-top: @header-height;
-	min-width: @body-min-width;
-	font-size: 17px;
-	font-family: @default-font;
-}
-
-header {
-	min-width: @body-min-width;
-	background-color: @color-header;
-	height: @header-height;
-	.container {
-		::selection {
-			background-color: darken(@color-header, @selection-darken-percentage);
-		}
-		max-width: @container-max-width;
-		height: @header-height;
-		a {
-			display: inline-block;
-			font-size: (@header-height / 2);
-			height: @header-height;
-			padding: (@header-height / 4) 10px;
-			margin: 0;
-			border: 0;
-			color: darken(@color-header, 30%);
-			float: left;
-			-webkit-tap-highlight-color: fade(@color-header, 70%);
-			.transition(0.4s);
-			&:hover, &:focus { 
-				text-decoration: none;
-				color: darken(@color-header, 35%);
-				background-color: lighten(@color-header, 10%);
-			}
-		}
-		.logo {
-			font-size: 38px;
-			font-weight: bolder;
-			font-family: @title-font;
-			padding: 0 10px;
-			color: lighten(@color-header, 40%);
-			text-shadow: 2px 2px 0 darken(@color-header, 25%);
-			float: right;
-			&:hover, &:focus {
-				color: #fff;
-				background-color: transparent;
-				text-shadow: 2px 2px 0 darken(@color-header, 50%);
-			}
-		}
-		@media screen and (max-width: 500px) {
-			padding-left: 5px;
-			padding-right: 5px;
-			a {
-			//	padding: (@header-height / 4) 7px;
-			}
-			.logo {
-				//padding: 0 5px;
-			}
-			.last-name {
-				display: none;
-			}
-		}
-	}
+  min-width: @body-min-width;
+  font-size: 17px;
+  font-family: @raleway;
+  height: 100%;
 }
 
 section {
-	color: #fff;
-	h1 {
-		font-family: inherit;
-	}
-	.container {
-		max-width: @container-max-width;
-		h1 {
-			font-size: 150%;
-			padding: 0 10px 10px 10px;
-			margin: 20px 0;
-		}
-	}
+  .container {
+    max-width: @container-max-width;
+  }
+}
+
+hr {
+  height: 0;
+  width: 100%;
+  border: 2px solid;
+  border-radius: 2px;
+  margin-top: 0;
+  margin-bottom: 0;
+  &.animate {
+    animation: full-width 0.5s ease-in-out;
+  }
+  &.yellow {
+    border-color: @color-yellow;
+  }
+  &.blue {
+    border-color: @color-blue;
+  }
+  &.purple {
+    border-color: @color-purple;
+  }
+}
+
+
+#name {
+  display: table;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  .center-container {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .hr-container {
+    max-width: 400px;
+    margin: auto;
+  }
+  h3 {
+    font-size: 42px;
+    text-transform: uppercase;
+    padding: 20px 0;
+    margin: 0;
+    animation: full-opacity 1s ease-in-out;
+  }
+  .icons {
+    font-size: 42px;
+    a {
+      display: inline-block;
+      padding: 0 10px;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    hr {
+      max-width: 300px;
+    }
+    h3 {
+      font-size: 32px;
+      padding: 15px 0;
+    }
+  }
+}
+
+
+
+/*
+
+header {
+  min-width: @body-min-width;
+  background-color: @color-header;
+  height: @header-height;
+  .container {
+    ::selection {
+      background-color: darken(@color-header, @selection-darken-percentage);
+    }
+    max-width: @container-max-width;
+    height: @header-height;
+    a {
+      display: inline-block;
+      font-size: (@header-height / 2);
+      height: @header-height;
+      padding: (@header-height / 4) 10px;
+      margin: 0;
+      border: 0;
+      color: darken(@color-header, 30%);
+      float: left;
+      -webkit-tap-highlight-color: fade(@color-header, 70%);
+      .transition(0.4s);
+      &:hover, &:focus {
+        text-decoration: none;
+        color: darken(@color-header, 35%);
+        background-color: lighten(@color-header, 10%);
+      }
+    }
+    .logo {
+      font-size: 38px;
+      font-weight: bolder;
+      font-family: @title-font;
+      padding: 0 10px;
+      color: lighten(@color-header, 40%);
+      text-shadow: 2px 2px 0 darken(@color-header, 25%);
+      float: right;
+      &:hover, &:focus {
+        color: #fff;
+        background-color: transparent;
+        text-shadow: 2px 2px 0 darken(@color-header, 50%);
+      }
+    }
+    @media screen and (max-width: 500px) {
+      padding-left: 5px;
+      padding-right: 5px;
+      a {
+      //  padding: (@header-height / 4) 7px;
+      }
+      .logo {
+        //padding: 0 5px;
+      }
+      .last-name {
+        display: none;
+      }
+    }
+  }
+}
+
+section {
+  color: #fff;
+  h1 {
+    font-family: inherit;
+  }
+  .container {
+    max-width: @container-max-width;
+    h1 {
+      font-size: 150%;
+      padding: 0 10px 10px 10px;
+      margin: 20px 0;
+    }
+  }
 }
 
 #aboutme {
-	::selection {
-		background-color: darken(@color-aboutme, @selection-darken-percentage);
-	}
-	a {
-		color: lighten(@color-aboutme, 30%);
-		-webkit-tap-highlight-color: fade(@color-aboutme, 50%);
-		&:hover, &:focus {
-			color: lighten(@color-aboutme, 30%);
-			text-decoration: none;
-			border-bottom: 1px dotted #fff;
-		}
-	}
-	background-color: @color-aboutme;
-	.container {
-		background-color: lighten(@color-aboutme, 10%);
-		position: relative;
-		overflow: hidden;
-		padding-bottom: 150px;
-		line-height: 1.5;
-		h3 {
-			font-family: @intro-font;
-			padding: 40px 20px 30px 20px;
-			text-align: center;
-			line-height: inherit;
-			font-size: 150%;
-			font-weight: 400;
-		}
-		.hidden-paragraphs {
-			font-size: 100%;
-			padding: 0 100px 5px 30px;
-			margin: 0;
-			p {
-				position: relative;
-				padding-bottom: 15px;
-				list-style: none;
-			}
-			a.fancy-button {
-				border: 2px solid lighten(@color-aboutme, 5%);
-				background-color: lighten(@color-aboutme, 13%);
-				border-radius: 5px;
-				padding: 5px 15px;
-				margin-top: 10px;
-				display: inline-block;
-				color: #fff;
-				&:hover, &:focus {
-					border-color: lighten(@color-aboutme, 2%);
-					background-color: lighten(@color-aboutme, 12%);
-				}
-			}
-		}
-		.buildings {
-			position: absolute;
-			bottom: -90px;
-			left:0;
-			right:0;
-			height: 90px;
-			background-image: url(@file-city-buildings);
-			background-position: bottom center;
-			background-repeat: repeat-x;
-		}
-		.city {
-			position: absolute;
-			bottom: -280px;
-			left:0;
-			right:15px;
-			height: 280px;
-			background-image: url(@file-city-toronto);
-			background-position: bottom right;
-			background-repeat: no-repeat;
-		}
-		@media screen and (max-width: 600px) {
-			padding-bottom: 170px;
-			.hidden-paragraphs {
-				padding-right: 90px;
-			}
-		}
-		@media screen and (max-width: 650px) {
-			padding-bottom: 200px;
-			.hidden-paragraphs {
-				padding-right: 40px;
-			}
-		}
-		@media screen and (max-width: 470px) {
-			padding-bottom: 240px;
-			.hidden-paragraphs {
-				padding: 0 30px;
-			}
-		}
-		@media screen and (max-width: 450px) {
-			h3 {
-				padding: 35px 20px;
-			}
-			.hidden-paragraphs {
-				padding: 0 25px;
-			}
-		}
-		@media screen and (max-width: 400px) {
-			padding-bottom: 270px;
-			h3 {
-				padding: 30px 20px;
-			}
-			.hidden-paragraphs {
-				padding: 0 20px;
-			}
-			.city {
-				right: 0px;
-			}
-		}
-		@media screen and (max-width: 350px) {
-			h3 {
-				padding: 25px 20px;
-			}
-			.hidden-paragraphs {
-				padding: 0 15px;
-			}
-		}
-	}
+  ::selection {
+    background-color: darken(@color-aboutme, @selection-darken-percentage);
+  }
+  a {
+    color: lighten(@color-aboutme, 30%);
+    -webkit-tap-highlight-color: fade(@color-aboutme, 50%);
+    &:hover, &:focus {
+      color: lighten(@color-aboutme, 30%);
+      text-decoration: none;
+      border-bottom: 1px dotted #fff;
+    }
+  }
+  background-color: @color-aboutme;
+  .container {
+    background-color: lighten(@color-aboutme, 10%);
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 150px;
+    line-height: 1.5;
+    h3 {
+      font-family: @intro-font;
+      padding: 40px 20px 30px 20px;
+      text-align: center;
+      line-height: inherit;
+      font-size: 150%;
+      font-weight: 400;
+    }
+    .hidden-paragraphs {
+      font-size: 100%;
+      padding: 0 100px 5px 30px;
+      margin: 0;
+      p {
+        position: relative;
+        padding-bottom: 15px;
+        list-style: none;
+      }
+      a.fancy-button {
+        border: 2px solid lighten(@color-aboutme, 5%);
+        background-color: lighten(@color-aboutme, 13%);
+        border-radius: 5px;
+        padding: 5px 15px;
+        margin-top: 10px;
+        display: inline-block;
+        color: #fff;
+        &:hover, &:focus {
+          border-color: lighten(@color-aboutme, 2%);
+          background-color: lighten(@color-aboutme, 12%);
+        }
+      }
+    }
+    .buildings {
+      position: absolute;
+      bottom: -90px;
+      left:0;
+      right:0;
+      height: 90px;
+      background-position: bottom center;
+      background-repeat: repeat-x;
+    }
+    .city {
+      position: absolute;
+      bottom: -280px;
+      left:0;
+      right:15px;
+      height: 280px;
+      background-position: bottom right;
+      background-repeat: no-repeat;
+    }
+    @media screen and (max-width: 600px) {
+      padding-bottom: 170px;
+      .hidden-paragraphs {
+        padding-right: 90px;
+      }
+    }
+    @media screen and (max-width: 650px) {
+      padding-bottom: 200px;
+      .hidden-paragraphs {
+        padding-right: 40px;
+      }
+    }
+    @media screen and (max-width: 470px) {
+      padding-bottom: 240px;
+      .hidden-paragraphs {
+        padding: 0 30px;
+      }
+    }
+    @media screen and (max-width: 450px) {
+      h3 {
+        padding: 35px 20px;
+      }
+      .hidden-paragraphs {
+        padding: 0 25px;
+      }
+    }
+    @media screen and (max-width: 400px) {
+      padding-bottom: 270px;
+      h3 {
+        padding: 30px 20px;
+      }
+      .hidden-paragraphs {
+        padding: 0 20px;
+      }
+      .city {
+        right: 0px;
+      }
+    }
+    @media screen and (max-width: 350px) {
+      h3 {
+        padding: 25px 20px;
+      }
+      .hidden-paragraphs {
+        padding: 0 15px;
+      }
+    }
+  }
 }
 
 #projects {
-	::selection {
-		background-color: darken(@color-projects, @selection-darken-percentage);
-	}
-	a {
-		color: lighten(@color-projects, 30%);
-		-webkit-tap-highlight-color: fade(@color-projects, 50%);
-		&:hover, &:focus {
-			color: lighten(@color-projects, 30%);
-			text-decoration: none;
-			border-bottom: 1px dotted #fff;
-		}
-	}
-	background-color: @color-projects;
-	.container {
-		h1 {
-			font-family: @title-font;
-			font-weight: bold;
-			text-align: center;
-			padding: 15px 30px;
-		}
-		p {
-			padding: 0 30px 20px 30px;
-		}
-		.list {
-			padding: 0;
-			margin: 0;
-			border-top: 4px solid lighten(@color-projects, 20%);
-			.left, .right {
-				padding:0;
-				margin:0;
-				width: 50%;
-				float: left;
-			}
-			a {
-				display: block;
-				padding: 20px;
-				max-width: 90%;
-				background-color: lighten(@color-projects, 10%);
-				margin: 30px 5%;
-				border: 1px dotted transparent;
-				font-size: 90%;
-				position: relative;
-				.transition(0.3s, border);
-				h2 {
-					margin: 0;
-					padding: 0 0 15px 0;
-					font-size: 130%;
-					font-weight: bold;
-					display: block;
-					color: #fff;
-				}
-				span {
-					position: absolute;
-					top: -1px;
-					right: -1px;
-					font-size: 80%;
-					padding: 5px 1px 2px 1px;
-					margin: 5px 14px 3px 14px;
-					display: inline-block;
-					border-bottom: 1px solid transparent;
-					.transition(0.3s, border);
-				}
-				&:hover, &:focus {
-					border-color: lighten(@color-projects, 25%);
-					span {
-						border-color: lighten(@color-projects, 25%);
-					}
-				}
-			}
-		}
-		@media screen and (max-width: 720px) {
-			.list {
-				.left, .right {
-					width: 100%;
-				}
-				.right a:first-child {
-					margin-top: 0;
-				}
-			}
-		}
-		@media screen and (max-width: 560px) {
-			p {
-				padding: 0 20px 20px 20px;
-			}
-		}
-	}
+  ::selection {
+    background-color: darken(@color-projects, @selection-darken-percentage);
+  }
+  a {
+    color: lighten(@color-projects, 30%);
+    -webkit-tap-highlight-color: fade(@color-projects, 50%);
+    &:hover, &:focus {
+      color: lighten(@color-projects, 30%);
+      text-decoration: none;
+      border-bottom: 1px dotted #fff;
+    }
+  }
+  background-color: @color-projects;
+  .container {
+    h1 {
+      font-family: @title-font;
+      font-weight: bold;
+      text-align: center;
+      padding: 15px 30px;
+    }
+    p {
+      padding: 0 30px 20px 30px;
+    }
+    .list {
+      padding: 0;
+      margin: 0;
+      border-top: 4px solid lighten(@color-projects, 20%);
+      .left, .right {
+        padding:0;
+        margin:0;
+        width: 50%;
+        float: left;
+      }
+      a {
+        display: block;
+        padding: 20px;
+        max-width: 90%;
+        background-color: lighten(@color-projects, 10%);
+        margin: 30px 5%;
+        border: 1px dotted transparent;
+        font-size: 90%;
+        position: relative;
+        .transition(0.3s, border);
+        h2 {
+          margin: 0;
+          padding: 0 0 15px 0;
+          font-size: 130%;
+          font-weight: bold;
+          display: block;
+          color: #fff;
+        }
+        span {
+          position: absolute;
+          top: -1px;
+          right: -1px;
+          font-size: 80%;
+          padding: 5px 1px 2px 1px;
+          margin: 5px 14px 3px 14px;
+          display: inline-block;
+          border-bottom: 1px solid transparent;
+          .transition(0.3s, border);
+        }
+        &:hover, &:focus {
+          border-color: lighten(@color-projects, 25%);
+          span {
+            border-color: lighten(@color-projects, 25%);
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 720px) {
+      .list {
+        .left, .right {
+          width: 100%;
+        }
+        .right a:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+    @media screen and (max-width: 560px) {
+      p {
+        padding: 0 20px 20px 20px;
+      }
+    }
+  }
 }
 
 footer {
-	background-color: @color-projects;
-	text-align: center;
-	padding: 0 0 20px 0;
-	margin: 0;
-	font-size: 75%;
-	color: #fff;
+  background-color: @color-projects;
+  text-align: center;
+  padding: 0 0 20px 0;
+  margin: 0;
+  font-size: 75%;
+  color: #fff;
 }
 
+*/
