@@ -1,12 +1,13 @@
 @import 'brand-colors';
 
 // Font Import
-@import url("http://fonts.googleapis.com/css?family=Black+Ops+One|Raleway:400,700|Bad+Script|Yeseva+One");
+@import url("http://fonts.googleapis.com/css?family=Black+Ops+One|Raleway:400,500,600,700|Bad+Script|Yeseva+One");
 @bad-script: "Bad Script", serif;
 @black-ops-one: "Black Ops One", serif;
 @raleway: "Raleway", sans-serif;
 
 // Global Variables
+@box-height: 70px;
 @container-max-width: 720px;
 @body-min-width: 320px;
 
@@ -17,14 +18,13 @@
 
 @selection-darken-percentage: 25%;
 
-@keyframes full-width {
-  0% { width: 0; }
-  100% { width: 100%; }
+ul, ol {
+  margin: 0;
+  padding: 0;
 }
 
-@keyframes full-opacity {
-  0% { opacity: 0; }
-  100% { opacity: 100%; }
+li {
+  list-style: none;
 }
 
 html {
@@ -51,9 +51,6 @@ hr {
   border-radius: 2px;
   margin-top: 0;
   margin-bottom: 0;
-  &.animate {
-    animation: full-width 0.4s ease-in-out;
-  }
   &.yellow {
     border-color: @color-yellow;
   }
@@ -65,35 +62,90 @@ hr {
   }
 }
 
+.box {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: @box-height;
+  color: #fff;
+  &.attach {
+    position: fixed;
+    z-index: 2;
+  }
+  &.bottom {
+    top: auto;
+    bottom: 4px;
+  }
+  &.blue {
+    background-color: @color-blue;
+  }
+  &.purple {
+    background-color: @color-purple;
+  }
+  &.yellow {
+    background-color: @color-yellow;
+  }
+  @media screen and (max-width: 500px) {
+    &.attach {
+      position: absolute;
+    }
+    &.bottom {
+      top: 0;
+      bottom: auto;
+    }
+  }
+}
+
+section {
+  position: relative;
+  width: 100%;
+  height: calc(~"100% -" @box-height);
+  padding-top: @box-height;
+  min-height: 400px;
+  @media screen and (max-width: 500px) {
+    min-height: 350px;
+    height: auto;
+  }
+}
+
+footer {
+  position: relative;
+  width: 100%;
+}
 
 #name {
   display: table;
-  height: 100%;
-  width: 100%;
-  min-height: 250px;
   text-align: center;
   .center-container {
     display: table-cell;
+    background-color: #fff;
+    padding: 20px 0;
     vertical-align: middle;
   }
   .hr-container {
     max-width: 400px;
     margin: auto;
-    margin-bottom: 25px;
   }
   h3 {
     font-size: 42px;
     text-transform: uppercase;
-    margin: 0 0 20px 0;
-    animation: full-opacity 1s ease-in-out;
+    margin: 0 0 5px 0;
+  }
+  h6 {
+    font-weight: 500;
+    color: #7F7F7F;
+    font-size: 18px;
+    margin: 0 0 25px 0;
   }
   .icons {
+    margin: 25px 0 0 0;
     font-size: 32px;
-    animation: full-opacity 1s ease-in-out;
     a {
       text-decoration: none;
       display: inline-block;
-      padding: 0 20px 10px 20px;
+      padding: 0 20px 0 20px;
       color: #000;
       transition: color 0.5s;
       &.github {
@@ -108,20 +160,15 @@ hr {
     }
   }
   @media screen and (max-width: 500px) {
-    display: block;
-    height: auto;
-    .center-container {
-      display: block;
-    }
     .hr-container {
       max-width: 300px;
-      margin-bottom: 20px;
     }
     h3 {
       font-size: 32px;
-      margin: 0 0 15px 0;
+      margin-bottom: 15px;
     }
     .icons {
+      margin-top: 20px;
       font-size: 20px;
       a {
         padding: 0 15px 10px 15px;
@@ -129,6 +176,7 @@ hr {
     }
   }
 }
+
 
 
 

@@ -1,9 +1,29 @@
+BOX_HEIGHT = 70
+
 $ ->
-  $('.icons a').tooltip
+  # Inside #name
+  $('#name .icons a').tooltip
     placement: 'bottom'
     html: true
+  $('#name hr.animate').
+    css(width: 0).
+    animate((width: '100%'), 400)
+  $('#name .fade-in').
+    css(opacity: 0).
+    delay(300).
+    animate((opacity: 1), 700)
 
+  $(window).on 'scroll resize', ->
+    $('.box').removeClass('attach bottom')
 
+    sectionHeight = $(window).height() - BOX_HEIGHT
+    scrollTop = $(window).scrollTop()
+    scrollRatio = scrollTop / sectionHeight
+    sectionNumber = Math.floor(scrollRatio) + 1
+    if sectionNumber * sectionHeight < scrollTop + BOX_HEIGHT + 4
+      $(".box.box-#{sectionNumber}").addClass('bottom')
+    else
+      $(".box.box-#{sectionNumber}").addClass('attach')
 
 ###
   # Header
