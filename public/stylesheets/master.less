@@ -7,7 +7,6 @@
 @raleway: "Raleway", sans-serif;
 
 // Global Variables
-@box-height: 70px;
 @container-max-width: 720px;
 @body-min-width: 320px;
 
@@ -44,70 +43,10 @@ section {
   }
 }
 
-hr {
-  height: 0;
-  width: 100%;
-  border: 2px solid;
-  border-radius: 2px;
-  margin-top: 0;
-  margin-bottom: 0;
-  &.yellow {
-    border-color: @color-yellow;
-  }
-  &.blue {
-    border-color: @color-blue;
-  }
-  &.purple {
-    border-color: @color-purple;
-  }
-}
-
-.box {
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: @box-height;
-  color: #fff;
-  &.attach {
-    position: fixed;
-    z-index: 2;
-  }
-  &.bottom {
-    top: auto;
-    bottom: 4px;
-  }
-  &.blue {
-    background-color: @color-blue;
-  }
-  &.purple {
-    background-color: @color-purple;
-  }
-  &.yellow {
-    background-color: @color-yellow;
-  }
-  @media screen and (max-width: 500px) {
-    &.attach {
-      position: absolute;
-    }
-    &.bottom {
-      top: 0;
-      bottom: auto;
-    }
-  }
-}
 
 section {
   position: relative;
   width: 100%;
-  height: calc(~"100% -" @box-height);
-  padding-top: @box-height;
-  min-height: 400px;
-  @media screen and (max-width: 500px) {
-    min-height: 350px;
-    height: auto;
-  }
 }
 
 footer {
@@ -116,18 +55,28 @@ footer {
 }
 
 #name {
+  min-height: 400px;
+  height: 100%;
   display: table;
   text-align: center;
+  background-image: url("/images/cntower.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+
   .center-container {
     display: table-cell;
-    background-color: #fff;
-    padding: 20px 0;
     vertical-align: middle;
   }
-  .hr-container {
-    max-width: 400px;
+
+  .main-box {
+    max-width: 450px;
     margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
   }
+
   h3 {
     font-size: 42px;
     text-transform: uppercase;
@@ -137,15 +86,14 @@ footer {
     font-weight: 500;
     color: #7F7F7F;
     font-size: 18px;
-    margin: 0 0 25px 0;
+    margin: 0 0 15px 0;
   }
   .icons {
-    margin: 25px 0 0 0;
     font-size: 32px;
     a {
       text-decoration: none;
       display: inline-block;
-      padding: 0 20px 0 20px;
+      padding: 0 15px;
       color: #000;
       transition: color 0.5s;
       &.github {
@@ -160,24 +108,30 @@ footer {
     }
   }
   @media screen and (max-width: 500px) {
-    .hr-container {
-      max-width: 300px;
+    height: auto;
+    .main-box {
+      width: 100%;
+      max-width: auto;
+      border-radius: 0;
     }
     h3 {
       font-size: 32px;
-      margin-bottom: 15px;
     }
     .icons {
-      margin-top: 20px;
-      font-size: 20px;
+      font-size: 25px;
       a {
-        padding: 0 15px 10px 15px;
+        padding: 0 10px;
       }
     }
   }
 }
 
-
+#projects {
+  min-height: 100%;
+  @media screen and (max-width: 500px) {
+    min-height: 350px;
+  }
+}
 
 
 /*
