@@ -9,7 +9,6 @@ $ ->
 
   topSection = $('#top')
   arrowDown = $('#top .arrow-down')
-  aboutSection = $('#about')
   projectSection = $('#projects')
 
   # How fast the opacity should change
@@ -18,13 +17,12 @@ $ ->
 
   (effect = ->
     ratio = $(window).scrollTop() / $(window).height()
-    if ratio < 1
-      blurOpacity = ratio / BLUR_THRESHOLD
-      topOpacity = 1 - ratio / TOP_THRESHOLD
-      blurBackground.css 'opacity', blurOpacity
-      topSection.css 'opacity', topOpacity
+    blurOpacity = Math.max(0, Math.min(1, ratio / BLUR_THRESHOLD))
+    topOpacity = 1 - Math.max(0, Math.min(1, ratio / TOP_THRESHOLD))
+    blurBackground.css 'opacity', blurOpacity
+    topSection.css 'opacity', topOpacity
   )()
-  $(window).on 'resize scroll', _.throttle(effect, 50)
+  $(window).on 'resize scroll', _.throttle(effect, if Modernizr.touch then 100 else 50)
 
   arrowDown
     .css('opacity', 0)
@@ -37,12 +35,6 @@ $ ->
   projectSection
     .find('hr').css(width: 0).end()
     .find('h1, .intro, .projects, .outro').css(opacity: 0).end()
-
-$(window).load ->
-  aboutSection = $('#about')
-  projectSection = $('#projects')
-
-  projectSection
     .waypoint ((dir) ->
       $(@).find('hr').delay(100).animate width: '100%', 400, =>
         $(@).find('h1, .intro').animate(opacity: 1, 400)
