@@ -3,19 +3,20 @@ html
   head
     title Ankit Sardesai
     meta(http-equiv='Content-type',content='text/html;charset=UTF-8')
-    meta(name='viewport',content='width=device-width, minimum-scale=1.0, maximum-scale=1.0')
+    meta(name='viewport',content='width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no')
     link(rel='stylesheet',href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css')
     link(rel='stylesheet',href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet',href='/stylesheets/master.css?v=1')
     script(type='text/javascript',src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(type='text/javascript',src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js')
     script(type='text/javascript',src='//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.2/waypoints.min.js')
     script(type='text/javascript',src='/javascripts/bootstrap.min.js')
     script(type='text/javascript',src='/javascripts/modernizr.min.js')
     script(type='text/javascript',src='/javascripts/master.js')
   body
-    header
-    section#name.parallax
-      .mask
+    .main-background
+    .blur-background
+    section#top
       .center-container
         .main-box
           h3 Ankit Sardesai
@@ -26,9 +27,15 @@ html
             a.fa.fa-file-pdf-o(href="/resume",title="My R&eacute;sum&eacute;")
             a.fa.fa-envelope(href="mailto:me@ankitsardesai.ca",title="me at ankitsardesai dot ca")
             a.linkedin.fa.fa-linkedin(href="https://www.linkedin.com/in/amsardesai",title="Ankit Sardesai")
+      a.arrow-down.fa.fa-chevron-down(href="#")
 
     section#projects
-
+      .container
+        h1 My Past Work
+        hr.animate-waypoint
+        ul.projects
+          li hihih
+          li hihihihi
 
   //-
     header.navbar-fixed-top

@@ -1,7 +1,7 @@
 @import 'brand-colors';
 
 // Font Import
-@import url("http://fonts.googleapis.com/css?family=Black+Ops+One|Raleway:400,500,600,700|Bad+Script|Yeseva+One");
+@import url("http://fonts.googleapis.com/css?family=Black+Ops+One|Raleway:300,400,500,600,700|Bad+Script|Yeseva+One");
 @bad-script: "Bad Script", serif;
 @black-ops-one: "Black Ops One", serif;
 @raleway: "Raleway", sans-serif;
@@ -28,6 +28,7 @@ li {
 
 html {
   height: 100%;
+  overflow: visible;
 }
 
 body {
@@ -35,6 +36,9 @@ body {
   font-size: 17px;
   font-family: @raleway;
   height: 100%;
+
+  overflow: visible;
+  -webkit-overflow-scrolling: touch;
 }
 
 section {
@@ -42,7 +46,6 @@ section {
     max-width: @container-max-width;
   }
 }
-
 
 section {
   position: relative;
@@ -54,15 +57,66 @@ footer {
   width: 100%;
 }
 
-#name {
-  min-height: 400px;
-  height: 100%;
-  display: table;
-  text-align: center;
-  background-image: url("/images/cntower.jpg");
+
+.main-background, .blur-background {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+
+.main-background {
+  background-image: url("/images/cntower.jpg");
+  z-index: -1;
+}
+
+.blur-background {
+  background-image: url("/images/cntower-blurred.jpg");
+  opacity: 0;
+}
+
+html.touch {
+  .main-background, .blur-background {
+    background-attachment: initial;
+    bottom: auto;
+    height: 1500px;
+    min-height: 100%;
+  }
+  @media screen and (max-width: 500px) {
+    .main-background, .blur-background {
+      height: 700px;
+    }
+  }
+}
+
+
+
+#top {
+  min-height: 300px;
+  height: 100%;
+  display: table;
+  text-align: center;
+  position: relative;
+  opacity: 1;
+  .arrow-down {
+    text-align: center;
+    display: inline-block;
+    width: 100px;
+    margin-left: -50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 25px;
+    color: #fff;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    text-decoration: none;
+  }
 
   .center-container {
     display: table-cell;
@@ -74,7 +128,7 @@ footer {
     margin: auto;
     background-color: #fff;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
   }
 
   h3 {
@@ -108,10 +162,13 @@ footer {
     }
   }
   @media screen and (max-width: 500px) {
-    height: auto;
+    .arrow-down {
+      display: none;
+    }
     .main-box {
       width: 100%;
-      max-width: auto;
+      margin: 0;
+      max-width: 500px;
       border-radius: 0;
     }
     h3 {
@@ -120,7 +177,7 @@ footer {
     .icons {
       font-size: 25px;
       a {
-        padding: 0 10px;
+        padding: 0 15px;
       }
     }
   }
@@ -128,8 +185,30 @@ footer {
 
 #projects {
   min-height: 100%;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+  h1 {
+    font-weight: 300;
+  }
+  hr {
+    width: 100%;
+    border: 1px solid;
+    border-radius: 2px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  ul.projects li {
+    margin: 20px 0;
+    padding: 20px 15px;
+    background-color: #fff;
+    opacity: 0.8;
+    color: #000;
+    text-align: left;
+  }
+
   @media screen and (max-width: 500px) {
-    min-height: 350px;
+    min-height: 500px;
   }
 }
 
