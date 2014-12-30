@@ -2,15 +2,9 @@
 
 Source code for [my website](http://ankitsardesai.ca).
 
-Built using:
--    NodeJS
--	ExpressJS (and Jade)
--	LESS
--	CoffeeScript
--	Bootstrap
--	FontAwesome
+Built using ExpressJS (with Jade, LESS, and CoffeeScript).
 
-The website is deployed on the Heroku platform.
+Deployed using Heroku.
 
 ### Installing
 
@@ -18,22 +12,16 @@ To create an instance of ankitsardesai.ca on your computer, clone this repositor
 
 	git clone https://github.com/amsardesai/ankitsardesai.ca.git
 	cd ankitsardesai.ca/
-	make
+	npm install
 
 ### Running
 
-To run an instance of ankitsardesai.ca on your computer, make sure CoffeeScript is installed on your computer.
+To run an instance of ankitsardesai.ca on your computer, make sure the CoffeeScript CLI is installed globally on your computer.
 
 	sudo npm install -g coffee-script
 
 Then, run the application.
 
-	coffee app.coffee
-
-### Uninstalling modules
-
-To remove all NPM modules in this package, perform the following command.
-
-	make clean
+  npm start
 
 &copy; Ankit Sardesai 2013
