@@ -32,54 +32,44 @@ html
     section#projects
       .container
         h1 My Past Work
-        hr.animate-waypoint
-        ul.projects
-          li hihih
-          li hihihihi
-
-  //-
-    header.navbar-fixed-top
-      .container
-        a.icon-envelope(href='mailto:me@ankitsardesai.ca',title='me at ankitsardesai dot ca')
-        a.icon-github(href='http://github.com/amsardesai',title='amsardesai')
-        a.icon-linkedin(href='http://linkedin.com/in/amsardesai',title='Ankit Sardesai')
-        a.logo(href='#top',title='Return to top') Ankit S
-          span.last-name ardesai
-    section#aboutme
-      .container
-        h3 My name is Ankit Sardesai.
-        .city
-        .buildings
-        .hidden-paragraphs
-          p I am a Software Engineering student at the <strong>University of Waterloo</strong>.
-          p I love making <strong>cool stuff</strong> on any platform and learning new things in the wonderful world of software. I also love alternative rock music, Tim Horton's coffee, and my home city of Toronto.
-          p
-            a.fancy-button(href="resume") My R&eacute;sum&eacute;
-    section#projects
-      .container
-        h1 My Past Work
-        p The source code for all these projects can be found on my <a href='http://github.com/amsardesai'>GitHub</a>.
-        .list
+        hr
+        .intro Here are some things I have worked on in the past:
+        .projects
           .left
-            a(href='http://goansinamerica.com/')
-              h2 Goan Convention 2014
-              | The official website of the 2014 Goan Convention
-              span node
-            a(href='http://old.ankitsardesai.ca/uw-roomschedule/')
-              h2 UW RoomSchedule
-              | Retrieves the class/tutorial schedule for individual rooms throughout the University of Waterloo campus.
-              span php
-            a(href='http://old.ankitsardesai.ca/')
-              h2 Old Website
-              | An older version of this site built in HTML5.
-              span html5
+            a(href='https://github.com/amsardesai/middleman-protect-emails')
+              .heading middleman-protect-emails
+              .description Middleman extension for email link protection and encryption
+              .language ruby
+            a(href='https://github.com/amsardesai/uwaterlooapi')
+              .heading uwaterlooapi
+              .description RubyGem for interfacing with the University of Waterloo API
+              .language ruby
+            a(href='http://2012-site.ankitsardesai.ca/')
+              .heading ankitsardesai.ca @ 2012
+              .description ankitsardesai.ca as it was in 2012
+              .language html5
+            a(href='http://2012-site.ankitsardesai.ca/css3transform/')
+              .heading CSS3 Transform
+              .description Visual tool for the CSS3 transform function
+              .language css3
           .right
-            a(href='http://mapofgoans.ankitsardesai.ca/')
-              h2 Map of Goans
-              | A map listing every Goan in North America. Data has been collected voluntarily.
-              span node/mongo
-            a(href='http://old.ankitsardesai.ca/css3transform/')
-              h2 CSS3 Transform
-              | Visual tool demonstrating how the CSS3 transform function and transformation matrices work.
-              span css3
-    footer &copy; Ankit Sardesai 2014
+            a(href='http://2014-site.ankitsardesai.ca')
+              .heading ankitsardesai.ca @ 2014
+              .description ankitsardesai.ca as it was in 2014
+              .language expressjs
+            a(href='http://goansinamerica.com')
+              .heading Goan Convention 2014
+              .description The official website of the 2014 Goan Convention
+              .language expressjs
+            a(href='http://mapofgoans.ankitsardesai.ca')
+              .heading Map of Goans
+              .description A map listing every Goan in North America
+              .language expressjs &amp; mongo
+            a(href='http://2012-site.ankitsardesai.ca/uw-roomschedule/')
+              .heading UW RoomSchedule
+              .description Retrieves the class/tutorial schedule for individual rooms throughout the University of Waterloo campus
+              .language html5
+          .clearfix
+        .outro You can see everything I've worked on on <a href='https://github.com/amsardesai'>GitHub</a>
+
+      .copyright &copy; Ankit Sardesai 2015

@@ -47,6 +47,10 @@ section {
   }
 }
 
+.clearfix {
+  clear: both;
+}
+
 section {
   position: relative;
   width: 100%;
@@ -128,7 +132,6 @@ html.touch {
     margin: auto;
     background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
   }
 
   h3 {
@@ -184,32 +187,92 @@ html.touch {
 }
 
 #projects {
-  min-height: 100%;
   color: #fff;
-  padding: 10px 0;
+  padding: 10px 0 50px 0;
+  font-weight: 300;
   text-align: center;
+  min-height: 100%;
+  position: relative;
   h1 {
     font-weight: 300;
+    font-size: 30px;
   }
   hr {
     width: 100%;
-    border: 1px solid;
-    border-radius: 2px;
-    margin-top: 0;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    margin-top: 20px;
     margin-bottom: 0;
   }
-  ul.projects li {
-    margin: 20px 0;
-    padding: 20px 15px;
-    background-color: #fff;
-    opacity: 0.8;
-    color: #000;
-    text-align: left;
+  a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  .intro {
+    font-size: 18px;
+    padding: 20px 0 10px 0;
+  }
+  .outro {
+    font-size: 18px;
+    padding: 20px;
+  }
+  .projects {
+    margin: 0;
+    padding: 0;
+    .left, .right {
+      margin: 0;
+      padding: 0;
+      width: 50%;
+      float: left;
+    }
+    a {
+      display: block;
+      margin: 10px 5px 0 5px;
+      padding: 15px;
+      opacity: 0.8;
+      background-color: #fff;
+      color: #000;
+      position: relative;
+      text-decoration: none;
+      text-align: left;
+      .heading {
+        font-weight: 500;
+        padding-bottom: 5px;
+      }
+      .description {
+        font-size: 14px;
+        clear: left;
+      }
+      .language {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #999;
+        font-size: 13px;
+      }
+      &:hover .language {
+        border-bottom: 1px solid #666;
+      }
+    }
+  }
+  .copyright {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 14px;
+    height: 50px;
+    line-height: 50px;
   }
 
-  @media screen and (max-width: 500px) {
-    min-height: 500px;
+  @media screen and (max-width: 720px) {
+    .projects {
+      .left, .right {
+        width: 100%;
+      }
+    }
   }
+
 }
 
 
