@@ -12,22 +12,24 @@ html
     script(type='text/javascript',src='//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.2/waypoints.min.js')
     script(type='text/javascript',src='/javascripts/bootstrap.min.js')
     script(type='text/javascript',src='/javascripts/modernizr.min.js')
-    script(type='text/javascript',src='/javascripts/master.js')
+    script(type='text/javascript',src='/javascripts/master.js?v=1')
   body
     .backgrounds
-      .main-background
-      .blur-background
+      .main
+        .background
+      .blur
+        .background
     section#top
       .center-container
         .main-box
           h3 Ankit Sardesai
           h6 Software Developer
           .icons
-            a.instagram.fa.fa-instagram(href="https://instagram.com/amsardesai",title="@amsardesai")
-            a.github.fa.fa-github-alt(href="https://github.com/amsardesai",title="@amsardesai")
-            a.fa.fa-file-pdf-o(href="/resume",title="My R&eacute;sum&eacute;")
-            a.fa.fa-envelope(href="mailto:me@ankitsardesai.ca",title="me at ankitsardesai dot ca")
-            a.linkedin.fa.fa-linkedin(href="https://www.linkedin.com/in/amsardesai",title="Ankit Sardesai")
+            a.instagram.fa.fa-instagram(href="https://instagram.com/amsardesai",title="@amsardesai",data-ga-label="Instagram")
+            a.github.fa.fa-github-alt(href="https://github.com/amsardesai",title="@amsardesai",data-ga-label="GitHub")
+            a.fa.fa-file-pdf-o(href="/resume",title="My R&eacute;sum&eacute;",data-ga-label="Resume")
+            a.fa.fa-envelope(href="mailto:me@ankitsardesai.ca",title="me at ankitsardesai dot ca",data-ga-label="Email")
+            a.linkedin.fa.fa-linkedin(href="https://www.linkedin.com/in/amsardesai",title="Ankit Sardesai",data-ga-label="LinkedIn")
       a.arrow-down.fa.fa-chevron-down(href="#")
 
     section#projects
@@ -74,3 +76,6 @@ html
         .outro You can see everything I've worked on on <a href='https://github.com/amsardesai'>GitHub</a>
 
       .copyright &copy; Ankit Sardesai 2015
+
+    script.
+      !function(a,b,c,d,e,f,g){a.GoogleAnalyticsObject=e,a[e]=a[e]||function(){(a[e].q=a[e].q||[]).push(arguments)},a[e].l=1*new Date,f=b.createElement(c),g=b.getElementsByTagName(c)[0],f.async=1,f.src=d,g.parentNode.insertBefore(f,g)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-37589348-3","auto"),ga("send","pageview");

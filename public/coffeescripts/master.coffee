@@ -1,20 +1,31 @@
+# ankitsardesai.ca
+
+BACKGROUNDS = [
+  'cntower'
+  'towers'
+]
+
 $ ->
-  # Inside #name
-  if not Modernizr.touch
-    $('#top .icons a').tooltip
-      placement: 'bottom'
-      html: true
 
-  blurBackground = $('.blur-background')
-
+  backgrounds = $('.backgrounds')
+  mainBackground = backgrounds.find('.main')
+  blurBackground = backgrounds.find('.blur')
   topSection = $('#top')
+  socialIcons = $('#top .icons a')
   arrowDown = $('#top .arrow-down')
   projectSection = $('#projects')
+
+  # Inside #name
+  if not Modernizr.touch
+    socialIcons.tooltip
+      placement: 'bottom'
+      html: true
 
   # How fast the opacity should change
   BLUR_THRESHOLD = 2 / 3
   TOP_THRESHOLD = 1 / 2
 
+  # Blurring effect
   (effect = ->
     ratio = $(window).scrollTop() / $(window).height()
     blurOpacity = Math.max(0, Math.min(1, ratio / BLUR_THRESHOLD))
@@ -24,6 +35,27 @@ $ ->
   )()
   $(window).on 'resize scroll', _.throttle(effect, if Modernizr.touch then 100 else 50)
 
+  # Image switching
+  currentImage = Math.floor(Math.random() * BACKGROUNDS.length)
+  mainBackground.find('.background').css 'background-image', "url('/images/#{BACKGROUNDS[currentImage]}.jpg')"
+  blurBackground.find('.background').css 'background-image', "url('/images/#{BACKGROUNDS[currentImage]}-blurred.jpg')"
+
+  changeImage = (index) ->
+    currentMainBackground = mainBackground.find('.background')
+    currentBlurBackground = blurBackground.find('.background')
+    newMainBackground = $("<div class='background'>").css(opacity: 0, 'background-image': "url('/images/#{BACKGROUNDS[currentImage]}.jpg')")
+    newBlurBackground = $("<div class='background'>").css(opacity: 0, 'background-image': "url('/images/#{BACKGROUNDS[currentImage]}-blurred.jpg')")
+    mainBackground.append newMainBackground
+    blurBackground.append newBlurBackground
+    newMainBackground.animate (opacity: 1), 1000, -> currentMainBackground.remove()
+    newBlurBackground.animate (opacity: 1), 1000, -> currentBlurBackground.remove()
+
+  setInterval ( ->
+    currentImage = (currentImage + 1) % BACKGROUNDS.length
+    changeImage currentImage
+  ), 10000
+
+  # Arrow fading in
   arrowDown
     .css('opacity', 0)
     .click (e) ->
@@ -32,6 +64,7 @@ $ ->
     .delay(500)
     .animate(opacity: 1, 500)
 
+  # Items in Projects section fading in
   projectSection
     .find('hr').css(width: 0).end()
     .find('h1, .intro, .projects, .outro').css(opacity: 0).end()
@@ -42,3 +75,8 @@ $ ->
         $(@).find('.outro').delay(600).animate(opacity: 1, 500)
     ), (offset: '85%')
 
+  # Google Analytics
+  socialIcons.click -> try ga 'send', 'event', 'button', 'click', $(this).data('ga-label') catch
+  arrowDown.click -> try ga 'send', 'event', 'button', 'click', 'Down Arrow' catch
+  projectSection.waypoint ((dir) -> try ga 'send', 'event', 'page', 'scroll', 'Projects Section' catch), (offset: '85%', triggerOnce: true)
+  projectSection.waypoint ((dir) -> try ga 'send', 'event', 'page', 'scroll', 'Bottom of Page' catch), (offset: 'bottom-in-view', triggerOnce: true)
