@@ -6,10 +6,8 @@ express = require 'express'
 routes = require './routes'
 http = require 'http'
 path = require 'path'
-
+connect = require 'connect-assets'
 autoprefixer = require 'express-autoprefixer'
-less = require 'less-middleware'
-coffee = require 'express-coffee'
 
 app = express()
 
@@ -26,15 +24,10 @@ app.configure ->
   app.use express.bodyParser()
   app.use express.methodOverride()
 
+  app.use connect()
   app.use autoprefixer
     browsers: 'last 5 versions'
     cascade: false
-  app.use less
-    src: "#{__dirname}/public"
-    yuicompress: true
-  app.use coffee
-    path: "#{__dirname}/public"
-    uglify: env == 'production'
 
   app.use express.static("#{__dirname}/public")
   app.use app.router

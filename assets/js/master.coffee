@@ -21,6 +21,24 @@ $ ->
       placement: 'bottom'
       html: true
 
+  # Image initialization
+  currentImage = Math.floor(Math.random() * BACKGROUNDS.length)
+  mainBackground.find('.background').css 'background-image', "url('/images/#{BACKGROUNDS[currentImage]}.jpg')"
+  blurBackground.find('.background').css 'background-image', "url('/images/#{BACKGROUNDS[currentImage]}-blurred.jpg')"
+
+  # Image switching
+  setInterval ( ->
+    currentImage = (currentImage + 1) % BACKGROUNDS.length
+    currentMainBackground = mainBackground.find('.background')
+    currentBlurBackground = blurBackground.find('.background')
+    newMainBackground = $("<div class='background'>").css(opacity: 0, 'background-image': "url('/images/#{BACKGROUNDS[currentImage]}.jpg')")
+    newBlurBackground = $("<div class='background'>").css(opacity: 0, 'background-image': "url('/images/#{BACKGROUNDS[currentImage]}-blurred.jpg')")
+    mainBackground.append newMainBackground
+    blurBackground.append newBlurBackground
+    newMainBackground.animate (opacity: 1), 2000, -> currentMainBackground.remove()
+    newBlurBackground.animate (opacity: 1), 2000, -> currentBlurBackground.remove()
+  ), 8000
+
   # How fast the opacity should change
   BLUR_THRESHOLD = 2 / 3
   TOP_THRESHOLD = 1 / 2
@@ -34,26 +52,6 @@ $ ->
     topSection.css 'opacity', topOpacity
   )()
   $(window).on 'resize scroll', _.throttle(effect, if Modernizr.touch then 100 else 50)
-
-  # Image switching
-  currentImage = Math.floor(Math.random() * BACKGROUNDS.length)
-  mainBackground.find('.background').css 'background-image', "url('/images/#{BACKGROUNDS[currentImage]}.jpg')"
-  blurBackground.find('.background').css 'background-image', "url('/images/#{BACKGROUNDS[currentImage]}-blurred.jpg')"
-
-  changeImage = (index) ->
-    currentMainBackground = mainBackground.find('.background')
-    currentBlurBackground = blurBackground.find('.background')
-    newMainBackground = $("<div class='background'>").css(opacity: 0, 'background-image': "url('/images/#{BACKGROUNDS[currentImage]}.jpg')")
-    newBlurBackground = $("<div class='background'>").css(opacity: 0, 'background-image': "url('/images/#{BACKGROUNDS[currentImage]}-blurred.jpg')")
-    mainBackground.append newMainBackground
-    blurBackground.append newBlurBackground
-    newMainBackground.animate (opacity: 1), 1000, -> currentMainBackground.remove()
-    newBlurBackground.animate (opacity: 1), 1000, -> currentBlurBackground.remove()
-
-  setInterval ( ->
-    currentImage = (currentImage + 1) % BACKGROUNDS.length
-    changeImage currentImage
-  ), 10000
 
   # Arrow fading in
   arrowDown

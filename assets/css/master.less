@@ -45,7 +45,7 @@ footer {
   width: 100%;
 }
 
-.main-background, .blur-background {
+.main .background, .blur .background {
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
@@ -55,17 +55,20 @@ footer {
   bottom: 0;
 }
 
-.main-background {
-  background-image: url("/images/towers.jpg");
+.main .background {
+  background-image: url("/images/cntower.jpg");
 }
 
-.blur-background {
-  background-image: url("/images/towers-blurred.jpg");
+.blur {
   opacity: 0;
 }
 
+.blur .background {
+  background-image: url("/images/cntower-blurred.jpg");
+}
+
 html.touch {
-  .main-background, .blur-background {
+  .main .background, .blur .background {
     background-attachment: initial;
     background-position: center;
     bottom: auto;
@@ -73,7 +76,7 @@ html.touch {
     min-height: 100%;
   }
   @media screen and (max-width: 500px) {
-    .main-background, .blur-background {
+    .main .background, .blur .background {
       height: 700px;
     }
   }
