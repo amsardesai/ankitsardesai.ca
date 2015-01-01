@@ -1,9 +1,54 @@
 # ankitsardesai.ca
 
-BACKGROUNDS = [
-  'cntower'
-  'towers'
-]
+
+class BackgroundImageSwitcher
+  # List of backgrounds
+  BACKGROUNDS: [
+    'cntower'
+    'towers'
+  ]
+
+  # UI hash
+  ui:
+    mainBackground: _.memoize => $('.backgrounds .main')
+    blurBackground: _.memoize => $('.backgrounds .blur')
+
+  # Various getters
+  getNextImageIndex: -> (@currentImageIndex + 1) % @BACKGROUNDS.length
+  getCurrentImageName: -> @BACKGROUNDS[@currentImageIndex]
+  getNextImageName: -> @BACKGROUNDS[@getNextImageIndex()]
+  incrementImageIndex: -> @currentImageIndex = @getNextImageIndex()
+
+  # Initialization
+  init: ->
+    @currentImageIndex = Math.floor(Math.random() * @BACKGROUNDS.length)
+    @ui.mainBackground().find('.background').css 'background-image', "url('/images/#{@BACKGROUNDS[@currentImageIndex]}.jpg')"
+    @ui.blurBackground().find('.background').css 'background-image', "url('/images/#{@BACKGROUNDS[@currentImageIndex]}-blurred.jpg')"
+    @preloadNextImage()
+    setInterval ( => @animateToNextImage() ), 8000
+
+  # Inserts an element representing the next image
+  preloadNextImage: ->
+    newMainBackground = $("<div class='background next'>").css(opacity: 0, 'background-image': "url('/images/#{@getNextImageName()}.jpg')")
+    newBlurBackground = $("<div class='background next'>").css(opacity: 0, 'background-image': "url('/images/#{@getNextImageName()}-blurred.jpg')")
+    @ui.mainBackground().append newMainBackground
+    @ui.blurBackground().append newBlurBackground
+
+  # Animates to the next image in cache
+  animateToNextImage: ->
+    asyncPostAnimation = _.after 2, ( => @postAnimation() )
+    @ui.mainBackground().find('.background.next').animate (opacity: 1), 2000, asyncPostAnimation
+    @ui.blurBackground().find('.background.next').animate (opacity: 1), 2000, asyncPostAnimation
+
+  # After animation has been performed
+  postAnimation: ->
+    @ui.mainBackground().find('.background:not(.next)').remove()
+    @ui.blurBackground().find('.background:not(.next)').remove()
+    @ui.mainBackground().find('.background').removeClass('next')
+    @ui.blurBackground().find('.background').removeClass('next')
+    @incrementImageIndex()
+    @preloadNextImage()
+
 
 $ ->
 
@@ -21,23 +66,7 @@ $ ->
       placement: 'bottom'
       html: true
 
-  # Image initialization
-  currentImage = Math.floor(Math.random() * BACKGROUNDS.length)
-  mainBackground.find('.background').css 'background-image', "url('/images/#{BACKGROUNDS[currentImage]}.jpg')"
-  blurBackground.find('.background').css 'background-image', "url('/images/#{BACKGROUNDS[currentImage]}-blurred.jpg')"
-
-  # Image switching
-  setInterval ( ->
-    currentImage = (currentImage + 1) % BACKGROUNDS.length
-    currentMainBackground = mainBackground.find('.background')
-    currentBlurBackground = blurBackground.find('.background')
-    newMainBackground = $("<div class='background'>").css(opacity: 0, 'background-image': "url('/images/#{BACKGROUNDS[currentImage]}.jpg')")
-    newBlurBackground = $("<div class='background'>").css(opacity: 0, 'background-image': "url('/images/#{BACKGROUNDS[currentImage]}-blurred.jpg')")
-    mainBackground.append newMainBackground
-    blurBackground.append newBlurBackground
-    newMainBackground.animate (opacity: 1), 2000, -> currentMainBackground.remove()
-    newBlurBackground.animate (opacity: 1), 2000, -> currentBlurBackground.remove()
-  ), 8000
+  (new BackgroundImageSwitcher).init()
 
   # How fast the opacity should change
   BLUR_THRESHOLD = 2 / 3
