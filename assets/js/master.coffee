@@ -22,7 +22,7 @@ class ParallaxBlur
   # Initialization
   init: ->
     @updateOpacity()
-    $(window).on 'resize scroll', _.throttle(@updateOpacity, if Modernizr.touch then @THROTTLE.TOUCH else @THROTTLE.REGULAR)
+    $(window).on 'resize scroll', _.throttle(( => @updateOpacity() ), if Modernizr.touch then @THROTTLE.TOUCH else @THROTTLE.REGULAR)
 
     @ui.arrowDown().click (e) ->
       e.preventDefault()
@@ -39,7 +39,7 @@ class ParallaxBlur
 
   # Update opacity on scroll
   updateOpacity: ->
-    ratio = @ui.window.scrollTop() / @ui.window.height()
+    ratio = @ui.window().scrollTop() / @ui.window().height()
     blurOpacity = Math.max(0, Math.min(1, ratio / @THRESHOLD.BLUR))
     topOpacity = 1 - Math.max(0, Math.min(1, ratio / @THRESHOLD.TOP))
     @ui.blurBackground().css 'opacity', blurOpacity
@@ -107,11 +107,22 @@ class SpecialEffects
 class GoogleAnalytics
   # Initialization
   init: ->
-    $('#top .icons a').click (e) => @sendGA 'button', 'click', $(e.currentTarget).data('ga-label')
-    $('#top .arrow-down').click => @sendGA 'button', 'click', 'Down Arrow'
-    $('#projects .projects a').click (e) => @sendGA 'button', 'click', $(e.currentTarget).data('ga-label')
-    $('#projects').waypoint ((dir) => @sendGA 'page', 'scroll', 'Projects Section'), (offset: '85%', triggerOnce: true)
-    $('#projects').waypoint ((dir) => @sendGA 'page', 'scroll', 'Bottom of Page'), (offset: 'bottom-in-view', triggerOnce: true)
+    $('#top .icons a').click (e) =>
+      @sendGA 'button', 'click', $(e.currentTarget).data('ga-label')
+
+    $('#top .arrow-down').click =>
+      @sendGA 'button', 'click', 'Down Arrow'
+
+    $('#projects .projects a').click (e) =>
+      @sendGA 'button', 'click', $(e.currentTarget).data('ga-label')
+
+    $('#projects').waypoint (dir) =>
+      @sendGA 'page', 'scroll', 'Projects Section'
+    , (offset: '85%', triggerOnce: true)
+
+    $('#projects').waypoint (dir) =>
+      @sendGA 'page', 'scroll', 'Bottom of Page'
+    , (offset: 'bottom-in-view', triggerOnce: true)
 
   # Send a GA event
   sendGA: (category, action, label) ->
