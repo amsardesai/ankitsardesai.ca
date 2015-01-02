@@ -1,4 +1,3 @@
-# ankitsardesai.ca
 
 class ParallaxBlur
   # How far down the page user has to go for element to disappear
@@ -118,11 +117,11 @@ class GoogleAnalytics
 
     $('#projects').waypoint (dir) =>
       @sendGA 'page', 'scroll', 'Projects Section'
-    , (offset: '85%', triggerOnce: true)
+    , offset: '85%', triggerOnce: true
 
     $('#projects').waypoint (dir) =>
       @sendGA 'page', 'scroll', 'Bottom of Page'
-    , (offset: 'bottom-in-view', triggerOnce: true)
+    , offset: 'bottom-in-view', triggerOnce: true
 
   # Send a GA event
   sendGA: (category, action, label) ->
