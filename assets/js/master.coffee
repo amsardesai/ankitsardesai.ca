@@ -21,7 +21,7 @@ class ParallaxBlur
   # Initialization
   init: ->
     @updateOpacity()
-    $(window).on 'resize scroll', _.throttle(( => @updateOpacity() ), if Modernizr.touch then @THROTTLE.TOUCH else @THROTTLE.REGULAR)
+    @ui.window().on 'resize scroll', _.throttle(( => @updateOpacity() ), if Modernizr.touch then @THROTTLE.TOUCH else @THROTTLE.REGULAR)
 
     @ui.arrowDown().click (e) ->
       e.preventDefault()
