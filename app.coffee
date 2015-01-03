@@ -1,18 +1,27 @@
-
-###
-Module dependencies.
-###
-express = require 'express'
-routes = require './routes'
-http = require 'http'
-path = require 'path'
-connect = require 'connect-assets'
+# Base
+express =      require 'express'
+connect =      require 'connect-assets'
 autoprefixer = require 'express-autoprefixer'
 
+# Database
+fs =           require 'fs'
+multiparty =   require 'multiparty'
+mongojs =      require 'mongojs'
+
+# Routes file
+routes =       require './routes'
+
+# Initialize Express
 app = express()
 
+# Determine port and environment
 port = process.env.PORT or 3000
 env = app.get("env")
+
+# Database connections
+databaseUrl = process.env.MONGOHQ_URL || process.env.DEV_DB_URL
+collections = ['backgrounds']
+db = mongojs.connect databaseUrl, collections
 
 # all environments
 app.configure ->
@@ -36,7 +45,7 @@ app.configure ->
 app.configure "development", ->
   app.use express.errorHandler()
 
-routes app, express
+routes app, express, db
 
 app.listen port, ->
   console.log "ankitsardesai.ca running at port #{port} in #{env} mode"

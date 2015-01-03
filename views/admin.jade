@@ -1,12 +1,72 @@
+mixin position-option(code, name, selected)
+  if (selected === code)
+    option(value=code,selected="selected")= name
+  else
+    option(value=code)= name
+
 !!! 5
 html
   head
     title Super Secret Bro Land
     meta(http-equiv='Content-type',content='text/html;charset=UTF-8')
     meta(name='viewport',content='width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no')
-    != css('bootstrap')
+    link(rel='stylesheet',href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
     script(type='text/javascript',src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js')
     script(type='text/javascript',src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js')
   body
     .container
       h1 Admin Panel
+
+      .panel.panel-default
+        .panel-heading Background Images
+        table.table.table-striped
+          thead
+            tr
+              th name
+              th Original
+              th Blurred
+              th Operation
+          tbody
+            each background in backgrounds
+              tr
+                th= background.name
+                td
+                  a(href=background.original_url)
+                    img(width="200",height="200",src=background.original_url)
+                td
+                  a(href=background.blurred_url)
+                    img(width="200",height="200",src=background.blurred_url)
+                td
+                  form.form-horizontal(action="/admin/background-image/#{background.id}/update",method="POST")
+                    .form-group
+                      label.col-sm-2.control-label(for="position-#{background.id}") Position
+                      .col-sm-10
+                        select.form-control(id="position-#{background.id}",name="position",value=background.position)
+                          +position-option('top', 'Top', background.position)
+                          +position-option('center', 'Center', background.position)
+                          +position-option('bottom', 'Bottom', background.position)
+                    .form-group
+                      input.form-control(type="submit",value="Update")
+                  form.form-horizontal(action="/admin/background-image/#{background.id}/delete",method="POST")
+                    .form-group
+                      input.form-control(type="submit",value="Delete")
+        .panel-body
+          form.form-horizontal
+            .form-group
+              label.col-sm-2.control-label(for="name")
+              .col-sm-10
+                input.form-control#name(type='text',placeholder="Name")
+            .form-group
+              label.col-sm-2.control-label(for="original_url")
+              .col-sm-10
+                input.form-control#original_url(type='text',placeholder="Original URL")
+            .form-group
+              label.col-sm-2.control-label(for="blurred_url")
+              .col-sm-10
+                input.form-control#blurred_url(type='text',placeholder="Blurred URL")
+            .form-group
+              label.col-sm-2.control-label(for="position")
+              .col-sm-10
+                input.form-control#position(type='text',placeholder="Blurred URL")
+
+
