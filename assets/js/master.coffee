@@ -1,3 +1,5 @@
+# jQuery configuration
+jQuery.fx.interval = 51
 
 class ParallaxBlur
   # How far down the page user has to go for element to disappear
@@ -7,8 +9,8 @@ class ParallaxBlur
 
   # How much delay there should be between updateOpacity calls
   THROTTLE:
-    TOUCH: 130
-    REGULAR: 90
+    TOUCH: 131
+    REGULAR: 89
 
   # UI hash
   ui:
