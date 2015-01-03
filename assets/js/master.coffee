@@ -46,9 +46,22 @@ class ParallaxBlur
 
 class BackgroundImageSwitcher
   # List of backgrounds
-  BACKGROUNDS: [
-    'cntower'
-    'towers'
+  backgrounds: [
+    (name: 'cntower', position: 'top')
+    (name: 'towers', position: 'center')
+    (name: 'pillars', position: 'bottom')
+    (name: 'terminal', position: 'top')
+    (name: 'delta', position: 'center')
+    (name: 'spadina', position: 'bottom')
+    (name: 'kingwest', position: 'bottom')
+    (name: 'fashionhouse', position: 'center')
+    (name: 'ctv', position: 'top')
+    (name: 'ago', position: 'bottom')
+    (name: 'uc', position: 'center')
+    (name: 'medsci', position: 'center')
+    (name: 'whitneyblock', position: 'center')
+    (name: 'baystnorth', position: 'top')
+
   ]
 
   # UI hash
@@ -57,31 +70,44 @@ class BackgroundImageSwitcher
     blurBackground: _.memoize => $('.backgrounds .blur')
 
   # Various getters
-  getNextImageIndex: -> (@currentImageIndex + 1) % @BACKGROUNDS.length
-  getCurrentImageName: -> @BACKGROUNDS[@currentImageIndex]
-  getNextImageName: -> @BACKGROUNDS[@getNextImageIndex()]
+  getNextImageIndex: -> (@currentImageIndex + 1) % @backgrounds.length
+  getCurrentImage: -> @backgrounds[@currentImageIndex]
+  getNextImage: -> @backgrounds[@getNextImageIndex()]
   incrementImageIndex: -> @currentImageIndex = @getNextImageIndex()
 
   # Initialization
   init: ->
-    @currentImageIndex = Math.floor(Math.random() * @BACKGROUNDS.length)
-    @ui.mainBackground().find('.background').css 'background-image', "url('/images/#{@BACKGROUNDS[@currentImageIndex]}.jpg')"
-    @ui.blurBackground().find('.background').css 'background-image', "url('/images/#{@BACKGROUNDS[@currentImageIndex]}-blurred.jpg')"
+    @backgrounds = _.shuffle @backgrounds
+    @currentImageIndex = Math.floor(Math.random() * @backgrounds.length)
+    currentBackground = @getCurrentImage()
+    @ui.mainBackground().find('.background').css
+      'background-image': "url('/images/#{currentBackground.name}.jpg')"
+      'background-position': currentBackground.position
+    @ui.blurBackground().find('.background').css
+      'background-image': "url('/images/#{currentBackground.name}-blurred.jpg')"
+      'background-position': currentBackground.position
     @preloadNextImage()
     setInterval ( => @animateToNextImage() ), 8000
 
   # Inserts an element representing the next image
   preloadNextImage: ->
-    newMainBackground = $("<div class='background next'>").css(opacity: 0, 'background-image': "url('/images/#{@getNextImageName()}.jpg')")
-    newBlurBackground = $("<div class='background next'>").css(opacity: 0, 'background-image': "url('/images/#{@getNextImageName()}-blurred.jpg')")
+    nextBackground = @getNextImage()
+    newMainBackground = $("<div class='background next'>").css
+        opacity: 0
+        'background-image': "url('/images/#{nextBackground.name}.jpg')"
+        'background-position': nextBackground.position
+    newBlurBackground = $("<div class='background next'>").css
+        opacity: 0
+        'background-image': "url('/images/#{nextBackground.name}-blurred.jpg')"
+        'background-position': nextBackground.position
     @ui.mainBackground().append newMainBackground
     @ui.blurBackground().append newBlurBackground
 
   # Animates to the next image in cache
   animateToNextImage: ->
-    asyncPostAnimation = _.after 2, ( => @postAnimation() )
-    @ui.mainBackground().find('.background.next').animate (opacity: 1), 2000, asyncPostAnimation
-    @ui.blurBackground().find('.background.next').animate (opacity: 1), 2000, asyncPostAnimation
+    postAnimation = _.after 2, => @postAnimation()
+    @ui.mainBackground().find('.background.next').animate (opacity: 1), 2000, postAnimation
+    @ui.blurBackground().find('.background.next').animate (opacity: 1), 2000, postAnimation
 
   # After animation has been performed
   postAnimation: ->

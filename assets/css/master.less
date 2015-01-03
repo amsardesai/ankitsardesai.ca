@@ -70,7 +70,6 @@ footer {
 html.touch {
   .main .background, .blur .background {
     background-attachment: initial;
-    background-position: center;
     bottom: auto;
     height: 1500px;
     min-height: 100%;
@@ -116,16 +115,21 @@ html.touch {
   h3 {
     font-size: 42px;
     text-transform: uppercase;
-    margin: 0 0 5px 0;
+    margin: 0;
   }
   h6 {
     font-weight: 500;
-    color: #7F7F7F;
+    color: #999;
     font-size: 18px;
-    margin: 0 0 15px 0;
+    margin: 0 0 5px 0;
+    em {
+      font-style: initial;
+      color: #222;
+    }
   }
   .icons {
     font-size: 32px;
+    margin: 15px 0 0 0;
     a {
       text-decoration: none;
       display: inline-block;
@@ -146,12 +150,13 @@ html.touch {
     }
     h3 {
       font-size: 32px;
+      margin: 0 0 5px 0;
+    }
+    h6 {
+      font-size: 16px;
     }
     .icons {
       font-size: 25px;
-      a {
-        padding: 0 15px;
-      }
     }
   }
 }
