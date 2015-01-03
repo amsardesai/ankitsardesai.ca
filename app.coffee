@@ -36,7 +36,7 @@ app.configure ->
 app.configure "development", ->
   app.use express.errorHandler()
 
-routes app
+routes app, express
 
 app.listen port, ->
   console.log "ankitsardesai.ca running at port #{port} in #{env} mode"
