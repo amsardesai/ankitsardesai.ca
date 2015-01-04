@@ -87,13 +87,11 @@ class BackgroundImageSwitcher
 class SpecialEffects
   # UI Hash
   ui:
-    arrowDown:   _.memoize => $('#top .arrow-down')
     socialIcons: _.memoize => $('#top .icons a')
 
   # Initialization
   init: ->
     @ui.socialIcons().tooltip(placement: 'bottom', html: 'true') unless Modernizr.touch
-    @ui.arrowDown().css('opacity', 0).delay(500).animate(opacity: 1, 500)
 
 class GoogleAnalytics
   # Initialization

@@ -33,10 +33,10 @@ app.configure ->
   app.use express.bodyParser()
   app.use express.methodOverride()
 
-  app.use connect()
   app.use autoprefixer
     browsers: 'last 5 versions'
     cascade: false
+  app.use connect()
 
   app.use express.static("#{__dirname}/public")
   app.use app.router
