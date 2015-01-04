@@ -46,6 +46,8 @@ footer {
 }
 
 .main .background, .blur .background {
+  transition: opacity 2s;
+  transform: translateZ(0); // Enables GPU acceleration
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
@@ -69,14 +71,23 @@ footer {
 
 html.touch {
   .main .background, .blur .background {
-    background-attachment: initial;
     bottom: auto;
-    height: 1500px;
+    height: 1000px;
     min-height: 100%;
   }
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 420px) {
     .main .background, .blur .background {
       height: 700px;
+    }
+  }
+  @media screen and (max-width: 380px) {
+    .main .background, .blur .background {
+      height: 630px;
+    }
+  }
+  @media screen and (max-width: 320px) {
+    .main .background, .blur .background {
+      height: 530px;
     }
   }
 }
@@ -95,7 +106,7 @@ html.touch {
     margin-left: -50px;
     height: 50px;
     line-height: 50px;
-    font-size: 25px;
+    font-size: 30px;
     color: #fff;
     position: absolute;
     bottom: 10px;
@@ -111,6 +122,8 @@ html.touch {
     margin: auto;
     background-color: #fff;
     padding: 20px;
+    opacity: 0.9;
+    box-shadow: 0px 0px 7px 2px #fff;
   }
   h3 {
     font-size: 42px;

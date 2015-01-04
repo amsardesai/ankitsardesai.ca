@@ -1,5 +1,5 @@
 # jQuery configuration
-jQuery.fx.interval = 51
+jQuery.fx.interval = 29
 
 class ParallaxBlur
   # How far down the page user has to go for element to disappear
@@ -10,7 +10,7 @@ class ParallaxBlur
   # How much delay there should be between updateOpacity calls
   THROTTLE:
     TOUCH: 131
-    REGULAR: 89
+    REGULAR: 67
 
   # UI hash
   ui:
@@ -57,13 +57,12 @@ class BackgroundImageSwitcher
     (name: 'spadina', position: 'bottom')
     (name: 'kingwest', position: 'bottom')
     (name: 'fashionhouse', position: 'center')
-    (name: 'ctv', position: 'top')
+    (name: 'ctv', position: 'top left')
     (name: 'ago', position: 'bottom')
     (name: 'uc', position: 'center')
     (name: 'medsci', position: 'center')
     (name: 'whitneyblock', position: 'center')
     (name: 'baystnorth', position: 'top')
-
   ]
 
   # UI hash
@@ -94,22 +93,21 @@ class BackgroundImageSwitcher
   # Inserts an element representing the next image
   preloadNextImage: ->
     nextBackground = @getNextImage()
-    newMainBackground = $("<div class='background next'>").css
-        opacity: 0
-        'background-image': "url('/images/#{nextBackground.name}.jpg')"
-        'background-position': nextBackground.position
-    newBlurBackground = $("<div class='background next'>").css
-        opacity: 0
-        'background-image': "url('/images/#{nextBackground.name}-blurred.jpg')"
-        'background-position': nextBackground.position
-    @ui.mainBackground().append newMainBackground
-    @ui.blurBackground().append newBlurBackground
+    @ui.mainBackground().append $("<div class='background next'>").css
+      opacity: 0
+      'background-image': "url('/images/#{nextBackground.name}.jpg')"
+      'background-position': nextBackground.position
+    @ui.blurBackground().append $("<div class='background next'>").css
+      opacity: 0
+      'background-image': "url('/images/#{nextBackground.name}-blurred.jpg')"
+      'background-position': nextBackground.position
 
   # Animates to the next image in cache
   animateToNextImage: ->
-    postAnimation = _.after 2, => @postAnimation()
-    @ui.mainBackground().find('.background.next').animate (opacity: 1), 2000, postAnimation
-    @ui.blurBackground().find('.background.next').animate (opacity: 1), 2000, postAnimation
+    # postAnimation = _.after 2, => @postAnimation()
+    @ui.mainBackground().find('.background.next').css(opacity: 1)
+    @ui.blurBackground().find('.background.next').css(opacity: 1)
+    _.delay ( => @postAnimation() ), 2000
 
   # After animation has been performed
   postAnimation: ->
