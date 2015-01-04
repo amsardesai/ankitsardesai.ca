@@ -19,7 +19,7 @@ port = process.env.PORT or 3000
 env = app.get("env")
 
 # Database connections
-databaseUrl = process.env.MONGOHQ_URL || process.env.DEV_DB_URL
+databaseUrl = process.env.DB_URL
 collections = ['backgrounds']
 db = mongojs.connect databaseUrl, collections
 

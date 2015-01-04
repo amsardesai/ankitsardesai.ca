@@ -1,9 +1,3 @@
-mixin position-option(code, name, selected)
-  if (selected === code)
-    option(value=code,selected="selected")= name
-  else
-    option(value=code)= name
-
 !!! 5
 html
   head
@@ -17,12 +11,12 @@ html
     .container
       h1 Admin Panel
 
+      h3 Background Images
       .panel.panel-default
-        .panel-heading Background Images
         table.table.table-striped
           thead
             tr
-              th name
+              th Name
               th Original
               th Blurred
               th Operation
@@ -31,42 +25,33 @@ html
               tr
                 th= background.name
                 td
-                  a(href=background.original_url)
+                  a(href=background.original_url,target="_blank")
                     img(width="200",height="200",src=background.original_url)
                 td
-                  a(href=background.blurred_url)
+                  a(href=background.blurred_url,target="_blank")
                     img(width="200",height="200",src=background.blurred_url)
                 td
-                  form.form-horizontal(action="/admin/background-image/#{background.id}/update",method="POST")
+                  form.form-horizontal(action="/db/backgrounds/#{background.name}/update",method="POST")
                     .form-group
-                      label.col-sm-2.control-label(for="position-#{background.id}") Position
+                      label.col-sm-2.control-label Position:
                       .col-sm-10
-                        select.form-control(id="position-#{background.id}",name="position",value=background.position)
-                          +position-option('top', 'Top', background.position)
-                          +position-option('center', 'Center', background.position)
-                          +position-option('bottom', 'Bottom', background.position)
-                    .form-group
-                      input.form-control(type="submit",value="Update")
-                  form.form-horizontal(action="/admin/background-image/#{background.id}/delete",method="POST")
-                    .form-group
-                      input.form-control(type="submit",value="Delete")
+                        input.form-control(type="text",name="position",value=background.position)
+                    .form-group.text-center
+                      button.btn.btn-default(type="submit") Update
+                  form.form-horizontal(action="/db/backgrounds/#{background.name}/delete",method="POST")
+                    .form-group.text-center
+                      button.btn.btn-default(type="submit") Delete
         .panel-body
-          form.form-horizontal
+          form.form-horizontal(action="/db/backgrounds/create",method="POST")
             .form-group
-              label.col-sm-2.control-label(for="name")
+              label.col-sm-2.control-label(for="name") Name:
               .col-sm-10
-                input.form-control#name(type='text',placeholder="Name")
+                input.form-control#name(type='text',name="name",placeholder="Name")
             .form-group
-              label.col-sm-2.control-label(for="original_url")
+              label.col-sm-2.control-label(for="position") Position:
               .col-sm-10
-                input.form-control#original_url(type='text',placeholder="Original URL")
-            .form-group
-              label.col-sm-2.control-label(for="blurred_url")
-              .col-sm-10
-                input.form-control#blurred_url(type='text',placeholder="Blurred URL")
-            .form-group
-              label.col-sm-2.control-label(for="position")
-              .col-sm-10
-                input.form-control#position(type='text',placeholder="Blurred URL")
+                input.form-control#position(type='text',name="position",placeholder="Position")
+            .form-group.text-center
+              button.btn.btn-default(type="submit") Add Photo
 
 
