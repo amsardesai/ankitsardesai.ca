@@ -10,8 +10,8 @@ module.exports = (app, express, db) ->
   app.get '/', (req, res) ->
     db.backgrounds.findOne
       random: $near: [Math.random(), 0]
-    , (err, backgrounds) ->
-      res.render 'index', { backgrounds }
+    , (err, background) ->
+      res.render 'index', { background }
 
   # Resume
   app.get '/resume', (req, res) -> res.sendfile "#{__dirname}/public/resume.pdf"
@@ -28,25 +28,20 @@ module.exports = (app, express, db) ->
 
   # Find a random background image
   app.get '/db/backgrounds/random', (req, res) ->
-    callback = (err, docs) ->
+    db.backgrounds.findOne
+      random: $near: [Math.random(), 0]
+      name: $not: $in: [req.query.previous]
+    , (err, docs) ->
       if err
-        console.log err
-      else
-        res.json
-          name: docs.name
-          original_url: docs.original_url
-          blurred_url: docs.blurred_url
-          position: docs.position
+        console.log "Random function error: ", err
+        res.json err: true
+        return
 
-    if req.query.previous?
-      db.backgrounds.findOne
-        random: $near: [Math.random(), 0]
-        name: $not: $in: [req.query.previous]
-      , callback
-    else
-      db.backgrounds.findOne
-        random: $near: [Math.random(), 0]
-      , callback
+      res.json
+        name: docs.name
+        original_url: docs.original_url
+        blurred_url: docs.blurred_url
+        position: docs.position
 
   # Background image operations
   app.post '/db/backgrounds/create', auth, (req, res) ->

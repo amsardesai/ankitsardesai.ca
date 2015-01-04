@@ -13,11 +13,11 @@ html
     != js('bootstrap')
     != js('modernizr')
   body
-    .backgrounds
+    .backgrounds(data-bg-initial=background.name)
       .main
-        .background
+        .background(style="background-image:url('#{background.original_url}');background-position:#{background.position};")
       .blur
-        .background
+        .background(style="background-image:url('#{background.blurred_url}');background-position:#{background.position};")
     section#top
       .center-container
         .main-box
