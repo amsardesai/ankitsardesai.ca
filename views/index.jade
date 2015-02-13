@@ -16,8 +16,6 @@ html
     .backgrounds(data-bg-initial=background.name)
       .main
         .background(style="background-image:url('#{background.original_url}');background-position:#{background.position};")
-      .blur
-        .background(style="background-image:url('#{background.blurred_url}');background-position:#{background.position};")
     section#top
       .center-container
         .main-box
@@ -31,52 +29,8 @@ html
             a.fa.fa-file-pdf-o(href="/resume",title="My R&eacute;sum&eacute;",data-ga-label="Resume")
             a.fa.fa-envelope(href="mailto:me@ankitsardesai.ca",title="me at ankitsardesai dot ca",data-ga-label="Email")
             a.linkedin.fa.fa-linkedin(href="https://www.linkedin.com/in/amsardesai",title="Ankit Sardesai",data-ga-label="LinkedIn")
-      a.arrow-down.fa.fa-chevron-down(href="#")
-
-    section#projects
-      .container
-        h1 My Past Work
-        hr
-        .intro Here are some things I have worked on in the past:
-        .projects
-          .left
-            a(href='https://github.com/amsardesai/middleman-protect-emails',data-ga-label='Project: middleman-protect-emails')
-              .heading middleman-protect-emails
-              .description Middleman extension for email link protection and encryption
-              .language ruby
-            a(href='https://github.com/amsardesai/uwaterlooapi',data-ga-label='Project: uwaterlooapi')
-              .heading uwaterlooapi
-              .description RubyGem for interfacing with the University of Waterloo API
-              .language ruby
-            a(href='http://2012-site.ankitsardesai.ca/',data-ga-label='Project: ankitsardesai.ca in 2012')
-              .heading ankitsardesai.ca @ 2012
-              .description ankitsardesai.ca as it was in 2012
-              .language html5
-            a(href='http://2012-site.ankitsardesai.ca/css3transform/',data-ga-label='Project: CSS3 Transform')
-              .heading CSS3 Transform
-              .description Visual tool for the CSS3 transform function
-              .language css3
-          .right
-            a(href='http://2014-site.ankitsardesai.ca',data-ga-label='Project: ankitsardesai.ca in 2014')
-              .heading ankitsardesai.ca @ 2014
-              .description ankitsardesai.ca as it was in 2014
-              .language expressjs
-            a(href='http://goansinamerica.com',data-ga-label='Project: Goan Convention 2014')
-              .heading Goan Convention 2014
-              .description The official website of the 2014 Goan Convention
-              .language expressjs
-            a(href='http://mapofgoans.ankitsardesai.ca',data-ga-label='Project: Map of Goans')
-              .heading Map of Goans
-              .description A map listing every Goan in North America
-              .language expressjs &amp; mongo
-            a(href='http://2012-site.ankitsardesai.ca/uw-roomschedule/',data-ga-label='Project: UW RoomSchedule')
-              .heading UW RoomSchedule
-              .description Retrieves the class/tutorial schedule for individual rooms throughout the University of Waterloo campus
-              .language html5
-          .clearfix
-        .outro You can see everything I've worked on on <a href='https://github.com/amsardesai'>GitHub</a>
-
-      .copyright &copy; Ankit Sardesai 2015
+      a.show-photos.fa.fa-camera(href="#")
+        span.effect
 
     script.
       !function(a,b,c,d,e,f,g){a.GoogleAnalyticsObject=e,a[e]=a[e]||function(){(a[e].q=a[e].q||[]).push(arguments)},a[e].l=1*new Date,f=b.createElement(c),g=b.getElementsByTagName(c)[0],f.async=1,f.src=d,g.parentNode.insertBefore(f,g)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-37589348-3","auto"),ga("send","pageview");
