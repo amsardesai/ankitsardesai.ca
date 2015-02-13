@@ -5,3 +5,4 @@ data
 psd/*
 
 *.psd
+npm-debug.log

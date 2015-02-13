@@ -12,7 +12,7 @@ mongojs =      require 'mongojs'
 routes =       require './routes'
 
 # Initialize Express
-app = express()
+exports.app = app = express()
 
 # Determine port and environment
 port = process.env.PORT or 3000
