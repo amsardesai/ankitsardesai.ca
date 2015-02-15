@@ -68,7 +68,7 @@ footer {
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  height: 100%;
   opacity: 1;
   &.next {
     opacity: 0;
@@ -100,6 +100,11 @@ footer {
     .location {
       float: right;
       width: 50%;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .photo-details {
+      display: none;
     }
   }
 }
@@ -173,13 +178,13 @@ html.touch {
       transform-origin: 34px 34px;
       animation: loading-rotating 8s linear infinite;
     }
-    &:hover, &.enabled {
+    .no-touch &:hover, &.enabled {
       color: #000;
       background-color: #fff;
     }
     &.enabled {
       opacity: 1;
-      box-shadow: 0px 0px 20px 15px #fff;
+      box-shadow: 0px 0px 15px 15px #fff;
     }
   }
   .center-container {
@@ -230,11 +235,24 @@ html.touch {
     }
   }
   @media screen and (max-width: 500px) {
+    .show-photos {
+      width: 50px;
+      height: 50px;
+      margin-left: -25px;
+      line-height: 50px;
+      font-size: 23px;
+      &:after {
+        width: 48px;
+        height: 48px;
+        transform-origin: 24px 24px;
+      }
+    }
     .main-box {
       width: 100%;
       margin: 0;
       max-width: 500px;
       border-radius: 0;
+      padding: 10px;
     }
     h3 {
       font-size: 32px;

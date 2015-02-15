@@ -73,7 +73,6 @@ class SpecialEffects
   init: ->
     unless Modernizr.touch
       @ui.socialIcons().tooltip(placement: 'bottom', html: 'true')
-      @ui.showPhotos().tooltip(placement: 'top', html: 'true')
 
 class GoogleAnalytics
   # Initialization
