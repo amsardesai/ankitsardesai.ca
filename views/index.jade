@@ -16,9 +16,14 @@ html
     .backgrounds(data-bg-initial=background.name)
       .main
         .background(style="background-image:url('#{background.original_url}');background-position:#{background.position};")
-          .photo-details
-            .name= background.photo_name
-            .location= background.location
+        .photo-details
+          .left= background.photo_name
+          .right= background.location
+    script#tpl-background(type="text/template")
+      .background.next(style!="background-image:url('<%= original_url %>');background-position:<%= position %>;")
+      .photo-details.next
+        .left <%= photo_name %>
+        .right <%= location %>
     section#top
       .center-container
         .main-box

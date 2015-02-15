@@ -6,29 +6,35 @@ class PhotoViewer
     showPhotos:  _.memoize => $('.show-photos')
     backgrounds: _.memoize => $('.backgrounds')
 
-  # Whether photo viewer is enabled
-  enabled: false
-
   # Initialization
   init: ->
-    @ui.showPhotos().click =>
-      @enabled = !@enabled
+    @ui.showPhotos().on "#{if Modernizr.touch then 'touchstart' else ''} click", (e) =>
+      e.preventDefault()
+      e.stopPropagation()
+      @toggleEnable()
       @reloadState()
-
 
     @reloadState()
 
   # Reload screen state depending on instance variables
   reloadState: ->
-    @ui.showPhotos().toggleClass('enabled', @enabled)
-    @ui.mainBox().toggleClass('hide-box', @enabled)
-    @ui.backgrounds().toggleClass('show-details', @enabled)
+    @ui.showPhotos().toggleClass('enabled', @enabled())
+    @ui.mainBox().toggleClass('hide-box', @enabled())
+    @ui.backgrounds().toggleClass('show-details', @enabled())
+
+  # Toggle photo viewer state
+  toggleEnable: ->
+    @_enabled = if @_enabled? then !@_enabled else true
+
+  # Get photo viewer state
+  enabled: -> @_enabled ? false
 
 class BackgroundImageSwitcher
   # UI hash
   ui:
     backgrounds:    _.memoize => $('.backgrounds')
     mainBackground: _.memoize => $('.backgrounds .main')
+    bgTemplate:     _.memoize => _.template($('#tpl-background').html())
 
   # Get the next image
   getNextImage: (callback) ->
@@ -45,19 +51,18 @@ class BackgroundImageSwitcher
   preloadNextImage: ->
     @getNextImage (nextBackground) =>
       @currentImage = nextBackground.name
-      nextImage = $("<div class='background next'>").css
-        'background-image': "url('#{nextBackground.original_url}')"
-        'background-position': nextBackground.position
-      photoDetails = $("<div class='photo-details'>")
-        .append($("<div class='name'>").text(nextBackground.photo_name))
-        .append($("<div class='location'>").text(nextBackground.location))
-      nextImage.append photoDetails
-      @ui.mainBackground().append nextImage
+      template = @ui.bgTemplate()(nextBackground)
+      @ui.mainBackground().append template
 
   # Animates to the next image in cache
   animateToNextImage: ->
     previousBackground = @ui.backgrounds().find('.background:not(.next)')
-    @ui.backgrounds().find('.background.next').removeClass('next')
+    previousDetails = @ui.backgrounds().find('.photo-details:not(.next)')
+    @ui.backgrounds().find('.next').removeClass('next')
+    previousDetails.addClass('previous')
+    _.delay ( =>
+      previousDetails.remove()
+    ), 300
     _.delay ( =>
       previousBackground.remove()
       @preloadNextImage()
