@@ -40,7 +40,6 @@ module.exports = (app, express, db) ->
       res.json
         name: docs.name
         original_url: docs.original_url
-        blurred_url: docs.blurred_url
         position: docs.position
         photo_name: docs.photo_name
         location: docs.location
@@ -49,19 +48,25 @@ module.exports = (app, express, db) ->
   app.post '/db/backgrounds/create', auth, (req, res) ->
     console.log "CREATING BACKGROUND WITH:"
     console.log "  NAME: #{req.body.name}"
+    console.log "  PHOTO NAME: #{req.body.photo_name}"
+    console.log "  LOCATION: #{req.body.location}"
     console.log "  POSITION: #{req.body.position}"
     db.backgrounds.insert
       name: req.body.name
-      original_url: "http://cdn.ankitsardesai.ca/backgrounds/#{req.body.name}.jpg"
-      blurred_url: "http://cdn.ankitsardesai.ca/backgrounds/#{req.body.name}-blurred.jpg"
+      photo_name: req.body.photo_name
+      location: req.body.location
       position: req.body.position
+      original_url: "http://cdn.ankitsardesai.ca/backgrounds/#{req.body.name}.jpg"
       random: [Math.random(), 0]
     , (err) ->
       console.log err if err
       res.redirect '/admin'
 
   app.post '/db/backgrounds/:name/update', auth, (req, res) ->
-    console.log "UPDATING BACKGROUND #{req.params.name} WITH POSITION #{req.body.position}"
+    console.log "UPDATING BACKGROUND #{req.params.name}:"
+    console.log "  PHOTO NAME: #{req.params.photo_name}"
+    console.log "  LOCATION: #{req.params.location}"
+    console.log "  POSITION: #{req.params.position}"
     db.backgrounds.update
       name: req.params.name
     ,
