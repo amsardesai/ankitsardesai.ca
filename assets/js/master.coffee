@@ -32,9 +32,8 @@ class PhotoViewer
 class BackgroundImageSwitcher
   # UI hash
   ui:
-    backgrounds:    _.memoize => $('.backgrounds')
-    mainBackground: _.memoize => $('.backgrounds .main')
-    bgTemplate:     _.memoize => _.template($('#tpl-background').html())
+    backgrounds: _.memoize => $('.backgrounds')
+    bgTemplate:  _.memoize => _.template($('#tpl-background').html())
 
   # Get the next image
   getNextImage: (callback) ->
@@ -52,7 +51,7 @@ class BackgroundImageSwitcher
     @getNextImage (nextBackground) =>
       @currentImage = nextBackground.name
       template = @ui.bgTemplate()(nextBackground)
-      @ui.mainBackground().append template
+      @ui.backgrounds().append template
 
   # Animates to the next image in cache
   animateToNextImage: ->

@@ -27,7 +27,6 @@ li {
 
 html {
   height: 100%;
-  overflow: visible;
 }
 
 body {
@@ -35,14 +34,9 @@ body {
   font-size: 17px;
   font-family: "Raleway", sans-serif;
   height: 100%;
-  overflow: visible;
-  -webkit-overflow-scrolling: touch;
-}
-
-section {
-  .container {
-    max-width: 720px;
-  }
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 .clearfix {
@@ -52,30 +46,36 @@ section {
 section {
   position: relative;
   width: 100%;
+  .container {
+    max-width: 720px;
+  }
 }
 
-footer {
-  position: relative;
-  width: 100%;
-}
-
-.main .background {
-  transition: opacity 2s;
-  transform: translateZ(0); // Enables GPU acceleration
-  background-repeat: no-repeat;
-  background-size: cover;
+.backgrounds {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 100%;
-  opacity: 1;
-  z-index: 1;
-  &.next {
-    opacity: 0;
-    z-index: 3;
+  .background {
+    transition: opacity 2s;
+    transform: translateZ(0); // Enables GPU acceleration
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    opacity: 1;
+    z-index: 1;
+    &.next {
+      opacity: 0;
+      z-index: 3;
+    }
   }
 }
+
 
 .photo-details {
   text-transform: lowercase;
@@ -128,23 +128,23 @@ footer {
 }
 
 html.touch {
-  .main .background {
+  .backgrounds .background {
     bottom: auto;
     height: 1000px;
     min-height: 100%;
   }
   @media screen and (max-width: 420px) {
-    .main .background {
+    .backgrounds .background {
       height: 700px;
     }
   }
   @media screen and (max-width: 380px) {
-    .main .background {
+    .backgrounds .background {
       height: 630px;
     }
   }
   @media screen and (max-width: 320px) {
-    .main .background {
+    .backgrounds .background {
       height: 530px;
     }
   }
@@ -156,6 +156,7 @@ html.touch {
   display: table;
   text-align: center;
   position: relative;
+  overflow: hidden;
   z-index: 6;
   .show-photos {
     text-align: center;
