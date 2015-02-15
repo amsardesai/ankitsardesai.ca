@@ -82,10 +82,10 @@ class SpecialEffects
 class GoogleAnalytics
   # Initialization
   init: ->
-    $('#top .icons a').click (e) =>
+    $('#top .icons a').on 'click', (e) =>
       @sendGA 'button', 'click', $(e.currentTarget).data('ga-label')
 
-    $('.show-photos').click =>
+    $('.show-photos').on 'touchstart click',  =>
       @sendGA 'button', 'click', 'Show Photo'
 
   # Send a GA event
