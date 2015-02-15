@@ -1,15 +1,28 @@
-# jQuery configuration
-jQuery.fx.interval = 29
 
 class PhotoViewer
   # UI hash
   ui:
-    showPhotos: _.memoize => $('.show-photos')
+    mainBox:     _.memoize => $('.main-box')
+    showPhotos:  _.memoize => $('.show-photos')
+    backgrounds: _.memoize => $('.backgrounds')
+
+  # Whether photo viewer is enabled
+  enabled: false
 
   # Initialization
   init: ->
+    @ui.showPhotos().click =>
+      @enabled = !@enabled
+      @reloadState()
 
 
+    @reloadState()
+
+  # Reload screen state depending on instance variables
+  reloadState: ->
+    @ui.showPhotos().toggleClass('enabled', @enabled)
+    @ui.mainBox().toggleClass('hide-box', @enabled)
+    @ui.backgrounds().toggleClass('show-details', @enabled)
 
 class BackgroundImageSwitcher
   # UI hash
@@ -32,9 +45,14 @@ class BackgroundImageSwitcher
   preloadNextImage: ->
     @getNextImage (nextBackground) =>
       @currentImage = nextBackground.name
-      @ui.mainBackground().append $("<div class='background next'>").css
+      nextImage = $("<div class='background next'>").css
         'background-image': "url('#{nextBackground.original_url}')"
         'background-position': nextBackground.position
+      photoDetails = $("<div class='photo-details'>")
+        .append($("<div class='name'>").text(nextBackground.photo_name))
+        .append($("<div class='location'>").text(nextBackground.location))
+      nextImage.append photoDetails
+      @ui.mainBackground().append nextImage
 
   # Animates to the next image in cache
   animateToNextImage: ->
@@ -49,10 +67,13 @@ class SpecialEffects
   # UI Hash
   ui:
     socialIcons: _.memoize => $('#top .icons a')
+    showPhotos:  _.memoize => $('.show-photos')
 
   # Initialization
   init: ->
-    @ui.socialIcons().tooltip(placement: 'bottom', html: 'true') unless Modernizr.touch
+    unless Modernizr.touch
+      @ui.socialIcons().tooltip(placement: 'bottom', html: 'true')
+      @ui.showPhotos().tooltip(placement: 'top', html: 'true')
 
 class GoogleAnalytics
   # Initialization
@@ -60,8 +81,8 @@ class GoogleAnalytics
     $('#top .icons a').click (e) =>
       @sendGA 'button', 'click', $(e.currentTarget).data('ga-label')
 
-    $('#top .arrow-down').click =>
-      @sendGA 'button', 'click', 'Down Arrow'
+    $('.show-photos').click =>
+      @sendGA 'button', 'click', 'Show Photo'
 
   # Send a GA event
   sendGA: (category, action, label) ->

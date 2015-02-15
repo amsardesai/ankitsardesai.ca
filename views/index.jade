@@ -16,6 +16,9 @@ html
     .backgrounds(data-bg-initial=background.name)
       .main
         .background(style="background-image:url('#{background.original_url}');background-position:#{background.position};")
+          .photo-details
+            .name= background.photo_name
+            .location= background.location
     section#top
       .center-container
         .main-box
@@ -29,8 +32,7 @@ html
             a.fa.fa-file-pdf-o(href="/resume",title="My R&eacute;sum&eacute;",data-ga-label="Resume")
             a.fa.fa-envelope(href="mailto:me@ankitsardesai.ca",title="me at ankitsardesai dot ca",data-ga-label="Email")
             a.linkedin.fa.fa-linkedin(href="https://www.linkedin.com/in/amsardesai",title="Ankit Sardesai",data-ga-label="LinkedIn")
-      a.show-photos.fa.fa-camera(href="#")
-        span.effect
+      a.show-photos.fa.fa-camera(href="#",title="Photo Details")
 
     script.
       !function(a,b,c,d,e,f,g){a.GoogleAnalyticsObject=e,a[e]=a[e]||function(){(a[e].q=a[e].q||[]).push(arguments)},a[e].l=1*new Date,f=b.createElement(c),g=b.getElementsByTagName(c)[0],f.async=1,f.src=d,g.parentNode.insertBefore(f,g)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-37589348-3","auto"),ga("send","pageview");

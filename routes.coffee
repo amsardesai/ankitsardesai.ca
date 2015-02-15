@@ -42,6 +42,8 @@ module.exports = (app, express, db) ->
         original_url: docs.original_url
         blurred_url: docs.blurred_url
         position: docs.position
+        photo_name: docs.photo_name
+        location: docs.location
 
   # Background image operations
   app.post '/db/backgrounds/create', auth, (req, res) ->
@@ -60,7 +62,16 @@ module.exports = (app, express, db) ->
 
   app.post '/db/backgrounds/:name/update', auth, (req, res) ->
     console.log "UPDATING BACKGROUND #{req.params.name} WITH POSITION #{req.body.position}"
-    db.backgrounds.update (name: req.params.name), ($set: (position: req.body.position)), (insert: false), (err) ->
+    db.backgrounds.update
+      name: req.params.name
+    ,
+      $set:
+        photo_name: req.body.photo_name
+        location: req.body.location
+        position: req.body.position
+    ,
+      insert: false
+    , (err) ->
       console.log err if err
       res.redirect '/admin'
 
