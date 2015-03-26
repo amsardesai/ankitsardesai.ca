@@ -2,26 +2,26 @@
 
 Source code for [my website](http://ankitsardesai.ca).
 
-Built using ExpressJS (with Jade, LESS, and CoffeeScript).
-
-Deployed using Heroku.
+* Built using the **ExpressJS** framework
+* **Jade**/**LESS**/**CoffeeScript** front-end
+* Using **Flightplan** for automated deployment
+* Deployed with **Amazon EC2**
+* Photographs stored in **Amazon S3**
+* Content delivery using **CloudFlare**
 
 ### Installing
 
-To create an instance of ankitsardesai.ca on your computer, clone this repository and install all dependencies. Ensure [NodeJS and NPM](http://nodejs.org) are installed on your computer.
+To create an instance of this site on your computer:
 
-	git clone https://github.com/amsardesai/ankitsardesai.ca.git
-	cd ankitsardesai.ca/
-	npm install
+    git clone https://github.com/amsardesai/ankitsardesai.ca
+    cd ankitsardesai.ca/
+    npm install
 
-### Running
+To run it:
 
-To run an instance of ankitsardesai.ca on your computer, make sure the CoffeeScript CLI is installed globally on your computer.
+    sudo npm install -g coffee-script
+    coffee app.coffee
 
-	sudo npm install -g coffee-script
+### Copyright
 
-Then, run the application.
-
-  npm start
-
-&copy; Ankit Sardesai 2013
+&copy; Ankit Sardesai 2015
