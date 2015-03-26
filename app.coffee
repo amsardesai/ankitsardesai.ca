@@ -4,9 +4,7 @@ connect =      require 'connect-assets'
 autoprefixer = require 'express-autoprefixer'
 
 # Database
-fs =           require 'fs'
-multiparty =   require 'multiparty'
-mongojs =      require 'mongojs'
+sqlite3 =      require('sqlite3').verbose()
 
 # Routes file
 routes =       require './routes'
@@ -16,12 +14,11 @@ exports.app = app = express()
 
 # Determine port and environment
 port = process.env.PORT or 3000
-env = app.get("env")
+env = app.get 'env'
 
 # Database connections
 databaseUrl = process.env.DB_URL
-collections = ['backgrounds']
-db = mongojs.connect databaseUrl, collections
+db = new sqlite3.Database(databaseUrl)
 
 # all environments
 app.configure ->

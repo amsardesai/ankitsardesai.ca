@@ -1,8 +1,9 @@
 .DS_Store
 node_modules
-data
+db
 
 psd/*
 
 *.psd
 npm-debug.log
+

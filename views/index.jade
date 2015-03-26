@@ -14,12 +14,12 @@ html
     != js('modernizr')
   body
     .backgrounds(data-bg-initial=background.name)
-      .background(style="background-image:url('#{background.original_url}');background-position:#{background.position};")
+      .background(style="background-image:url('#{background.url}');background-position:#{background.position};")
       .photo-details
         .left= background.photo_name
         .right= background.location
     script#tpl-background(type="text/template")
-      .background.next(style!="background-image:url('<%= original_url %>');background-position:<%= position %>;")
+      .background.next(style!="background-image:url('<%= url %>');background-position:<%= position %>;")
       .photo-details.next
         .left <%= photo_name %>
         .right <%= location %>

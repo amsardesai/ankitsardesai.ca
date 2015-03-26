@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "http://github.com/amsardesai/ankitsardesai.ca.git"
+    "url": "https://github.com/amsardesai/ankitsardesai.ca"
   },
   "private": true,
   "dependencies": {
@@ -16,8 +16,7 @@
     "express-autoprefixer": "~2.1.1",
     "jade": "0.35.0",
     "less": "1.7.5",
-    "mongojs": "^0.18.0",
-    "multiparty": "^4.1.0"
+    "sqlite3": "^3.0.5"
   },
   "engines": {
     "node": "0.10.17",
@@ -25,5 +24,8 @@
   },
   "scripts": {
     "start": "coffee app.coffee"
+  },
+  "devDependencies": {
+    "flightplan": "^0.6.1"
   }
 }
