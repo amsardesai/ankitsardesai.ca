@@ -5,9 +5,10 @@ Source code for [my website](http://ankitsardesai.ca).
 * Built using the **ExpressJS** framework
 * **Jade**/**LESS**/**CoffeeScript** front-end
 * Using **Flightplan** for automated deployment
-* Deployed with **Amazon EC2**
-* Photographs stored in **Amazon S3**
+* Deployed on **Amazon EC2** instances
+* Photos stored in **Amazon S3**
 * Content delivery using **CloudFlare**
+* Full **HTTPS** support (because why not?)
 
 ### Installing
 
