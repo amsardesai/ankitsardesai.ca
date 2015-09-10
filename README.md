@@ -1,6 +1,6 @@
 # ankitsardesai.ca
 
-Source code for [my website](http://ankitsardesai.ca).
+Source code for [my website](https://ankitsardesai.ca).
 
 * Built using the **ExpressJS** framework
 * **Jade**/**LESS**/**CoffeeScript** front-end
@@ -20,8 +20,7 @@ To create an instance of this site on your computer:
 
 To run it:
 
-    sudo npm install -g coffee-script
-    coffee app.coffee
+    npm start
 
 ### Copyright
 
