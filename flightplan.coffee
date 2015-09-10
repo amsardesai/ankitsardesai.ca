@@ -11,7 +11,8 @@ plan.target 'production', (
   symlinkLocation: '/var/www/ankitsardesai'
 )
 
-tmpDir = "ankitsardesai-#{new Date().getTime()}"
+timestamp = new Date().getTime()
+tmpDir = "ankitsardesai-#{timestamp}"
 
 # # # # # #
 # SCRIPTS #
@@ -25,8 +26,7 @@ plan.local 'deploy', (transport) ->
   transport.transfer filesToCopy, "/tmp/#{tmpDir}"
 
 plan.remote 'deploy', (transport) ->
-  webRoot = plan.runtime.options.webRoot
-  symlinkLocation = plan.runtime.options.symlinkLocation
+  { webRoot, symlinkLocation } = plan.runtime.options
 
   transport.log 'Moving folder to web root'
   transport.exec "cp -R /tmp/#{tmpDir} #{webRoot}/"
