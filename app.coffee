@@ -1,13 +1,13 @@
 # Base
-express =      require 'express'
-connect =      require 'connect-assets'
+express = require 'express'
+connect = require 'connect-assets'
 autoprefixer = require 'express-autoprefixer'
 
 # Database
-sqlite3 =      require('sqlite3').verbose()
+sqlite3 = require('sqlite3').verbose()
 
 # Routes file
-routes =       require './routes'
+routes = require './routes'
 
 # Initialize Express
 exports.app = app = express()
@@ -17,8 +17,7 @@ port = process.env.PORT or 3000
 env = app.get 'env'
 
 # Database connections
-databaseUrl = process.env.DB_URL
-db = new sqlite3.Database(databaseUrl)
+db = new sqlite3.Database(process.env.DB_URL)
 
 # all environments
 app.configure ->
