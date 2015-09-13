@@ -9,18 +9,23 @@
   },
   "private": true,
   "scripts": {
-    "start": "coffee app.coffee",
+    "start": "coffee app.coffee | bunyan",
     "deploy": "fly deploy:production"
   },
   "dependencies": {
-    "autoprefixer": "^5.2.0",
+    "autoprefixer-core": "^5.2.1",
+    "basic-auth-connect": "^1.0.0",
+    "body-parser": "^1.13.3",
+    "bunyan": "^1.5.1",
     "coffee-script": "^1.10.0",
     "connect-assets": "^5.0.1",
-    "express": "3.3.5",
-    "express-autoprefixer": "^3.3.0",
+    "errorhandler": "^1.4.2",
+    "express": "^4.13.3",
+    "express-bunyan-logger": "^1.1.1",
     "jade": "^1.11.0",
     "less": "^2.5.1",
-    "postcss": "^4.1.16",
+    "method-override": "^2.3.5",
+    "serve-favicon": "^2.3.0",
     "sqlite3": "^3.1.0"
   },
   "devDependencies": {

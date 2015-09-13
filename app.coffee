@@ -1,48 +1,49 @@
-# Base
-express = require 'express'
+# External modules
+bodyParser = require 'body-parser'
+bunyan = require 'bunyan'
+bunyanExpress = require 'express-bunyan-logger'
 connect = require 'connect-assets'
-autoprefixer = require 'express-autoprefixer'
-
-# Database
-sqlite3 = require('sqlite3').verbose()
+errorHandler = require 'errorhandler'
+express = require 'express'
+favicon = require 'serve-favicon'
+methodOverride = require 'method-override'
+sqlite = require 'sqlite3'
 
 # Routes file
 routes = require './routes'
 
-# Initialize Express
-exports.app = app = express()
+# Initialize sqlite3
+sqlite3 = sqlite.verbose()
+
+# Initialize logging
+log = bunyan.createLogger(name: 'ankitsardesai')
+
+# Initialize express
+app = express()
 
 # Determine port and environment
 port = process.env.PORT or 3000
-env = app.get 'env'
+env = process.env.NODE_ENV or 'development'
 
 # Database connections
 db = new sqlite3.Database(process.env.DB_URL)
 
 # all environments
-app.configure ->
-  app.set 'port', port
-  app.set 'views', "#{__dirname}/views"
-  app.set 'view engine', 'jade'
-  app.use express.favicon("#{__dirname}/public/favicon.ico")
-  app.use express.logger('dev')
-  app.use express.bodyParser()
-  app.use express.methodOverride()
-
-  app.use autoprefixer
-    browsers: 'last 5 versions'
-    cascade: false
-  app.use connect()
-
-  app.use express.static("#{__dirname}/public")
-  app.use app.router
+app.set 'views', "#{__dirname}/views"
+app.set 'view engine', 'jade'
+app.use favicon("#{__dirname}/public/favicon.ico")
+app.use bodyParser.urlencoded(extended: true)
+app.use methodOverride()
+app.use bunyanExpress.errorLogger()
+app.use connect()
+app.use express.static("#{__dirname}/public")
 
 # development only
-app.configure "development", ->
-  app.use express.errorHandler()
+if env == 'development'
+  app.use errorHandler((err, str, req) -> log.error(str))
 
-routes app, express, db
+routes app, db, log
 
 app.listen port, ->
-  console.log "ankitsardesai.ca running at port #{port} in #{env} mode"
+  log.info 'ankitsardesai.ca running at port %s in %s mode', port, env
 
