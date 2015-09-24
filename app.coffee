@@ -36,7 +36,6 @@ app.use bodyParser.urlencoded(extended: true)
 app.use methodOverride()
 app.use bunyanExpress.errorLogger()
 app.use connect()
-app.use express.static("#{__dirname}/public")
 
 # development only
 if env == 'development'
