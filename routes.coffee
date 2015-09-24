@@ -86,4 +86,6 @@ module.exports = (app, db, log) ->
         res.redirect '/admin'
 
   # Catch all for 404s
-  app.get '*', (req, res) -> res.status(404).send('404')
+  app.get '*', (req, res) ->
+    log.error 'Invalid URL: %s', req.url
+    res.redirect '/'
