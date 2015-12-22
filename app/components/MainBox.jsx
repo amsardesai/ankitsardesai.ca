@@ -4,6 +4,11 @@ import React from 'react';
 import Tooltip from 'rc-tooltip';
 
 export default function MainBox() {
+  const tooltipProps = {
+    placement: 'bottom',
+    mouseLeaveDelay: 0,
+  };
+
   return (
     <section className="main__top-section">
       <div className="main__center-container">
@@ -13,43 +18,53 @@ export default function MainBox() {
           <h6 className="main__box-subheading"><em>travelling</em> addict</h6>
           <h6 className="main__box-subheading">amateur <em>photographer</em></h6>
           <div className="main__box-icons">
-
-            <Tooltip placement="bottom" overlay={(
+            <Tooltip {...tooltipProps} overlay={(
               <span><strong>Instagram</strong><br />@amsardesai</span>
             )}>
-            <a href="https://www.instagram.com/amsardesai/"><FontAwesome name="instagram" /></a>
+            <a href="https://www.instagram.com/amsardesai/">
+              <FontAwesome name="instagram" />
+            </a>
             </Tooltip>
 
-            <Tooltip placement="bottom" overlay={(
+            <Tooltip {...tooltipProps} overlay={(
               <span><strong>500px</strong><br />@amsardesai</span>
             )}>
-            <a href="https://500px.com/amsardesai"><FontAwesome name="500px" /></a>
+            <a href="https://500px.com/amsardesai">
+              <FontAwesome name="500px" />
+            </a>
             </Tooltip>
 
-            <Tooltip placement="bottom" overlay={(
+            <Tooltip {...tooltipProps} overlay={(
               <span><strong>My Resume</strong><br />Click to view</span>
             )}>
-            <a href="/resume"><FontAwesome name="file-pdf-o" /></a>
+            <a href="/resume/">
+              <FontAwesome name="file-pdf-o" />
+            </a>
             </Tooltip>
 
-            <Tooltip placement="bottom" overlay={(
+            <Tooltip {...tooltipProps} overlay={(
               <span><strong>Email</strong><br />me at ankitsardesai dot ca</span>
             )}>
-            <a href="mailto:me@ankitsardesai.ca"><FontAwesome name="envelope" /></a>
+            <a href="mailto:me@ankitsardesai.ca">
+              <FontAwesome name="envelope" />
+            </a>
             </Tooltip>
 
-            <Tooltip placement="bottom" overlay={(
+            <Tooltip {...tooltipProps} overlay={(
               <span><strong>GitHub</strong><br />@amsardesai</span>
             )}>
-            <a href="https://github.com/amsardesai"><FontAwesome name="github-alt" /></a>
+            <a href="https://github.com/amsardesai">
+              <FontAwesome name="github-alt" />
+            </a>
             </Tooltip>
 
-            <Tooltip placement="bottom" overlay={(
+            <Tooltip {...tooltipProps} overlay={(
               <span><strong>LinkedIn</strong><br />Ankit Sardesai</span>
             )}>
-            <a href="https://www.linkedin.com/in/amsardesai"><FontAwesome name="linkedin" /></a>
+            <a href="https://www.linkedin.com/in/amsardesai">
+              <FontAwesome name="linkedin" />
+            </a>
             </Tooltip>
-
           </div>
         </div>
       </div>

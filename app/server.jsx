@@ -3,6 +3,7 @@
 import compose from 'koa-compose';
 import createLocation from 'history/lib/createLocation';
 import favicon from 'koa-favicon';
+import fs from 'fs';
 import Helmet from 'react-helmet';
 import koa from 'koa';
 import mount from 'koa-mount';
@@ -10,7 +11,6 @@ import path from 'path';
 import React from 'react';
 import sendfile from 'koa-sendfile';
 import serve from 'koa-static';
-import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import { RoutingContext, match } from 'react-router';
@@ -19,7 +19,6 @@ import { RoutingContext, match } from 'react-router';
 import config from '../config';
 import configureStore from './utils/configureStore';
 import getRoutes from './utils/getRoutes';
-import reducers from './reducers/index';
 import * as api from './server/api';
 import { all } from './utils/database';
 
@@ -32,7 +31,8 @@ global.__SERVER__ = true;
 global.__CLIENT__ = false;
 
 // Paths to javascript/css files
-let jsPath, cssPath;
+let jsPath;
+let cssPath;
 
 // Use build directory as assets
 app.use(mount('/assets/', serve(path.join(__dirname, '..', config.files.staticAssets))));
@@ -41,7 +41,7 @@ app.use(mount('/assets/', serve(path.join(__dirname, '..', config.files.staticAs
 app.use(favicon(path.join(__dirname, '..', 'assets', 'favicon.ico')));
 
 // Serve the resume
-app.use(mount('/resume', function* (next) {
+app.use(mount('/resume', function* resumeMiddleware() {
   yield* sendfile.call(this, path.join(__dirname, '..', 'assets', 'resume.pdf'));
 }));
 
@@ -49,18 +49,18 @@ app.use(mount('/resume', function* (next) {
 app.use(compose(Object.keys(api).map(key => api[key])));
 
 // Store output files and directory for client JS and CSS files.
-let jsOutFile = config.files.client.outFile;
-let jsOutDir = config.files.client.out;
-let cssOutFile = 'master.css';
-let cssOutDir = config.files.css.out;
+const jsOutFile = config.files.client.outFile;
+const jsOutDir = config.files.client.out;
+const cssOutFile = 'master.css';
+const cssOutDir = config.files.css.out;
 
 if (process.env.NODE_ENV === 'production') {
   // In production, our node context will be under the root directory, so we need to include the
   // build folder in our path when getting the manifest file.
 
   // Get the manifest files for our CSS and JS files
-  let jsManifest = JSON.parse(fs.readFileSync('./build/static/js/rev-manifest.json', 'utf-8'));
-  let cssManifest = JSON.parse(fs.readFileSync('./build/static/css/rev-manifest.json', 'utf-8'));
+  const jsManifest = JSON.parse(fs.readFileSync('./build/static/js/rev-manifest.json', 'utf-8'));
+  const cssManifest = JSON.parse(fs.readFileSync('./build/static/css/rev-manifest.json', 'utf-8'));
 
   // If we're in production, we want to make the build directory a static directory in /assets
   jsPath = `/assets/${jsOutDir}/${jsManifest[jsOutFile]}`;
@@ -72,8 +72,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Capture all requests
-app.use(function* (next) {
-
+app.use(function* middleware() {
   // Get initial image to display
   const initialBackgrounds = yield all('SELECT name, position FROM backgrounds ' +
                                        'ORDER BY RANDOM() LIMIT 2');
@@ -83,7 +82,6 @@ app.use(function* (next) {
     routes: getRoutes(),
     location: createLocation(this.req.url),
   }, (error, redirectLocation, renderProps) => {
-
     // Invariant checks on route
     if (redirectLocation) {
       this.redirect(redirectLocation.pathname, redirectLocation.search);
@@ -99,10 +97,8 @@ app.use(function* (next) {
       this.status = 404;
       this.body = '404 NOT FOUND';
     } else {
-
       // Catch possible rendering errors
       try {
-
         // Generate initial state
         const initialState = {
           background: {
@@ -143,7 +139,7 @@ app.use(function* (next) {
               <meta charset="utf-8" />
               <meta name="viewport" content="width=device-width,initial-scale=1" />
               ${meta}
-              <title>${title}</title>
+              ${title}
               <link rel="stylesheet" href="${cssPath}" />
               ${link}
             </head>
@@ -153,7 +149,6 @@ app.use(function* (next) {
               <script src="${jsPath}"></script>
             </body>
           </html>`;
-
       } catch (err) {
         this.status = 500;
         if (process.env.NODE_ENV === 'development') {
@@ -164,8 +159,8 @@ app.use(function* (next) {
       }
     }
   });
-})
+});
 
 app.listen(port, () => {
-  console.log(`ankitsardesai server listening on port ${port}`);
+  console.log(`ankitsardesai server listening on port ${port}`); // eslint-disable-line no-console
 });

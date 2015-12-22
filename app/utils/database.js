@@ -8,9 +8,7 @@ const db = new sqlite3.Database(process.env.DB_URL);
  */
 export function get(query, ...values) {
   return new Promise((resolve, reject) => {
-    db.get(query, ...values, (err, row) => {
-      err ? reject(err) : resolve(row);
-    });
+    db.get(query, ...values, (err, row) => err ? reject(err) : resolve(row));
   });
 }
 
@@ -19,8 +17,6 @@ export function get(query, ...values) {
  */
 export function all(query, ...values) {
   return new Promise((resolve, reject) => {
-    db.all(query, ...values, (err, row) => {
-      err ? reject(err) : resolve(row);
-    });
+    db.all(query, ...values, (err, row) => err ? reject(err) : resolve(row));
   });
 }

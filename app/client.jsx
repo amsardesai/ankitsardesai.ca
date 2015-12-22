@@ -8,11 +8,10 @@ import React from 'react';
 import Router from 'react-router';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
-import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
+import { syncReduxAndRouter } from 'redux-simple-router';
 
 // Import internal modules
 import configureStore from './utils/configureStore';
-import reducers from './reducers/index';
 import getRoutes from './utils/getRoutes';
 
 // Global isomorphic constants

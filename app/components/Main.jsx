@@ -66,35 +66,23 @@ const Main = React.createClass({
         position: React.PropTypes.string.isRequired,
 
       }).isRequired,
-
-      /**
-       * The scrollTop of the window
-       */
-      windowScrollTop: React.PropTypes.number,
-
     }),
+
+    /**
+     * The GET_NEW_PHOTO action
+     */
+    getNewPhoto: React.PropTypes.func.isRequired,
   },
 
   componentDidMount() {
     this.backgroundInterval = setInterval(() => {
       const { current, next } = this.props.background;
       this.props.getNewPhoto(current, next);
-    }, 8000);
-
-    this.windowTracker = () => {
-      const scrollTop = window.scrollY;
-      console.log(scrollTop);
-
-
-
-    };
-
-    window.addEventListener('resize', this.windowTracker);
+    }, 10000);
   },
 
   componentWillUnmount() {
     clearInterval(this.backgroundInterval);
-    window.removeEventListener('resize', this.windowTracker);
   },
 
   render() {
@@ -102,13 +90,13 @@ const Main = React.createClass({
 
     return (
       <div>
-        <Helmet title="Main" />
+        <Helmet title="Ankit Sardesai" />
         <div className="main__background-container">
           {prev ? (
-            <Background {...prev} isPrev={true} key={prev.name} />
+            <Background {...prev} isPrev key={prev.name} />
           ) : null}
           <Background {...current} key={current.name} />
-          <Background {...next} isNext={true} key={next.name} />
+          <Background {...next} isNext key={next.name} />
           <div className="main__background main__background--white" />
           <MainBox />
         </div>
