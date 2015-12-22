@@ -98,7 +98,7 @@ gulp.task('build:server', () => {
     .pipe(cache('src:server'))
     .pipe(plumber())
     .pipe(sourcemaps.init())
-    .pipe(babel(config.build.babel))
+    .pipe(babel(config.build.babel.server))
     .pipe(sourcemaps.write('.'))
     .pipe(size({ title: 'Server JS' }))
     .pipe(gulp.dest(config.files.server.out));
@@ -250,7 +250,7 @@ gulp.task('watch', ['clean'], callback => {
 
             // Launch BrowserSync
             browserSync({
-              proxy: `localhost:${config.ports.express}`,
+              proxy: `localhost:${config.ports.koa}`,
               open: false,
             });
 

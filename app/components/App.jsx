@@ -7,14 +7,13 @@ export default React.createClass({
     children: React.PropTypes.node,
   },
 
-
-
+  render() {
+    return (
+      <div>
+        {this.props.children}
+      </div>
+    );
+  },
 
 });
-
-
-
-
-
-
 

@@ -1,0 +1,106 @@
+
+@keyframes box-fade-in
+  0%
+    opacity: 0
+  50%
+    opacity: 0
+  100%
+    opacity: 0.9
+
+@keyframes cover-fade-out
+  0%
+    opacity: 1
+  50%
+    opacity: 1
+  100%
+    opacity: 0
+
+.main__background-container
+  position: relative
+  height: 100vh
+
+.main__background
+  transition: opacity 2s
+  background-attachment: fixed;
+  background-repeat: no-repeat
+  background-size: cover
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  height: 100%
+  opacity: 1
+  z-index: 3
+  &--prev
+    opacity: 0
+    z-index: 2
+  &--next
+    opacity: 0
+    z-index: 1
+  &--white
+    background-color: #fff
+    opacity: 0
+    animation-name: cover-fade-out;
+    animation-duration: 1s
+
+.main__top-section
+  position: absolute
+  top: 0
+  left: 0
+  min-height: 300px
+  height: 100%
+  width: 100%
+  display: table
+  text-align: center
+  overflow: hidden
+  z-index: 6
+
+.main__center-container
+  display: table-cell
+  vertical-align: middle
+
+.main__box
+  max-width: 450px
+  margin: auto
+  background-color: #fff
+  padding: 15px
+  opacity: 0.9
+  border: 5px solid #eee
+  @media screen and (max-width: 500px)
+    width: 100%
+    margin: 0
+    max-width: 500px
+    padding: 10px 0
+    border-width: 5px 0
+
+.main__box-heading
+  font-size: 42px
+  text-transform: uppercase
+  margin: 0
+  padding: 8px 0 12px 0
+  @media screen and (max-width: 500px)
+    font-size: 32px
+
+.main__box-subheading
+  color: #999
+  font-weight: 500
+  font-size: 18px
+  margin: 0
+  padding: 0 0 8px 0
+  em
+    color: #222
+    font-style: initial
+  @media screen and (max-width: 500px)
+    font-size: 16px
+
+.main__box-icons
+  font-size: 30px
+  padding: 15px 0 10px 0
+  .fa
+    text-decoration: none
+    display: inline-block
+    padding: 0 10px
+    color: #000
+    transition: color 0.5s
+  @media screen and (max-width: 500px)
+    font-size: 25px

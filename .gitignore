@@ -1,9 +1,7 @@
 .DS_Store
 node_modules
 db
-
+build
 psd/*
-
 *.psd
 npm-debug.log
-

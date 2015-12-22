@@ -14,7 +14,7 @@ module.exports = {
       outFile: 'bundle.js',
     },
     css: {
-      entry: './assets/css/main.sass',
+      entry: './assets/css/master.sass',
       src: './assets/css/**/**/*.sass',
       out: 'css',
     },
@@ -31,7 +31,12 @@ module.exports = {
 
   build: {
     babel: {
-      presets: ['node5', 'react', 'stage-0'],
+      client: {
+        presets: ['es2015', 'react', 'stage-0'],
+      },
+      server: {
+        presets: ['node5', 'react', 'stage-0'],
+      }
     },
     sass: {
       style: 'compact',

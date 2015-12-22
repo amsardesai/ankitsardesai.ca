@@ -1,7 +1,12 @@
 {
-  "extends": "airbnb/base",
+  "parser": "babel-eslint",
+  "extends": "airbnb",
   "env": {
     "mocha": true
+  },
+  "globals": {
+    "__SERVER__": true,
+    "__CLIENT__": true
   },
   "rules": {
     "new-cap": 0
