@@ -47,5 +47,10 @@ module.exports = {
     },
   },
 
+  analytics: {
+    google: 'UA-37589348-3',
+  },
+
+
 };
 
