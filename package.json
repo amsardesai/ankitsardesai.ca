@@ -14,7 +14,7 @@
     "compile": "gulp compile",
     "deploy": "fly deploy:production",
     "lint": "gulp build:lint",
-    "production": "NODE_ENV=production node build/index",
+    "production": "NODE_ENV=production node build/server",
     "watch": "gulp watch"
   },
   "dependencies": {
