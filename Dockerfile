@@ -15,7 +15,7 @@ RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
 
 # Create and populate database
 ADD database/database.sql /tmp/database.sql
-RUN sqlite3 -init /tmp/database.sql /db/ankitsardesai.db ""
+RUN mkdir -p /db && sqlite3 -init /tmp/database.sql /db/ankitsardesai.db ""
 
 # Copy application code
 WORKDIR /opt/app
@@ -37,5 +37,5 @@ ENV DB_URL /db/ankitsardesai.db
 EXPOSE 5092
 
 # Start the server
-CMD ["node", "build/server.js"]
+CMD ["node", "build/server"]
 
