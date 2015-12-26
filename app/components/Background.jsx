@@ -9,9 +9,11 @@ export default function Background({ name, position, isNext, isPrev }) {
   });
 
   return (
-    <div className={classes} style={{
-      backgroundImage: `url('//cdn.ankitsardesai.ca/backgrounds/${name}.jpg')`,
-      backgroundPosition: position,
-    }} />
+    <div className={classes}
+      style={{
+        backgroundImage: `url('//cdn.ankitsardesai.ca/backgrounds/${name}.jpg')`,
+        backgroundPosition: position,
+      }}
+    />
   );
 }

@@ -7,7 +7,7 @@ function createAnalyticsEventSender(service) {
   return function sendAnalyticsEvent() {
     if (!window || !window.ga) return;
     window.ga('send', 'event', 'button', 'click', service);
-  }
+  };
 }
 
 export default function MainBox() {
@@ -26,56 +26,62 @@ export default function MainBox() {
           <h6 className="main__box-subheading">amateur <em>photographer</em></h6>
           <div className="main__box-icons">
 
-            <Tooltip {...tooltipProps} overlay={(
-              <span><strong>Instagram</strong><br />@amsardesai</span>
-            )}>
+            <Tooltip {...tooltipProps}
+              overlay={<span><strong>Instagram</strong><br />@amsardesai</span>}
+            >
             <a href="https://www.instagram.com/amsardesai/"
-              onClick={createAnalyticsEventSender('Instagram')}>
+              onClick={createAnalyticsEventSender('Instagram')}
+            >
               <FontAwesome name="instagram" />
             </a>
             </Tooltip>
 
-            <Tooltip {...tooltipProps} overlay={(
-              <span><strong>500px</strong><br />@amsardesai</span>
-            )}>
+            <Tooltip {...tooltipProps}
+              overlay={<span><strong>500px</strong><br />@amsardesai</span>}
+            >
             <a href="https://500px.com/amsardesai"
-              onClick={createAnalyticsEventSender('500px')}>
+              onClick={createAnalyticsEventSender('500px')}
+            >
               <FontAwesome name="500px" />
             </a>
             </Tooltip>
 
-            <Tooltip {...tooltipProps} overlay={(
-              <span><strong>My Resume</strong><br />Click to view</span>
-            )}>
+            <Tooltip {...tooltipProps}
+              overlay={<span><strong>My Resume</strong><br />Click to view</span>}
+            >
             <a href="/resume/"
-              onClick={createAnalyticsEventSender('Resume')}>
+              onClick={createAnalyticsEventSender('Resume')}
+            >
               <FontAwesome name="file-pdf-o" />
             </a>
             </Tooltip>
 
-            <Tooltip {...tooltipProps} overlay={(
-              <span><strong>Email</strong><br />me at ankitsardesai dot ca</span>
-            )}>
+            <Tooltip {...tooltipProps}
+              overlay={<span><strong>Email</strong><br />me at ankitsardesai dot ca</span>}
+            >
             <a href="mailto:me@ankitsardesai.ca"
-              onClick={createAnalyticsEventSender('Email')}>
+              onClick={createAnalyticsEventSender('Email')}
+            >
               <FontAwesome name="envelope" />
             </a>
             </Tooltip>
 
-            <Tooltip {...tooltipProps} overlay={(
-              <span><strong>GitHub</strong><br />@amsardesai</span>
-            )}>
+            <Tooltip {...tooltipProps}
+              overlay={<span><strong>GitHub</strong><br />@amsardesai</span>}
+            >
             <a href="https://github.com/amsardesai"
-              onClick={createAnalyticsEventSender('GitHub')}>
+              onClick={createAnalyticsEventSender('GitHub')}
+            >
               <FontAwesome name="github-alt" />
             </a>
             </Tooltip>
 
-            <Tooltip {...tooltipProps} overlay={(
-              <span><strong>LinkedIn</strong><br />Ankit Sardesai</span>
-            )}>
+            <Tooltip {...tooltipProps}
+              overlay={<span><strong>LinkedIn</strong><br />Ankit Sardesai</span>}
+            >
             <a href="https://www.linkedin.com/in/amsardesai"
-              onClick={createAnalyticsEventSender('LinkedIn')}>
+              onClick={createAnalyticsEventSender('LinkedIn')}
+            >
               <FontAwesome name="linkedin" />
             </a>
             </Tooltip>

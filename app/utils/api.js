@@ -9,7 +9,7 @@ export function get(endpoint, params) {
     request.get(`${baseUrl}${endpoint}`)
       .query(params)
       .end((err, res) => {
-        if (err) reject(err)
+        if (err) reject(err);
         else resolve(JSON.parse(res.text));
       });
   });
