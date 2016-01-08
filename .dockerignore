@@ -1,4 +1,7 @@
-build
+.DS_Store
 node_modules
+db
+build
+npm-debug.log
 Dockerfile
 .git

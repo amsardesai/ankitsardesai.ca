@@ -36,16 +36,6 @@ let webpackDevCompiler = webpack(webpackDevConfig);
 let isRunningDevServer = false;
 
 /**
- * Compile our images
- */
-gulp.task('build:images', () => {
-  return gulp.src(config.files.images.src)
-    .pipe(imagemin())
-    .pipe(gulp.dest(`${config.files.staticAssets}${config.files.images.out}`))
-    .pipe(reload({ stream: true }));
-});
-
-/**
  * Compile our CSS files
  */
 gulp.task('build:css', () => {
@@ -151,7 +141,7 @@ gulp.task('build:client:prod', callback => {
     // Emulate gulp-size
     let outputConfig = webpackProdConfig.output;
     let jsFilePath = path.join(outputConfig.path, outputConfig.filename);
-    gutil.log(`'${gutil.colors.cyan('Client Prod JS')}' ${gutil.colors.green('all files ')}` +
+    gutil.log(`${gutil.colors.cyan('Client Prod JS')} ${gutil.colors.green('all files ')}` +
               `${gutil.colors.magenta(pretty(fs.statSync(jsFilePath).size))}`);
 
     callback();
@@ -190,7 +180,6 @@ gulp.task('clean', callback => {
  */
 gulp.task('compile', callback => {
   runSequence('clean', 'build:lint:prod', [
-    'build:images',
     'build:css:prod',
     'build:client:prod',
     'build:server',
@@ -202,7 +191,6 @@ gulp.task('compile', callback => {
  */
 gulp.task('compile:nolint', callback => {
   runSequence('clean', [
-    'build:images',
     'build:css:prod',
     'build:client:prod',
     'build:server',
@@ -215,7 +203,6 @@ gulp.task('compile:nolint', callback => {
 gulp.task('watch', ['clean'], callback => {
   runSequence(
     'build:lint', [
-      'build:images',
       'build:css',
       'build:client',
       'build:server',
@@ -226,7 +213,6 @@ gulp.task('watch', ['clean'], callback => {
       gulp.watch(config.files.server.src, ['build:server']);
       gulp.watch(config.files.client.src, ['build:lint']);
       gulp.watch(config.files.css.src, ['build:css']);
-      gulp.watch(config.files.images.src, ['build:images']);
 
       // Launch Nodemon
       nodemon({
