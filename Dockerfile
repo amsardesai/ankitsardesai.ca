@@ -17,10 +17,10 @@ RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
 WORKDIR /opt/app
 ADD . /opt/app
 
-# # Compile codebase
+# Compile codebase
 RUN npm run compile
 
-# # Prune developer packages and uncompiled files
+# Prune developer packages and uncompiled files
 RUN rm -rf app && npm prune --production
 
 # Add hier directories to root
@@ -30,7 +30,7 @@ ADD hier /
 RUN sqlite3 -init /db/database.sql /db/ankitsardesai.db ""
 
 # Create self-signed certs
-# RUN /scripts/create-certificates.sh
+RUN /scripts/create-certificates.sh
 
 # Add nginx user and start it
 RUN useradd -ms /bin/bash nginx && /etc/init.d/nginx start
