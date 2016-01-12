@@ -32,8 +32,8 @@ RUN sqlite3 -init /db/database.sql /db/ankitsardesai.db ""
 # Create self-signed certs
 RUN /scripts/create-certificates.sh
 
-# Add nginx user and start it
-RUN useradd -ms /bin/bash nginx && /etc/init.d/nginx start
+# Add nginx user
+RUN useradd -ms /bin/bash nginx
 
 # Define environment variables
 ENV NODE_ENV production
@@ -46,4 +46,3 @@ EXPOSE 443
 
 # Start the server
 CMD ["/usr/bin/supervisord"]
-
