@@ -2,26 +2,36 @@
 
 Source code for [my website](https://ankitsardesai.ca).
 
-* Built using the **ExpressJS** framework
-* **Jade**/**LESS**/**CoffeeScript** front-end
-* Using **Flightplan** for automated deployment
-* Deployed on **Amazon EC2** instances
-* Photos stored in **Amazon S3**
-* Content delivery using **CloudFlare**
-* Full **HTTPS** support (because why not?)
+* Front-end built using [**React**](https://github.com/facebook/react) and
+  [**Redux**](https://github.com/rackt/redux) with universal rendering.
+* Photo data stored in a **sqlite** database and photos are stored on **Amazon S3**.
+* Using **Docker** to build and deploy on **Amazon EC2 Container Service**.
+* Content delivery and DDOS protection using **CloudFlare**.
+* Full **HTTPS** support. (because why not?)
 
-### Installing
+## Installing
 
-To create an instance of this site on your computer:
+### Using Docker
 
-    git clone https://github.com/amsardesai/ankitsardesai.ca
-    cd ankitsardesai.ca/
+To run the production version of this site with docker, clone and run the following:
+
+    docker build -t ankitsardesai . # This will take a long time
+    docker run -d --name instance.ankitsardesai -p 443:443 ankitsardesai
+
+Then go to `https://<your docker IP>/`.
+
+### Manually
+
+To run the development version of this site, install `sqlite3` and `node`, then clone and
+run the following:
+
+    sqlite3 -init hier/db/database.sql ankit.db ""
+    export DB_URL="$(pwd -P)/ankit.db"
     npm install
+    npm run watch
 
-To run it:
+Then go to `http://localhost:3000/`
 
-    npm start
+## Copyright
 
-### Copyright
-
-&copy; Ankit Sardesai 2015
+&copy; Ankit Sardesai 2016
