@@ -10,7 +10,7 @@ app:
 database:
   build: ./database
   volumes:
-    - /db/
+    - /db
 
 nginx:
   restart: always

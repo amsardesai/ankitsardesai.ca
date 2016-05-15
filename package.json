@@ -15,7 +15,8 @@
     "deploy": "fly deploy:production",
     "lint": "gulp build:lint",
     "production": "NODE_ENV=production node build/server",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "deploy": "./deploy/deploy.sh"
   },
   "dependencies": {
     "babel-polyfill": "^6.8.0",
