@@ -1,0 +1,23 @@
+
+app:
+  restart: always
+  build: .
+  ports:
+    - "5092:5092"
+  volumes_from:
+    - database
+
+database:
+  build: ./database
+  volumes:
+    - /db/
+
+nginx:
+  restart: always
+  build: ./nginx
+  ports:
+    - "80:80"
+    - "443:443"
+  links:
+    - app:app
+

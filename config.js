@@ -33,10 +33,12 @@ module.exports = {
     babel: {
       client: {
         presets: ['es2015', 'react', 'stage-0'],
+        plugins: ['transform-decorators-legacy'],
       },
       server: {
-        presets: ['node5', 'react', 'stage-0'],
-      }
+        presets: ['node6', 'react', 'stage-0'],
+        plugins: ['transform-decorators-legacy'],
+      },
     },
     sass: {
       style: 'compact',
@@ -50,7 +52,6 @@ module.exports = {
   analytics: {
     google: 'UA-37589348-3',
   },
-
 
 };
 

@@ -6,10 +6,10 @@ import React from 'react';
 // Import internal modules
 import config from '../../config';
 
-export default React.createClass({
-  propTypes: {
+export default class App extends React.Component {
+  static propTypes = {
     children: React.PropTypes.node,
-  },
+  };
 
   render() {
     return (
@@ -18,5 +18,5 @@ export default React.createClass({
         {this.props.children}
       </div>
     );
-  },
-});
+  }
+}

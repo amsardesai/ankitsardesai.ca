@@ -7,86 +7,45 @@ import Background from './Background';
 import MainBox from './MainBox';
 import { getNewPhoto } from '../actions/background';
 
-const Main = React.createClass({
-
-  propTypes: {
-
-    /**
-     * Background object
-     */
+@connect(
+  state => ({ background: state.background }),
+  { getNewPhoto }
+)
+export default class Main extends React.Component {
+  static propTypes = {
     background: React.PropTypes.shape({
-
-      /**
-       * The current background
-       */
       prev: React.PropTypes.shape({
-
-        /**
-         * Name of the background
-         */
         name: React.PropTypes.string.isRequired,
-
-        /**
-         * Background position of the background
-         */
         position: React.PropTypes.string.isRequired,
-
       }),
-
-      /**
-       * The current background
-       */
       current: React.PropTypes.shape({
-
-        /**
-         * Name of the background
-         */
         name: React.PropTypes.string.isRequired,
-
-        /**
-         * Background position of the background
-         */
         position: React.PropTypes.string.isRequired,
-
       }).isRequired,
-
-      /**
-       * The next background
-       */
       next: React.PropTypes.shape({
-
-        /**
-         * Name of the background
-         */
         name: React.PropTypes.string.isRequired,
-
-        /**
-         * Background position of the background
-         */
         position: React.PropTypes.string.isRequired,
-
       }).isRequired,
     }),
-
-    /**
-     * The GET_NEW_PHOTO action
-     */
     getNewPhoto: React.PropTypes.func.isRequired,
-  },
+  };
 
   componentDidMount() {
-    this.backgroundInterval = setInterval(() => {
-      const { current, next } = this.props.background;
-      this.props.getNewPhoto(current, next);
-    }, 10000);
-  },
+    this.backgroundInterval = setInterval(this.handleChangeBackground, 10000);
+  }
 
   componentWillUnmount() {
     clearInterval(this.backgroundInterval);
-  },
+  }
+
+  handleChangeBackground = () => {
+    const { current, next } = this.props.background;
+    this.props.getNewPhoto(current, next);
+  };
 
   render() {
-    const { prev, current, next } = this.props.background;
+    const { background } = this.props;
+    const { prev, current, next } = background;
 
     return (
       <div>
@@ -102,10 +61,5 @@ const Main = React.createClass({
         </div>
       </div>
     );
-  },
-});
-
-export default connect(
-  state => ({ background: state.background }),
-  { getNewPhoto }
-)(Main);
+  }
+}

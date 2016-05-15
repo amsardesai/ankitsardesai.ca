@@ -1,48 +1,31 @@
 
 # Use Ubuntu distribution
-FROM ubuntu:14.04
+FROM node:6.1.0
 MAINTAINER Ankit Sardesai <me@ankitsardesai.ca>
 
-# Install node and sqlite3 on Ubuntu
-RUN apt-get install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
-RUN apt-get install -y nodejs sqlite3 nginx supervisor openssl
-
 # Install packages
-ADD package.json /tmp/package.json
-RUN cd /tmp && npm install
-RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
+ADD package.json npm-shrinkwrap.json /tmp/
+RUN cd /tmp && npm install --quiet
+RUN mkdir -p /opt/app
+RUN cp -a /tmp/node_modules /opt/app/
+RUN cp /tmp/package.json /opt/app
 
 # Copy application code
 WORKDIR /opt/app
-ADD . /opt/app
+ADD app /opt/app/app
+ADD assets /opt/app/assets
+ADD .eslintrc config.js index.js gulpfile.js webpack.client.js webpack.dev.client.js /opt/app/
 
 # Compile codebase
 RUN npm run compile
 
 # Prune developer packages and uncompiled files
-RUN rm -rf app && npm prune --production
-
-# Add hier directories to root
-ADD hier /
-
-# Create and populate database
-RUN sqlite3 -init /db/database.sql /db/ankitsardesai.db ""
-
-# Create self-signed certs
-RUN /scripts/create-certificates.sh
-
-# Add nginx user
-RUN useradd -ms /bin/bash nginx
+RUN rm -rf app && npm prune --production --quiet
 
 # Define environment variables
 ENV NODE_ENV production
 ENV PORT 5092
 ENV DB_URL /db/ankitsardesai.db
 
-# Expose the port being used
-EXPOSE 80
-EXPOSE 443
-
 # Start the server
-CMD ["/usr/bin/supervisord"]
+CMD ["node", "/opt/app/build/server"]
