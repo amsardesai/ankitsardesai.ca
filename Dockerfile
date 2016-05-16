@@ -3,6 +3,9 @@
 FROM node:6.1.0
 MAINTAINER Ankit Sardesai <me@ankitsardesai.ca>
 
+# Install sqlite3
+RUN apt-get update && apt-get install -y sqlite3
+
 # Install packages
 ADD package.json npm-shrinkwrap.json /tmp/
 RUN cd /tmp && npm install --quiet
@@ -21,6 +24,11 @@ RUN npm run compile
 
 # Prune developer packages and uncompiled files
 RUN rm -rf app && npm prune --production --quiet
+
+# Initialize database
+RUN mkdir -p /db
+ADD database.sql /tmp/
+RUN sqlite3 -init /tmp/database.sql /db/ankitsardesai.db ""
 
 # Define environment variables
 ENV NODE_ENV production

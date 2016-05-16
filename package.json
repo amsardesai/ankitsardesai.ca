@@ -16,7 +16,7 @@
     "lint": "gulp build:lint",
     "production": "NODE_ENV=production node build/server",
     "watch": "gulp watch",
-    "deploy": "./deploy/deploy.sh"
+    "deploy": "./deploy/deploy.rb"
   },
   "dependencies": {
     "babel-polyfill": "^6.8.0",
