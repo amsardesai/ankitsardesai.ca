@@ -1,34 +1,45 @@
 
 # Use Ubuntu distribution
-FROM node:6.1.0
+FROM node:6.9.2
 MAINTAINER Ankit Sardesai <me@ankitsardesai.ca>
 
-# Install sqlite3
-RUN apt-get update && apt-get install -y sqlite3
+# Install necessary packages to install yarn
+RUN apt-get update
+RUN apt-get install -y apt-transport-https
+
+# Configure apt-get repository for yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+# Install yarn and sqlite3
+RUN apt-get update
+RUN apt-get install -y yarn sqlite3
+
+# Make working directory
+RUN mkdir -p /opt/app
+WORKDIR /opt/app
 
 # Install packages
-ADD package.json npm-shrinkwrap.json /tmp/
-RUN cd /tmp && npm install --quiet
-RUN mkdir -p /opt/app
-RUN cp -a /tmp/node_modules /opt/app/
-RUN cp /tmp/package.json /opt/app
+ADD package.json yarn.lock ./
+RUN yarn
 
 # Copy application code
-WORKDIR /opt/app
-ADD app /opt/app/app
-ADD assets /opt/app/assets
-ADD .eslintrc config.js index.js gulpfile.js webpack.client.js webpack.dev.client.js /opt/app/
+ADD app ./app
+ADD assets ./assets
+ADD .eslintrc config.js index.js gulpfile.js ./
+ADD webpack.client.js webpack.dev.client.js ./
 
 # Compile codebase
-RUN npm run compile
+RUN yarn run compile
 
 # Prune developer packages and uncompiled files
-RUN rm -rf app && npm prune --production --quiet
+RUN rm -rf app
+RUN yarn install --production --ignore-scripts --prefer-offline
 
 # Initialize database
 RUN mkdir -p /db
-ADD database.sql /tmp/
-RUN sqlite3 -init /tmp/database.sql /db/ankitsardesai.db ""
+ADD database.sql ./
+RUN sqlite3 -init ./database.sql /db/ankitsardesai.db ""
 
 # Define environment variables
 ENV NODE_ENV production
@@ -37,3 +48,4 @@ ENV DB_URL /db/ankitsardesai.db
 
 # Start the server
 CMD ["node", "/opt/app/build/server"]
+
