@@ -16,15 +16,15 @@ export default class Main extends React.Component {
     background: React.PropTypes.shape({
       prev: React.PropTypes.shape({
         name: React.PropTypes.string.isRequired,
-        position: React.PropTypes.string.isRequired,
+        location: React.PropTypes.string.isRequired,
       }),
       current: React.PropTypes.shape({
         name: React.PropTypes.string.isRequired,
-        position: React.PropTypes.string.isRequired,
+        location: React.PropTypes.string.isRequired,
       }).isRequired,
       next: React.PropTypes.shape({
         name: React.PropTypes.string.isRequired,
-        position: React.PropTypes.string.isRequired,
+        location: React.PropTypes.string.isRequired,
       }).isRequired,
     }),
     getNewPhoto: React.PropTypes.func.isRequired,

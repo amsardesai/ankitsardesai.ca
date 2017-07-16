@@ -45,6 +45,13 @@ app.use(mount('/resume', function* resumeMiddleware() {
   yield* sendfile.call(this, path.join(__dirname, '..', 'assets', 'resume.pdf'));
 }));
 
+// Serve the pgp key
+app.use(mount('/pgp', function* pgpMiddleware() {
+  this.set('Cache-Control', 'no-cache');
+  this.set('Content-Disposition', 'attachment; filename=ankit.asc');
+  yield* sendfile.call(this, path.join(__dirname, '..', 'assets', 'pgp.asc'));
+}));
+
 // Serve database API routes
 app.use(compose(Object.keys(api).map(key => api[key])));
 
@@ -74,7 +81,7 @@ if (process.env.NODE_ENV === 'production') {
 // Capture all requests
 app.use(function* middleware() {
   // Get initial image to display
-  const initialBackgrounds = yield all('SELECT name, position FROM backgrounds ' +
+  const initialBackgrounds = yield all('SELECT name, location FROM backgrounds ' +
                                        'ORDER BY RANDOM() LIMIT 2');
 
   // Match a specific route
@@ -104,11 +111,11 @@ app.use(function* middleware() {
           background: {
             current: {
               name: initialBackgrounds[0].name,
-              position: initialBackgrounds[0].position,
+              location: initialBackgrounds[0].location,
             },
             next: {
               name: initialBackgrounds[1].name,
-              position: initialBackgrounds[1].position,
+              location: initialBackgrounds[1].location,
             },
           },
           routing: {},

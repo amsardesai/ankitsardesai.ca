@@ -8,8 +8,8 @@ module.exports = {
 
   files: {
     client: {
-      entry: './app/client.jsx',
-      src: ['./app/**/**/**/**/*.js', './app/**/**/**/**/*.jsx'],
+      entry: './app/client.js',
+      src: './app/**/**/**/**/*.js',
       out: 'js',
       outFile: 'bundle.js',
     },
@@ -23,7 +23,7 @@ module.exports = {
       out: 'img',
     },
     server: {
-      src: ['./app/**/**/**/*.js', './app/**/**/**/*.jsx'],
+      src: './app/**/**/**/*.js',
       out: 'build',
     },
     staticAssets: 'build/static/',

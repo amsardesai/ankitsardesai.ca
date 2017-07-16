@@ -1,11 +1,5 @@
 
-@keyframes box-fade-in
-  0%
-    opacity: 0
-  50%
-    opacity: 0
-  100%
-    opacity: 0.9
+$mobile-max-width: 400px
 
 @keyframes cover-fade-out
   0%
@@ -18,30 +12,88 @@
 .main__background-container
   position: relative
   height: 100vh
+  background-color: #000
 
 .main__background
   transition: opacity 2s
-  background-attachment: fixed;
-  background-repeat: no-repeat
-  background-size: cover
+  background-color: #000
   position: absolute
   top: 0
   left: 0
   right: 0
-  height: 100%
+  bottom: 0
   opacity: 1
   z-index: 3
+  user-select: none
+  overflow: hidden
   &--prev
-    opacity: 0
+    opacity: 1
     z-index: 2
   &--next
     opacity: 0
     z-index: 1
+  @media screen and (max-width: $mobile-max-width)
+    top: 20px
   &--white
     background-color: #fff
     opacity: 0
+    top: 0
     animation-name: cover-fade-out;
-    animation-duration: 1s
+    animation-duration: 2s
+
+$tunerx: -0.2
+$tunery: -0.05
+
+.main__background-image
+  background-repeat: no-repeat
+  background-size: contain
+  background-position: center
+  position: absolute
+  height: calc(100vh - (100vh * #{$tunery}))
+  width: calc(100% - (100% * #{$tunerx}))
+  top: 0
+  left: 0
+  margin-top: calc(100vh * #{$tunery / 2})
+  margin-left: calc(100% * #{$tunerx / 2})
+
+.main__background-location
+  position: absolute
+  bottom: 20px
+  right: 20px
+  display: inline-block
+  background-color: #fff
+  padding: 10px 15px
+  opacity: 0.9
+  color: #000
+  font-weight: 400
+  font-size: 14px
+  border-radius: 20px
+  @media screen and (max-width: $mobile-max-width)
+    font-size: 12px
+    border-radius: 15px
+    padding: 8px 13px
+  &:before
+    content: ""
+    position: absolute
+    top: -8px
+    left: 20px
+    display: block
+    width: 0
+    height: 0
+    border-left: 8px solid transparent
+    border-right: 8px solid transparent
+    border-bottom: 8px solid #fff
+    @media screen and (max-width: $mobile-max-width)
+      border-left: 6px solid transparent
+      border-right: 6px solid transparent
+      border-bottom: 6px solid #fff
+      top: -6px
+      left: 15px
+
+.main__background-location-icon
+  padding-right: 10px
+  @media screen and (max-width: $mobile-max-width)
+    padding-right: 8px
 
 .main__top-section
   position: absolute
@@ -55,53 +107,62 @@
   overflow: hidden
   z-index: 6
 
-.main__center-container
-  display: table-cell
-  vertical-align: middle
-
 .main__box
-  max-width: 450px
-  margin: auto
+  display: inline-block
+  position: absolute
+  top: 20px
+  left: 20px
   background-color: #fff
-  padding: 15px
+  padding: 10px 15px
   opacity: 0.9
-  border: 5px solid #eee
-  @media screen and (max-width: 500px)
-    width: 100%
-    margin: 0
-    max-width: 500px
-    padding: 10px 0
-    border-width: 5px 0
+  @media screen and (max-width: $mobile-max-width)
+    display: block
+    margin: 20px
+    position: relative
+    top: 0
+    left: 0
+    padding: 8px
 
 .main__box-heading
-  font-size: 42px
+  font-size: 30px
   text-transform: uppercase
   margin: 0
-  padding: 8px 0 12px 0
-  @media screen and (max-width: 500px)
-    font-size: 32px
-
-.main__box-subheading
-  color: #999
-  font-weight: 500
-  font-size: 18px
-  margin: 0
-  padding: 0 0 8px 0
-  em
-    color: #222
-    font-style: initial
-  @media screen and (max-width: 500px)
-    font-size: 16px
+  padding: 8px 10px
+  @media screen and (max-width: $mobile-max-width)
+    font-size: 25px
+    padding: 5px 0
 
 .main__box-icons
-  font-size: 30px
-  padding: 15px 0 10px 0
-  height: 35px
+  text-align: center
+  font-size: 25px
+  padding: 5px 0
+  user-select: none
   .fa
     text-decoration: none
     display: inline-block
     padding: 0 10px
     color: #000
-    transition: color 0.5s
+  @media screen and (max-width: $mobile-max-width)
+    font-size: 20px
+    .fa
+      padding: 0 7px
+
+.main__author-mark
+  display: inline-block
+  position: absolute
+  bottom: 20px
+  left: 20px
+  background-color: #fff
+  padding: 10px 15px
+  opacity: 0.9
+  color: #000
+  font-weight: 400
+  font-size: 14px
+  border-radius: 20px
+  user-select: none
   @media screen and (max-width: 500px)
-    font-size: 25px
+    display: none
+
+.main__author-mark-icon
+  padding-right: 10px
+

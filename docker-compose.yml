@@ -1,16 +1,19 @@
 
-app:
-  restart: always
-  build: .
-  ports:
-    - "5092:5092"
+version: '3'
 
-nginx:
-  restart: always
-  build: ./nginx
-  ports:
-    - "80:80"
-    - "443:443"
-  links:
-    - app:app
+services:
+  app:
+    restart: always
+    build: .
+    ports:
+      - "5092:5092"
+
+  nginx:
+    restart: always
+    build: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - app:app
 

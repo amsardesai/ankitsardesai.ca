@@ -25,7 +25,7 @@ Then go to `https://<your docker IP>/`.
 To run the development version of this site, install `sqlite3` and `node`, then clone and
 run the following:
 
-    sqlite3 -init hier/db/database.sql ankit.db ""
+    sqlite3 -init database.sql ankit.db ""
     export DB_URL="$(pwd -P)/ankit.db"
     npm install
     npm run watch
