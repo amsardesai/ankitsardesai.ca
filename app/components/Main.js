@@ -2,6 +2,7 @@
 import Helmet from 'react-helmet';
 import React from 'react';
 import { connect } from 'react-redux';
+import { shape, string, func } from 'prop-types';
 
 import Background from './Background';
 import MainBox from './MainBox';
@@ -13,21 +14,21 @@ import { getNewPhoto } from '../actions/background';
 )
 export default class Main extends React.Component {
   static propTypes = {
-    background: React.PropTypes.shape({
-      prev: React.PropTypes.shape({
-        name: React.PropTypes.string.isRequired,
-        location: React.PropTypes.string.isRequired,
+    background: shape({
+      prev: shape({
+        name: string.isRequired,
+        location: string.isRequired,
       }),
-      current: React.PropTypes.shape({
-        name: React.PropTypes.string.isRequired,
-        location: React.PropTypes.string.isRequired,
+      current: shape({
+        name: string.isRequired,
+        location: string.isRequired,
       }).isRequired,
-      next: React.PropTypes.shape({
-        name: React.PropTypes.string.isRequired,
-        location: React.PropTypes.string.isRequired,
+      next: shape({
+        name: string.isRequired,
+        location: string.isRequired,
       }).isRequired,
     }),
-    getNewPhoto: React.PropTypes.func.isRequired,
+    getNewPhoto: func.isRequired,
   };
 
   componentDidMount() {

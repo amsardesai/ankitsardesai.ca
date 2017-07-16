@@ -12,11 +12,10 @@
   "scripts": {
     "clean": "gulp clean",
     "compile": "gulp compile",
-    "deploy": "fly deploy:production",
+    "deploy": "./deploy/deploy.rb",
     "lint": "gulp build:lint",
     "production": "NODE_ENV=production node build/server",
-    "watch": "gulp watch",
-    "deploy": "./deploy/deploy.rb"
+    "watch": "gulp watch"
   },
   "dependencies": {
     "babel-polyfill": "^6.8.0",
@@ -31,13 +30,14 @@
     "koa-sendfile": "^1.1.1",
     "koa-static": "^1.5.2",
     "normalize.css": "^3.0.3",
+    "prop-types": "^15.5.10",
     "rc-tooltip": "^3.3.2",
-    "react": "^0.14.6",
-    "react-dom": "^0.14.6",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "react-fontawesome": "^0.3.3",
     "react-g-analytics": "^0.1.17",
     "react-helmet": "^2.3.1",
-    "react-redux": "^4.4.5",
+    "react-redux": "^5.0.5",
     "react-router": "^1.0.3",
     "redux": "^3.5.2",
     "redux-actions": "^0.9.1",

@@ -2,13 +2,14 @@
 // Import external modules
 import GoogleAnalytics from 'react-g-analytics';
 import React from 'react';
+import { node } from 'prop-types';
 
 // Import internal modules
 import config from '../../config';
 
 export default class App extends React.Component {
   static propTypes = {
-    children: React.PropTypes.node,
+    children: node,
   };
 
   render() {
