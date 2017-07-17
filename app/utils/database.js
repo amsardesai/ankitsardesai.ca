@@ -17,7 +17,7 @@ export function get(
   ...values: Array<string>
 ): Promise<any> {
   return new Promise((resolve, reject) => {
-    db.get(query, ...values, (err, row) => err ? reject(err) : resolve(row));
+    db.get(query, ...values, (err, row) => (err ? reject(err) : resolve(row)));
   });
 }
 
@@ -29,6 +29,6 @@ export function all(
   ...values: Array<string>
 ): Promise<any> {
   return new Promise((resolve, reject) => {
-    db.all(query, ...values, (err, row) => err ? reject(err) : resolve(row));
+    db.all(query, ...values, (err, row) => (err ? reject(err) : resolve(row)));
   });
 }

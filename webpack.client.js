@@ -30,8 +30,8 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify('production') },
-      __CLIENT__: true,
-      __SERVER__: false,
+      IS_CLIENT: true,
+      IS_SERVER: false,
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),

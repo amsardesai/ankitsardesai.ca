@@ -6,7 +6,7 @@ import { get } from '../utils/database';
 /**
  * GET /api/background - Get a new random background.
  */
-export const getBackground = route.get('/api/background', async ctx => {
+export const getBackground = route.get('/api/background', async (ctx) => {
   try {
     const { query } = ctx.request;
     const prevName = (query && query.prev) || '';

@@ -14,8 +14,8 @@ import Main from './components/Main';
 import { loadGoogleAnalytics, trackPageView } from './utils/analytics';
 
 // Global isomorphic constants
-window.__SERVER__ = false;
-window.__CLIENT__ = true;
+window.IS_SERVER = false;
+window.IS_CLIENT = true;
 
 // Load Google Analytics
 loadGoogleAnalytics();
@@ -24,7 +24,7 @@ loadGoogleAnalytics();
 trackPageView(window.document.location);
 
 // Create reducer, store, and history
-const store = configureStore(window.__INITIAL_STATE__);
+const store = configureStore(window.INITIAL_STATE);
 
 // Get react-root object
 const reactRoot = document.getElementById('react-root');
@@ -34,5 +34,5 @@ render(
   <Provider store={store}>
     <Main />
   </Provider>,
-  reactRoot
+  reactRoot,
 );

@@ -7,11 +7,11 @@ import { shape, string, func } from 'prop-types';
 // Import internal modules
 import Background from './Background';
 import MainBox from './MainBox';
-import { getNewPhoto } from '../actions/background';
+import getNewPhoto from '../actions/background';
 
 @connect(
   state => ({ background: state }),
-  { getNewPhoto }
+  { getNewPhoto },
 )
 export default class Main extends React.Component {
   static propTypes = {
@@ -28,7 +28,7 @@ export default class Main extends React.Component {
         name: string.isRequired,
         location: string.isRequired,
       }).isRequired,
-    }),
+    }).isRequired,
     getNewPhoto: func.isRequired,
   };
 

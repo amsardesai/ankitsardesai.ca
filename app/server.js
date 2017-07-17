@@ -26,8 +26,8 @@ const app = new Koa();
 const port = process.env.PORT || config.ports.koa;
 
 // Add our isomorphic constants
-global.__SERVER__ = true;
-global.__CLIENT__ = false;
+global.IS_SERVER = true;
+global.IS_CLIENT = false;
 
 // Paths to javascript/css files
 let jsPath;
@@ -40,12 +40,12 @@ app.use(mount('/assets/', serve(path.join(__dirname, '..', config.files.staticAs
 app.use(favicon(path.join(__dirname, '..', 'assets', 'favicon.ico')));
 
 // Serve the resume
-app.use(route.get('/resume', async ctx => {
+app.use(route.get('/resume', async (ctx) => {
   await sendfile(ctx, path.join(__dirname, '..', 'assets', 'resume.pdf'));
 }));
 
 // Serve the pgp key
-app.use(route.get('/pgp', async ctx => {
+app.use(route.get('/pgp', async (ctx) => {
   ctx.set('Cache-Control', 'no-cache');
   ctx.set('Content-Disposition', 'attachment; filename=ankit.asc');
   await sendfile(ctx, path.join(__dirname, '..', 'assets', 'pgp.asc'));
@@ -78,7 +78,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Capture main route
-app.use(route.get('/', async ctx => {
+app.use(route.get('/', async (ctx) => {
   // Get initial image to display
   const initialBackgrounds = await all('SELECT name, location FROM backgrounds ' +
                                        'ORDER BY RANDOM() LIMIT 2');
@@ -100,7 +100,7 @@ app.use(route.get('/', async ctx => {
   const renderedString = renderToString(
     <Provider store={store}>
       <Main />
-    </Provider>
+    </Provider>,
   );
 
   // Serialize state to send to client
@@ -122,7 +122,7 @@ app.use(route.get('/', async ctx => {
       </head>
       <body>
         <div id="react-root">${renderedString}</div>
-        <script>window.__INITIAL_STATE__ = ${serializedState}</script>
+        <script>window.INITIAL_STATE = ${serializedState}</script>
         <script src="${jsPath}"></script>
       </body>
     </html>`;

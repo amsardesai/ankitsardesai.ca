@@ -64,7 +64,7 @@ export function loadGoogleAnalytics() {
  * @return {Function} An event tracker function.
  */
 export function createEventTracker(
-  category: string
+  category: string,
 ): Function {
   if (process.env.NODE_ENV === 'development' && !category) {
     throw Error('Please specify a category.');
@@ -85,7 +85,7 @@ export function createEventTracker(
   return function trackEvent(
     action: Action,
     label: string,
-    nonInteraction: boolean = false
+    nonInteraction: boolean = false,
   ) {
     if (process.env.NODE_ENV === 'development') {
       if (!window) {
@@ -117,7 +117,7 @@ export function trackPageView({
   pathname,
   search,
   hash,
-}: {
+  }: {
   pathname: string,
   search: string,
   hash: string,
