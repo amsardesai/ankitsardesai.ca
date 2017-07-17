@@ -3,10 +3,13 @@ import FontAwesome from 'react-fontawesome';
 import React from 'react';
 import Tooltip from 'rc-tooltip';
 
+import { createEventTracker } from '../utils/analytics';
+
+const trackEvent = createEventTracker('button');
+
 function createAnalyticsEventSender(service) {
   return function sendAnalyticsEvent() {
-    if (!window || !window.ga) return;
-    window.ga('send', 'event', 'button', 'click', service);
+    trackEvent('click', service);
   };
 }
 

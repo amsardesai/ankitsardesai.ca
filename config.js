@@ -1,3 +1,6 @@
+/**
+ * @flow
+ */
 
 module.exports = {
 

@@ -4,12 +4,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { shape, string, func } from 'prop-types';
 
+// Import internal modules
 import Background from './Background';
 import MainBox from './MainBox';
 import { getNewPhoto } from '../actions/background';
 
 @connect(
-  state => ({ background: state.background }),
+  state => ({ background: state }),
   { getNewPhoto }
 )
 export default class Main extends React.Component {

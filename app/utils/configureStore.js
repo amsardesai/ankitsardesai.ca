@@ -1,20 +1,22 @@
+// @flow
 
-import promiseMiddleware from 'redux-promise';
+import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 
-import reducers from '../reducers';
+import reducer from '../reducers';
 
-// No middleware yet
-const createStoreWithMiddleware = applyMiddleware(
-  promiseMiddleware
-)(createStore);
+import type { State } from '../reducers';
 
-export default function configureStore(initialState) {
-  const store = createStoreWithMiddleware(reducers, initialState);
+export default function configureStore(initialState: State) {
+  const store = createStore(
+    reducer,
+    initialState,
+    applyMiddleware(thunk),
+  );
 
   // Webpack hot module replacement for reducers
   if (module.hot) {
-    module.hot.accept('../reducers', () => {
+    window.module.hot.accept('../reducers', () => {
       const nextRootReducer = require('../reducers');
       store.replaceReducer(nextRootReducer);
     });

@@ -1,20 +1,33 @@
+// @flow
 
-import { createAction } from 'redux-actions';
+import { get } from 'superagent';
+import config from '../../config';
 
-import { get } from '../utils/api';
+import type { Dispatch, ThunkedAction } from 'redux-thunk';
+import type { PhotoInfo } from '../utils/types';
 
-/**
- * Changes the scrollTop state to update the UI accordingly.
- */
-export const changeScrollTop = createAction('CHANGE_SCROLL_TOP', newScrollTop => newScrollTop);
-
-/**
- * Makes a request to the API server to get a new background.
- */
-export const getNewPhoto = createAction('GET_NEW_PHOTO', async (prev, current) => {
-  const { name, location } = await get('/api/background', {
-    prev: prev.name,
-    current: current.name,
-  });
-  return { name, location };
-});
+export const getNewPhoto = (
+  prev: PhotoInfo,
+  current: PhotoInfo,
+): ThunkedAction => {
+  return (dispatch: Dispatch) => {
+    const baseUrl = window.__SERVER__ ? `http://localhost:${config.ports.koa}` : '';
+    get(`${baseUrl}/api/background`)
+      .query({
+        prev: prev.name,
+        current: current.name,
+      })
+      .end((err, res) => {
+        if (!err) {
+          const { name, location } = JSON.parse(res.text);
+          if (name) {
+            dispatch({
+              type: 'GET_NEW_PHOTO',
+              name,
+              location,
+            });
+          }
+        }
+      });
+  };
+};

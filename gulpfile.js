@@ -9,7 +9,6 @@ let eslint = require('gulp-eslint');
 let fs = require('fs');
 let gulp = require('gulp');
 let gutil = require('gulp-util');
-let imagemin = require('gulp-imagemin');
 let minifyCss = require('gulp-minify-css');
 let nodemon = require('nodemon');
 let path = require('path');
