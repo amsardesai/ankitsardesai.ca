@@ -1,6 +1,10 @@
 
 $mobile-max-width: 400px
 
+$image-tuner-x: -0.2
+$image-tuner-y: -0.05
+$container-tuner: 1.575
+
 @keyframes cover-fade-out
   0%
     opacity: 1
@@ -41,9 +45,6 @@ $mobile-max-width: 400px
     animation-name: cover-fade-out;
     animation-duration: 2s
 
-$image-tuner-x: -0.2
-$image-tuner-y: -0.05
-
 .main__background-image
   background-repeat: no-repeat
   background-size: contain
@@ -56,7 +57,6 @@ $image-tuner-y: -0.05
   margin-top: calc(100vh * #{$image-tuner-y / 2})
   margin-left: calc(100% * #{$image-tuner-x / 2})
 
-$container-tuner: 1.566
 
 .main__background-info-container
   position: absolute
@@ -133,12 +133,11 @@ $container-tuner: 1.566
   position: absolute
   top: 0
   left: 0
-  min-height: 300px
-  height: 100%
+  right: 0
+  bottom: 0
   width: 100%
-  display: table
-  text-align: center
-  overflow: hidden
+  max-width: calc(100vh * #{$container-tuner})
+  margin: auto
   z-index: 6
 
 .main__box

@@ -11,8 +11,7 @@ export const getNewPhoto = (
   current: PhotoInfo,
 ): ThunkedAction => {
   return (dispatch: Dispatch) => {
-    const baseUrl = window.__SERVER__ ? `http://localhost:${config.ports.koa}` : '';
-    get(`${baseUrl}/api/background`)
+    get('/api/background')
       .query({
         prev: prev.name,
         current: current.name,

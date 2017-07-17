@@ -1,3 +1,4 @@
+// @flow
 
 // Import babel polyfill before anything else
 import 'babel-polyfill';

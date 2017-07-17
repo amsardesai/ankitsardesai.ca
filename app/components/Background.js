@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import FontAwesome from 'react-fontawesome';
 import React from 'react';
 
-export default function Background({ name, location, isNext, isPrev }) {
+export default ({ name, location, isNext, isPrev }) => {
   return (
     <div
       className={classNames('main__background', {
@@ -29,4 +29,4 @@ export default function Background({ name, location, isNext, isPrev }) {
       </div>
     </div>
   );
-}
+};

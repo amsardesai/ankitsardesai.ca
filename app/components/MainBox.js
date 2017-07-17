@@ -6,14 +6,9 @@ import Tooltip from 'rc-tooltip';
 import { createEventTracker } from '../utils/analytics';
 
 const trackEvent = createEventTracker('button');
+const createAnalyticsEventSender = service => () => trackEvent('click', service);
 
-function createAnalyticsEventSender(service) {
-  return function sendAnalyticsEvent() {
-    trackEvent('click', service);
-  };
-}
-
-export default function MainBox() {
+export default () => {
   const tooltipProps = {
     placement: 'bottom',
     mouseLeaveDelay: 0,
@@ -89,4 +84,4 @@ export default function MainBox() {
       </div>
     </section>
   );
-}
+};
