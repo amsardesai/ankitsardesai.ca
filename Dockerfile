@@ -26,7 +26,7 @@ RUN yarn
 # Copy application code
 ADD app ./app
 ADD assets ./assets
-ADD .eslintrc config.js index.js gulpfile.js ./
+ADD .eslintrc config.js gulpfile.js ./
 ADD webpack.client.js webpack.dev.client.js ./
 
 # Compile codebase
