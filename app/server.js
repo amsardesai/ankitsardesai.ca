@@ -4,7 +4,7 @@ import compose from 'koa-compose';
 import favicon from 'koa-favicon';
 import fs from 'fs';
 import Helmet from 'react-helmet';
-import koa from 'koa';
+import Koa from 'koa';
 import mount from 'koa-mount';
 import path from 'path';
 import React from 'react';
@@ -22,7 +22,7 @@ import * as api from './server/api';
 import { all } from './utils/database';
 
 // Launch Koa application
-const app = koa();
+const app = new Koa();
 const port = process.env.PORT || config.ports.koa;
 
 // Add our isomorphic constants
@@ -40,15 +40,15 @@ app.use(mount('/assets/', serve(path.join(__dirname, '..', config.files.staticAs
 app.use(favicon(path.join(__dirname, '..', 'assets', 'favicon.ico')));
 
 // Serve the resume
-app.use(route.get('/resume', function* resumeMiddleware() {
-  yield* sendfile.call(this, path.join(__dirname, '..', 'assets', 'resume.pdf'));
+app.use(route.get('/resume', async ctx => {
+  await sendfile(ctx, path.join(__dirname, '..', 'assets', 'resume.pdf'));
 }));
 
 // Serve the pgp key
-app.use(route.get('/pgp', function* pgpMiddleware() {
-  this.set('Cache-Control', 'no-cache');
-  this.set('Content-Disposition', 'attachment; filename=ankit.asc');
-  yield* sendfile.call(this, path.join(__dirname, '..', 'assets', 'pgp.asc'));
+app.use(route.get('/pgp', async ctx => {
+  ctx.set('Cache-Control', 'no-cache');
+  ctx.set('Content-Disposition', 'attachment; filename=ankit.asc');
+  await sendfile(ctx, path.join(__dirname, '..', 'assets', 'pgp.asc'));
 }));
 
 // Serve database API routes
@@ -78,9 +78,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Capture main route
-app.use(route.get('/', function* mainMiddleware() {
+app.use(route.get('/', async ctx => {
   // Get initial image to display
-  const initialBackgrounds = yield all('SELECT name, location FROM backgrounds ' +
+  const initialBackgrounds = await all('SELECT name, location FROM backgrounds ' +
                                        'ORDER BY RANDOM() LIMIT 2');
 
   // Generate initial state
@@ -110,8 +110,8 @@ app.use(route.get('/', function* mainMiddleware() {
   const { title, meta, link } = Helmet.rewind();
 
   // Generate output
-  this.status = 200;
-  this.body =
+  ctx.status = 200;
+  ctx.body =
     `<!DOCTYPE html>
     <html>
       <head>

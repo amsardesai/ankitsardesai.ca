@@ -113,7 +113,11 @@ export function createEventTracker(
  *
  * @param {Object} location The location object.
  */
-export function trackPageView({ pathname, search, hash }: {
+export function trackPageView({
+  pathname,
+  search,
+  hash,
+}: {
   pathname: string,
   search: string,
   hash: string,

@@ -1,6 +1,6 @@
 
 # Use Ubuntu distribution
-FROM node:6.9.2
+FROM node:8.1.4
 MAINTAINER Ankit Sardesai <me@ankitsardesai.ca>
 
 # Install necessary packages to install yarn

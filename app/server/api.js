@@ -6,16 +6,16 @@ import { get } from '../utils/database';
 /**
  * GET /api/background - Get a new random background.
  */
-export const getBackground = route.get('/api/background', function* getBackground() {
+export const getBackground = route.get('/api/background', async ctx => {
   try {
-    const { query } = this.request;
+    const { query } = ctx.request;
     const prevName = (query && query.prev) || '';
     const curName = (query && query.current) || '';
-    const { name, location } = yield get('SELECT name, location FROM backgrounds ' +
+    const { name, location } = await get('SELECT name, location FROM backgrounds ' +
                                          'WHERE name != ? AND name != ?' +
                                          'ORDER BY RANDOM() LIMIT 1', prevName, curName);
-    this.body = { name, location };
+    ctx.body = { name, location };
   } catch (err) {
-    this.status = 500;
+    ctx.status = 500;
   }
 });

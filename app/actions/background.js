@@ -1,7 +1,6 @@
 // @flow
 
 import { get } from 'superagent';
-import config from '../../config';
 
 import type { Dispatch, ThunkedAction } from 'redux-thunk';
 import type { PhotoInfo } from '../utils/types';
