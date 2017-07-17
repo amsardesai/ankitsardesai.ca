@@ -23,16 +23,6 @@ export default function MainBox() {
         <div className="main__box-icons">
 
           <Tooltip {...tooltipProps}
-            overlay={<span><strong>Instagram</strong><br />@amsardesai</span>}
-          >
-          <a href="https://www.instagram.com/amsardesai/"
-            onClick={createAnalyticsEventSender('Instagram')}
-          >
-            <FontAwesome name="instagram" />
-          </a>
-          </Tooltip>
-
-          <Tooltip {...tooltipProps}
             overlay={<span><strong>My Resume</strong><br />Click to view</span>}
           >
           <a href="/resume"
@@ -82,11 +72,17 @@ export default function MainBox() {
           </a>
           </Tooltip>
 
+          <Tooltip {...tooltipProps}
+            overlay={<span><strong>Instagram</strong><br />@amsardesai</span>}
+          >
+          <a href="https://www.instagram.com/amsardesai/"
+            onClick={createAnalyticsEventSender('Instagram')}
+          >
+            <FontAwesome name="instagram" />
+          </a>
+          </Tooltip>
+
         </div>
-      </div>
-      <div className="main__author-mark">
-        <FontAwesome name="camera-retro" className="main__author-mark-icon" />
-        pictures by me
       </div>
     </section>
   );

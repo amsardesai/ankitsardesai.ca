@@ -17,9 +17,15 @@ export default function Background({ name, location, isNext, isPrev }) {
           backgroundImage: `url('//cdn.ankitsardesai.ca/backgrounds/${name}.jpg')`,
         }}
       />
-      <div className="main__background-location">
-        <FontAwesome name="map-marker" className="main__background-location-icon" />
-        {location}
+      <div className="main__background-info-container">
+        <div className="main__background-location">
+          <FontAwesome name="map-marker" className="main__background-location-icon" />
+          {location}
+        </div>
+        <div className="main__background-author-mark">
+          <FontAwesome name="camera-retro" className="main__background-author-mark-icon" />
+          pictures by me
+        </div>
       </div>
     </div>
   );

@@ -41,20 +41,32 @@ $mobile-max-width: 400px
     animation-name: cover-fade-out;
     animation-duration: 2s
 
-$tunerx: -0.2
-$tunery: -0.05
+$image-tuner-x: -0.2
+$image-tuner-y: -0.05
 
 .main__background-image
   background-repeat: no-repeat
   background-size: contain
   background-position: center
   position: absolute
-  height: calc(100vh - (100vh * #{$tunery}))
-  width: calc(100% - (100% * #{$tunerx}))
+  height: calc(100vh - (100vh * #{$image-tuner-y}))
+  width: calc(100% - (100% * #{$image-tuner-x}))
   top: 0
   left: 0
-  margin-top: calc(100vh * #{$tunery / 2})
-  margin-left: calc(100% * #{$tunerx / 2})
+  margin-top: calc(100vh * #{$image-tuner-y / 2})
+  margin-left: calc(100% * #{$image-tuner-x / 2})
+
+$container-tuner: 1.566
+
+.main__background-info-container
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  width: 100%
+  max-width: calc(100vh * #{$container-tuner})
+  margin: auto
 
 .main__background-location
   position: absolute
@@ -68,10 +80,12 @@ $tunery: -0.05
   font-weight: 400
   font-size: 14px
   border-radius: 20px
+  line-height: 15px
   @media screen and (max-width: $mobile-max-width)
     font-size: 12px
     border-radius: 15px
     padding: 8px 13px
+    line-height: 10px
   &:before
     content: ""
     position: absolute
@@ -94,6 +108,26 @@ $tunery: -0.05
   padding-right: 10px
   @media screen and (max-width: $mobile-max-width)
     padding-right: 8px
+
+.main__background-author-mark
+  display: inline-block
+  position: absolute
+  bottom: 20px
+  left: 20px
+  background-color: #fff
+  padding: 10px 15px
+  opacity: 0.9
+  color: #000
+  font-weight: 400
+  font-size: 14px
+  border-radius: 20px
+  user-select: none
+  line-height: 15px
+  @media screen and (max-width: 475px), screen and (max-height: 350px)
+    display: none
+
+.main__background-author-mark-icon
+  padding-right: 10px
 
 .main__top-section
   position: absolute
@@ -146,23 +180,4 @@ $tunery: -0.05
     font-size: 20px
     .fa
       padding: 0 7px
-
-.main__author-mark
-  display: inline-block
-  position: absolute
-  bottom: 20px
-  left: 20px
-  background-color: #fff
-  padding: 10px 15px
-  opacity: 0.9
-  color: #000
-  font-weight: 400
-  font-size: 14px
-  border-radius: 20px
-  user-select: none
-  @media screen and (max-width: 500px)
-    display: none
-
-.main__author-mark-icon
-  padding-right: 10px
 
