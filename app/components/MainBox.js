@@ -15,9 +15,9 @@ export default () => {
   };
 
   return (
-    <section className="main__top-section">
+    <section className="main__box-container">
       <div className="main__box">
-        <h3 className="main__box-heading">Ankit Sardesai</h3>
+        <h1 className="main__box-heading">Ankit Sardesai</h1>
         <div className="main__box-icons">
 
           <Tooltip {...tooltipProps}
@@ -25,6 +25,7 @@ export default () => {
           >
           <a href="/resume"
             onClick={createAnalyticsEventSender('Resume')}
+            aria-label="Resume"
           >
             <FontAwesome name="file-pdf-o" />
           </a>
@@ -35,6 +36,7 @@ export default () => {
           >
           <a href="mailto:me@ankitsardesai.ca"
             onClick={createAnalyticsEventSender('Email')}
+            aria-label="Email"
           >
             <FontAwesome name="envelope" />
           </a>
@@ -45,6 +47,7 @@ export default () => {
           >
           <a href="/pgp"
             onClick={createAnalyticsEventSender('PGP')}
+            aria-label="PGP Key"
           >
             <FontAwesome name="key" />
           </a>
@@ -55,6 +58,7 @@ export default () => {
           >
           <a href="https://github.com/amsardesai"
             onClick={createAnalyticsEventSender('GitHub')}
+            aria-label="GitHub"
           >
             <FontAwesome name="github-alt" />
           </a>
@@ -65,6 +69,7 @@ export default () => {
           >
           <a href="https://www.linkedin.com/in/amsardesai"
             onClick={createAnalyticsEventSender('LinkedIn')}
+            aria-label="LinkedIn"
           >
             <FontAwesome name="linkedin" />
           </a>
@@ -75,6 +80,7 @@ export default () => {
           >
           <a href="https://www.instagram.com/amsardesai/"
             onClick={createAnalyticsEventSender('Instagram')}
+            aria-label="Instagram"
           >
             <FontAwesome name="instagram" />
           </a>

@@ -959,10 +959,6 @@ base64id@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/base64id/-/base64id-0.1.0.tgz#02ce0fdeee0cef4f40080e1e73e834f0b1bfce3f"
 
-basic-auth@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/basic-auth/-/basic-auth-1.1.0.tgz#45221ee429f7ee1e5035be3f51533f1cdfd29884"
-
 batch@0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/batch/-/batch-0.5.3.tgz#3f3414f380321743bfc1042f9a83ff1d5824d464"
@@ -3242,12 +3238,6 @@ kind-of@^4.0.0:
   dependencies:
     is-buffer "^1.1.5"
 
-koa-basic-auth@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/koa-basic-auth/-/koa-basic-auth-1.1.2.tgz#1879285845a7af9de0b4d1e90036ef48d998db71"
-  dependencies:
-    basic-auth "^1.0.0"
-
 koa-compose@^3.0.0, koa-compose@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/koa-compose/-/koa-compose-3.2.1.tgz#a85ccb40b7d986d8e5a345b3a1ace8eabcf54de7"
@@ -4488,7 +4478,7 @@ prompt@^0.2.14:
     utile "0.2.x"
     winston "0.8.x"
 
-prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8:
+prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -4628,9 +4618,11 @@ react-dom@^15.6.1:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react-fontawesome@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/react-fontawesome/-/react-fontawesome-0.3.3.tgz#6fa13ba05e38123c882fd48577d182c45cfe867e"
+react-fontawesome@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/react-fontawesome/-/react-fontawesome-1.6.1.tgz#eddce17e7dc731aa09fd4a186688a61793a16c5c"
+  dependencies:
+    prop-types "^15.5.6"
 
 react-helmet@^5.1.3:
   version "5.1.3"

@@ -44,6 +44,7 @@ $container-tuner: 1.575
     top: 0
     animation-name: cover-fade-out;
     animation-duration: 2s
+    z-index: 4
 
 .main__background-image
   background-repeat: no-repeat
@@ -126,7 +127,7 @@ $container-tuner: 1.575
 .main__background-author-mark-icon
   padding-right: 0.6em
 
-.main__top-section
+.main__box-container
   position: absolute
   top: 0
   left: 0
@@ -136,6 +137,7 @@ $container-tuner: 1.575
   max-width: calc(100vh * #{$container-tuner})
   margin: auto
   z-index: 6
+  overflow: visible
 
 .main__box
   display: inline-block
@@ -146,6 +148,7 @@ $container-tuner: 1.575
   padding: 10px 15px
   opacity: 0.9
   text-align: center
+  white-space: nowrap
   @media screen and (max-width: $mobile-max-width)
     display: block
     margin: 20px
