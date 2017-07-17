@@ -143,12 +143,10 @@ app.use(function* middleware() {
           `<!DOCTYPE html>
           <html>
             <head>
-              <meta charset="utf-8" />
-              <meta name="viewport" content="width=device-width,initial-scale=1" />
-              ${meta}
-              ${title}
+              ${meta.toString()}
+              ${title.toString()}
               <link rel="stylesheet" href="${cssPath}" />
-              ${link}
+              ${link.toString()}
             </head>
             <body>
               <div id="react-root">${renderedString}</div>

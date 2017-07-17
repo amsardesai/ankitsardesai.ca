@@ -50,7 +50,11 @@ export default class Main extends React.Component {
 
     return (
       <div>
-        <Helmet title="Ankit Sardesai" />
+        <Helmet>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <title>Ankit Sardesai</title>
+        </Helmet>
         <div className="main__background-container">
           {prev ? (
             <Background {...prev} isPrev key={prev.name} />
