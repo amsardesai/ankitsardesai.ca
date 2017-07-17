@@ -51,6 +51,11 @@ app.use(route.get('/pgp', async (ctx) => {
   await sendfile(ctx, path.join(__dirname, '..', 'assets', 'pgp.asc'));
 }));
 
+// Serve the robots.txt file
+app.use(route.get('/robots.txt', async (ctx) => {
+  await sendfile(ctx, path.join(__dirname, '..', 'assets', 'robots.txt'));
+}));
+
 // Serve database API routes
 app.use(compose(Object.keys(api).map(key => api[key])));
 
