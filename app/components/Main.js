@@ -54,6 +54,14 @@ export default class Main extends React.Component {
         <Helmet>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <meta property="og:title" content="Ankit Sardesai" />
+          <meta property="og:type" content="website" />
+          <meta property="og:image" content="https://cdn.ankitsardesai.ca/assets/profile.jpg" />
+          <meta property="og:url" content="https://ankitsardesai.ca" />
+          <meta
+            name="description"
+            content="Ankit Sardesai is a software engineer currently working at Facebook."
+          />
           <title>Ankit Sardesai</title>
         </Helmet>
         <div className="main__background-container">
