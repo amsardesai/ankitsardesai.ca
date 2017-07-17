@@ -57,9 +57,7 @@ export default class Main extends React.Component {
           <title>Ankit Sardesai</title>
         </Helmet>
         <div className="main__background-container">
-          {prev ? (
-            <Background {...prev} isPrev key={prev.name} />
-          ) : null}
+          {prev && <Background {...prev} isPrev key={prev.name} />}
           <Background {...current} key={current.name} />
           <Background {...next} isNext key={next.name} />
           <div className="main__background main__background--white" />

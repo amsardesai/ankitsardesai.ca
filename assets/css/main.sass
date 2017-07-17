@@ -57,7 +57,6 @@ $container-tuner: 1.575
   margin-top: calc(100vh * #{$image-tuner-y / 2})
   margin-left: calc(100% * #{$image-tuner-x / 2})
 
-
 .main__background-info-container
   position: absolute
   top: 0
@@ -105,9 +104,7 @@ $container-tuner: 1.575
       left: 15px
 
 .main__background-location-icon
-  padding-right: 10px
-  @media screen and (max-width: $mobile-max-width)
-    padding-right: 8px
+  padding-right: 0.6em
 
 .main__background-author-mark
   display: inline-block
@@ -127,7 +124,7 @@ $container-tuner: 1.575
     display: none
 
 .main__background-author-mark-icon
-  padding-right: 10px
+  padding-right: 0.6em
 
 .main__top-section
   position: absolute
@@ -148,6 +145,7 @@ $container-tuner: 1.575
   background-color: #fff
   padding: 10px 15px
   opacity: 0.9
+  text-align: center
   @media screen and (max-width: $mobile-max-width)
     display: block
     margin: 20px
@@ -173,10 +171,8 @@ $container-tuner: 1.575
   .fa
     text-decoration: none
     display: inline-block
-    padding: 0 10px
+    padding: 0 0.4em
     color: #000
   @media screen and (max-width: $mobile-max-width)
     font-size: 20px
-    .fa
-      padding: 0 7px
 
