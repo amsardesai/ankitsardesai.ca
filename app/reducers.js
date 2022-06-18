@@ -1,6 +1,5 @@
-// @flow
 
-import type { PhotoInfo } from '../utils/types';
+import type { PhotoInfo } from '../utils/types.js';
 
 type Action = {
   type: string,

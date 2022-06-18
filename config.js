@@ -1,8 +1,5 @@
-/**
- * @flow
- */
 
-module.exports = {
+export default {
 
   ports: {
     webpack: 8080,

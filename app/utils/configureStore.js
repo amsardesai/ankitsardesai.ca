@@ -1,18 +1,15 @@
-// @flow
 
-import thunk from 'redux-thunk';
+// import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 
-import reducer from '../reducers';
+import reducer from '../reducers.js';
 
-import type { State } from '../reducers';
+import type { State } from '../reducers.js';
 
-export default function configureStore(initialState: State) {
-  const store = createStore(
+export default function configureStore(initialState) {
+  return createStore(
     reducer,
     initialState,
-    applyMiddleware(thunk),
+    // applyMiddleware(thunk),
   );
-
-  return store;
 }

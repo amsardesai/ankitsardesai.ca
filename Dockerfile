@@ -47,5 +47,5 @@ ENV PORT 5092
 ENV DB_URL /db/ankitsardesai.db
 
 # Start the server
-CMD ["node", "/opt/app/build/server"]
+CMD ["node", "/opt/app/app/server"]
 

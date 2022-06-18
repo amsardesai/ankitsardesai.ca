@@ -1,11 +1,9 @@
 /**
- * @flow
- *
  * @module analytics
  * A set of utility functions for Google Analytics.
  */
 
-import config from '../../config';
+import config from '../../config.js';
 
 type Action = 'submit' | 'error' | 'click' | 'scroll' | 'load' | 'keypress';
 const VALID_ACTIONS = ['submit', 'error', 'click', 'scroll', 'load', 'keypress'];

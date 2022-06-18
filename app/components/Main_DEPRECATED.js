@@ -9,10 +9,10 @@ import Background from './Background';
 import MainBox from './MainBox';
 import getNewPhoto from '../actions/background';
 
-@connect(
-  state => ({ background: state }),
-  { getNewPhoto },
-)
+// @connect(
+  // state => ({ background: state }),
+  // { getNewPhoto },
+// )
 export default class Main extends React.Component {
   static propTypes = {
     background: shape({

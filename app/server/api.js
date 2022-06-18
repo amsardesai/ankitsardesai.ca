@@ -1,7 +1,7 @@
 
 import route from 'koa-route';
 
-import { get } from '../utils/database';
+import { get } from '../utils/database.js';
 
 /**
  * GET /api/background - Get a new random background.

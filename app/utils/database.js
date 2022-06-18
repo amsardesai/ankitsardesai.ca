@@ -1,6 +1,4 @@
 /**
- * @flow
- *
  * @module database
  * A set of utilities for interating with the sqlite3 database.
  */

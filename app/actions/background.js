@@ -3,7 +3,7 @@
 import { get } from 'superagent';
 
 import type { Dispatch, ThunkedAction } from 'redux-thunk';
-import type { PhotoInfo } from '../utils/types';
+import type { PhotoInfo } from '../utils/types.js';
 
 export default (
   prev: PhotoInfo,

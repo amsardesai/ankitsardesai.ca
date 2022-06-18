@@ -1,6 +1,6 @@
 
 // Import babel polyfill before anything else
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 // Import external modules
 import React from 'react';
@@ -8,9 +8,9 @@ import { Provider } from 'react-redux';
 import { createRoot } from 'react-dom/client';
 
 // Import internal modules
-import configureStore from './utils/configureStore';
-import App from './components/App';
-import { loadGoogleAnalytics, trackPageView } from './utils/analytics';
+import configureStore from './utils/configureStore.js';
+import App from './components/App.js';
+import { loadGoogleAnalytics, trackPageView } from './utils/analytics.js';
 
 // Global isomorphic constants
 window.IS_SERVER = false;
@@ -25,11 +25,8 @@ trackPageView(window.document.location);
 // Create reducer, store, and history
 const store = configureStore(window.INITIAL_STATE);
 
-// Get react-root object
-const reactRoot = document.getElementById('react-root');
-
 // Render application
-const root = createRoot(reactRoot);
+const root = createRoot(document.getElementById('react-root'));
 root.render(
   <Provider store={store}>
     <App />

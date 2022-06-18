@@ -6,20 +6,23 @@ import fs from 'fs';
 import Helmet from 'react-helmet';
 import Koa from 'koa';
 import mount from 'koa-mount';
-import path from 'path';
-import React from 'react';
+import * as React from 'react';
 import route from 'koa-route';
 import sendfile from 'koa-sendfile';
 import serve from 'koa-static';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
 // Import internal modules
-import config from '../config';
-import configureStore from './utils/configureStore';
-import Main from './components/Main';
-import * as api from './server/api';
-import { all } from './utils/database';
+import config from '../config.js';
+import configureStore from './utils/configureStore.js';
+import App from './components/App.js';
+import * as api from './server/api.js';
+import { all } from './utils/database.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Launch Koa application
 const app = new Koa();
@@ -34,26 +37,26 @@ let jsPath;
 let cssPath;
 
 // Use build directory as assets
-app.use(mount('/assets/', serve(path.join(__dirname, '..', config.files.staticAssets))));
+app.use(mount('/assets/', serve(join(__dirname, '..', config.files.staticAssets))));
 
 // Serve the favicon
-app.use(favicon(path.join(__dirname, '..', 'assets', 'favicon.ico')));
+app.use(favicon(join(__dirname, '..', 'assets', 'favicon.ico')));
 
 // Serve the resume
 app.use(route.get('/resume', async (ctx) => {
-  await sendfile(ctx, path.join(__dirname, '..', 'assets', 'resume.pdf'));
+  await sendfile(ctx, join(__dirname, '..', 'assets', 'resume.pdf'));
 }));
 
 // Serve the pgp key
 app.use(route.get('/pgp', async (ctx) => {
   ctx.set('Cache-Control', 'no-cache');
   ctx.set('Content-Disposition', 'attachment; filename=ankit.asc');
-  await sendfile(ctx, path.join(__dirname, '..', 'assets', 'pgp.asc'));
+  await sendfile(ctx, join(__dirname, '..', 'assets', 'pgp.asc'));
 }));
 
 // Serve the robots.txt file
 app.use(route.get('/robots.txt', async (ctx) => {
-  await sendfile(ctx, path.join(__dirname, '..', 'assets', 'robots.txt'));
+  await sendfile(ctx, join(__dirname, '..', 'assets', 'robots.txt'));
 }));
 
 // Serve database API routes
@@ -104,7 +107,7 @@ app.use(route.get('/', async (ctx) => {
   const store = configureStore(initialState);
   const renderedString = renderToString(
     <Provider store={store}>
-      <Main />
+      <App />
     </Provider>,
   );
 
@@ -112,7 +115,7 @@ app.use(route.get('/', async (ctx) => {
   const serializedState = JSON.stringify(store.getState());
 
   // Get HEAD info for specific route
-  const { title, meta, link } = Helmet.rewind();
+  const { title, meta, link } = Helmet.renderStatic();
 
   // Generate output
   ctx.status = 200;
