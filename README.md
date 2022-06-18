@@ -7,7 +7,6 @@ Source code for [my website](https://ankitsardesai.ca).
 * Photo data stored in a **sqlite** database and photos are stored on **Amazon S3**.
 * Using **Docker** to build and deploy on **Amazon EC2 Container Service**.
 * Content delivery and DDOS protection using **CloudFlare**.
-* Full **HTTPS** support. (because why not?)
 
 ## Installing
 

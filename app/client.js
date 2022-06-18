@@ -1,4 +1,3 @@
-// @flow
 
 // Import babel polyfill before anything else
 import 'babel-polyfill';
@@ -6,11 +5,11 @@ import 'babel-polyfill';
 // Import external modules
 import React from 'react';
 import { Provider } from 'react-redux';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 // Import internal modules
 import configureStore from './utils/configureStore';
-import Main from './components/Main';
+import App from './components/App';
 import { loadGoogleAnalytics, trackPageView } from './utils/analytics';
 
 // Global isomorphic constants
@@ -30,9 +29,9 @@ const store = configureStore(window.INITIAL_STATE);
 const reactRoot = document.getElementById('react-root');
 
 // Render application
-render(
+const root = createRoot(reactRoot);
+root.render(
   <Provider store={store}>
-    <Main />
+    <App />
   </Provider>,
-  reactRoot,
 );

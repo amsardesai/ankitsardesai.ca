@@ -18,7 +18,7 @@ let pretty = require('prettysize');
 let reload = browserSync.reload;
 let rev = require('gulp-rev');
 let runSequence = require('run-sequence');
-let sass = require('gulp-sass');
+//let sass = require('gulp-sass');
 let size = require('gulp-size');
 let sourcemaps = require('gulp-sourcemaps');
 let webpack = require('webpack');
@@ -40,7 +40,7 @@ let isRunningDevServer = false;
 gulp.task('build:css', () => {
   return gulp.src(config.files.css.entry)
     .pipe(plumber())
-    .pipe(sass(config.build.sass))
+  //  .pipe(sass(config.build.sass))
     .pipe(prefix(config.build.autoprefixer))
     .pipe(size({ title: 'CSS' }))
     .pipe(gulp.dest(`${config.files.staticAssets}${config.files.css.out}`))
@@ -52,7 +52,7 @@ gulp.task('build:css', () => {
  */
 gulp.task('build:css:prod', () => {
   return gulp.src(config.files.css.entry)
-    .pipe(sass(config.build.sass))
+  //  .pipe(sass(config.build.sass))
     .pipe(prefix(config.build.autoprefixer))
     .pipe(minifyCss())
     .pipe(size({ title: 'CSS' }))
@@ -202,7 +202,7 @@ gulp.task('compile:nolint', callback => {
 gulp.task('watch', ['clean'], callback => {
   runSequence(
     'build:lint', [
-      'build:css',
+      //'build:css',
       'build:client',
       'build:server',
     ], () => {
@@ -211,7 +211,7 @@ gulp.task('watch', ['clean'], callback => {
       gulp.watch(config.files.client.src, ['build:client']);
       gulp.watch(config.files.server.src, ['build:server']);
       gulp.watch(config.files.client.src, ['build:lint']);
-      gulp.watch(config.files.css.src, ['build:css']);
+      //gulp.watch(config.files.css.src, ['build:css']);
 
       // Launch Nodemon
       nodemon({
