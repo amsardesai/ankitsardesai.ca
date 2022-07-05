@@ -24,8 +24,7 @@ Then go to `https://<your docker IP>/`.
 To run the development version of this site, install `sqlite3` and `node`, then clone and
 run the following:
 
-    sqlite3 -init database.sql ankit.db ""
-    export DB_URL="$(pwd -P)/ankit.db"
+    npm run setup-db
     npm install
     npm run watch
 
@@ -33,4 +32,4 @@ Then go to `http://localhost:3000/`
 
 ## Copyright
 
-&copy; Ankit Sardesai 2016
+&copy; Ankit Sardesai 2022

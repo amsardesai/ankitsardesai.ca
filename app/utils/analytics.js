@@ -10,7 +10,7 @@ const VALID_ACTIONS = ['submit', 'error', 'click', 'scroll', 'load', 'keypress']
 
 const GOOGLE_ANALYTICS_URL = 'https://www.google-analytics.com/analytics.js';
 
-const GA_TRACKING_CODE = process.env.GA_TRACKING_CODE || config.analytics.google;
+const GA_TRACKING_CODE = ''; //process.env.GA_TRACKING_CODE || config.analytics.google;
 
 function loadScriptFile(src, id) {
   if (!document.getElementById(id)) {

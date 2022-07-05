@@ -8,7 +8,7 @@ import { createEventTracker } from '../utils/analytics';
 const trackEvent = createEventTracker('button');
 const createAnalyticsEventSender = service => () => trackEvent('click', service);
 
-export default () => {
+// export default () => {
   const tooltipProps = {
     placement: 'bottom',
     mouseLeaveDelay: 0,

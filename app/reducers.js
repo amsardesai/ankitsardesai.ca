@@ -13,12 +13,12 @@ export type State = {
   next: PhotoInfo,
 };
 
-export default (
+export default function reducer(
   prevState: State,
   action: Action,
-) => {
+): State {
   switch (action.type) {
-    case 'GET_NEW_PHOTO': return {
+    case 'PUSH_NEW_PHOTO': return {
       ...prevState,
       prev: prevState.current,
       current: prevState.next,

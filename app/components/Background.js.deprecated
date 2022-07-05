@@ -4,7 +4,7 @@ import FontAwesome from 'react-fontawesome';
 import React from 'react';
 import { string, bool } from 'prop-types';
 
-const Background = ({ name, location, isNext, isPrev }) => (
+// const Background = ({ name, location, isNext, isPrev }) => (
   <div
     className={classNames('main__background', {
       'main__background--next': isNext,

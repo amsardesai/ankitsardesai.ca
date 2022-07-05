@@ -1,5 +1,5 @@
 /**
- * @module database
+ * @module sqlite3
  * A set of utilities for interating with the sqlite3 database.
  */
 

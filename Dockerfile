@@ -1,51 +1,42 @@
 
 # Use Ubuntu distribution
-FROM node:8.1.4
+FROM node:18.4.0
 MAINTAINER Ankit Sardesai <me@ankitsardesai.ca>
 
-# Install necessary packages to install yarn
+# Install sqlite3
 RUN apt-get update
-RUN apt-get install -y apt-transport-https
-
-# Configure apt-get repository for yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
-# Install yarn and sqlite3
-RUN apt-get update
-RUN apt-get install -y yarn sqlite3
+RUN apt-get install -y sqlite3
 
 # Make working directory
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 
 # Install packages
-ADD package.json yarn.lock ./
-RUN yarn
+ADD package.json package-lock.json ./
+RUN npm install
 
 # Copy application code
 ADD app ./app
 ADD assets ./assets
-ADD .eslintrc config.js gulpfile.js ./
-ADD webpack.client.js webpack.dev.client.js ./
+ADD .eslintrc.cjs config.js Gulpfile.js ./
+ADD webpack.config.js webpack.dev.config.js ./
 
 # Compile codebase
-RUN yarn run compile
+RUN npm run compile
 
 # Prune developer packages and uncompiled files
 RUN rm -rf app
-RUN yarn install --production --ignore-scripts --prefer-offline
+RUN npm prune --production
 
 # Initialize database
-RUN mkdir -p /db
 ADD database.sql ./
-RUN sqlite3 -init ./database.sql /db/ankitsardesai.db ""
+RUN npm run setup-db
 
 # Define environment variables
 ENV NODE_ENV production
 ENV PORT 5092
-ENV DB_URL /db/ankitsardesai.db
+ENV DB_URL /opt/app/ankit.db
 
 # Start the server
-CMD ["node", "/opt/app/app/server"]
+CMD ["node", "/opt/app/build/server"]
 

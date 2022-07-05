@@ -1,14 +1,14 @@
 
 'use strict'; // eslint-disable-line strict
 
-// Import modules
-// import webpack from 'webpack';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+const Style9Plugin = require('style9/webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
+const { join } = require('path');
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const config = require('./config.js');
 
-export default {
+module.exports = {
 
   // target: 'web',
   // cache: true,
@@ -19,10 +19,10 @@ export default {
   mode: 'production',
 
   output: {
-    path: join(__dirname, 'build/static/js'),
+    path: join(__dirname, 'build/static'),
     filename: 'bundle.js',
-    // chunkFilename: '[name].[id].js',
-    // publicPath: '/assets/js/',
+    chunkFilename: '[name].[id].js',
+    publicPath: '/assets/',
   },
 
   module: {
@@ -30,18 +30,49 @@ export default {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              ['@babel/preset-typescript', { isTSX: true, allExtensions: true }],
-              ['@babel/preset-react'],
-              ['@babel/preset-env', { targets: "defaults" }],
-            ],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['@babel/preset-typescript', { isTSX: true, allExtensions: true }],
+                ['@babel/preset-react'],
+                ['@babel/preset-env', { targets: "defaults" }],
+              ],
+              plugins: [
+                ['style9/babel']
+              ],
+            },
           },
-        },
+          // { loader: Style9Plugin.loader },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: 'css-loader', options: {} },
+        ],
       },
     ],
+  },
+
+  plugins: [
+    new Style9Plugin(),
+    new MiniCssExtractPlugin(),
+  ],
+
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          type: 'css/mini-extract',
+          chunks: 'all',
+          enforce: true,
+        }
+      }
+    }
   },
 
   // externals: {
