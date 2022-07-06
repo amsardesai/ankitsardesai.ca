@@ -1,14 +1,18 @@
 
 'use strict'; // eslint-disable-line strict
 
-const Style9Plugin = require('style9/webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const webpack = require('webpack');
-const { join } = require('path');
+import Style9Plugin from 'style9/webpack/index.js';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import webpack from 'webpack';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
-const config = require('./config.js');
+import config from './config.js';
 
-module.exports = {
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+export default {
 
   // target: 'web',
   // cache: true,
@@ -17,11 +21,12 @@ module.exports = {
   // debug: false,
   entry: './app/client.js',
   mode: 'production',
+  cache: true,
 
   output: {
     path: join(__dirname, 'build/static'),
     filename: 'bundle.js',
-    chunkFilename: '[name].[id].js',
+    // chunkFilename: '[name].[id].js',
     publicPath: '/assets/',
   },
 
@@ -39,19 +44,20 @@ module.exports = {
                 ['@babel/preset-react'],
                 ['@babel/preset-env', { targets: "defaults" }],
               ],
-              plugins: [
-                ['style9/babel']
-              ],
+              plugins: [],
             },
           },
-          // { loader: Style9Plugin.loader },
+          { loader: Style9Plugin.loader },
         ],
       },
       {
         test: /\.css$/,
         use: [
           { loader: MiniCssExtractPlugin.loader },
-          { loader: 'css-loader', options: {} },
+          {
+            loader: 'css-loader',
+            options: { sourceMap: false },
+          },
         ],
       },
     ],
@@ -59,10 +65,15 @@ module.exports = {
 
   plugins: [
     new Style9Plugin(),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'styles.css',
+    }),
   ],
 
   optimization: {
+    innerGraph: true,
+    mangleExports: true,
+    minimizer: [ '...', new CssMinimizerPlugin() ],
     splitChunks: {
       cacheGroups: {
         styles: {

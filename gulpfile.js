@@ -1,34 +1,35 @@
 'use strict'; // eslint-disable-line strict
 
 // Import external modules
-const babel = require('gulp-babel');
-const browserSync = require('browser-sync');
-const cache = require('gulp-cached');
-const colors = require('ansi-colors');
-const del = require('del');
-const eslint = require('gulp-eslint');
-const fs = require('fs');
-const log = require('fancy-log');
-const gulp = require('gulp');
-// const cleanCss = require('gulp-clean-css');
-const nodemon = require('nodemon');
-const path = require('path');
-const PluginError = require('plugin-error');
-const plumber = require('gulp-plumber');
-const prefix = require('gulp-autoprefixer');
-const pretty = require('prettysize');
-// const reload = require('ync.reload);
-const rev = require('gulp-rev');
-//const sass = require('gulp-sass'));
-const size = require('gulp-size');
-const sourcemaps = require('gulp-sourcemaps');
-const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
+import babel from 'gulp-babel';
+import browserSync from 'browser-sync';
+import cache from 'gulp-cached';
+import colors from 'ansi-colors';
+import del from 'del';
+import eslint from 'gulp-eslint';
+import fs from 'fs';
+import log from 'fancy-log';
+import gulp from 'gulp';
+// import cleanCss from 'gulp-clean-css';
+import nodemon from 'nodemon';
+import path from 'path';
+import PluginError from 'plugin-error';
+import plumber from 'gulp-plumber';
+import prefix from 'gulp-autoprefixer';
+import pretty from 'prettysize';
+// import reload from 'ync.reload;
+import rev from 'gulp-rev';
+import revdel from 'gulp-rev-delete-original';
+//import sass from 'gulp-sass');
+import size from 'gulp-size';
+import sourcemaps from 'gulp-sourcemaps';
+import webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
 
-// const internal modules
-const config = require('./config.js');
-const webpackProdConfig = require('./webpack.config.js');
-const webpackDevConfig = require('./webpack.dev.config.js');
+// import internal modules
+import config from './config.js';
+import webpackProdConfig from './webpack.config.js';
+import webpackDevConfig from './webpack.dev.config.js';
 
 /**
  * Compile our CSS files
@@ -87,8 +88,6 @@ function buildServer() {
       presets: [
         ['@babel/preset-typescript', { isTSX: true, allExtensions: true }],
         ['@babel/preset-react'],
-        ['@babel/preset-env', { targets: "defaults" }],
-        // ['@linaria'],
       ],
       plugins: [
         ['style9/babel'],
@@ -155,8 +154,9 @@ function buildClientProd(callback) {
  * caching.
  */
 function buildCache() {
-  return gulp.src(`build/static/*.js`)
+  return gulp.src(`build/static/*.{js,css}`)
     .pipe(rev())
+    .pipe(revdel())
     .pipe(gulp.dest(`build/static`))
     .pipe(rev.manifest())
     .pipe(gulp.dest(`build/static`));
@@ -165,15 +165,14 @@ function buildCache() {
 /**
  * Clean out build folder so we build from scratch.
  */
-function clean() {
+export function clean() {
   return del(['build']);
 }
-exports.clean = clean;
 
 /**
  * Task to compile our files for production.
  */
-exports.compile = gulp.series(
+export const compile = gulp.series(
   clean,
   // buildLintProd,
   gulp.parallel(
@@ -187,7 +186,7 @@ exports.compile = gulp.series(
 /**
  * Task to compile our files for production, ignoring linting.
  */
-exports.compileNoLint = gulp.series(
+export const compileNoLint = gulp.series(
   clean,
   gulp.parallel(
     buildClientProd,
@@ -199,7 +198,7 @@ exports.compileNoLint = gulp.series(
 /**
  * Watch the necessary directories and launch BrowserSync.
  */
-exports.watch = gulp.series(
+export const watch = gulp.series(
   clean,
   // buildLint,
   gulp.parallel(
@@ -208,7 +207,7 @@ exports.watch = gulp.series(
   ),
   function startServer(callback) {
     // Watch files
-    gulp.watch('./app/**/**/**/**/*.js', buildClient);
+    // gulp.watch('./app/**/**/**/**/*.js', buildClient);
     gulp.watch('./app/**/**/**/**/*.js', buildServer);
     // gulp.watch('./app/**/**/**/**/*.js', buildLint);
 
@@ -216,7 +215,7 @@ exports.watch = gulp.series(
     nodemon({
       env: { NODE_ENV: 'development' },
       watch: [ 'build' ],
-      ignore: [ 'build/static/' ],
+      ignore: [ 'build/static' ],
     });
 
     // Boolean to check if BrowserSync has started.

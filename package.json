@@ -8,17 +8,18 @@
     "type": "git",
     "url": "https://github.com/amsardesai/ankitsardesai.ca"
   },
+  "type": "module",
   "private": true,
   "scripts": {
     "clean": "gulp clean",
     "compile": "gulp compile",
     "setup-db": "sqlite3 -init database.sql ankit.db \"\"; export DB_URL=\"$(pwd -P)/ankit.db\"",
-    "production": "NODE_ENV=production node app/server",
+    "production": "NODE_ENV=production node build/server",
     "watch": "gulp watch"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1",
     "classnames": "^2.3.1",
+    "core-js": "^3.23.3",
     "koa": "^2.13.4",
     "koa-favicon": "^2.1.0",
     "koa-mount": "^4.0.0",
@@ -32,7 +33,7 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "sqlite3": "^5.0.8",
-    "style9": "^0.13.3"
+    "style9": "^0.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",
@@ -46,6 +47,7 @@
     "browser-sync": "^2.27.10",
     "catom": "^1.2.8",
     "css-loader": "^6.7.1",
+    "css-minimizer-webpack-plugin": "^4.0.0",
     "del": "^6.1.1",
     "eslint": "^8.18.0",
     "eslint-plugin-import": "^2.26.0",
@@ -60,6 +62,7 @@
     "gulp-eslint": "^4.0.0",
     "gulp-plumber": "^1.2.1",
     "gulp-rev": "^9.0.0",
+    "gulp-rev-delete-original": "^0.2.3",
     "gulp-size": "^4.0.1",
     "gulp-sourcemaps": "^3.0.0",
     "lodash.clonedeep": "^4.5.0",

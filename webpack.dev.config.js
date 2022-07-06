@@ -1,18 +1,19 @@
 
 'use strict'; // eslint-disable-line strict
 
-const cloneDeep = require('lodash.cloneDeep');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const webpack = require('webpack');
+import cloneDeep from 'lodash.cloneDeep';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import webpack from 'webpack';
 
-const webpackProdConfig = require('./webpack.config.js');
-const config = require('./config.js');
+import webpackProdConfig from './webpack.config.js';
+import config from './config.js';
 
 const webpackConfig = cloneDeep(webpackProdConfig);
 
 webpackConfig.mode = 'development';
 webpackConfig.output.publicPath = `http://localhost:${config.ports.webpack}/`;
 webpackConfig.devServer = {
+  compress: true,
   static: {
     directory: './build/static',
   },
@@ -23,21 +24,16 @@ webpackConfig.devServer = {
 // Use React Refresh plugins for Babel and Webpack
 webpackConfig.module.rules[0].use[0].options.plugins.unshift('react-refresh/babel');
 webpackConfig.plugins.unshift(
-  new webpack.DefinePlugin({
-    // 'process.env': { NODE_ENV: JSON.stringify('production') },
-    IS_CLIENT: true,
-    IS_SERVER: false,
-  }),
   new webpack.HotModuleReplacementPlugin(),
   new ReactRefreshWebpackPlugin(),
 );
 
 // CSS sourcemaps
 // webpackConfig.module.rules[0].use[1].options.sourceMap = true;
-// webpackConfig.module.rules[1].use[1].options.sourceMap = true;
+webpackConfig.module.rules[1].use[1].options.sourceMap = true;
 
 // Make sure we don't clobber our other configuration.
-module.exports = webpackConfig;
+export default webpackConfig;
 
 // webpackConfig.debug = true;
 // webpackConfig.devtool = 'eval-source-map';

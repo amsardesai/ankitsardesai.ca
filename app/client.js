@@ -1,6 +1,7 @@
 
-// Import babel polyfill before anything else
-import '@babel/polyfill';
+import 'core-js/stable/index.js';
+import 'normalize.css';
+import './main.css'
 
 // Import external modules
 import React from 'react';
@@ -13,8 +14,8 @@ import App from './components/App.js';
 // import { loadGoogleAnalytics, trackPageView } from './utils/analytics.js';
 
 // Global isomorphic constants
-window.IS_SERVER = false;
-window.IS_CLIENT = true;
+// window.IS_SERVER = false;
+// window.IS_CLIENT = true;
 
 // Track Google Analytics page view
 // loadGoogleAnalytics();

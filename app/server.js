@@ -20,15 +20,15 @@ import App from './components/App.js';
 import * as api from './server/api.js';
 import { all } from './utils/sqlite3.js';
 
-// const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Launch Koa application
 const app = new Koa();
 const port = process.env.PORT || config.ports.koa;
 
 // Add our isomorphic constants
-global.IS_SERVER = true;
-global.IS_CLIENT = false;
+// global.IS_SERVER = true;
+// global.IS_CLIENT = false;
 
 // Use build directory as assets
 app.use(mount('/assets/', serve(join(__dirname, '../build/static/'))));
@@ -74,16 +74,10 @@ let jsPath = '';
 let cssPath = '';
 
 if (process.env.NODE_ENV === 'production') {
-  // In production, our node context will be under the root directory, so we need to include the
-  // build folder in our path when getting the manifest file.
-
-  // Get the manifest files for our CSS and JS files
-  const jsManifest = JSON.parse(fs.readFileSync('./build/static/js/rev-manifest.json', 'utf-8'));
-  // const cssManifest = JSON.parse(fs.readFileSync('./build/static/css/rev-manifest.json', 'utf-8'));
-
-  // If we're in production, we want to make the build directory a static directory in /assets
-  jsPath = `/assets/${jsManifest['bundle.js']}`;
-  cssPath = `/assets/css/${cssManifest['styles.css']}`;
+  // Check manifest files for latest hashes for js/css bundles
+  const manifest = JSON.parse(fs.readFileSync('./build/static/rev-manifest.json', 'utf-8'));
+  jsPath = `/assets/${manifest['bundle.js']}`;
+  cssPath = `/assets/${manifest['styles.css']}`;
 } else {
   // In development mode, point to webpack-dev-server.
   jsPath = `http://localhost:${config.ports.webpack}/bundle.js`;
@@ -120,24 +114,20 @@ app.use(route.get('/', async (ctx) => {
   // Generate output
   ctx.status = 200;
   ctx.body =
-    `<!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta property="og:title" content="Ankit Sardesai" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://cdn.ankitsardesai.ca/assets/profile.jpg" />
-        <meta property="og:url" content="https://ankitsardesai.ca" />
-        <title>Ankit Sardesai</title>
-        <link rel="stylesheet" href="${cssPath}" />
-      </head>
-      <body>
-        <div id="react-root">${renderedString}</div>
-        <script>window.INITIAL_STATE = ${serializedState}</script>
-        <script src="${jsPath}"></script>
-      </body>
-    </html>`;
+    '<!DOCTYPE html><html><head>' +
+    '<meta charset="utf-8" />' +
+    '<meta name="viewport" content="width=device-width,initial-scale=1" />' +
+    '<meta property="og:title" content="Ankit Sardesai" />' +
+    '<meta property="og:type" content="website" />' +
+    '<meta property="og:image" content="https://cdn.ankitsardesai.ca/assets/profile.jpg" />' +
+    '<meta property="og:url" content="https://ankitsardesai.ca" />' +
+    '<title>Ankit Sardesai</title>' +
+    '<link rel="stylesheet" href="' + cssPath + '" />' +
+    '<script defer src="' + jsPath + '"></script>' +
+    '</head><body>' +
+    '<div id="react-root">' + renderedString + '</div>' +
+    '<script>window.INITIAL_STATE=' + serializedState + '</script>' +
+    '</body></html>';
 }));
 
 app.listen(port, () => {
