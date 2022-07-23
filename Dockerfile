@@ -1,7 +1,7 @@
 
 # Use Ubuntu distribution
 FROM node:18.4.0
-MAINTAINER Ankit Sardesai <me@ankitsardesai.ca>
+MAINTAINER Ankit Sardesai <amsardesai@gmail.com>
 
 # Install sqlite3
 RUN apt-get update

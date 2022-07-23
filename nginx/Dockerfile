@@ -1,6 +1,6 @@
 
-FROM nginx:1.10.0
-MAINTAINER Ankit Sardesai <me@ankitsardesai.ca>
+FROM nginx:1.23.1
+MAINTAINER Ankit Sardesai <amsardesai@gmail.com>
 
 RUN apt-get install -y openssl
 ADD hier /
