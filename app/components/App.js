@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { useCallback, useLayoutEffect, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import style9 from 'style9';
 
 import Details from './Details.js';
 import IconBriefcase from './icons/IconBriefcase.js';
@@ -10,12 +11,6 @@ import IconKey from './icons/IconKey.js';
 import IconLinkedIn from './icons/IconLinkedIn.js';
 import IconLocation from './icons/IconLocation.js';
 import IconMail from './icons/IconMail.js';
-
-import style9 from 'style9';
-
-// const WIDTH_TO_HEIGHT_RATIO = 1.5;
-
-const emptyFunction = () => {};
 
 const styles = style9.create({
   backgroundLayer: {
@@ -99,12 +94,10 @@ const styles = style9.create({
     height: 1,
     opacity: 0,
   },
-
   linkAnchor: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-
     transitionProperty: 'transform',
     transitionTimingFunction: 'linear',
     transitionDuration: '100ms',
@@ -325,7 +318,7 @@ export default function App({initialPhoto}: Props): React.MixedElement {
         }
       });
 
-  }, [dispatch, photo.name, triggerNextPhoto]);
+  }, [dispatch, photo.name, preloadImage, triggerNextPhoto]);
 
   // Preload image when this component mounts, then start carousel
   const hasStartedRef = useRef(false);
@@ -335,7 +328,7 @@ export default function App({initialPhoto}: Props): React.MixedElement {
       blockTransitionsForSomeTime();
     }
     hasStartedRef.current = true;
-  }, [loadNextPhoto]);
+  });
 
   const prevTransitioningRef = useRef(transitioning);
   useLayoutEffect(() => {
@@ -396,6 +389,19 @@ export default function App({initialPhoto}: Props): React.MixedElement {
       }
     }
   }, [])
+
+  // Trigger next photo when pressing right arrow key
+  useEffect(() => {
+    function handleKeyPress(e) {
+      if (e.keyCode === 39) {
+        triggerNextPhoto();
+      }
+    }
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [triggerNextPhoto]);
 
   const resetScroll = (e) => {
     e.target.scrollTop = 0;
