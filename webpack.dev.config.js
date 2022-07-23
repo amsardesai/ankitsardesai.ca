@@ -1,7 +1,7 @@
 
 'use strict'; // eslint-disable-line strict
 
-import cloneDeep from 'lodash.cloneDeep';
+import cloneDeep from 'lodash.clonedeep';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import webpack from 'webpack';
 
