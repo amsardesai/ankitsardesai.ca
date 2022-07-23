@@ -465,7 +465,7 @@ export default function App({initialPhoto}: Props): React.MixedElement {
                 <span className={style9(styles.pillText)}>github</span>
               </a>
               <a
-                href="mailto:me@ankitsardesai.ca"
+                href="mailto:amsardesai@gmail.com"
                 style={{ animationDelay: '800ms' }}
                 className={style9(styles.pill, styles.linkPill)}>
                 <IconMail className={style9(styles.pillIcon)} />
