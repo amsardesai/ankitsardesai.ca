@@ -3,12 +3,14 @@ version: '3'
 
 services:
   app:
+    image: ankitsardesai/app
     restart: always
     build: .
     ports:
       - "5092:5092"
 
   nginx:
+    image: ankitsardesai/nginx
     restart: always
     build: ./nginx
     ports:

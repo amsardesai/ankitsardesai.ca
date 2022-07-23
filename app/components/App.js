@@ -360,7 +360,7 @@ export default function App({initialPhoto}: Props): React.MixedElement {
       }
     }
     prevTransitioningRef.current = transitioning;
-  }, [transitioning, loadNextPhoto]);
+  }, [transitioning, loadNextPhoto, blockTransitionsForSomeTime]);
 
   // Subtle parallax effect so links stick out in front of busy photos
   useEffect(() => {
