@@ -230,6 +230,9 @@ const styles = style9.create({
     transform: 'translateY(30px)',
     transitionDelay: '0s',
   },
+  locationPillInitial: {
+    transitionDuration: '0s',
+  },
 });
 
 /**
@@ -474,6 +477,7 @@ export default function App({initialPhoto}: Props): React.MixedElement {
               transitioning
                 ? styles.locationPillTransitioningOut
                 : styles.locationPillTransitioningIn,
+              transitioning && previousPhoto == null && styles.locationPillInitial,
             )}>
             <IconLocation className={style9(styles.pillIcon)} />
             <div className={style9(styles.pillText)}>{photo.location}</div>
