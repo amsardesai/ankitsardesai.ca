@@ -10,6 +10,32 @@ import config from './config.js';
 
 const webpackConfig = cloneDeep(webpackProdConfig);
 
+
+
+// class WebpackWatchRunPlugin {
+    // constructor(options) {
+        // if (typeof options !== "object") options = {};
+        // this.options = options;
+    // }
+
+    // apply(compiler) {
+        // const options = this.options;
+        // compiler.plugin("watch-run",
+            // function (watching, done) {
+                // const changedTimes = watching.compiler.watchFileSystem.watcher.mtimes;
+                // const changedFiles = Object.keys(changedTimes)
+                    // .map(file => `\n  ${file}`)
+                    // .join("");
+                // if (changedFiles.length) {
+                    // console.log("Files modified:", changedFiles);
+                // }
+                // done();
+            // });
+    // }
+// }
+
+
+
 webpackConfig.mode = 'development';
 webpackConfig.output.publicPath = `http://localhost:${config.ports.webpack}/`;
 webpackConfig.devServer = {
@@ -24,6 +50,7 @@ webpackConfig.devServer = {
 // Use React Refresh plugins for Babel and Webpack
 webpackConfig.module.rules[0].use[0].options.plugins.unshift('react-refresh/babel');
 webpackConfig.plugins.unshift(
+  // new WebpackWatchRunPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new ReactRefreshWebpackPlugin(),
 );

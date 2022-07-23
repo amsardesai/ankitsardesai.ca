@@ -18,7 +18,8 @@ import config from '../config.js';
 import configureStore from './utils/configureStore.js';
 import App from './components/App.js';
 import * as api from './server/api.js';
-import { all } from './utils/sqlite3.js';
+import { get, all } from './utils/sqlite3.js';
+import { getInitialState } from './reducer.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -54,14 +55,12 @@ app.use(route.get('/robots.txt', async (ctx) => {
 }));
 
 // Serve endpoint for receiving next photo
-app.use(route.get('/api/next_photo', async (ctx) => {
+app.use(route.get('/api/getNextPhoto', async (ctx) => {
   try {
-    const { query } = ctx.request;
-    const prevName = (query && query.prev) || '';
-    const curName = (query && query.current) || '';
-    const { name, location } = await get('SELECT name, location FROM photo ' +
-                                         'WHERE name != ? AND name != ?' +
-                                         'ORDER BY RANDOM() LIMIT 1', prevName, curName);
+    const previousName = ctx.request?.query?.previousName || '';
+    const { name, location } = await get('SELECT name, location FROM photos ' +
+                                         'WHERE name != ? ORDER BY RANDOM() ' +
+                                         'LIMIT 1', previousName);
     ctx.status = 200;
     ctx.body = { name, location };
   } catch (err) {
@@ -87,21 +86,10 @@ if (process.env.NODE_ENV === 'production') {
 // Capture main route
 app.use(route.get('/', async (ctx) => {
   // Get initial image to display
-  const initialPhotos = await all('SELECT name, location FROM photos ORDER BY RANDOM() LIMIT 2');
-
-  // Generate initial state
-  const initialState = {
-    current: {
-      name: initialPhotos[0].name,
-      location: initialPhotos[0].location,
-    },
-    next: {
-      name: initialPhotos[1].name,
-      location: initialPhotos[1].location,
-    },
-  };
-
-  const store = configureStore(initialState)
+  const initialPhotos = await all('SELECT name, location FROM photos ORDER BY RANDOM() LIMIT 1');
+  const store = configureStore(
+    getInitialState(initialPhotos[0].name, initialPhotos[0].location),
+  );
   const renderedString = renderToString(
     <Provider store={store}>
       <App />

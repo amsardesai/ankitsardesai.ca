@@ -21,10 +21,12 @@ import App from './components/App.js';
 // loadGoogleAnalytics();
 // trackPageView(window.document.location);
 
+const initialState = window.INITIAL_STATE;
+
 // Hydrate server-side generated markup
 hydrateRoot(
   document.getElementById('react-root'),
-  <Provider store={configureStore(window.INITIAL_STATE)}>
+  <Provider store={configureStore(initialState)} serverState={initialState}>
     <App />
   </Provider>,
 );

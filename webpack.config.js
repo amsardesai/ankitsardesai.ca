@@ -21,7 +21,6 @@ export default {
   // debug: false,
   entry: './app/client.js',
   mode: 'production',
-  cache: true,
 
   output: {
     path: join(__dirname, 'build/static'),

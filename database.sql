@@ -389,7 +389,6 @@ INSERT INTO photos VALUES( '20190727-DSCF8364', 'san francisco, california, usa'
 INSERT INTO photos VALUES( '20190727-DSCF8372', 'san francisco, california, usa' );
 INSERT INTO photos VALUES( '20190803-DSCF8409', 'denali national park, usa' );
 INSERT INTO photos VALUES( '20190803-DSCF8424', 'nenana, alaska, usa' );
-INSERT INTO photos VALUES( '20190803-DSCF8465', 'fairbanks, alaska, usa' );
 INSERT INTO photos VALUES( '20190804-DSCF8490', 'delta river, alaska, usa' );
 INSERT INTO photos VALUES( '20190804-DSCF8520', 'delta river, alaska, usa' );
 INSERT INTO photos VALUES( '20190804-DSCF8527', 'delta river, alaska, usa' );

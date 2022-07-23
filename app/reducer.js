@@ -5,9 +5,15 @@ type Action = {
   location: string,
 };
 
-export type State = {
+type Photo = {
   name: string,
   location: string,
+};
+
+export type State = {
+  previousPhoto: Photo | null,
+  currentPhoto: Photo,
+  transitioning: boolean,
 };
 
 export default function reducer(
@@ -15,11 +21,17 @@ export default function reducer(
   action: Action,
 ): State {
   switch (action.type) {
-    case 'PUSH_NEW_PHOTO': return {
-      name: action.name,
-      location: action.location,
+    case 'SHOW_PHOTO': return {
+      ...prevState,
+      transitioning: false,
     };
-    default: prevState;
+    case 'PUSH_NEXT_PHOTO': return {
+      ...prevState,
+      previousPhoto: prevState.currentPhoto,
+      currentPhoto: { name: action.name, location: action.location },
+      transitioning: true,
+    };
+    default: return prevState;
   }
 };
 
@@ -27,5 +39,9 @@ export function getInitialState(
   name: string,
   location: string,
 ) {
-  return { name, location };
+  return {
+    previousPhoto: null,
+    currentPhoto: { name, location },
+    transitioning: true,
+  };
 }
