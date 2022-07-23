@@ -18,7 +18,7 @@ RUN npm install
 # Copy application code
 ADD app ./app
 ADD assets ./assets
-ADD .eslintrc.cjs config.js Gulpfile.js ./
+ADD .eslintrc.cjs config.js gulpfile.js ./
 ADD webpack.config.js webpack.dev.config.js ./
 
 # Compile codebase
