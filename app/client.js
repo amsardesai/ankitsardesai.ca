@@ -11,15 +11,15 @@ import { hydrateRoot } from 'react-dom/client';
 // Import internal modules
 import configureStore from './utils/configureStore.js';
 import App from './components/App.js';
-// import { loadGoogleAnalytics, trackPageView } from './utils/analytics.js';
+import { loadGoogleAnalytics, trackPageView } from './utils/analytics.js';
 
 // Global isomorphic constants
 // window.IS_SERVER = false;
 // window.IS_CLIENT = true;
 
 // Track Google Analytics page view
-// loadGoogleAnalytics();
-// trackPageView(window.document.location);
+loadGoogleAnalytics();
+trackPageView(window.document.location);
 
 const initialState = window.INITIAL_STATE;
 

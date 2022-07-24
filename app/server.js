@@ -42,13 +42,6 @@ app.use(route.get('/resume', async (ctx) => {
   await sendfile(ctx, join(__dirname, '../assets/resume.pdf'));
 }));
 
-// Serve the pgp key
-app.use(route.get('/pgp', async (ctx) => {
-  ctx.set('Cache-Control', 'no-cache');
-  ctx.set('Content-Disposition', 'attachment; filename=ankit.asc');
-  await sendfile(ctx, join(__dirname, '../assets/pgp.asc'));
-}));
-
 // Serve the robots.txt file
 app.use(route.get('/robots.txt', async (ctx) => {
   await sendfile(ctx, join(__dirname, '../assets/robots.txt'));

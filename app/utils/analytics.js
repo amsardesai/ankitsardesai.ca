@@ -3,14 +3,12 @@
  * A set of utility functions for Google Analytics.
  */
 
-import config from '../../config.js';
-
 type Action = 'submit' | 'error' | 'click' | 'scroll' | 'load' | 'keypress';
 const VALID_ACTIONS = ['submit', 'error', 'click', 'scroll', 'load', 'keypress'];
 
 const GOOGLE_ANALYTICS_URL = 'https://www.google-analytics.com/analytics.js';
 
-const GA_TRACKING_CODE = ''; //process.env.GA_TRACKING_CODE || config.analytics.google;
+const GA_TRACKING_CODE = 'UA-37589348-3';
 
 function loadScriptFile(src, id) {
   if (!document.getElementById(id)) {
@@ -115,7 +113,7 @@ export function trackPageView({
   pathname,
   search,
   hash,
-  }: {
+}: {
   pathname: string,
   search: string,
   hash: string,
