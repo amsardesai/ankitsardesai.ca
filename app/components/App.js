@@ -114,6 +114,7 @@ const styles = style9.create({
     borderStyle: 'solid',
     borderColor: 'rgba(255,255,255,0.85)',
     backdropFilter: 'brightness(80%) invert(10%) saturate(250%) blur(30px)',
+    WebkitBackdropFilter: 'brightness(80%) invert(10%) saturate(250%) blur(30px)',
     boxSizing: 'border-box',
     borderRadius: '3em',
     fontFamily: 'inherit',
