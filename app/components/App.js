@@ -4,10 +4,8 @@ import { useCallback, useLayoutEffect, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import style9 from 'style9';
 
-import Details from './Details.js';
 import IconBriefcase from './icons/IconBriefcase.js';
 import IconGithub from './icons/IconGithub.js';
-import IconKey from './icons/IconKey.js';
 import IconLinkedIn from './icons/IconLinkedIn.js';
 import IconLocation from './icons/IconLocation.js';
 import IconMail from './icons/IconMail.js';
@@ -238,11 +236,7 @@ const CAROUSEL_DELAY = 15000;
  */
 const MIN_TIME_PER_PHOTO = 4000;
 
-interface Props {
-  initialPhoto: string,
-};
-
-export default function App({initialPhoto}: Props): React.MixedElement {
+export default function App(): React.MixedElement {
   const dispatch = useDispatch();
   const previousPhoto = useSelector(state => state.previousPhoto);
   const currentPhoto = useSelector(state => state.currentPhoto);
@@ -344,7 +338,7 @@ export default function App({initialPhoto}: Props): React.MixedElement {
         const startTransform = `scale(${shouldZoomIn ? 1.15 : 1.3}) translate(${initialX}%, ${initialY}%)`;
         const endTransform = `scale(${shouldZoomIn ? 1.3 : 1.15}) translate(${finalX}%, ${finalY}%)`;
 
-        const animation = imageDiv.animate(
+        imageDiv.animate(
           [{ transform: startTransform }, { transform: endTransform }],
           { duration: CAROUSEL_DELAY + MIN_TIME_PER_PHOTO, iterations: 1 },
         );

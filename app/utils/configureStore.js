@@ -10,7 +10,7 @@ const thunkMiddleware = typeof thunk.default === 'function'
   ? thunk.default
   : thunk;
 
-export default function configureStore(initialState) {
+export default function configureStore(initialState: State) {
   return createStore(
     reducer,
     initialState,

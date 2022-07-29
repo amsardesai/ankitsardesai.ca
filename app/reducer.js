@@ -33,7 +33,7 @@ export default function reducer(
     };
     default: return prevState;
   }
-};
+}
 
 export function getInitialState(
   name: string,

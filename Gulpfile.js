@@ -6,23 +6,21 @@ import browserSync from 'browser-sync';
 import cache from 'gulp-cached';
 import colors from 'ansi-colors';
 import del from 'del';
-import eslint from 'gulp-eslint';
+import eslint from 'gulp-eslint-new';
 import fs from 'fs';
 import log from 'fancy-log';
 import gulp from 'gulp';
-// import cleanCss from 'gulp-clean-css';
 import nodemon from 'nodemon';
 import path from 'path';
 import PluginError from 'plugin-error';
 import plumber from 'gulp-plumber';
 import prefix from 'gulp-autoprefixer';
 import pretty from 'prettysize';
-// import reload from 'ync.reload;
 import rev from 'gulp-rev';
 import revdel from 'gulp-rev-delete-original';
-//import sass from 'gulp-sass');
 import size from 'gulp-size';
 import sourcemaps from 'gulp-sourcemaps';
+import ts from 'gulp-typescript';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 
@@ -31,57 +29,14 @@ import config from './config.js';
 import webpackProdConfig from './webpack.config.js';
 import webpackDevConfig from './webpack.dev.config.js';
 
-/**
- * Compile our CSS files
- */
-// function buildCSS() {
-  // return gulp.src(config.files.css.entry)
-    // .pipe(plumber())
-   // .pipe(sass(config.build.sass))
-    // .pipe(prefix(config.build.autoprefixer))
-    // .pipe(size({ title: 'CSS' }))
-    // .pipe(gulp.dest(`${config.files.staticAssets}${config.files.css.out}`))
-    // .pipe(reload({ stream: true }));
-// }
-
-/**
- * Compile our CSS files for production. This minifies our CSS as well.
- */
-// function buildCSSProd() {
-  // return gulp.src(config.files.css.entry)
-  // //  .pipe(sass(config.build.sass))
-    // .pipe(prefix(config.build.autoprefixer))
-    // .pipe(minifyCss())
-    // .pipe(size({ title: 'CSS' }))
-    // .pipe(gulp.dest(`${config.files.staticAssets}${config.files.css.out}`));
-// }
-
-/**
- * Lint all our JS files.
- */
-// function buildLint() {
-  // return gulp.src('./app/**/**/**/**/*.js')
-    // .pipe(cache('build:lint'))
-    // .pipe(eslint())
-    // .pipe(eslint.format());
-// );
-
-/**
- * Lint all our JS files, and fail on error. Useful on CI machines and build scripts.
- */
-// function buildLintProd() {
-  // return gulp.src('./app/**/**/**/**/*.js')
-    // .pipe(eslint())
-    // .pipe(eslint.format())
-    // .pipe(eslint.failOnError());
-// }
+const ALL_JS_FILES = './app/**/**/**/**/*.{js,ts}';
 
 /**
  * Compile server files.
  */
 function buildServer() {
-  return gulp.src('./app/**/**/**/*.js')
-    .pipe(cache('src:server'))
+  return gulp.src(ALL_JS_FILES)
+    .pipe(cache('server'))
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(babel({
@@ -115,7 +70,7 @@ function buildClient(callback) {
   const devCompiler = webpack(
     webpackDevConfig,
     err => {
-      if (err) throw new PluginError('build:client', err);
+      if (err) throw new PluginError('buildClient', err);
       renderOutputSize('Client Dev JS');
 
       if (startedDevServer) {
@@ -142,7 +97,7 @@ function buildClientProd(callback) {
   webpack(
     webpackProdConfig,
     err => {
-      if (err) throw new PluginError('build:client', err);
+      if (err) throw new PluginError('buildClient', err);
       renderOutputSize('Client Prod JS');
       callback();
     },
@@ -163,6 +118,40 @@ function buildCache() {
 }
 
 /**
+ * Check types in all JS files
+ */
+function checkTypes() {
+  return gulp.src(ALL_JS_FILES)
+    .pipe(ts({ allowJs: true }))
+}
+
+/**
+ * Lint all JS files, and fail on error. Useful on CI machines and build scripts.
+ */
+export const lintProd = gulp.series(
+  checkTypes,
+  function lintProd() {
+    return gulp.src(ALL_JS_FILES)
+      .pipe(eslint())
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError());
+  },
+);
+
+/**
+ * Lint all JS files.
+ */
+export const lint = gulp.series(
+  checkTypes,
+  function lint() {
+    return gulp.src(ALL_JS_FILES)
+      .pipe(cache('lint'))
+      .pipe(eslint())
+      .pipe(eslint.format());
+  }
+);
+
+/**
  * Clean out build folder so we build from scratch.
  */
 export function clean() {
@@ -174,13 +163,13 @@ export function clean() {
  */
 export const compile = gulp.series(
   clean,
-  // buildLintProd,
+  lintProd,
   gulp.parallel(
     buildClientProd,
     buildServer,
   ),
-  buildCache
-)
+  buildCache,
+);
 
 
 /**
@@ -200,16 +189,16 @@ export const compileNoLint = gulp.series(
  */
 export const watch = gulp.series(
   clean,
-  // buildLint,
+  lint,
   gulp.parallel(
     buildClient,
     buildServer,
   ),
   function startServer(callback) {
     // Watch files
-    // gulp.watch('./app/**/**/**/**/*.js', buildClient);
-    gulp.watch('./app/**/**/**/**/*.js', buildServer);
-    // gulp.watch('./app/**/**/**/**/*.js', buildLint);
+    gulp.watch(ALL_JS_FILES, buildClient);
+    gulp.watch(ALL_JS_FILES, buildServer);
+    gulp.watch(ALL_JS_FILES, lint);
 
     // Launch Nodemon
     nodemon({
@@ -242,5 +231,5 @@ export const watch = gulp.series(
       }
     });
   },
-)
+);
 

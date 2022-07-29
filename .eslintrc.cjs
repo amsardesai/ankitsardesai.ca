@@ -13,13 +13,12 @@ module.exports = {
     "mocha": true,
     "node": true
   },
+  "extends": "eslint:recommended",
   "globals": {
     "IS_SERVER": true,
     "IS_CLIENT": true
   },
   "rules": {
-    "new-cap": 0,
-    "react/jsx-filename-extension": 0,
-    "import/prefer-default-export": 0
+    "no-inner-declarations": 0,
   }
 }

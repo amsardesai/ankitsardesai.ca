@@ -15,6 +15,7 @@
     "compile": "gulp compile",
     "setup-db": "sqlite3 -init database.sql ankit.db \"\"; export DB_URL=\"$(pwd -P)/ankit.db\"",
     "production": "NODE_ENV=production node build/server",
+    "lint": "gulp lint",
     "watch": "gulp watch"
   },
   "dependencies": {
@@ -59,12 +60,13 @@
     "gulp-babel": "^8.0.0",
     "gulp-cached": "^1.1.0",
     "gulp-clean-css": "^4.3.0",
-    "gulp-eslint": "^4.0.0",
+    "gulp-eslint-new": "^1.5.1",
     "gulp-plumber": "^1.2.1",
     "gulp-rev": "^9.0.0",
     "gulp-rev-delete-original": "^0.2.3",
     "gulp-size": "^4.0.1",
     "gulp-sourcemaps": "^3.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "lodash.clonedeep": "^4.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "nodemon": "^2.0.16",

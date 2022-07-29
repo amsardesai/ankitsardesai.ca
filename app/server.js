@@ -17,7 +17,6 @@ import { fileURLToPath } from 'url';
 import config from '../config.js';
 import configureStore from './utils/configureStore.js';
 import App from './components/App.js';
-import * as api from './server/api.js';
 import { get, all } from './utils/sqlite3.js';
 import { getInitialState } from './reducer.js'
 
