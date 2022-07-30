@@ -22,7 +22,7 @@ ADD .eslintrc.cjs config.js Gulpfile.js ./
 ADD webpack.config.js webpack.dev.config.js ./
 
 # Compile codebase
-RUN npm run compile
+RUN npm run compile-no-lint
 
 # Prune developer packages and uncompiled files
 RUN rm -rf app
@@ -35,7 +35,6 @@ RUN npm run setup-db
 # Define environment variables
 ENV NODE_ENV production
 ENV PORT 5092
-ENV DB_URL /opt/app/ankit.db
 
 # Start the server
 CMD ["node", "/opt/app/build/server"]

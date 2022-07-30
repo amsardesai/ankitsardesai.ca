@@ -189,7 +189,7 @@ const styles = style9.create({
     transitionDuration: '500ms',
     ':after': {
       position: 'absolute',
-      top: '-0.55em',
+      top: '-0.5em',
       left: '1em',
       width: 0,
       height: 0,

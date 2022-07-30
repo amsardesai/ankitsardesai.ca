@@ -13,7 +13,8 @@
   "scripts": {
     "clean": "gulp clean",
     "compile": "gulp compile",
-    "setup-db": "sqlite3 -init database.sql ankit.db \"\"; export DB_URL=\"$(pwd -P)/ankit.db\"",
+    "compile-no-lint": "gulp compileNoLint",
+    "setup-db": "sqlite3 -init database.sql database.db \"\"",
     "production": "NODE_ENV=production node build/server",
     "lint": "gulp lint",
     "watch": "gulp watch"

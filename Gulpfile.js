@@ -122,7 +122,10 @@ function buildCache() {
  */
 function checkTypes() {
   return gulp.src(ALL_JS_FILES)
-    .pipe(ts({ allowJs: true }))
+    .pipe(ts({
+      noEmitOnError: true,
+      allowJs: true,
+    }))
 }
 
 /**
@@ -141,15 +144,12 @@ export const lintProd = gulp.series(
 /**
  * Lint all JS files.
  */
-export const lint = gulp.series(
-  checkTypes,
-  function lint() {
-    return gulp.src(ALL_JS_FILES)
-      .pipe(cache('lint'))
-      .pipe(eslint())
-      .pipe(eslint.format());
-  }
-);
+export function lint() {
+  return gulp.src(ALL_JS_FILES)
+    .pipe(cache('lint'))
+    .pipe(eslint())
+    .pipe(eslint.format());
+}
 
 /**
  * Clean out build folder so we build from scratch.

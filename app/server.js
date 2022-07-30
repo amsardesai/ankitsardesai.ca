@@ -26,10 +26,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = new Koa();
 const port = process.env.PORT || config.ports.koa;
 
-// Add our isomorphic constants
-// global.IS_SERVER = true;
-// global.IS_CLIENT = false;
-
 // Use build directory as assets
 app.use(mount('/assets/', serve(join(__dirname, '../build/static/'))));
 
