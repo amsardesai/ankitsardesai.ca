@@ -8,16 +8,16 @@ module.exports = {
       "jsx": true
     },
   },
+  "plugins": ["@typescript-eslint"],
   "env": {
     "browser": true,
     "mocha": true,
     "node": true
   },
-  "extends": "eslint:recommended",
-  "globals": {
-    "IS_SERVER": true,
-    "IS_CLIENT": true
-  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+  ],
   "rules": {
     "no-inner-declarations": 0,
   }

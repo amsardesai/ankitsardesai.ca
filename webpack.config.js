@@ -8,8 +8,6 @@ import webpack from 'webpack';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
-import config from './config.js';
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default {
@@ -26,7 +24,7 @@ export default {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
         use: [
           {

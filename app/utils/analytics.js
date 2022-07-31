@@ -61,7 +61,7 @@ export function loadGoogleAnalytics() {
  */
 export function createEventTracker(
   category: string,
-): Function {
+) {
   if (process.env.NODE_ENV === 'development' && !category) {
     throw Error('Please specify a category.');
   }
@@ -81,8 +81,8 @@ export function createEventTracker(
   return function trackEvent(
     action: Action,
     label: string,
-    nonInteraction: boolean = false,
-  ) {
+    nonInteraction = false,
+  ): void {
     if (process.env.NODE_ENV === 'development') {
       if (!window) {
         throw Error('Cannot call trackEvent from the server-side.');

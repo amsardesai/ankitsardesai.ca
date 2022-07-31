@@ -16,7 +16,7 @@ const db = new sqlite3.Database(join(__dirname, '../../database.db'));
 export function get(
   query: string,
   ...values: Array<string>
-): Promise<any> {
+): Promise {
   return new Promise((resolve, reject) => {
     db.get(query, ...values, (err, row) => (err ? reject(err) : resolve(row)));
   });
@@ -28,7 +28,7 @@ export function get(
 export function all(
   query: string,
   ...values: Array<string>
-): Promise<any> {
+): Promise {
   return new Promise((resolve, reject) => {
     db.all(query, ...values, (err, row) => (err ? reject(err) : resolve(row)));
   });

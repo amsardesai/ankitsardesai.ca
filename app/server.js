@@ -14,7 +14,7 @@ import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 // Import internal modules
-import config from '../config.js';
+import { PORT_KOA, PORT_WEBPACK } from '../ports.js';
 import configureStore from './utils/configureStore.js';
 import App from './components/App.js';
 import { get, all } from './utils/sqlite3.js';
@@ -24,7 +24,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Launch Koa application
 const app = new Koa();
-const port = process.env.PORT || config.ports.koa;
+const port = process.env.PORT || PORT_KOA;
 
 // Use build directory as assets
 app.use(mount('/assets/', serve(join(__dirname, '../build/static/'))));
@@ -67,8 +67,8 @@ if (process.env.NODE_ENV === 'production') {
   cssPath = `/assets/${manifest['styles.css']}`;
 } else {
   // In development mode, point to webpack-dev-server.
-  jsPath = `http://localhost:${config.ports.webpack}/bundle.js`;
-  cssPath = `http://localhost:${config.ports.webpack}/styles.css`;
+  jsPath = `http://localhost:${PORT_WEBPACK}/bundle.js`;
+  cssPath = `http://localhost:${PORT_WEBPACK}/styles.css`;
 }
 
 // Capture main route

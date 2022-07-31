@@ -25,7 +25,7 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 
 // import internal modules
-import config from './config.js';
+import { PORT_KOA } from './ports.js';
 import webpackProdConfig from './webpack.config.js';
 import webpackDevConfig from './webpack.dev.config.js';
 
@@ -132,7 +132,7 @@ function checkTypes() {
  * Lint all JS files, and fail on error. Useful on CI machines and build scripts.
  */
 export const lintProd = gulp.series(
-  checkTypes,
+  // checkTypes,
   function lintProd() {
     return gulp.src(ALL_JS_FILES)
       .pipe(eslint())
@@ -222,7 +222,7 @@ export const watch = gulp.series(
 
           // Launch BrowserSync
           browserSync({
-            proxy: `localhost:${config.ports.koa}`,
+            proxy: `localhost:${PORT_KOA}`,
             open: false,
           });
 
