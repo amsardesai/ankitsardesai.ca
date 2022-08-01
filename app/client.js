@@ -10,7 +10,7 @@ import { hydrateRoot } from 'react-dom/client';
 
 // Import internal modules
 import configureStore from './utils/configureStore.js';
-import App from './components/App.js';
+import App from './app.js';
 import { loadGoogleAnalytics, trackPageView } from './utils/analytics.js';
 
 // Track Google Analytics page view

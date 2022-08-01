@@ -50,12 +50,9 @@ const styles = style9.create({
     paddingRight: '0.4em',
     marginBottom: -2,
   },
-  image: {
+  imageLayer: {
     userSelect: 'none',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'contain',
-    backgroundPositionX: 'center',
-    backgroundPositionY: 'center',
+    display: 'flex',
     position: 'absolute',
     top: 0,
     left: 0,
@@ -63,10 +60,23 @@ const styles = style9.create({
     width: 'calc(100% * 1.2)',
     marginTop: 'calc(100vh * -0.025)',
     marginLeft: 'calc(100% * -0.1)',
+    transitionProperty: 'transform',
+    transitionTimingFunction: 'linear',
+    transitionDuration: '100ms',
+    willChange: 'transform',
+  },
+  image: {
+    height: '100%',
+    width: '100%',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'contain',
+    backgroundPositionX: 'center',
+    backgroundPositionY: 'center',
     transformOrigin: 'center center',
     transitionProperty: 'opacity',
     transitionTimingFunction: 'ease-in-out',
     transitionDuration: '1s',
+    willChange: 'opacity',
   },
   imageTransitioningIn: {
     opacity: 1,
@@ -100,6 +110,7 @@ const styles = style9.create({
     transitionProperty: 'transform',
     transitionTimingFunction: 'linear',
     transitionDuration: '100ms',
+    willChange: 'transform',
   },
   linkPile: {
     marginTop: '0.6em',
@@ -129,6 +140,7 @@ const styles = style9.create({
     transitionTimingFunction: 'ease-in-out',
     transitionDuration: '2s',
     isolation: 'isolate',
+    willChange: 'transform, opacity',
     ':before': {
       backgroundColor: 'rgb(255,255,255)',
       boxShadow: '0 0.1em 10px rgba(0,0,0,0.35)',
@@ -144,6 +156,7 @@ const styles = style9.create({
       transitionProperty: 'opacity',
       transitionTimingFunction: 'ease-out',
       transitionDuration: '300ms',
+      willChange: 'opacity',
     },
     ':hover:before': {
       opacity: 1,
@@ -188,6 +201,7 @@ const styles = style9.create({
     transitionProperty: 'transform, opacity',
     transitionTimingFunction: 'ease-in-out',
     transitionDuration: '500ms',
+    willChange: 'transform, opacity',
     ':after': {
       position: 'absolute',
       top: '-0.5em',
@@ -202,6 +216,7 @@ const styles = style9.create({
       transitionProperty: 'opacity',
       transitionTimingFunction: 'ease-out',
       transitionDuration: '200ms',
+      willChange: 'opacity',
     },
     ':hover:after': {
       opacity: 1,
@@ -247,6 +262,7 @@ export default function App(): React.MixedElement {
   const photo = transitioning && previousPhoto != null ? previousPhoto : currentPhoto;
 
   const imageRef = useRef(null);
+  const imageLayerRef = useRef(null);
   const linkAnchorRef = useRef(null);
 
   // Preload the image using dummy element
@@ -360,9 +376,9 @@ export default function App(): React.MixedElement {
 
   // Subtle parallax effect so links stick out in front of busy photos
   useEffect(() => {
-    if (linkAnchorRef.current != null) {
-      const linkAnchor = linkAnchorRef.current;
-
+    const linkAnchor = linkAnchorRef.current;
+    const imageLayer = imageLayerRef.current;
+    if (linkAnchor != null && imageLayer != null) {
       function handleParallax(e) {
         const xPercentage = e.clientX / window.innerWidth;
         const yPercentage = e.clientY / window.innerHeight;
@@ -372,11 +388,18 @@ export default function App(): React.MixedElement {
           / window.innerHeight;
         const distanceX = xPercentage - anchorCenterX;
         const distanceY = yPercentage - anchorCenterY;
+
         linkAnchor.style.cssText = `transform: perspective(50px) rotateX(${
           -distanceY
         }deg) rotateY(${
           distanceX
         }deg)`;
+
+        imageLayer.style.cssText = `transform: translate(${
+          distanceX * -5
+        }px, ${
+          distanceY * -3
+        }px)`;
       }
 
       document.addEventListener('mousemove', handleParallax);
@@ -407,19 +430,21 @@ export default function App(): React.MixedElement {
   return (
     <div className={style9(styles.container)}>
       <div className={style9(styles.backgroundLayer)} onScroll={resetScroll}>
-        <div
-          aria-label={`Photo taken in ${photo.location}`}
-          className={style9(
-            styles.image,
-            transitioning ? styles.imageTransitioningOut : styles.imageTransitioningIn,
-            // previousPhoto == null && styles.imageInitial,
-          )}
-          role="img"
-          ref={imageRef}
-          style={{
-            backgroundImage: `url(https://cdn.ankitsardesai.ca/backgrounds/${photo.name}.jpg)`,
-          }}
-        />
+        <div className={style9(styles.imageLayer)} ref={imageLayerRef}>
+          <div
+            aria-label={`Photo taken in ${photo.location}`}
+            className={style9(
+              styles.image,
+              transitioning ? styles.imageTransitioningOut : styles.imageTransitioningIn,
+              // previousPhoto == null && styles.imageInitial,
+            )}
+            role="img"
+            ref={imageRef}
+            style={{
+              backgroundImage: `url(https://cdn.ankitsardesai.ca/backgrounds/${photo.name}.jpg)`,
+            }}
+          />
+        </div>
 
         <div className={style9(styles.imageFrame)}>
           <div className={style9(styles.linkAnchor)} ref={linkAnchorRef}>

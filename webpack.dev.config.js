@@ -8,38 +8,22 @@ import webpack from 'webpack';
 import webpackProdConfig from './webpack.config.js';
 import { PORT_WEBPACK } from './ports.js';
 
-const webpackConfig = cloneDeep(webpackProdConfig);
+const config = cloneDeep(webpackProdConfig);
 
 
 class WebpackWatchRunPlugin {
-  constructor(options) {
-    if (typeof options !== "object") options = {};
-    this.options = options;
-  }
-
   apply(compiler) {
-    const options = this.options;
-    compiler.plugin(
-      "watch-run",
-      function (watching, done) {
-        const changedTimes = watching.compiler.watchFileSystem.watcher.mtimes;
-        const changedFiles = Object.keys(changedTimes)
-        .map(file => `\n  ${file}`)
-        .join("");
-        if (changedFiles.length) {
-          console.log("Files modified:", changedFiles);
-        }
-        done();
-      }
-    );
+    compiler.hooks.watchRun.tap('WatchRun', (comp) => {
+      console.log('modified files:', comp.modifiedFiles)
+    });
   }
 }
 
 
+config.mode = 'development';
+config.output.publicPath = `http://localhost:${PORT_WEBPACK}/`;
 
-webpackConfig.mode = 'development';
-webpackConfig.output.publicPath = `http://localhost:${PORT_WEBPACK}/`;
-webpackConfig.devServer = {
+config.devServer = {
   compress: true,
   static: {
     directory: './build/static',
@@ -48,18 +32,28 @@ webpackConfig.devServer = {
   port: PORT_WEBPACK,
 };
 
+// config.cache = {
+  // type: 'filesystem',
+  // store: 'pack',
+// };
+
+config.watchOptions = {
+  aggregateTimeout: 1000,
+};
+
 // Use React Refresh plugins for Babel and Webpack
-webpackConfig.module.rules[0].use[0].options.plugins.unshift('react-refresh/babel');
-webpackConfig.plugins.unshift(
+config.module.rules[0].use[0].options.plugins.unshift('react-refresh/babel');
+// config.module.rules[1].use[0].loader = 'style-loader';
+config.plugins.unshift(
   new WebpackWatchRunPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new ReactRefreshWebpackPlugin(),
 );
 
 // CSS sourcemaps
-// webpackConfig.module.rules[0].use[1].options.sourceMap = true;
-webpackConfig.module.rules[1].use[1].options.sourceMap = true;
+// config.module.rules[0].use[1].options.sourceMap = true;
+// config.module.rules[1].use[1].options.sourceMap = true;
 
 // Make sure we don't clobber our other configuration.
-export default webpackConfig;
+export default config;
 

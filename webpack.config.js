@@ -45,10 +45,7 @@ export default {
         test: /\.css$/,
         use: [
           { loader: MiniCssExtractPlugin.loader },
-          {
-            loader: 'css-loader',
-            options: { sourceMap: false },
-          },
+          { loader: 'css-loader' },
         ],
       },
     ],

@@ -16,7 +16,7 @@ import { fileURLToPath } from 'url';
 // Import internal modules
 import { PORT_KOA, PORT_WEBPACK } from '../ports.js';
 import configureStore from './utils/configureStore.js';
-import App from './components/App.js';
+import App from './app.js';
 import { get, all } from './utils/sqlite3.js';
 import { getInitialState } from './reducer.js'
 
