@@ -17,26 +17,17 @@ export default {
     rules: [
       {
         exclude: /node_modules/,
-        test: /\.(j|t)sx?$/,
+        test: /\.tsx?$/,
         use: [
-          {
-            loader: 'ts-loader',
-          },
+          { loader: Style9Plugin.loader },
           {
             loader: 'babel-loader',
             options: {
               plugins: [],
-              presets: [
-                // [
-                //   '@babel/preset-typescript',
-                //   { allExtensions: true, isTSX: true },
-                // ],
-                ['@babel/preset-react'],
-                ['@babel/preset-env', { targets: 'defaults' }],
-              ],
+              presets: [['@babel/preset-env', { targets: 'defaults' }]],
             },
           },
-          { loader: Style9Plugin.loader },
+          { loader: 'ts-loader' },
         ],
       },
       {

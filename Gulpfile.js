@@ -27,7 +27,7 @@ import { PORT_KOA } from './ports.js';
 import webpackProdConfig from './webpack.config.js';
 import webpackDevConfig from './webpack.dev.config.js';
 
-const ALL_JS_FILES = './app/**/**/**/**/*.{js,ts,tsx}';
+const ALL_JS_FILES = './app/**/**/**/**/*.{ts,tsx}';
 
 var tsProject = ts.createProject('tsconfig.json');
 

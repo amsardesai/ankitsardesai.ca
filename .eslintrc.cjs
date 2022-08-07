@@ -36,4 +36,7 @@ module.exports = {
     'sort-imports': 0,
     'sort-keys': 1,
   },
+  settings: {
+    react: { version: '999.999.999' },
+  },
 };

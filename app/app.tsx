@@ -63,6 +63,7 @@ const styles = style9.create({
     marginTop: 'calc(100vh * -0.025)',
     position: 'absolute',
     top: 0,
+    transformOrigin: 'center center',
     transitionDuration: '100ms',
     transitionProperty: 'transform',
     transitionTimingFunction: 'linear',
@@ -295,7 +296,7 @@ export default function App(): JSX.Element {
           `https://cdn.ankitsardesai.ca/backgrounds/${nextImage.name}.jpg`,
         );
         imageElement.onload = () => {
-          resolve({ location: nextImage.location, name: nextImage.name });
+          resolve(nextImage);
         };
         imageElement.onerror = e => {
           reject(e);
@@ -341,12 +342,11 @@ export default function App(): JSX.Element {
         triggerNextPhoto();
       }, CAROUSEL_DELAY);
 
-      fetch(`/api/getNextPhoto?previousName=${previousPhoto.name}`)
+      fetch(`/api/getNextPhoto/${previousPhoto.name}`)
         .then(response => response.json())
         .then(nextImage => preloadImage(nextImage))
         .then(nextImage => {
           preloadedImageRef.current = nextImage;
-
           if (carouselTimeoutRef.current == null) {
             triggerNextPhoto();
           }
@@ -391,8 +391,10 @@ export default function App(): JSX.Element {
       } else if (transitioning && !prevTransitioningRef.current) {
         // When transitioning goes from false to true, load next photo on transitionend
         function listener() {
-          if (imageDiv != null && currentPhoto != null) {
+          if (currentPhoto != null) {
             loadNextPhoto(currentPhoto);
+          }
+          if (imageDiv != null) {
             imageDiv.removeEventListener('transitionend', listener);
           }
         }
@@ -415,20 +417,29 @@ export default function App(): JSX.Element {
 
         const xPercentage = e.clientX / window.innerWidth;
         const yPercentage = e.clientY / window.innerHeight;
-        const anchorCenterX =
+
+        const linkAnchorCenterX =
           (linkAnchor.offsetLeft + linkAnchor.offsetWidth / 2) /
           window.innerWidth;
-        const anchorCenterY =
+        const linkAnchorCenterY =
           (linkAnchor.offsetTop + linkAnchor.offsetHeight / 2) /
           window.innerHeight;
-        const distanceX = xPercentage - anchorCenterX;
-        const distanceY = yPercentage - anchorCenterY;
+        const linkAnchorDistanceX = xPercentage - linkAnchorCenterX;
+        const linkAnchorDistanceY = yPercentage - linkAnchorCenterY;
 
-        linkAnchor.style.cssText = `transform: perspective(50px) rotateX(${-distanceY}deg) rotateY(${distanceX}deg)`;
+        const imageLayerCenterX =
+          (imageLayer.offsetLeft + imageLayer.offsetWidth / 2) /
+          window.innerWidth;
+        const imageLayerCenterY =
+          (imageLayer.offsetTop + imageLayer.offsetHeight / 2) /
+          window.innerHeight;
+        const imageLayerDistanceX = xPercentage - imageLayerCenterX;
+        const imageLayerDistanceY = yPercentage - imageLayerCenterY;
 
-        imageLayer.style.cssText = `transform: translate(${distanceX * -5}px, ${
-          distanceY * -3
-        }px)`;
+        linkAnchor.style.cssText = `transform: perspective(50px) rotateX(${
+          -linkAnchorDistanceY * 3
+        }deg) rotateY(${linkAnchorDistanceX}deg)`;
+        imageLayer.style.cssText = `transform: perspective(2000px) rotateX(${-imageLayerDistanceY}deg) rotateY(${imageLayerDistanceX}deg)`;
       }
 
       document.addEventListener('mousemove', handleParallax);

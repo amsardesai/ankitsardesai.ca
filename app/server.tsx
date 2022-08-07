@@ -1,4 +1,4 @@
-import redux from '@reduxjs/toolkit';
+import * as redux from '@reduxjs/toolkit';
 import express from 'express';
 import fs from 'fs';
 import { dirname, join } from 'path';
@@ -13,6 +13,9 @@ import App from './app.js';
 import type { Photo } from './reducer.js';
 import reducer, { getInitialState } from './reducer.js';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const { configureStore } = ((redux as any).default ?? redux) as typeof redux;
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Launch Express application
@@ -20,7 +23,7 @@ const app = express();
 const port = process.env.PORT || 5092;
 
 // Launch sqlite3 database
-const db = new sqlite3.Database(join(__dirname, '../../database.db'));
+const db = new sqlite3.Database(join(__dirname, '../database.db'));
 
 // Serve built files
 app.use('/static', express.static(join(__dirname, '../build/static/')));
@@ -35,9 +38,7 @@ app.use(favicon(join(__dirname, '../assets/favicon.ico')));
 app.get('/api/getNextPhoto/:previousPhoto', (req, res) => {
   const previousPhoto = req.params.previousPhoto;
   db.get(
-    'SELECT name, location FROM photos ' +
-      'WHERE name != ? ORDER BY RANDOM() ' +
-      'LIMIT 1',
+    'SELECT name, location FROM photos WHERE name != ? ORDER BY RANDOM() LIMIT 1',
     previousPhoto,
     (err: Error | null, row: Photo) => {
       if (err == null) {
@@ -67,13 +68,13 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Capture main route
-app.get('/', (req, res) => {
-  db.all(
+app.get('/', (_req, res) => {
+  db.get(
     'SELECT name, location FROM photos ORDER BY RANDOM() LIMIT 1',
-    (err: Error | null, rows: Photo[]) => {
+    (err: Error | null, row: Photo) => {
       if (err == null) {
-        const initialPhoto = rows[0];
-        const store = redux.configureStore({
+        const initialPhoto = row;
+        const store = configureStore({
           preloadedState: getInitialState(
             initialPhoto.name,
             initialPhoto.location,
@@ -100,18 +101,19 @@ app.get('/', (req, res) => {
             '<meta property="og:image" content="https://cdn.ankitsardesai.ca/assets/profile.jpg" />' +
             '<meta property="og:url" content="https://ankitsardesai.ca" />' +
             '<title>Ankit Sardesai</title>' +
-            '<link rel="stylesheet" href="',
+            '<link rel="stylesheet" href="' +
+            cssPath +
+            '" /><script defer src="' +
+            jsPath +
+            '"></script></head><body><div id="react-root">' +
+            renderedString +
+            '</div><script>window.PRELOADED_STATE=' +
+            serializedState +
+            '</script></body></html>',
         );
-        res.send(cssPath);
-        res.send('" /><script defer src="');
-        res.send(jsPath);
-        res.send('"></script></head><body><div id="react-root">');
-        res.send(renderedString);
-        res.send('</div><script>window.PRELOADED_STATE=');
-        res.send(serializedState);
-        res.send('</script></body></html>');
       } else {
         res.sendStatus(500);
+        throw err;
       }
     },
   );

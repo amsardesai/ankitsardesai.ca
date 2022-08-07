@@ -1,9 +1,7 @@
 {
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
-    // "allowJs": true,
     "jsx": "react",
-    "removeComments": true,
     "baseUrl": "./app",
     "module": "es2020",
     "moduleResolution": "node",

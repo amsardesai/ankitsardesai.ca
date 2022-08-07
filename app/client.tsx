@@ -2,7 +2,7 @@ import 'core-js/stable/index.js';
 import 'normalize.css';
 import './main.css';
 
-import redux from '@reduxjs/toolkit';
+import * as redux from '@reduxjs/toolkit';
 import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
