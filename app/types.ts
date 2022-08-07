@@ -1,5 +1,3 @@
-
 export type IconProps = {
-  className: string,
+  className: string;
 };
-

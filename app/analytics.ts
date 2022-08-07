@@ -3,14 +3,31 @@
  * A set of utility functions for Google Analytics.
  */
 
+declare global {
+  interface Window {
+    GoogleAnalyticsObject: 'ga';
+    ga: ((...v: Array<string | Record<string, unknown>>) => void) & {
+      q: Array<string | Record<string, unknown>>;
+      l: number;
+    };
+  }
+}
+
 type Action = 'submit' | 'error' | 'click' | 'scroll' | 'load' | 'keypress';
-const VALID_ACTIONS = ['submit', 'error', 'click', 'scroll', 'load', 'keypress'];
+const VALID_ACTIONS = [
+  'submit',
+  'error',
+  'click',
+  'scroll',
+  'load',
+  'keypress',
+];
 
 const GOOGLE_ANALYTICS_URL = 'https://www.google-analytics.com/analytics.js';
 
 const GA_TRACKING_CODE = 'UA-37589348-3';
 
-function loadScriptFile(src, id) {
+function loadScriptFile(src: string, id: string) {
   if (!document.getElementById(id)) {
     const firstScript = document.getElementsByTagName('script')[0];
     const script = document.createElement('script');
@@ -29,11 +46,13 @@ function loadScriptFile(src, id) {
 export function loadGoogleAnalytics() {
   // Create ga array
   window.GoogleAnalyticsObject = 'ga';
-  window.ga = window.ga || ((...args) => {
-    window.ga.q = window.ga.q || [];
-    window.ga.q.push(...args);
-  });
-  window.ga.l = 1 * new Date();
+  window.ga =
+    window.ga ||
+    ((...args) => {
+      window.ga.q = window.ga.q || [];
+      window.ga.q.push(...args);
+    });
+  window.ga.l = Date.now();
 
   // Asynchronously load google analytics JS
   loadScriptFile(GOOGLE_ANALYTICS_URL, 'google-analytics');
@@ -59,9 +78,7 @@ export function loadGoogleAnalytics() {
  *
  * @return {Function} An event tracker function.
  */
-export function createEventTracker(
-  category: string,
-) {
+export function createEventTracker(category: string) {
   if (process.env.NODE_ENV === 'development' && !category) {
     throw Error('Please specify a category.');
   }
@@ -89,16 +106,18 @@ export function createEventTracker(
       } else if (!label) {
         throw Error('Please specify a label.');
       } else if (VALID_ACTIONS.indexOf(action) === -1) {
-        throw Error('Invalid action sent to trackEvent. Check analytics.js for valid actions.');
+        throw Error(
+          'Invalid action sent to trackEvent. Check analytics.js for valid actions.',
+        );
       }
     }
 
     // Send the event to Google Analytics
     window.ga('send', {
-      hitType: 'event',
-      eventCategory: category,
       eventAction: action,
+      eventCategory: category,
       eventLabel: label,
+      hitType: 'event',
       nonInteraction,
     });
   };
@@ -114,9 +133,9 @@ export function trackPageView({
   search,
   hash,
 }: {
-  pathname: string,
-  search: string,
-  hash: string,
+  pathname: string;
+  search: string;
+  hash: string;
 }): void {
   if (process.env.NODE_ENV === 'development' && !window) {
     throw Error('Cannot call trackPageView from the server-side.');

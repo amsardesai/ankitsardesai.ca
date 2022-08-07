@@ -1,41 +1,39 @@
-
 'use strict'; // eslint-disable-line strict
 
-import Style9Plugin from 'style9/webpack/index.js';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import webpack from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { dirname, join } from 'path';
+import ResolveTypeScriptPlugin from 'resolve-typescript-plugin';
+import Style9Plugin from 'style9/webpack/index.js';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default {
-
-  entry: './app/client.js',
+  entry: './app/client.tsx',
   mode: 'production',
-
-  output: {
-    path: join(__dirname, 'build/static'),
-    filename: 'bundle.js',
-    publicPath: '/assets/',
-  },
 
   module: {
     rules: [
       {
-        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
+        test: /\.(j|t)sx?$/,
         use: [
+          {
+            loader: 'ts-loader',
+          },
           {
             loader: 'babel-loader',
             options: {
-              presets: [
-                ['@babel/preset-typescript', { isTSX: true, allExtensions: true }],
-                ['@babel/preset-react'],
-                ['@babel/preset-env', { targets: "defaults" }],
-              ],
               plugins: [],
+              presets: [
+                // [
+                //   '@babel/preset-typescript',
+                //   { allExtensions: true, isTSX: true },
+                // ],
+                ['@babel/preset-react'],
+                ['@babel/preset-env', { targets: 'defaults' }],
+              ],
             },
           },
           { loader: Style9Plugin.loader },
@@ -51,6 +49,28 @@ export default {
     ],
   },
 
+  optimization: {
+    innerGraph: true,
+    mangleExports: true,
+    minimizer: ['...', new CssMinimizerPlugin()],
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          chunks: 'all',
+          enforce: true,
+          name: 'styles',
+          type: 'css/mini-extract',
+        },
+      },
+    },
+  },
+
+  output: {
+    filename: 'bundle.js',
+    path: join(__dirname, 'build/static'),
+    publicPath: '/assets/',
+  },
+
   plugins: [
     new Style9Plugin(),
     new MiniCssExtractPlugin({
@@ -58,22 +78,7 @@ export default {
     }),
   ],
 
-  optimization: {
-    innerGraph: true,
-    mangleExports: true,
-    minimizer: [ '...', new CssMinimizerPlugin() ],
-    splitChunks: {
-      cacheGroups: {
-        styles: {
-          name: 'styles',
-          type: 'css/mini-extract',
-          chunks: 'all',
-          enforce: true,
-        }
-      }
-    }
+  resolve: {
+    plugins: [new ResolveTypeScriptPlugin()],
   },
-
 };
-
-

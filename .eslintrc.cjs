@@ -1,24 +1,39 @@
-
 module.exports = {
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": "latest",
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    },
+  env: {
+    browser: true,
+    mocha: true,
+    node: true,
   },
-  "plugins": ["@typescript-eslint"],
-  "env": {
-    "browser": true,
-    "mocha": true,
-    "node": true
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
-  "rules": {
-    "no-inner-declarations": 0,
-  }
-}
+  ignorePatterns: ['build'],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaFeatures: { jsx: true },
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  plugins: ['@typescript-eslint', 'simple-import-sort'],
+  rules: {
+    'comma-dangle': [1, 'always-multiline'],
+    'jsx-quotes': 1,
+    'no-inner-declarations': 0,
+    'react/jsx-boolean-value': [1, 'always'],
+    'react/jsx-closing-bracket-location': 1,
+    'react/jsx-closing-tag-location': 1,
+    'react/jsx-indent': [1, 2],
+    'react/jsx-indent-props': [1, 2],
+    'react/jsx-no-leaked-render': 1,
+    'react/jsx-sort-props': 1,
+    'react/jsx-tag-spacing': 1,
+    'react/self-closing-comp': 1,
+    'simple-import-sort/exports': 2,
+    'simple-import-sort/imports': 2,
+    'sort-imports': 0,
+    'sort-keys': 1,
+  },
+};

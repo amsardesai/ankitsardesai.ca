@@ -1,7 +1,6 @@
 
 # Use Ubuntu distribution
 FROM node:18.4.0
-MAINTAINER Ankit Sardesai <amsardesai@gmail.com>
 
 # Install sqlite3
 RUN apt-get update
@@ -34,8 +33,9 @@ RUN npm run setup-db
 
 # Define environment variables
 ENV NODE_ENV production
+ENV NODE_PATH /opt/app/build
 ENV PORT 5092
 
 # Start the server
-CMD ["node", "/opt/app/build/server"]
+CMD ["node", "/opt/app/build/server.js"]
 
