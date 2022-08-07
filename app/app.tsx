@@ -84,6 +84,7 @@ const styles = style9.create({
   },
   linkAnchor: {
     alignItems: 'center',
+    backfaceVisibility: 'visible',
     display: 'flex',
     flexDirection: 'column',
     transitionDuration: '100ms',
@@ -183,37 +184,6 @@ const styles = style9.create({
     padding: '0.3em',
   },
   pill: {
-    ':before': {
-      backgroundColor: 'rgb(255,255,255)',
-      borderRadius: '3em',
-      bottom: '-0.15em',
-      boxShadow: '0 0.1em 10px rgba(0,0,0,0.35)',
-      content: '""',
-      left: '-0.15em',
-      opacity: 0,
-      position: 'absolute',
-      right: '-0.15em',
-      top: '-0.15em',
-      transitionDuration: '300ms',
-      transitionProperty: 'opacity',
-      transitionTimingFunction: 'ease-out',
-      willChange: 'opacity',
-      zIndex: -1,
-    },
-    // Only way to do cascading using style9
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    ':focus-visible:before': {
-      opacity: 1,
-      transitionDuration: '50ms',
-    },
-    ':hover:before': {
-      opacity: 1,
-      transitionDelay: '100ms',
-      transitionDuration: '50ms',
-    },
-    WebkitBackdropFilter:
-      'brightness(80%) invert(10%) saturate(250%) blur(30px)',
     alignItems: 'center',
     animationFillMode: 'both',
     backdropFilter: 'brightness(80%) invert(10%) saturate(250%) blur(30px)',
@@ -249,6 +219,37 @@ const styles = style9.create({
     mixBlendMode: 'difference',
     paddingLeft: '0.3em',
     paddingRight: '0.1em',
+  },
+  pillWithHover: {
+    ':before': {
+      backgroundColor: 'rgb(255,255,255)',
+      borderRadius: '3em',
+      bottom: '-0.15em',
+      boxShadow: '0 0.1em 10px rgba(0,0,0,0.35)',
+      content: '""',
+      left: '-0.15em',
+      opacity: 0,
+      position: 'absolute',
+      right: '-0.15em',
+      top: '-0.15em',
+      transitionDuration: '300ms',
+      transitionProperty: 'opacity',
+      transitionTimingFunction: 'ease-out',
+      willChange: 'opacity',
+      zIndex: -1,
+    },
+    // Only way to do cascading using style9
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    ':focus-visible:before': {
+      opacity: 1,
+      transitionDuration: '50ms',
+    },
+    ':hover:before': {
+      opacity: 1,
+      transitionDelay: '100ms',
+      transitionDuration: '50ms',
+    },
   },
 });
 
@@ -439,7 +440,7 @@ export default function App(): JSX.Element {
         linkAnchor.style.cssText = `transform: perspective(50px) rotateX(${
           -linkAnchorDistanceY * 3
         }deg) rotateY(${linkAnchorDistanceX}deg)`;
-        imageLayer.style.cssText = `transform: perspective(2000px) rotateX(${-imageLayerDistanceY}deg) rotateY(${imageLayerDistanceX}deg)`;
+        imageLayer.style.cssText = `transform: perspective(1500px) rotateX(${-imageLayerDistanceY}deg) rotateY(${imageLayerDistanceX}deg)`;
       }
 
       document.addEventListener('mousemove', handleParallax);
@@ -452,7 +453,12 @@ export default function App(): JSX.Element {
   // Trigger next photo when pressing right arrow key
   useEffect(() => {
     function handleKeyPress(e: KeyboardEvent) {
-      if (e.key === 'ArrowRight') {
+      console.log(e.key);
+      if (
+        e.key === 'ArrowRight' ||
+        e.key === 'ArrowLeft' ||
+        e.key === 'Enter'
+      ) {
         triggerNextPhoto();
       }
     }
@@ -510,7 +516,11 @@ export default function App(): JSX.Element {
             </button>
             <div className={style9(styles.linkPile)}>
               <a
-                className={style9(styles.pill, styles.linkPill)}
+                className={style9(
+                  styles.pill,
+                  styles.pillWithHover,
+                  styles.linkPill,
+                )}
                 href="https://www.linkedin.com/in/amsardesai"
                 rel="noreferrer"
                 style={{ animationDelay: '200ms' }}
@@ -520,7 +530,11 @@ export default function App(): JSX.Element {
                 <span className={style9(styles.pillText)}>linkedin</span>
               </a>
               <a
-                className={style9(styles.pill, styles.linkPill)}
+                className={style9(
+                  styles.pill,
+                  styles.pillWithHover,
+                  styles.linkPill,
+                )}
                 href="/resume.pdf"
                 style={{ animationDelay: '400ms' }}
               >
@@ -528,7 +542,11 @@ export default function App(): JSX.Element {
                 <span className={style9(styles.pillText)}>resume</span>
               </a>
               <a
-                className={style9(styles.pill, styles.linkPill)}
+                className={style9(
+                  styles.pill,
+                  styles.pillWithHover,
+                  styles.linkPill,
+                )}
                 href="https://www.github.com/amsardesai"
                 rel="noreferrer"
                 style={{ animationDelay: '600ms' }}
@@ -538,7 +556,11 @@ export default function App(): JSX.Element {
                 <span className={style9(styles.pillText)}>github</span>
               </a>
               <a
-                className={style9(styles.pill, styles.linkPill)}
+                className={style9(
+                  styles.pill,
+                  styles.pillWithHover,
+                  styles.linkPill,
+                )}
                 href="mailto:amsardesai@gmail.com"
                 style={{ animationDelay: '800ms' }}
               >
@@ -552,6 +574,7 @@ export default function App(): JSX.Element {
             <a
               className={style9(
                 styles.pill,
+                styles.pillWithHover,
                 styles.locationPill,
                 transitioning
                   ? styles.locationPillTransitioningOut

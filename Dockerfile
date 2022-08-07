@@ -19,6 +19,7 @@ ADD app ./app
 ADD assets ./assets
 ADD .eslintrc.cjs ports.js Gulpfile.js ./
 ADD webpack.config.js webpack.dev.config.js ./
+ADD tsconfig.json ./
 
 # Compile codebase
 RUN npm run compile-no-lint
