@@ -9,7 +9,7 @@ import favicon from 'serve-favicon';
 import sqlite3 from 'sqlite3';
 import { fileURLToPath } from 'url';
 
-import App from './App.js';
+import App from './app.js';
 import type { Photo } from './reducer.js';
 import reducer, { getInitialState } from './reducer.js';
 
