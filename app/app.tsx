@@ -64,9 +64,6 @@ const styles = style9.create({
     position: 'absolute',
     top: 0,
     transformOrigin: 'center center',
-    transitionDuration: '100ms',
-    transitionProperty: 'transform',
-    transitionTimingFunction: 'linear',
     userSelect: 'none',
     width: 'calc(100% * 1.2)',
     willChange: 'transform',
@@ -87,9 +84,6 @@ const styles = style9.create({
     backfaceVisibility: 'visible',
     display: 'flex',
     flexDirection: 'column',
-    transitionDuration: '100ms',
-    transitionProperty: 'transform',
-    transitionTimingFunction: 'linear',
     willChange: 'transform',
   },
   linkPile: {
@@ -143,9 +137,6 @@ const styles = style9.create({
     position: 'absolute',
     right: '1em',
     transitionDuration: '500ms',
-    transitionProperty: 'transform, opacity',
-    transitionTimingFunction: 'ease-in-out',
-    willChange: 'transform, opacity',
   },
   locationPillInitial: {
     transitionDuration: '0s',
@@ -211,6 +202,17 @@ const styles = style9.create({
     mixBlendMode: 'difference',
     pointerEvents: 'none',
     width: '1em',
+  },
+  pillReflection: {
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderRadius: '3em',
+    bottom: 0,
+    left: 0,
+    opacity: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    willChange: 'opacity',
   },
   pillText: {
     color: 'white',
@@ -283,6 +285,13 @@ export default function App(): JSX.Element {
   const imageRef = useRef<HTMLDivElement | null>(null);
   const imageLayerRef = useRef<HTMLDivElement | null>(null);
   const linkAnchorRef = useRef<HTMLDivElement | null>(null);
+
+  const reflectionSetRef = useRef<Set<HTMLSpanElement>>(new Set());
+  const reflectionRef = useCallback((element: HTMLSpanElement | null) => {
+    if (element != null) {
+      reflectionSetRef.current.add(element);
+    }
+  }, []);
 
   // Preload the image using dummy element
   const preloadImage = useCallback((nextImage: Photo) => {
@@ -437,23 +446,29 @@ export default function App(): JSX.Element {
         const imageLayerDistanceX = xPercentage - imageLayerCenterX;
         const imageLayerDistanceY = yPercentage - imageLayerCenterY;
 
+        const reflection = Math.max(
+          yPercentage * 1.5 - 0.5,
+          xPercentage * 3 - 2,
+        );
+        const opacity = Math.min(Math.max(reflection, 0), 1);
+
         linkAnchor.style.cssText = `transform: perspective(50px) rotateX(${
           -linkAnchorDistanceY * 3
         }deg) rotateY(${linkAnchorDistanceX}deg)`;
         imageLayer.style.cssText = `transform: perspective(1500px) rotateX(${-imageLayerDistanceY}deg) rotateY(${imageLayerDistanceX}deg)`;
+        reflectionSetRef.current.forEach(reflection => {
+          reflection.style.cssText = `opacity: ${opacity}`;
+        });
       }
 
       document.addEventListener('mousemove', handleParallax);
-      return () => {
-        document.removeEventListener('mousemove', handleParallax);
-      };
+      return () => document.removeEventListener('mousemove', handleParallax);
     }
   }, []);
 
   // Trigger next photo when pressing right arrow key
   useEffect(() => {
     function handleKeyPress(e: KeyboardEvent) {
-      console.log(e.key);
       if (
         e.key === 'ArrowRight' ||
         e.key === 'ArrowLeft' ||
@@ -463,9 +478,7 @@ export default function App(): JSX.Element {
       }
     }
     document.addEventListener('keydown', handleKeyPress);
-    return () => {
-      document.removeEventListener('keydown', handleKeyPress);
-    };
+    return () => document.removeEventListener('keydown', handleKeyPress);
   }, [triggerNextPhoto]);
 
   const resetScroll = (e: React.SyntheticEvent<HTMLDivElement, UIEvent>) => {
@@ -526,6 +539,10 @@ export default function App(): JSX.Element {
                 style={{ animationDelay: '200ms' }}
                 target="_blank"
               >
+                <span
+                  className={style9(styles.pillReflection)}
+                  ref={reflectionRef}
+                />
                 <IconLinkedIn className={style9(styles.pillIcon)} />
                 <span className={style9(styles.pillText)}>linkedin</span>
               </a>
@@ -538,6 +555,10 @@ export default function App(): JSX.Element {
                 href="/resume.pdf"
                 style={{ animationDelay: '400ms' }}
               >
+                <span
+                  className={style9(styles.pillReflection)}
+                  ref={reflectionRef}
+                />
                 <IconBriefcase className={style9(styles.pillIcon)} />
                 <span className={style9(styles.pillText)}>resume</span>
               </a>
@@ -552,6 +573,10 @@ export default function App(): JSX.Element {
                 style={{ animationDelay: '600ms' }}
                 target="_blank"
               >
+                <span
+                  className={style9(styles.pillReflection)}
+                  ref={reflectionRef}
+                />
                 <IconGithub className={style9(styles.pillIcon)} />
                 <span className={style9(styles.pillText)}>github</span>
               </a>
@@ -564,6 +589,10 @@ export default function App(): JSX.Element {
                 href="mailto:amsardesai@gmail.com"
                 style={{ animationDelay: '800ms' }}
               >
+                <span
+                  className={style9(styles.pillReflection)}
+                  ref={reflectionRef}
+                />
                 <IconMail className={style9(styles.pillIcon)} />
                 <span className={style9(styles.pillText)}>email</span>
               </a>
@@ -588,9 +617,9 @@ export default function App(): JSX.Element {
               target="_blank"
             >
               <IconLocation className={style9(styles.pillIcon)} />
-              <div className={style9(styles.pillText)}>
+              <span className={style9(styles.pillText)}>
                 {currentPhoto.location}
-              </div>
+              </span>
             </a>
           )}
         </div>

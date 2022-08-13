@@ -8,7 +8,7 @@ import { hydrateRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import * as analytics from './analytics.js';
-import App from './app.js';
+import App from './App.js';
 import type { State } from './reducer.js';
 import reducer from './reducer.js';
 
