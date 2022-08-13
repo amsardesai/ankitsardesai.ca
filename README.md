@@ -2,11 +2,11 @@
 
 Source code for [my website](https://ankitsardesai.ca).
 
-* Front-end built using [**React**](https://github.com/facebook/react) and
-  [**Redux**](https://github.com/rackt/redux) with universal rendering.
-* Photo data stored in a **sqlite** database and photos are stored on **Amazon S3**.
-* Using **Docker** to build and deploy on **Amazon EC2 Container Service**.
-* Content delivery and DDOS protection using **CloudFlare**.
+- Front-end built using [**React**](https://reactjs.org/) and
+  [**Redux**](https://redux.js.org/).
+- Photo data stored in a **sqlite** database and photos are stored on **Amazon S3**.
+- Using **Docker** to build and deploy on **Amazon EC2**.
+- Content delivery and DDOS protection using **CloudFlare**.
 
 ## Installing
 
@@ -14,21 +14,21 @@ Source code for [my website](https://ankitsardesai.ca).
 
 To run the production version of this site with docker, clone and run the following:
 
-    docker build -t ankitsardesai . # This will take a long time
-    docker run -d --name instance.ankitsardesai -p 443:443 ankitsardesai
+    docker-compose build
+    docker-compose up
 
 Then go to `https://<your docker IP>/`.
 
 ### Manually
 
-To run the development version of this site, install `sqlite3` and `node`, then clone and
-run the following:
+To run the development version of this site, install `sqlite3` and `node` globally,
+then clone and run the following:
 
-    npm run setup-db
     npm install
+    npm run setup-db
     npm run watch
 
-Then go to `http://localhost:3000/`
+Then go to `http://localhost:5092/`
 
 ## Copyright
 
