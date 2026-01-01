@@ -35,8 +35,8 @@ var tsProject = ts.createProject('tsconfig.json');
  * Compile server files.
  */
 function buildServer() {
-  return gulp
-    .src(ALL_JS_FILES)
+  return tsProject
+    .src()
     .pipe(cache('server'))
     .pipe(plumber())
     .pipe(sourcemaps.init())

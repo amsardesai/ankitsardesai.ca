@@ -20,7 +20,9 @@
     "watch": "gulp watch"
   },
   "dependencies": {
+    "@analytics/google-analytics": "^1.0.3",
     "@reduxjs/toolkit": "^1.8.3",
+    "analytics": "^0.8.1",
     "classnames": "^2.3.1",
     "core-js": "^3.23.3",
     "express": "^4.18.1",

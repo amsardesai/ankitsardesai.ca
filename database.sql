@@ -356,7 +356,7 @@ INSERT INTO photos VALUES( '20190401-DSCF7142', 'taipei, taiwan' );
 INSERT INTO photos VALUES( '20190401-DSCF7181', 'taipei, taiwan' );
 INSERT INTO photos VALUES( '20190401-DSCF7216', 'taipei, taiwan' );
 INSERT INTO photos VALUES( '20190401-DSCF7265', 'taipei, taiwan' );
-INSERT INTO photos VALUES( '20190402-DSCF7367', 'keelung cuty, taiwan' );
+INSERT INTO photos VALUES( '20190402-DSCF7367', 'keelung city, taiwan' );
 INSERT INTO photos VALUES( '20190402-DSCF7418', 'jiufen, taiwan' );
 INSERT INTO photos VALUES( '20190402-DSCF7439', 'jiufen, taiwan' );
 INSERT INTO photos VALUES( '20190402-DSCF7458', 'shifen, taiwan' );
