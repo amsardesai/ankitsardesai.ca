@@ -1,4 +1,3 @@
-import 'core-js/stable/index.js';
 import 'normalize.css';
 import './main.css';
 
