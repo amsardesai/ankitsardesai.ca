@@ -1,7 +1,7 @@
+import * as stylex from '@stylexjs/stylex';
 import * as React from 'react';
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import style9 from 'style9';
 
 import IconBriefcase from './icons/IconBriefcase.js';
 import IconGithub from './icons/IconGithub.js';
@@ -11,7 +11,18 @@ import IconMail from './icons/IconMail.js';
 import type { Photo } from './reducer.js';
 import type { State } from './reducer.js';
 
-const styles = style9.create({
+// Keyframes must be defined outside stylex.create() in StyleX
+const slideInFromLeft = stylex.keyframes({
+  '0%': { opacity: 0, transform: 'translateX(-20px)' },
+  '100%': { opacity: 1, transform: 'translateX(0)' },
+});
+
+const slideInFromBottom = stylex.keyframes({
+  '0%': { opacity: 0, transform: 'translateY(30px)' },
+  '100%': { opacity: 1, transform: 'translateY(0)' },
+});
+
+const styles = stylex.create({
   backgroundLayer: {
     alignItems: 'center',
     bottom: 0,
@@ -96,42 +107,47 @@ const styles = style9.create({
   },
   linkPill: {
     animationDuration: '1s',
-    animationName: style9.keyframes({
-      '0%': { opacity: 0, transform: 'translateX(-20px)' },
-      '100%': { opacity: 1, transform: 'translateX(0)' },
-    }),
+    animationName: slideInFromLeft,
     marginBottom: '0.45em',
     marginLeft: '0.25em',
     marginRight: '0.25em',
   },
   locationPill: {
-    ':after': {
-      borderBottom: '0.4em solid rgba(255,255,255,1)',
-      borderLeft: '0.4em solid transparent',
-      borderRight: '0.4em solid transparent',
+    '::after': {
+      // StyleX requires expanded border properties (no shorthands)
+      borderBottomWidth: '0.4em',
+      borderBottomStyle: 'solid',
+      borderBottomColor: 'rgba(255,255,255,1)',
+      borderLeftWidth: '0.4em',
+      borderLeftStyle: 'solid',
+      borderLeftColor: 'transparent',
+      borderRightWidth: '0.4em',
+      borderRightStyle: 'solid',
+      borderRightColor: 'transparent',
       content: '""',
       height: 0,
       left: '1em',
-      opacity: 0.85,
+      // StyleX: Nested pseudo-class states within the pseudo-element
+      opacity: {
+        default: 0.85,
+        ':hover': 1,
+        ':focus-visible': 1,
+      },
       position: 'absolute',
       top: '-0.5em',
-      transitionDuration: '200ms',
+      transitionDelay: {
+        default: null,
+        ':hover': '100ms',
+      },
+      transitionDuration: {
+        default: '200ms',
+        ':hover': '50ms',
+        ':focus-visible': '50ms',
+      },
       transitionProperty: 'opacity',
       transitionTimingFunction: 'ease-out',
       width: 0,
       willChange: 'opacity',
-    },
-    // Only way to do cascading using style9
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    ':focus-visible:after': {
-      opacity: 1,
-      transitionDuration: '50ms',
-    },
-    ':hover:after': {
-      opacity: 1,
-      transitionDelay: '100ms',
-      transitionDuration: '50ms',
     },
     bottom: '1em',
     position: 'absolute',
@@ -160,15 +176,12 @@ const styles = style9.create({
     fontSize: '2em',
     fontWeight: '500',
     margin: 0,
-    marginBottom: -2,
+    marginBottom: '-2px',
     paddingRight: '0.4em',
   },
   namePill: {
     animationDuration: '1s',
-    animationName: style9.keyframes({
-      '0%': { opacity: 0, transform: 'translateY(30px)' },
-      '100%': { opacity: 1, transform: 'translateY(0)' },
-    }),
+    animationName: slideInFromBottom,
     backgroundColor: '#fff',
     boxShadow: '0 0.1em 10px rgba(0,0,0,0.35)',
     cursor: 'pointer',
@@ -217,40 +230,41 @@ const styles = style9.create({
   pillText: {
     color: 'white',
     fontWeight: '400',
-    marginBottom: -2,
+    marginBottom: '-2px',
     mixBlendMode: 'difference',
     paddingLeft: '0.3em',
     paddingRight: '0.1em',
   },
   pillWithHover: {
-    ':before': {
+    '::before': {
       backgroundColor: 'rgb(255,255,255)',
       borderRadius: '3em',
       bottom: '-0.15em',
       boxShadow: '0 0.1em 10px rgba(0,0,0,0.35)',
       content: '""',
       left: '-0.15em',
-      opacity: 0,
+      // StyleX: Nested pseudo-class states within the pseudo-element
+      opacity: {
+        default: 0,
+        ':hover': 1,
+        ':focus-visible': 1,
+      },
       position: 'absolute',
       right: '-0.15em',
       top: '-0.15em',
-      transitionDuration: '300ms',
+      transitionDelay: {
+        default: null,
+        ':hover': '100ms',
+      },
+      transitionDuration: {
+        default: '300ms',
+        ':hover': '50ms',
+        ':focus-visible': '50ms',
+      },
       transitionProperty: 'opacity',
       transitionTimingFunction: 'ease-out',
       willChange: 'opacity',
       zIndex: -1,
-    },
-    // Only way to do cascading using style9
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    ':focus-visible:before': {
-      opacity: 1,
-      transitionDuration: '50ms',
-    },
-    ':hover:before': {
-      opacity: 1,
-      transitionDelay: '100ms',
-      transitionDuration: '50ms',
     },
   },
 });
@@ -300,7 +314,7 @@ export default function App(): JSX.Element {
         const imageDiv = imageRef.current;
         const imageElement = document.createElement('img');
         imageElement.setAttribute('aria-hidden', 'true');
-        imageElement.setAttribute('class', style9(styles.imagePreloader));
+        imageElement.setAttribute('class', stylex.props(styles.imagePreloader).className ?? '');
         imageElement.setAttribute(
           'src',
           `https://cdn.ankitsardesai.ca/backgrounds/${nextImage.name}.jpg`,
@@ -490,13 +504,13 @@ export default function App(): JSX.Element {
   };
 
   return (
-    <div className={style9(styles.container)}>
-      <div className={style9(styles.backgroundLayer)} onScroll={resetScroll}>
-        <div className={style9(styles.imageLayer)} ref={imageLayerRef}>
+    <div {...stylex.props(styles.container)}>
+      <div {...stylex.props(styles.backgroundLayer)} onScroll={resetScroll}>
+        <div {...stylex.props(styles.imageLayer)} ref={imageLayerRef}>
           {currentPhoto != null && (
             <div
               aria-label={`Photo taken in ${currentPhoto.location}`}
-              className={style9(
+              {...stylex.props(
                 styles.image,
                 transitioning
                   ? styles.imageTransitioningOut
@@ -512,24 +526,24 @@ export default function App(): JSX.Element {
           )}
         </div>
 
-        <div className={style9(styles.imageFrame)}>
-          <div className={style9(styles.linkAnchor)} ref={linkAnchorRef}>
+        <div {...stylex.props(styles.imageFrame)}>
+          <div {...stylex.props(styles.linkAnchor)} ref={linkAnchorRef}>
             <button
-              className={style9(styles.pill, styles.namePill)}
+              {...stylex.props(styles.pill, styles.namePill)}
               onClick={triggerNextPhoto}
             >
               <img
                 aria-hidden="true"
-                className={style9(styles.nameAvatar)}
+                {...stylex.props(styles.nameAvatar)}
                 src="https://cdn.ankitsardesai.ca/assets/profile.jpg"
               />
-              <h1 className={style9(styles.pillText, styles.nameHeading)}>
+              <h1 {...stylex.props(styles.pillText, styles.nameHeading)}>
                 Ankit Sardesai
               </h1>
             </button>
-            <div className={style9(styles.linkPile)}>
+            <div {...stylex.props(styles.linkPile)}>
               <a
-                className={style9(
+                {...stylex.props(
                   styles.pill,
                   styles.pillWithHover,
                   styles.linkPill,
@@ -540,14 +554,14 @@ export default function App(): JSX.Element {
                 target="_blank"
               >
                 <span
-                  className={style9(styles.pillReflection)}
+                  {...stylex.props(styles.pillReflection)}
                   ref={reflectionRef}
                 />
-                <IconLinkedIn className={style9(styles.pillIcon)} />
-                <span className={style9(styles.pillText)}>linkedin</span>
+                <IconLinkedIn {...stylex.props(styles.pillIcon)} />
+                <span {...stylex.props(styles.pillText)}>linkedin</span>
               </a>
               <a
-                className={style9(
+                {...stylex.props(
                   styles.pill,
                   styles.pillWithHover,
                   styles.linkPill,
@@ -556,14 +570,14 @@ export default function App(): JSX.Element {
                 style={{ animationDelay: '400ms' }}
               >
                 <span
-                  className={style9(styles.pillReflection)}
+                  {...stylex.props(styles.pillReflection)}
                   ref={reflectionRef}
                 />
-                <IconBriefcase className={style9(styles.pillIcon)} />
-                <span className={style9(styles.pillText)}>resume</span>
+                <IconBriefcase {...stylex.props(styles.pillIcon)} />
+                <span {...stylex.props(styles.pillText)}>resume</span>
               </a>
               <a
-                className={style9(
+                {...stylex.props(
                   styles.pill,
                   styles.pillWithHover,
                   styles.linkPill,
@@ -574,14 +588,14 @@ export default function App(): JSX.Element {
                 target="_blank"
               >
                 <span
-                  className={style9(styles.pillReflection)}
+                  {...stylex.props(styles.pillReflection)}
                   ref={reflectionRef}
                 />
-                <IconGithub className={style9(styles.pillIcon)} />
-                <span className={style9(styles.pillText)}>github</span>
+                <IconGithub {...stylex.props(styles.pillIcon)} />
+                <span {...stylex.props(styles.pillText)}>github</span>
               </a>
               <a
-                className={style9(
+                {...stylex.props(
                   styles.pill,
                   styles.pillWithHover,
                   styles.linkPill,
@@ -590,18 +604,18 @@ export default function App(): JSX.Element {
                 style={{ animationDelay: '800ms' }}
               >
                 <span
-                  className={style9(styles.pillReflection)}
+                  {...stylex.props(styles.pillReflection)}
                   ref={reflectionRef}
                 />
-                <IconMail className={style9(styles.pillIcon)} />
-                <span className={style9(styles.pillText)}>email</span>
+                <IconMail {...stylex.props(styles.pillIcon)} />
+                <span {...stylex.props(styles.pillText)}>email</span>
               </a>
             </div>
           </div>
 
           {currentPhoto != null && (
             <a
-              className={style9(
+              {...stylex.props(
                 styles.pill,
                 styles.pillWithHover,
                 styles.locationPill,
@@ -616,8 +630,8 @@ export default function App(): JSX.Element {
               rel="noreferrer"
               target="_blank"
             >
-              <IconLocation className={style9(styles.pillIcon)} />
-              <span className={style9(styles.pillText)}>
+              <IconLocation {...stylex.props(styles.pillIcon)} />
+              <span {...stylex.props(styles.pillText)}>
                 {currentPhoto.location}
               </span>
             </a>

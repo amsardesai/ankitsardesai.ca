@@ -22,6 +22,7 @@
   "dependencies": {
     "@analytics/google-analytics": "^1.0.3",
     "@reduxjs/toolkit": "^1.8.3",
+    "@stylexjs/stylex": "^0.17.4",
     "analytics": "^0.8.1",
     "classnames": "^2.3.1",
     "core-js": "^3.23.3",
@@ -31,8 +32,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
     "serve-favicon": "^2.5.0",
-    "sqlite3": "^5.0.8",
-    "style9": "^0.14.0"
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",
@@ -41,6 +41,8 @@
     "@babel/preset-react": "^7.17.12",
     "@babel/preset-typescript": "^7.17.12",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
+    "@stylexjs/babel-plugin": "^0.17.4",
+    "@stylexjs/unplugin": "^0.17.4",
     "@tsconfig/recommended": "^1.0.1",
     "@types/core-js": "^2.5.5",
     "@types/react-dom": "^18.0.6",
@@ -85,7 +87,7 @@
     "resolve-typescript-plugin": "^1.2.0",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.3.1",
-    "typescript": "^4.7.4",
+    "typescript": "^5.9.3",
     "webpack": "^5.73.0",
     "webpack-dev-server": "^4.9.2"
   }

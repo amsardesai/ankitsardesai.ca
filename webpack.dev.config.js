@@ -39,7 +39,8 @@ config.watchOptions = {
 };
 
 // Use React Refresh plugins for Babel and Webpack
-config.module.rules[0].use[1].options.plugins.unshift('react-refresh/babel');
+// Note: babel-loader is now at index 0 after removing Style9Plugin.loader
+config.module.rules[0].use[0].options.plugins.unshift('react-refresh/babel');
 // config.module.rules[1].use[0].loader = 'style-loader';
 config.plugins.unshift(
   new WebpackWatchRunPlugin(),

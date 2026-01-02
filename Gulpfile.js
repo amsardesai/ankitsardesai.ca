@@ -41,7 +41,17 @@ function buildServer() {
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(tsProject())
-    .pipe(babel({ plugins: [['style9/babel']] }))
+    .pipe(babel({
+      plugins: [
+        [
+          '@stylexjs/babel-plugin',
+          {
+            dev: process.env.NODE_ENV !== 'production',
+            unstable_moduleResolution: { type: 'commonJS', rootDir: process.cwd() },
+          },
+        ],
+      ],
+    }))
     .pipe(sourcemaps.write())
     .pipe(size({ title: 'Server JS' }))
     .pipe(gulp.dest('build'));

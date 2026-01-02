@@ -4,7 +4,7 @@ import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { dirname, join } from 'path';
 import ResolveTypeScriptPlugin from 'resolve-typescript-plugin';
-import Style9Plugin from 'style9/webpack/index.js';
+import stylexPlugin from '@stylexjs/unplugin';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -19,7 +19,6 @@ export default {
         exclude: /node_modules/,
         test: /\.tsx?$/,
         use: [
-          { loader: Style9Plugin.loader },
           {
             loader: 'babel-loader',
             options: {
@@ -27,7 +26,7 @@ export default {
               presets: [['@babel/preset-env', { targets: 'defaults' }]],
             },
           },
-          { loader: 'ts-loader' },
+          { loader: 'ts-loader', options: { transpileOnly: true } },
         ],
       },
       {
@@ -71,7 +70,10 @@ export default {
   },
 
   plugins: [
-    new Style9Plugin(),
+    stylexPlugin.webpack({
+      dev: process.env.NODE_ENV !== 'production',
+      unstable_moduleResolution: { type: 'commonJS', rootDir: __dirname },
+    }),
     new MiniCssExtractPlugin({
       filename: 'styles.css',
     }),
