@@ -1,42 +1,42 @@
+# syntax=docker/dockerfile:1
 
-# Use Ubuntu distribution
-FROM node:18.4.0
+FROM node:18.4.0-slim
 
-# Install sqlite3
-RUN apt-get update
-RUN apt-get install -y sqlite3
+# Install sqlite3 and clean up apt cache
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends sqlite3 \
+    && rm -rf /var/lib/apt/lists/*
 
-# Make working directory
-RUN mkdir -p /opt/app
+# Set working directory
 WORKDIR /opt/app
 
-# Install packages
-ADD package.json package-lock.json ./
-RUN npm install
+# Install dependencies (copy package files first for better caching)
+COPY package.json package-lock.json ./
+RUN npm ci
 
-# Copy application code
-ADD app ./app
-ADD assets ./assets
-ADD .eslintrc.cjs ports.js Gulpfile.js ./
-ADD webpack.config.js webpack.dev.config.js ./
-ADD tsconfig.json ./
+# Copy application code and config
+COPY app ./app
+COPY assets ./assets
+COPY .eslintrc.cjs tsconfig.json vite.config.ts index.html ./
 
-# Compile codebase
-RUN npm run compile-no-lint
+# Build for production
+RUN npm run build
 
-# Prune developer packages and uncompiled files
-RUN rm -rf app
-RUN npm prune --production
+# Prune dev dependencies (keep app/server.tsx for production, remove React components)
+RUN find app -type f ! -name 'server.tsx' ! -name 'reducer.ts' -delete \
+    && find app -type d -empty -delete \
+    && npm prune --production
 
 # Initialize database
-ADD database.sql ./
+COPY database.sql ./
 RUN npm run setup-db
 
 # Define environment variables
-ENV NODE_ENV production
-ENV NODE_PATH /opt/app/build
-ENV PORT 5092
+ENV NODE_ENV=production
+ENV PORT=5092
+
+# Expose port
+EXPOSE 5092
 
 # Start the server
-CMD ["node", "/opt/app/build/server.js"]
-
+CMD ["npx", "tsx", "app/server.tsx"]
