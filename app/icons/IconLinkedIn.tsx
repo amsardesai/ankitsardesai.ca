@@ -7,7 +7,7 @@ import * as React from 'react';
 
 import type { IconProps } from '../types.js';
 
-export default function IconLinkedIn({ className }: IconProps): JSX.Element {
+export default function IconLinkedIn({ className }: IconProps): React.JSX.Element {
   return (
     <svg
       className={className}

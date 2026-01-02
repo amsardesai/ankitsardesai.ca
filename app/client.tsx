@@ -2,15 +2,13 @@ import 'core-js/stable/index.js';
 import 'normalize.css';
 import './main.css';
 
-import * as redux from '@reduxjs/toolkit';
 import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
 
 import analytics from './analytics.js';
 import App from './app.js';
+import { AppContextProvider } from './AppContext.js';
 import type { State } from './reducer.js';
-import reducer from './reducer.js';
 
 declare global {
   interface Window {
@@ -27,14 +25,13 @@ analytics.ready(payload => {
 analytics.page();
 
 const rootElement = document.getElementById('react-root');
-const store = redux.configureStore({ preloadedState, reducer });
 
 // Hydrate server-side generated markup
 if (rootElement != null) {
   hydrateRoot(
     rootElement,
-    <Provider serverState={preloadedState} store={store}>
+    <AppContextProvider initialState={preloadedState}>
       <App />
-    </Provider>,
+    </AppContextProvider>,
   );
 }

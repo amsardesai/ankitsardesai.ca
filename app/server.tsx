@@ -1,20 +1,16 @@
-import * as redux from '@reduxjs/toolkit';
 import express from 'express';
 import fs from 'fs';
 import { dirname, join } from 'path';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
-import { Provider } from 'react-redux';
 import favicon from 'serve-favicon';
 import sqlite3 from 'sqlite3';
 import { fileURLToPath } from 'url';
 
 import App from './app.js';
+import { AppContextProvider } from './AppContext.js';
 import type { Photo } from './reducer.js';
-import reducer, { getInitialState } from './reducer.js';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const { configureStore } = ((redux as any).default ?? redux) as typeof redux;
+import { getInitialState } from './reducer.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -74,22 +70,19 @@ app.get('/', (_req, res) => {
     (err: Error | null, row: Photo) => {
       if (err == null) {
         const initialPhoto = row;
-        const store = configureStore({
-          preloadedState: getInitialState(
-            initialPhoto.name,
-            initialPhoto.location,
-          ),
-          reducer,
-        });
+        const initialState = getInitialState(
+          initialPhoto.name,
+          initialPhoto.location,
+        );
 
         const renderedString = renderToString(
-          <Provider store={store}>
+          <AppContextProvider initialState={initialState}>
             <App />
-          </Provider>,
+          </AppContextProvider>,
         );
 
         // Serialize state to send to client
-        const serializedState = JSON.stringify(store.getState());
+        const serializedState = JSON.stringify(initialState);
 
         // Send output
         res.send(

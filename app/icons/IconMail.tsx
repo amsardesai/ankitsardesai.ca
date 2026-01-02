@@ -7,7 +7,7 @@ import * as React from 'react';
 
 import type { IconProps } from '../types.js';
 
-export default function IconMail({ className }: IconProps): JSX.Element {
+export default function IconMail({ className }: IconProps): React.JSX.Element {
   return (
     <svg
       className={className}

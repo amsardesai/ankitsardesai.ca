@@ -1,15 +1,14 @@
 import * as stylex from '@stylexjs/stylex';
 import * as React from 'react';
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
+import { useAppDispatch, useAppState } from './AppContext.js';
 import IconBriefcase from './icons/IconBriefcase.js';
 import IconGithub from './icons/IconGithub.js';
 import IconLinkedIn from './icons/IconLinkedIn.js';
 import IconLocation from './icons/IconLocation.js';
 import IconMail from './icons/IconMail.js';
 import type { Photo } from './reducer.js';
-import type { State } from './reducer.js';
 
 // Keyframes must be defined outside stylex.create() in StyleX
 const slideInFromLeft = stylex.keyframes({
@@ -279,17 +278,13 @@ const CAROUSEL_DELAY = 15000;
  */
 const MIN_TIME_PER_PHOTO = 4000;
 
-export default function App(): JSX.Element {
-  const dispatch = useDispatch();
-  const previousPhoto = useSelector<State, State['previousPhoto']>(
-    state => state.previousPhoto,
-  );
-  const currentPhotoFromState = useSelector<State, State['currentPhoto']>(
-    state => state.currentPhoto,
-  );
-  const transitioning = useSelector<State, State['transitioning']>(
-    state => state.transitioning,
-  );
+export default function App(): React.JSX.Element {
+  const dispatch = useAppDispatch();
+  const {
+    currentPhoto: currentPhotoFromState,
+    previousPhoto,
+    transitioning,
+  } = useAppState();
 
   const currentPhoto =
     transitioning && previousPhoto != null
