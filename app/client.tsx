@@ -1,7 +1,6 @@
 import 'normalize.css';
 import './main.css';
 
-import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
 
 import analytics from './analytics.js';

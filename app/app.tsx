@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex';
-import * as React from 'react';
+import type { ReactElement, SyntheticEvent } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 
 import { useAppDispatch, useAppState } from './AppContext.js';
@@ -278,7 +278,7 @@ const CAROUSEL_DELAY = 15000;
  */
 const MIN_TIME_PER_PHOTO = 4000;
 
-export default function App(): React.JSX.Element {
+export default function App(): ReactElement {
   const dispatch = useAppDispatch();
   const {
     currentPhoto: currentPhotoFromState,
@@ -490,7 +490,7 @@ export default function App(): React.JSX.Element {
     return () => document.removeEventListener('keydown', handleKeyPress);
   }, [triggerNextPhoto]);
 
-  const resetScroll = (e: React.SyntheticEvent<HTMLDivElement, UIEvent>) => {
+  const resetScroll = (e: SyntheticEvent<HTMLDivElement, UIEvent>) => {
     const target = e.target;
     if (target instanceof Element) {
       target.scrollTop = 0;

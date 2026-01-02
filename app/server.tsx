@@ -118,7 +118,10 @@ async function createServer(): Promise<void> {
       } else {
         // Production: Build template from manifest and import built SSR module
         template = getProductionTemplate();
-        const entryModule = await import('../build/server/entry-server.js');
+        const serverEntryPath = '../build/server/entry-server.js';
+        const entryModule: { render: typeof render } = await import(
+          /* @vite-ignore */ serverEntryPath
+        );
         render = entryModule.render;
       }
 

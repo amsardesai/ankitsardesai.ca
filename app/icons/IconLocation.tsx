@@ -3,11 +3,11 @@
  * https://ionic.io/ionicons
  */
 
-import * as React from 'react';
+import type { ReactElement } from 'react';
 
 import type { IconProps } from '../types.js';
 
-export default function IconLocation({ className }: IconProps): React.JSX.Element {
+export default function IconLocation({ className }: IconProps): ReactElement {
   return (
     <svg
       className={className}
