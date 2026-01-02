@@ -1,6 +1,8 @@
 import express from 'express';
 import fs from 'fs';
+import helmet from 'helmet';
 import { dirname, join } from 'path';
+import pino from 'pino';
 import favicon from 'serve-favicon';
 import sqlite3 from 'sqlite3';
 import { fileURLToPath } from 'url';
@@ -10,6 +12,12 @@ import type { Photo, State } from './reducer.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const isProduction = process.env.NODE_ENV === 'production';
+
+// Structured logger - pretty print in dev, JSON in production
+const logger = pino({
+  level: process.env.LOG_LEVEL || 'info',
+  transport: isProduction ? undefined : { target: 'pino-pretty', options: { colorize: true } },
+});
 
 // Build production HTML template with correct asset paths from manifest
 function getProductionTemplate(): string {
@@ -66,6 +74,26 @@ function getNextPhoto(db: sqlite3.Database, previousPhoto: string): Promise<Phot
 async function createServer(): Promise<void> {
   const app = express();
   const port = process.env.PORT || 5092;
+
+  // Security headers (CSP, X-Frame-Options, X-Content-Type-Options, etc.)
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'", "'unsafe-inline'"], // Needed for inline preloaded state
+          styleSrc: ["'self'", "'unsafe-inline'"], // Needed for StyleX
+          imgSrc: ["'self'", 'data:'],
+          connectSrc: ["'self'"],
+        },
+      },
+    }),
+  );
+
+  // Health check endpoint for container orchestration
+  app.get('/health', (_req, res) => {
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+  });
 
   // Launch sqlite3 database
   const db = new sqlite3.Database(join(__dirname, '../database.db'));
@@ -141,13 +169,13 @@ async function createServer(): Promise<void> {
       if (!isProduction && vite) {
         vite.ssrFixStacktrace(err as Error);
       }
-      console.error(err); // eslint-disable-line no-console
+      logger.error({ err }, 'SSR render error');
       res.sendStatus(500);
     }
   });
 
   app.listen(port, () => {
-    console.log(`ankitsardesai server listening on port ${port}`); // eslint-disable-line no-console
+    logger.info({ port }, 'Server listening');
   });
 }
 
