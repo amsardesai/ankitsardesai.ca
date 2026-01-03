@@ -425,17 +425,22 @@ export default function App(): ReactElement {
   }, [transitioning, loadNextPhoto, blockTransitionsForSomeTime, currentPhoto]);
 
   // Subtle parallax effect so links stick out in front of busy photos
+  // Uses requestAnimationFrame to throttle updates and prevent layout thrashing
   useEffect(() => {
     const linkAnchor = linkAnchorRef.current;
     const imageLayer = imageLayerRef.current;
     if (linkAnchor != null && imageLayer != null) {
-      function handleParallax(e: MouseEvent) {
+      let rafId: number | null = null;
+      let lastMouseX = 0;
+      let lastMouseY = 0;
+
+      function updateParallax() {
         if (linkAnchor == null || imageLayer == null) {
           return;
         }
 
-        const xPercentage = e.clientX / window.innerWidth;
-        const yPercentage = e.clientY / window.innerHeight;
+        const xPercentage = lastMouseX / window.innerWidth;
+        const yPercentage = lastMouseY / window.innerHeight;
 
         const linkAnchorCenterX =
           (linkAnchor.offsetLeft + linkAnchor.offsetWidth / 2) /
@@ -468,10 +473,27 @@ export default function App(): ReactElement {
         reflectionSetRef.current.forEach(reflection => {
           reflection.style.cssText = `opacity: ${opacity}`;
         });
+
+        rafId = null;
+      }
+
+      function handleParallax(e: MouseEvent) {
+        lastMouseX = e.clientX;
+        lastMouseY = e.clientY;
+
+        // Only schedule one update per animation frame
+        if (rafId === null) {
+          rafId = requestAnimationFrame(updateParallax);
+        }
       }
 
       document.addEventListener('mousemove', handleParallax);
-      return () => document.removeEventListener('mousemove', handleParallax);
+      return () => {
+        document.removeEventListener('mousemove', handleParallax);
+        if (rafId !== null) {
+          cancelAnimationFrame(rafId);
+        }
+      };
     }
   }, []);
 
