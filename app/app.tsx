@@ -112,46 +112,28 @@ const styles = stylex.create({
     marginRight: '0.25em',
   },
   locationPill: {
-    '::after': {
-      // StyleX requires expanded border properties (no shorthands)
-      borderBottomWidth: '0.4em',
-      borderBottomStyle: 'solid',
-      borderBottomColor: 'rgba(255,255,255,1)',
-      borderLeftWidth: '0.4em',
-      borderLeftStyle: 'solid',
-      borderLeftColor: 'transparent',
-      borderRightWidth: '0.4em',
-      borderRightStyle: 'solid',
-      borderRightColor: 'transparent',
-      content: '""',
-      height: 0,
-      left: '1em',
-      // StyleX: Nested pseudo-class states within the pseudo-element
-      opacity: {
-        default: 0.85,
-        ':hover': 1,
-        ':focus-visible': 1,
-      },
-      position: 'absolute',
-      top: '-0.5em',
-      transitionDelay: {
-        default: null,
-        ':hover': '100ms',
-      },
-      transitionDuration: {
-        default: '200ms',
-        ':hover': '50ms',
-        ':focus-visible': '50ms',
-      },
-      transitionProperty: 'opacity',
-      transitionTimingFunction: 'ease-out',
-      width: 0,
-      willChange: 'opacity',
-    },
     bottom: '1em',
     position: 'absolute',
     right: '1em',
     transitionDuration: '500ms',
+  },
+  // Tooltip arrow for location pill (replaces ::after since StyleX doesn't support :hover on pseudo-elements)
+  locationPillArrow: {
+    borderBottomColor: 'rgba(255,255,255,1)',
+    borderBottomStyle: 'solid',
+    borderBottomWidth: '0.4em',
+    borderLeftColor: 'transparent',
+    borderLeftStyle: 'solid',
+    borderLeftWidth: '0.4em',
+    borderRightColor: 'transparent',
+    borderRightStyle: 'solid',
+    borderRightWidth: '0.4em',
+    height: 0,
+    left: '1em',
+    pointerEvents: 'none',
+    position: 'absolute',
+    top: '-0.5em',
+    width: 0,
   },
   locationPillInitial: {
     transitionDuration: '0s',
@@ -234,37 +216,29 @@ const styles = stylex.create({
     paddingLeft: '0.3em',
     paddingRight: '0.1em',
   },
+  // Hover background element (replaces ::before since StyleX doesn't support :hover on pseudo-elements)
+  // Note: opacity and transition are handled in hover-workarounds.css to avoid specificity conflicts
+  pillHoverBg: {
+    backgroundColor: 'rgb(255,255,255)',
+    borderRadius: '3em',
+    bottom: '-0.15em',
+    boxShadow: '0 0.1em 10px rgba(0,0,0,0.35)',
+    left: '-0.15em',
+    pointerEvents: 'none',
+    position: 'absolute',
+    right: '-0.15em',
+    top: '-0.15em',
+    willChange: 'opacity',
+    zIndex: -1,
+  },
+  // Container that enables hover state for child elements
   pillWithHover: {
-    '::before': {
-      backgroundColor: 'rgb(255,255,255)',
-      borderRadius: '3em',
-      bottom: '-0.15em',
-      boxShadow: '0 0.1em 10px rgba(0,0,0,0.35)',
-      content: '""',
-      left: '-0.15em',
-      // StyleX: Nested pseudo-class states within the pseudo-element
-      opacity: {
-        default: 0,
-        ':hover': 1,
-        ':focus-visible': 1,
-      },
-      position: 'absolute',
-      right: '-0.15em',
-      top: '-0.15em',
-      transitionDelay: {
-        default: null,
-        ':hover': '100ms',
-      },
-      transitionDuration: {
-        default: '300ms',
-        ':hover': '50ms',
-        ':focus-visible': '50ms',
-      },
-      transitionProperty: 'opacity',
-      transitionTimingFunction: 'ease-out',
-      willChange: 'opacity',
-      zIndex: -1,
-    },
+    // Empty - hover logic moved to pillHoverBgVisible
+  },
+  pillHoverBgVisible: {
+    opacity: 1,
+    transitionDuration: '50ms',
+    transitionDelay: '100ms',
   },
 });
 
@@ -571,6 +545,9 @@ export default function App(): ReactElement {
                 target="_blank"
               >
                 <span
+                  className={`pill-hover-bg ${stylex.props(styles.pillHoverBg).className}`}
+                />
+                <span
                   {...stylex.props(styles.pillReflection)}
                   ref={reflectionRef}
                 />
@@ -586,6 +563,9 @@ export default function App(): ReactElement {
                 href="/resume.pdf"
                 style={{ animationDelay: '400ms' }}
               >
+                <span
+                  className={`pill-hover-bg ${stylex.props(styles.pillHoverBg).className}`}
+                />
                 <span
                   {...stylex.props(styles.pillReflection)}
                   ref={reflectionRef}
@@ -605,6 +585,9 @@ export default function App(): ReactElement {
                 target="_blank"
               >
                 <span
+                  className={`pill-hover-bg ${stylex.props(styles.pillHoverBg).className}`}
+                />
+                <span
                   {...stylex.props(styles.pillReflection)}
                   ref={reflectionRef}
                 />
@@ -620,6 +603,9 @@ export default function App(): ReactElement {
                 href="mailto:amsardesai@gmail.com"
                 style={{ animationDelay: '800ms' }}
               >
+                <span
+                  className={`pill-hover-bg ${stylex.props(styles.pillHoverBg).className}`}
+                />
                 <span
                   {...stylex.props(styles.pillReflection)}
                   ref={reflectionRef}
@@ -647,6 +633,12 @@ export default function App(): ReactElement {
               rel="noreferrer"
               target="_blank"
             >
+              <span
+                className={`pill-hover-bg ${stylex.props(styles.pillHoverBg).className}`}
+              />
+              <span
+                className={`location-pill-arrow ${stylex.props(styles.locationPillArrow).className}`}
+              />
               <IconLocation {...stylex.props(styles.pillIcon)} />
               <span {...stylex.props(styles.pillText)}>
                 {currentPhoto.location}

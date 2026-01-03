@@ -1,0 +1,34 @@
+/**
+ * Hover state workarounds for StyleX limitation
+ *
+ * StyleX doesn't support :hover pseudo-classes nested inside ::before/::after
+ * pseudo-elements. This CSS provides the hover logic that StyleX can't handle.
+ *
+ * See: https://github.com/facebook/stylex/issues/137
+ */
+
+/* Pill hover background - shows white background on hover */
+.pill-hover-bg {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+a:hover .pill-hover-bg,
+a:focus-visible .pill-hover-bg,
+button:hover .pill-hover-bg,
+button:focus-visible .pill-hover-bg {
+  opacity: 1;
+  transition: opacity 50ms ease-out 100ms;
+}
+
+/* Location pill tooltip arrow - becomes fully opaque on hover */
+.location-pill-arrow {
+  opacity: 0.85;
+  transition: opacity 200ms ease-out;
+}
+
+a:hover .location-pill-arrow,
+a:focus-visible .location-pill-arrow {
+  opacity: 1;
+  transition: opacity 50ms ease-out 100ms;
+}

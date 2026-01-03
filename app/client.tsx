@@ -1,5 +1,6 @@
 import 'normalize.css';
 import './main.css';
+import './hover-workarounds.css';
 
 import { hydrateRoot } from 'react-dom/client';
 
