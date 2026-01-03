@@ -44,8 +44,8 @@ function getProductionTemplate(): string {
   return template;
 }
 
-// Helper to get random photo from database
-function getRandomPhoto(db: sqlite3.Database): Promise<Photo> {
+// Helper to get random photo from database (exported for testing)
+export function getRandomPhoto(db: sqlite3.Database): Promise<Photo> {
   return new Promise((resolve, reject) => {
     db.get(
       'SELECT name, location FROM photos ORDER BY RANDOM() LIMIT 1',
@@ -57,8 +57,8 @@ function getRandomPhoto(db: sqlite3.Database): Promise<Photo> {
   });
 }
 
-// Helper to get next photo (different from previous)
-function getNextPhoto(db: sqlite3.Database, previousPhoto: string): Promise<Photo> {
+// Helper to get next photo (different from previous) (exported for testing)
+export function getNextPhoto(db: sqlite3.Database, previousPhoto: string): Promise<Photo> {
   return new Promise((resolve, reject) => {
     db.get(
       'SELECT name, location FROM photos WHERE name != ? ORDER BY RANDOM() LIMIT 1',
@@ -69,6 +69,28 @@ function getNextPhoto(db: sqlite3.Database, previousPhoto: string): Promise<Phot
       },
     );
   });
+}
+
+// Create Express app with API routes (exported for testing)
+export function createApiApp(db: sqlite3.Database): express.Application {
+  const app = express();
+
+  // Health check endpoint for container orchestration
+  app.get('/health', (_req, res) => {
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+  });
+
+  // API endpoint for getting next photo
+  app.get('/api/getNextPhoto/:previousPhoto', async (req, res) => {
+    try {
+      const photo = await getNextPhoto(db, req.params.previousPhoto);
+      res.json({ location: photo.location, name: photo.name });
+    } catch {
+      res.sendStatus(500);
+    }
+  });
+
+  return app;
 }
 
 async function createServer(): Promise<void> {
