@@ -53,4 +53,21 @@ export default tseslint.config(
       react: { version: 'detect' },
     },
   },
+
+  // Test files configuration
+  {
+    files: ['app/__tests__/**/*.test.ts'],
+    languageOptions: {
+      globals: {
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        beforeAll: 'readonly',
+        beforeEach: 'readonly',
+        afterAll: 'readonly',
+        afterEach: 'readonly',
+        vi: 'readonly',
+      },
+    },
+  },
 );

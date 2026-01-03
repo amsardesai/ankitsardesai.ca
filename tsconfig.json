@@ -12,8 +12,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "types": ["vite/client"]
+    "types": ["vite/client", "vitest/globals"]
   },
-  "include": ["app/**/*.ts", "app/**/*.tsx", "vite.config.ts"],
+  "include": ["app/**/*.ts", "app/**/*.tsx", "vite.config.ts", "vitest.config.ts"],
   "exclude": ["node_modules"]
 }
