@@ -4,3 +4,6 @@ build
 npm-debug.log
 database.db
 deploy
+
+# Claude Code local settings (user-specific permissions)
+.claude/settings.local.json
