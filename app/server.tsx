@@ -105,7 +105,7 @@ async function createServer(): Promise<void> {
           defaultSrc: ["'self'"],
           scriptSrc: ["'self'", "'unsafe-inline'"], // Needed for inline preloaded state
           styleSrc: ["'self'", "'unsafe-inline'"], // Needed for StyleX
-          imgSrc: ["'self'", 'data:'],
+          imgSrc: ["'self'", 'data:', 'https://cdn.ankitsardesai.ca'],
           connectSrc: ["'self'"],
         },
       },
@@ -201,4 +201,7 @@ async function createServer(): Promise<void> {
   });
 }
 
-createServer();
+// Only start server when run directly (not when imported for testing)
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  createServer();
+}

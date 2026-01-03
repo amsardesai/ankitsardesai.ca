@@ -5,10 +5,11 @@
 ## Build Commands
 
 ```bash
-npm run watch          # Dev: Webpack HMR + Express + BrowserSync (localhost:3000)
-npm run compile        # Production build with linting
+npm run dev            # Dev server with Vite HMR (localhost:5092)
+npm run build          # Production build (client + server)
 npm run production     # Start production server (port 5092)
 npm run setup-db       # Initialize SQLite database
+npm test               # Run tests with Vitest
 ```
 
 ## Architecture Overview
@@ -22,12 +23,10 @@ Full-stack React SSR with Express and SQLite:
 
 | File | Purpose |
 |------|---------|
-| `app/app.tsx` | Main component (~630 lines), all styles, photo carousel logic |
+| `app/app.tsx` | Main component, all styles, photo carousel logic |
 | `app/server.tsx` | Express server, SSR, API routes |
 | `app/client.tsx` | Client hydration entry point |
-| `webpack.config.js` | Production webpack with StyleX unplugin |
-| `webpack.dev.config.js` | Dev webpack with HMR |
-| `Gulpfile.js` | Build orchestration (lint → typecheck → webpack) |
+| `vite.config.ts` | Vite config with StyleX plugin |
 
 ## StyleX Patterns
 
@@ -82,8 +81,7 @@ const styles = stylex.create({
 
 ## TypeScript Notes
 
-- Uses `transpileOnly: true` in ts-loader (type checking is separate via `checkTypes` gulp task)
-- Run `npx tsc --noEmit` to check types without building
+- Run `npm run type-check` or `npx tsc --noEmit` to check types
 - IconProps in `app/types.ts` has optional `className` for StyleX compatibility
 
 ## ESLint Warnings
@@ -96,19 +94,15 @@ StyleX requires `default` to come first. These warnings can be ignored.
 
 ## Development Workflow
 
-1. Start dev server: `npm run watch`
-2. Open `http://localhost:3000` (BrowserSync proxy)
-3. Webpack HMR at `localhost:8080`, Express at `localhost:5092`
+1. Start dev server: `npm run dev`
+2. Open http://localhost:5092
+3. Vite HMR handles client-side hot reloading
 4. Changes to `.tsx` files trigger automatic rebuild
 
 ## Common Issues
 
-### Build Cache Corruption
-If you see `SyntaxError: Unexpected token 'i', "import * a"... is not valid JSON`:
-```bash
-rm -rf .tsbuildinfo node_modules/.cache build/*
-npm run watch
-```
+### Port Already in Use
+If tests fail with `EADDRINUSE: address already in use :::5092`, stop the dev server before running tests.
 
 ### Node Version
 Requires Node 18+ or 25+. sqlite3 5.1.7 has native binaries for these versions.
